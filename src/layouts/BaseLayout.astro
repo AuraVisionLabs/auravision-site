@@ -42,9 +42,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <slot />
 
     <script>
-      // Redirect to admin after Netlify Identity login
+      const hash = window.location.hash;
+      const isAuthRedirect =
+        hash.includes("confirmation_token") ||
+        hash.includes("recovery_token") ||
+        hash.includes("invite_token");
+
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user: any) => {
+          // Open the widget if we have an auth token in the URL
+          if (!user && isAuthRedirect) {
+            window.netlifyIdentity.open();
+          }
           if (!user) {
             window.netlifyIdentity.on("login", () => {
               document.location.href = "/admin/";
