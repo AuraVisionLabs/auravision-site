@@ -1,23 +1,19 @@
 ---
 const clients = [
-  { name: "Adidas", logo: "/images/logos/adidas.svg" },
-  { name: "Casper", logo: "/images/logos/casper.svg" },
   { name: "Virgin Media O2", logo: "/images/logos/vmo2.svg" },
-  { name: "Browns", logo: "/images/logos/browns.svg" },
+  { name: "Adidas", logo: "/images/logos/adidas.svg" },
   { name: "Paddy Power", logo: "/images/logos/paddy power.svg" },
   { name: "Purple", logo: "/images/logos/purple.svg" },
+  { name: "Casper", logo: "/images/logos/casper.svg" },
+  { name: "Browns", logo: "/images/logos/browns.svg" },
 ];
 ---
 
-<section class="py-16 border-y border-white/5 overflow-hidden">
-  <p class="text-center text-xs uppercase tracking-widest text-white/30 mb-10">
-    Trusted by leading retailers
-  </p>
-
+<section class="py-16 overflow-hidden">
   <div class="relative">
     <!-- Fade edges -->
-    <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-indigo-950 to-transparent"></div>
-    <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-indigo-950 to-transparent"></div>
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-slate-900 to-transparent"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-slate-900 to-transparent"></div>
 
     <!-- Scrolling track: two copies for seamless loop -->
     <div class="animate-marquee flex w-max items-center gap-20">
@@ -25,7 +21,7 @@ const clients = [
         <img
           src={client.logo}
           alt={client.name}
-          class="h-8 w-auto flex-shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
+          class="h-12 w-max-3xl flex-shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
           loading="lazy"
         />
       ))}
@@ -34,7 +30,7 @@ const clients = [
         <img
           src={client.logo}
           alt={client.name}
-          class="h-8 w-auto flex-shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
+          class="h-12 w-max-3xl flex-shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
           loading="lazy"
         />
       ))}
