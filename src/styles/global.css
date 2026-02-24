@@ -4,6 +4,7 @@
 @theme {
   --font-title: "Questrial", sans-serif;
   --font-body: "Open Sans", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
 
   --color-accent: #8b5cf6;
   --color-accent-light: #a78bfa;
