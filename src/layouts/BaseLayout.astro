@@ -9,7 +9,7 @@ interface Props {
 
 const {
   title,
-  description = "Auravision — AI-powered solutions for forward-thinking businesses.",
+  description = "Aura Vision — Your in-store AI analyst, no new sensors needed.",
   ogImage = "/og-default.jpg",
 } = Astro.props;
 
@@ -33,18 +33,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="stylesheet"
     />
 
-    <title>{title} | Auravision</title>
+    <title>{title} | Aura Vision</title>
     <meta name="description" content={description} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={`${title} | Auravision`} />
+    <meta property="og:title" content={`${title} | Aura Vision`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
 
   </head>
-  <body class="bg-black text-white antialiased">
+  <body class="min-h-screen bg-gradient-to-tr from-slate-950 from-20% via-indigo-950 via-70% to-purple-950 text-white antialiased">
     <slot />
 
     <script>

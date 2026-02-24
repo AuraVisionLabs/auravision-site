@@ -1,11 +1,11 @@
 ---
 const clients = [
-  { name: "Decathlon" },
-  { name: "Adidas" },
-  { name: "Sports Direct" },
-  { name: "JD Sports" },
-  { name: "Primark" },
-  { name: "River Island" },
+  { name: "Adidas", logo: "/images/logos/adidas.svg" },
+  { name: "Casper", logo: "/images/logos/casper.svg" },
+  { name: "Virgin Media O2", logo: "/images/logos/vmo2.svg" },
+  { name: "Browns", logo: "/images/logos/browns.svg" },
+  { name: "Paddy Power", logo: "/images/logos/paddy power.svg" },
+  { name: "Purple", logo: "/images/logos/purple.svg" },
 ];
 ---
 
@@ -16,21 +16,27 @@ const clients = [
 
   <div class="relative">
     <!-- Fade edges -->
-    <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-black to-transparent"></div>
-    <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-black to-transparent"></div>
+    <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-r from-slate-950 to-transparent"></div>
+    <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-24 bg-gradient-to-l from-slate-950 to-transparent"></div>
 
     <!-- Scrolling track: two copies for seamless loop -->
-    <div class="animate-marquee flex w-max items-center gap-16">
+    <div class="animate-marquee flex w-max items-center gap-20">
       {clients.map((client) => (
-        <div class="flex h-10 w-36 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.02] px-4">
-          <span class="text-xs text-white/30 whitespace-nowrap">{client.name}</span>
-        </div>
+        <img
+          src={client.logo}
+          alt={client.name}
+          class="h-8 w-auto flex-shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
+          loading="lazy"
+        />
       ))}
       {/* Duplicate for seamless loop */}
       {clients.map((client) => (
-        <div class="flex h-10 w-36 flex-shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.02] px-4">
-          <span class="text-xs text-white/30 whitespace-nowrap">{client.name}</span>
-        </div>
+        <img
+          src={client.logo}
+          alt={client.name}
+          class="h-8 w-auto flex-shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
+          loading="lazy"
+        />
       ))}
     </div>
   </div>

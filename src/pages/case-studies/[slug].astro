@@ -60,7 +60,7 @@ const formattedDate = study.data.pubDate.toLocaleDateString("en-GB", {
               <p class="text-white/30 uppercase tracking-widest text-xs mb-1">Tags</p>
               <div class="flex flex-wrap gap-2 mt-1">
                 {study.data.tags.map((tag: string) => (
-                  <span class="text-xs px-3 py-1 rounded-full border border-white/10 text-white/40">
+                  <span class="text-xs px-3 py-1 rounded-full border border-white/5 bg-white/[0.03] text-white/40">
                     {tag}
                   </span>
                 ))}

@@ -4,6 +4,10 @@
 @theme {
   --font-title: "Questrial", sans-serif;
   --font-body: "Open Sans", sans-serif;
+
+  --color-accent: #8b5cf6;
+  --color-accent-light: #a78bfa;
+  --color-accent-muted: #7c3aed;
 }
 
 body {
@@ -28,4 +32,13 @@ body {
   .animate-marquee {
     animation: none;
   }
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
