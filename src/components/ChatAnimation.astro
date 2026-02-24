@@ -1,0 +1,124 @@
+---
+---
+
+<div class="chat-animation relative h-[200px] md:h-[180px]">
+  <div class="chat-pair space-y-3 max-w-md ml-auto">
+    <div class="chat-user flex justify-end items-start gap-2.5 opacity-0">
+      <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-5 py-3 shadow-lg bg-cyan-700/80 text-white">
+      </div>
+      <div class="chat-user-avatar flex-shrink-0 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">
+      </div>
+    </div>
+    <div class="chat-bot flex justify-start items-start gap-2.5 opacity-0">
+      <img src="/images/aura-vision-icon.svg" alt="Aura" class="flex-shrink-0 w-12 h-12 -mt-2 ml-1" />
+      <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-5 py-3 shadow-lg bg-purple-700/80 text-white/85">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const messages = [
+    {
+      user: "How did our flagship store perform last month?",
+      bot: "Your flagship saw 24.8k visitors with a 4.7% conversion rate — up 32% from the previous month.",
+    },
+    {
+      user: "Which zone has the highest dwell time?",
+      bot: "Zone B (menswear) averages 6.2 minutes, nearly double the store-wide average of 3.4 minutes.",
+    },
+    {
+      user: "Are we staffed correctly for weekend peaks?",
+      bot: "Saturday 1–3pm sees 3x average footfall but only 1.5x staff. I'd recommend adding two team members for that window.",
+    },
+  ];
+
+  const CHAR_INTERVAL = 18;
+  const THINKING_DURATION = 1200;
+  const INITIALS = ["JT", "SR", "KM", "AL", "DP", "HW"];
+
+  function initChatAnimation(container: Element) {
+    const userBubble = container.querySelector(".chat-user")!;
+    const botBubble = container.querySelector(".chat-bot")!;
+    const userText = userBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
+    const botText = botBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
+    const avatarEl = container.querySelector(".chat-user-avatar") as HTMLElement;
+    let index = 0;
+    let initialsIndex = 0;
+    let streamTimer: number | undefined;
+
+    function resetClasses(el: Element) {
+      el.classList.remove("chat-fade-in-up", "chat-fade-out-up");
+      void (el as HTMLElement).offsetWidth;
+    }
+
+    function showThinkingDots(el: HTMLElement) {
+      el.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span>';
+    }
+
+    function streamText(el: HTMLElement, text: string, onDone: () => void) {
+      el.textContent = "";
+      let i = 0;
+      streamTimer = window.setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(streamTimer);
+          streamTimer = undefined;
+          onDone();
+        }
+      }, CHAR_INTERVAL);
+    }
+
+    function showPair() {
+      const pair = messages[index];
+      userText.textContent = pair.user;
+      botText.textContent = "";
+      avatarEl.textContent = INITIALS[initialsIndex];
+      initialsIndex = (initialsIndex + 1) % INITIALS.length;
+
+      // Reset both to hidden
+      userBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
+      botBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
+      (userBubble as HTMLElement).style.opacity = "0";
+      (botBubble as HTMLElement).style.opacity = "0";
+
+      // Fade in user message
+      requestAnimationFrame(() => {
+        resetClasses(userBubble);
+        userBubble.classList.add("chat-fade-in-up");
+      });
+
+      // Show bot bubble with thinking dots after user appears
+      setTimeout(() => {
+        showThinkingDots(botText);
+        resetClasses(botBubble);
+        botBubble.classList.add("chat-fade-in-up");
+      }, 800);
+
+      // Replace dots with streaming text
+      setTimeout(() => {
+        streamText(botText, pair.bot, () => {
+          // Hold for a beat then fade both out
+          const holdTime = 2000;
+          setTimeout(() => {
+            resetClasses(userBubble);
+            resetClasses(botBubble);
+            userBubble.classList.add("chat-fade-out-up");
+            botBubble.classList.add("chat-fade-out-up");
+
+            // Next pair
+            setTimeout(() => {
+              index = (index + 1) % messages.length;
+              showPair();
+            }, 800);
+          }, holdTime);
+        });
+      }, 800 + THINKING_DURATION);
+    }
+
+    showPair();
+  }
+
+  document.querySelectorAll(".chat-animation").forEach(initChatAnimation);
+</script>

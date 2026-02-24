@@ -28,9 +28,80 @@ body {
   animation: marquee 30s linear infinite;
 }
 
+@keyframes chat-fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chat-fade-out-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-32px);
+  }
+}
+
+.chat-fade-in-up {
+  animation: chat-fade-in-up 0.5s ease-out forwards;
+}
+
+.chat-fade-out-up {
+  animation: chat-fade-out-up 0.5s ease-in forwards;
+}
+
+@keyframes thinking-dot {
+  0%, 80%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.thinking-dots span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  margin: 0 2px;
+  animation: thinking-dot 1.4s ease-in-out infinite;
+}
+
+.thinking-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.thinking-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
+  }
+
+  .chat-fade-in-up,
+  .chat-fade-out-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .thinking-dots span {
+    animation: none;
+    opacity: 0.6;
   }
 }
 

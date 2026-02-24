@@ -3,14 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import LogoMarquee from "../components/LogoMarquee.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
-
-const caseStudies: CollectionEntry<"case-studies">[] = await getCollection("case-studies");
-caseStudies.sort(
-  (a: CollectionEntry<"case-studies">, b: CollectionEntry<"case-studies">) =>
-    b.data.pubDate.getTime() - a.data.pubDate.getTime()
-);
-const latestStudies = caseStudies.slice(0, 3);
+import ChatAnimation from "../components/ChatAnimation.astro";
 ---
 
 <BaseLayout title="Instant answers with Ask Aura">
@@ -19,20 +12,25 @@ const latestStudies = caseStudies.slice(0, 3);
   <!-- Hero -->
   <section class="relative pt-48 pb-32 overflow-hidden bg-gradient-to-tr from-slate-900 via-indigo-950 to-purple-900">
     <div class="mx-auto max-w-7xl px-6 lg:px-8 w-full">
-      <div class="max-w-2xl">
-        <h1 class="font-title text-4xl tracking-tight md:text-6xl lg:text-7xl">
-          Instantly validate store decisions.
-        </h1>
-        <p class="mt-8 max-w-lg text-2xl text-white/50 md:text-4xl">
-          Introducing <span class="text-white">Ask Aura</span>,<br />your AI retail analyst.
-        </p>
-        <div class="mt-12">
-          <a
-            href="/contact"
-            class="inline-flex items-center rounded-full bg-purple-600 px-10 py-4 text-base font-title tracking-[0.05em] text-lg text-white transition-colors hover:bg-accent-muted"
-          >
-            See it in action
-          </a>
+      <div class="grid items-center gap-12 md:grid-cols-2">
+        <div class="max-w-2xl">
+          <h1 class="font-title text-4xl tracking-tight md:text-6xl lg:text-7xl">
+            Instantly validate any store decision.
+          </h1>
+          <p class="mt-8 max-w-lg text-2xl text-white/50 md:text-4xl">
+            Introducing <span class="text-white">Ask Aura</span>,<br />your AI retail analyst.
+          </p>
+          <div class="mt-12">
+            <a
+              href="/contact"
+              class="inline-flex items-center rounded-full bg-purple-600 px-10 py-4 text-base font-title tracking-[0.05em] text-lg text-white transition-colors hover:bg-accent-muted"
+            >
+              See Aura in action
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <ChatAnimation />
         </div>
       </div>
     </div>
@@ -41,77 +39,173 @@ const latestStudies = caseStudies.slice(0, 3);
   <!-- Logo Marquee -->
   <LogoMarquee />
 
-  <!-- Capability Row -->
-  <section class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-    <div class="grid grid-cols-3 gap-8">
-      <div class="flex flex-col items-center text-center">
-        <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10">
-          <svg class="h-7 w-7 text-accent-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128H9m6 0a5.972 5.972 0 0 0-.786-3.07M9 19.128A9.38 9.38 0 0 1 6.375 19.5a9.337 9.337 0 0 1-4.121-.952 4.125 4.125 0 0 1 7.533-2.493M9 19.128v-.003c0-1.113.285-2.16.786-3.07m0 0a5.838 5.838 0 0 1 .786-.231" />
-          </svg>
+  <!-- Centered Tagline -->
+  <section class="pt-24 md:pt-32">
+    <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
+      <h2 class="font-title text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
+        Anonymous full-store analytics for enterprise retailers
+      </h2>
+      <p class="mt-6 text-xl text-white/80 md:text-2xl">
+        No new sensors. No personal data. Just answers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Metrics Grid -->
+  <section class="py-16 md:py-24">
+    <div class="mx-auto max-w-5xl px-6 lg:px-8">
+      <div class="grid grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16 tracking-[0.05em]">
+        <!-- Footfall -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128H9m6 0a5.972 5.972 0 0 0-.786-3.07M9 19.128A9.38 9.38 0 0 1 6.375 19.5a9.337 9.337 0 0 1-4.121-.952 4.125 4.125 0 0 1 7.533-2.493M9 19.128v-.003c0-1.113.285-2.16.786-3.07m0 0a5.838 5.838 0 0 1 .786-.231" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Footfall</p>
         </div>
-        <p class="font-title text-sm md:text-base text-white/70">Enhanced Footfall</p>
-      </div>
-      <div class="flex flex-col items-center text-center">
-        <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10">
-          <svg class="h-7 w-7 text-accent-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
-          </svg>
+        <!-- Staffing -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Staffing</p>
         </div>
-        <p class="font-title text-sm md:text-base text-white/70">Path to Purchase</p>
-      </div>
-      <div class="flex flex-col items-center text-center">
-        <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10">
-          <svg class="h-7 w-7 text-accent-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
-          </svg>
+        <!-- Queues -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Queues</p>
         </div>
-        <p class="font-title text-sm md:text-base text-white/70">Brand Performance</p>
+        <!-- Journeys -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Journeys</p>
+        </div>
+        <!-- Heatmaps -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Heatmaps</p>
+        </div>
+        <!-- Demographics -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Demographics</p>
+        </div>
+        <!-- Passers-by -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Passers-by</p>
+        </div>
+        <!-- Capture Rate -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Capture rate</p>
+        </div>
+        <!-- Dwell Time -->
+        <div class="flex flex-col items-center text-center">
+          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+            <svg class="h-8 w-8 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <p class="font-title text-sm text-white/70 md:text-base">Dwell time</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Split: Enhanced Footfall (text left, visual right) -->
-  <section class="py-32">
+  <!-- Insanely Fast Install -->
+  <section class="border-t border-white/10 py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid items-center gap-16 md:grid-cols-2">
         <div>
-          <p class="text-xs font-medium uppercase tracking-widest text-accent-light/60 mb-4">Enhanced Footfall</p>
-          <h2 class="font-title text-3xl leading-snug tracking-tight md:text-4xl">
-            Know exactly who enters, when they arrive, and how long they stay
+          <h2 class="font-title text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
+            Insanely fast install
           </h2>
+          <p class="mt-4 text-xl text-white/40 md:text-2xl">
+            Like, 100x faster.
+          </p>
           <p class="mt-6 text-base leading-relaxed text-white/50">
-            Make staffing and layout decisions backed by real data, not guesswork. Auravision counts every visitor with camera-level accuracy and surfaces trends the moment they emerge.
+            Point your existing cameras at our cloud. No sensors to mount, no wiring to run, no ladders required. Most stores are live in under an hour.
           </p>
           <a href="/contact" class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent-light transition-colors hover:text-white">
-            Learn more
+            How installation works
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
           </a>
         </div>
         <div class="flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
-          <p class="text-sm text-white/20">Screenshot coming soon</p>
+          <div class="flex flex-col items-center gap-6 px-8 w-full">
+            <div class="w-full">
+              <div class="flex items-center justify-between text-xs text-white/40 mb-2">
+                <span>Traditional sensors</span>
+                <span>Weeks</span>
+              </div>
+              <div class="h-3 w-full rounded-full bg-white/5">
+                <div class="h-3 rounded-full bg-white/10" style="width: 100%"></div>
+              </div>
+            </div>
+            <div class="w-full">
+              <div class="flex items-center justify-between text-xs text-white/40 mb-2">
+                <span>Auravision</span>
+                <span>Minutes</span>
+              </div>
+              <div class="h-3 w-full rounded-full bg-white/5">
+                <div class="h-3 rounded-full bg-accent" style="width: 8%"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Split: Path to Purchase (visual left, text right) -->
-  <section class="border-t border-white/10 py-32">
+  <!-- Instant Validation -->
+  <section class="border-t border-white/10 py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid items-center gap-16 md:grid-cols-2">
         <div class="order-2 md:order-1 flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
-          <p class="text-sm text-white/20">Screenshot coming soon</p>
+          <p class="text-sm text-white/20">Dashboard screenshot coming soon</p>
         </div>
         <div class="order-1 md:order-2">
-          <p class="text-xs font-medium uppercase tracking-widest text-accent-light/60 mb-4">Path to Purchase</p>
-          <h2 class="font-title text-3xl leading-snug tracking-tight md:text-4xl">
-            Trace every customer journey through your store
+          <h2 class="font-title text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
+            Instant validation
           </h2>
+          <p class="mt-4 text-xl text-white/40 md:text-2xl">
+            Real-time and historical data at your fingertips.
+          </p>
           <p class="mt-6 text-base leading-relaxed text-white/50">
-            Identify high-traffic zones, dead spots, and conversion bottlenecks with precision. See exactly how shoppers move from entrance to checkout — and where they drop off.
+            See occupancy the moment cameras connect. Ask Aura any question about your stores and get answers in seconds — no analyst required. Historical trends, live counts, and mobile access all included.
           </p>
           <a href="/contact" class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent-light transition-colors hover:text-white">
-            Learn more
+            See the dashboard
             <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
           </a>
         </div>
@@ -119,35 +213,17 @@ const latestStudies = caseStudies.slice(0, 3);
     </div>
   </section>
 
-  <!-- Split: Brand Performance (text left, visual right) -->
-  <section class="border-t border-white/10 py-32">
+  <!-- Word Is Out -->
+  <section class="border-t border-white/10 py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="grid items-center gap-16 md:grid-cols-2">
-        <div>
-          <p class="text-xs font-medium uppercase tracking-widest text-accent-light/60 mb-4">Brand Performance</p>
-          <h2 class="font-title text-3xl leading-snug tracking-tight md:text-4xl">
-            Unified dashboards that tie it all together
-          </h2>
-          <p class="mt-6 text-base leading-relaxed text-white/50">
-            Footfall, dwell time, and conversion in one picture. Ask Aura any question about your stores and get answers in seconds — no analyst required.
-          </p>
-          <a href="/contact" class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent-light transition-colors hover:text-white">
-            Learn more
-            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /></svg>
-          </a>
-        </div>
-        <div class="flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
-          <p class="text-sm text-white/20">Screenshot coming soon</p>
-        </div>
+      <div class="text-center mb-16">
+        <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
+          Word is out
+        </h2>
+        <p class="mt-4 text-lg text-white/40 md:text-xl">
+          Trusted by leading retailers and brands worldwide.
+        </p>
       </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="border-t border-white/10 py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <p class="text-xs font-medium uppercase tracking-widest text-accent-light/60 mb-4">What our clients say</p>
-      <h2 class="font-title text-4xl tracking-tight md:text-5xl mb-16">Trusted by leading retailers</h2>
 
       <div class="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 scrollbar-none">
         <!-- Quote 1 -->
@@ -189,92 +265,80 @@ const latestStudies = caseStudies.slice(0, 3);
     </div>
   </section>
 
-  <!-- Case Studies -->
-  <section id="case-studies" class="border-t border-white/10 py-32">
+  <!-- Form and Function -->
+  <section class="border-t border-white/10 py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mb-16 flex items-end justify-between">
-        <div>
-          <p class="text-xs font-medium uppercase tracking-widest text-accent-light/60 mb-4">Results</p>
-          <h2 class="font-title text-4xl tracking-tight md:text-5xl">Case Studies</h2>
-        </div>
-      </div>
-
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {latestStudies.map((study) => (
-          <a
-            href={`/case-studies/${study.slug}/`}
-            class="group block overflow-hidden rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm transition-all hover:border-white/15 hover:bg-white/[0.06]"
-          >
-            {study.data.coverImage ? (
-              <div class="aspect-video overflow-hidden bg-white/5">
-                <img
-                  src={study.data.coverImage}
-                  alt={study.data.title}
-                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-            ) : (
-              <div class="aspect-video bg-white/5"></div>
-            )}
-            <div class="p-6">
-              <p class="mb-2 text-xs uppercase tracking-widest text-white/40">
-                {study.data.client}
-              </p>
-              <h3 class="font-title text-lg mb-2 transition-colors group-hover:text-white/80">
-                {study.data.title}
-              </h3>
-              <p class="text-sm leading-relaxed text-white/50">{study.data.summary}</p>
-            </div>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- About / Why Auravision -->
-  <section id="about" class="border-t border-white/10 py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="max-w-3xl mb-20">
-        <p class="text-xs font-medium uppercase tracking-widest text-accent-light/60 mb-4">Why Auravision</p>
-        <h2 class="font-title text-4xl leading-snug tracking-tight md:text-5xl">
-          Retail intelligence you can trust at any scale
+      <div class="text-center mb-20">
+        <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
+          Form and function
         </h2>
-        <p class="mt-6 text-lg leading-relaxed text-white/50">
-          We built Auravision for retailers who need answers, not more data. Our platform turns existing camera infrastructure into an always-on analytics layer — without capturing or storing personal data.
+        <p class="mt-4 text-lg text-white/40 md:text-xl">
+          Enterprise-grade analytics from your existing infrastructure.
         </p>
       </div>
 
-      <div class="grid gap-12 md:grid-cols-3">
-        <div>
-          <div class="mb-4 text-3xl font-title text-white/80">Scalable</div>
-          <p class="text-sm leading-relaxed text-white/50">
-            From a single store to thousands of locations. Our edge-first architecture scales with you, not against you.
-          </p>
+      <div class="grid gap-16 md:grid-cols-2">
+        <!-- Specs List -->
+        <div class="space-y-8">
+          <div class="border-b border-white/10 pb-6">
+            <p class="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Cameras</p>
+            <p class="font-title text-lg text-white/90">Works with any IP or RTSP camera</p>
+          </div>
+          <div class="border-b border-white/10 pb-6">
+            <p class="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Demographics</p>
+            <p class="font-title text-lg text-white/90">Age, gender & staff-customer segmentation</p>
+          </div>
+          <div class="border-b border-white/10 pb-6">
+            <p class="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Latency</p>
+            <p class="font-title text-lg text-white/90">Real-time processing, sub-second updates</p>
+          </div>
+          <div class="border-b border-white/10 pb-6">
+            <p class="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Privacy</p>
+            <p class="font-title text-lg text-white/90">GDPR-compliant, no PII stored</p>
+          </div>
+          <div class="border-b border-white/10 pb-6">
+            <p class="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">API</p>
+            <p class="font-title text-lg text-white/90">Full REST API and webhook support</p>
+          </div>
+          <div class="pb-6">
+            <p class="text-xs font-medium uppercase tracking-widest text-white/40 mb-2">Scale</p>
+            <p class="font-title text-lg text-white/90">1 to 10,000+ cameras</p>
+          </div>
         </div>
-        <div>
-          <div class="mb-4 text-3xl font-title text-white/80">Secure</div>
-          <p class="text-sm leading-relaxed text-white/50">
-            Enterprise-grade encryption, SOC 2 compliance, and on-premise deployment options. Your data stays yours.
-          </p>
-        </div>
-        <div>
-          <div class="mb-4 text-3xl font-title text-white/80">Anonymous</div>
-          <p class="text-sm leading-relaxed text-white/50">
-            Privacy by design. We count and track movement patterns without identifying individuals. GDPR-compliant from day one.
-          </p>
+
+        <!-- Visual / Highlights -->
+        <div class="space-y-8">
+          <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
+            <h3 class="font-title text-2xl mb-3">No new hardware</h3>
+            <p class="text-base leading-relaxed text-white/50">
+              Auravision connects to the cameras you already own. No sensors, no gateways, no additional rack space. Just point your feed at our cloud and go.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
+            <h3 class="font-title text-2xl mb-3">Scales with you</h3>
+            <p class="text-base leading-relaxed text-white/50">
+              From a single entrance to an entire estate. Edge-first architecture means consistent performance whether you have one location or thousands.
+            </p>
+          </div>
+          <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
+            <h3 class="font-title text-2xl mb-3">Budget friendly</h3>
+            <p class="text-base leading-relaxed text-white/50">
+              No upfront hardware costs. Simple per-camera pricing that scales down as you grow. Contact us for volume pricing.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="border-t border-white/10 py-32">
+  <section class="border-t border-white/10 py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
       <h2 class="font-title text-4xl tracking-tight md:text-5xl">
-        Ready to transform your retail intelligence?
+        Ready to see it in action?
       </h2>
       <p class="mx-auto mt-6 max-w-xl text-lg text-white/50">
-        See how Ask Aura can give your team instant, actionable insights from your existing camera infrastructure.
+        Get live analytics from your existing cameras. No hardware, no hassle.
       </p>
       <a
         href="/contact"
