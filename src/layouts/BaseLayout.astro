@@ -35,32 +35,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
 
-    <!-- Netlify Identity (for Decap CMS auth redirect) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="bg-black text-white antialiased">
     <slot />
 
     <script>
+      import netlifyIdentity from "netlify-identity-widget";
+
+      netlifyIdentity.init();
+
       const hash = window.location.hash;
       const isAuthRedirect =
         hash.includes("confirmation_token") ||
         hash.includes("recovery_token") ||
         hash.includes("invite_token");
 
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user: any) => {
-          // Open the widget if we have an auth token in the URL
-          if (!user && isAuthRedirect) {
-            window.netlifyIdentity.open();
-          }
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
+      netlifyIdentity.on("init", (user: ReturnType<typeof netlifyIdentity.currentUser>) => {
+        if (!user && isAuthRedirect) {
+          netlifyIdentity.open();
+        }
+        if (!user) {
+          netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
     </script>
   </body>
 </html>
