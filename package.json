@@ -16,6 +16,7 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@types/netlify-identity-widget": "^1.9.7"
+    "@types/netlify-identity-widget": "^1.9.7",
+    "svgo": "^4.0.0"
   }
 }

@@ -25,6 +25,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
 
+    <!-- Google Fonts: Questrial (titles) + Open Sans (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+
     <title>{title} | Auravision</title>
     <meta name="description" content={description} />
 

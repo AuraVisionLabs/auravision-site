@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Contact" description="Get in touch with Auravision to learn more about our AI retail intelligence platform.">
+  <Nav />
+
+  <main class="mx-auto max-w-3xl px-6 pt-32 pb-32 lg:px-8">
+    <p class="text-xs font-medium uppercase tracking-widest text-white/30 mb-4">Get in touch</p>
+    <h1 class="font-title text-4xl tracking-tight md:text-6xl mb-6">
+      Let&apos;s talk
+    </h1>
+    <p class="text-lg text-white/50 max-w-xl leading-relaxed mb-12">
+      Whether you&apos;re ready for a demo or just exploring, we&apos;d love to hear from you.
+    </p>
+
+    <div class="grid gap-12 md:grid-cols-2">
+      <!-- Email contact -->
+      <div>
+        <h2 class="font-title text-xl mb-3">Email us</h2>
+        <a
+          href="mailto:hello@auravision.ai"
+          class="text-white/60 hover:text-white transition-colors underline underline-offset-4"
+        >
+          hello@auravision.ai
+        </a>
+      </div>
+
+      <!-- Demo request form -->
+      <div>
+        <h2 class="font-title text-xl mb-3">Request a demo</h2>
+        <p class="text-sm text-white/40 mb-6">
+          Fill out the form below and we&apos;ll be in touch within 24 hours.
+        </p>
+        <form name="contact" method="POST" data-netlify="true" class="flex flex-col gap-4">
+          <input type="hidden" name="form-name" value="contact" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            required
+            class="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Work email"
+            required
+            class="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors"
+          />
+          <textarea
+            name="message"
+            rows="4"
+            placeholder="Tell us about your needs..."
+            class="rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/30 focus:border-white/30 focus:outline-none transition-colors resize-none"
+          ></textarea>
+          <button
+            type="submit"
+            class="mt-2 self-start rounded-full bg-white px-8 py-3 text-sm font-medium text-black transition-colors hover:bg-white/90"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
