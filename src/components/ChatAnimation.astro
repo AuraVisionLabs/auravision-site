@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="chat-animation relative h-[200px] md:h-[180px]">
+<div class="chat-animation relative h-[280px] md:h-[260px]">
   <div class="chat-pair space-y-3 max-w-md ml-auto">
     <div class="chat-user flex justify-end items-start gap-2.5 opacity-0">
       <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-5 py-3 shadow-lg bg-cyan-600 text-white font-medium">
@@ -9,9 +9,21 @@
       <div class="chat-user-avatar flex-shrink-0 w-7 h-7 rounded-full bg-cyan-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">
       </div>
     </div>
+    <div class="chat-bot-image flex justify-start items-start gap-2.5 opacity-0 pr-[38px]">
+      <div class="flex-shrink-0 w-7 h-7 rounded-full bg-purple-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">AA
+      </div>
+      <div class="max-w-[80%] rounded-2xl rounded-tl-sm shadow-lg overflow-hidden bg-purple-600/20 border border-purple-500/20">
+        <div class="chat-image-placeholder w-[240px] h-[100px] bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30 flex items-center justify-center">
+          <svg class="w-8 h-8 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 15l3-3 2 2 3-4" />
+          </svg>
+        </div>
+      </div>
+    </div>
     <div class="chat-bot flex justify-start items-start gap-2.5 opacity-0 pr-[38px]">
-      <img src="/images/aura-vision-icon.svg" alt="Aura" class="flex-shrink-0 w-12 h-12 -mt-2 ml-1" />
-      <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-5 py-3 shadow-lg bg-purple-600 text-white font-medium">
+      <div class="flex-shrink-0 w-7 h-7"></div>
+      <div class="min-w-[70px] min-h-[47px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-5 py-3 shadow-lg bg-purple-600 text-white font-medium">
       </div>
     </div>
   </div>
@@ -40,6 +52,7 @@
   function initChatAnimation(container: Element) {
     const userBubble = container.querySelector(".chat-user")!;
     const botBubble = container.querySelector(".chat-bot")!;
+    const botImageBubble = container.querySelector(".chat-bot-image")!;
     const userText = userBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
     const botText = botBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
     const avatarEl = container.querySelector(".chat-user-avatar") as HTMLElement;
@@ -77,11 +90,13 @@
       avatarEl.textContent = INITIALS[initialsIndex];
       initialsIndex = (initialsIndex + 1) % INITIALS.length;
 
-      // Reset both to hidden
+      // Reset all to hidden
       userBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
       botBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
+      botImageBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
       (userBubble as HTMLElement).style.opacity = "0";
       (botBubble as HTMLElement).style.opacity = "0";
+      (botImageBubble as HTMLElement).style.opacity = "0";
 
       // Fade in user message
       requestAnimationFrame(() => {
@@ -89,23 +104,31 @@
         userBubble.classList.add("chat-fade-in-up");
       });
 
-      // Show bot bubble with thinking dots after user appears
+      // Show image bubble first after user appears
+      setTimeout(() => {
+        resetClasses(botImageBubble);
+        botImageBubble.classList.add("chat-fade-in-up");
+      }, 800);
+
+      // Show bot text bubble with thinking dots after image
       setTimeout(() => {
         showThinkingDots(botText);
         resetClasses(botBubble);
         botBubble.classList.add("chat-fade-in-up");
-      }, 800);
+      }, 1400);
 
       // Replace dots with streaming text
       setTimeout(() => {
         streamText(botText, pair.bot, () => {
-          // Hold for a beat then fade both out
-          const holdTime = 2000;
+          // Hold for a beat then fade all out
+          const holdTime = 2400;
           setTimeout(() => {
             resetClasses(userBubble);
             resetClasses(botBubble);
+            resetClasses(botImageBubble);
             userBubble.classList.add("chat-fade-out-up");
             botBubble.classList.add("chat-fade-out-up");
+            botImageBubble.classList.add("chat-fade-out-up");
 
             // Next pair
             setTimeout(() => {
@@ -114,7 +137,7 @@
             }, 800);
           }, holdTime);
         });
-      }, 800 + THINKING_DURATION);
+      }, 1400 + THINKING_DURATION);
     }
 
     showPair();

@@ -119,9 +119,9 @@ const metrics = [
       const t1 = setTimeout(() => {
         if (sweepPaused) return;
         item.classList.add("sweep");
-        const t2 = setTimeout(() => item.classList.remove("sweep"), 400);
+        const t2 = setTimeout(() => item.classList.remove("sweep"), 600);
         sweepTimeouts.push(t2);
-      }, i * 100);
+      }, i * 200);
       sweepTimeouts.push(t1);
     });
   }
