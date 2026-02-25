@@ -5,7 +5,8 @@ import Footer from "../components/Footer.astro";
 import LogoMarquee from "../components/LogoMarquee.astro";
 import ChatAnimation from "../components/ChatAnimation.astro";
 import MetricsGrid from "../components/MetricsGrid.astro";
-import { ArrowRight, Quote } from "@lucide/astro";
+import Testimonials from "../components/Testimonials.astro";
+import { ArrowRight } from "@lucide/astro";
 ---
 
 <BaseLayout title="Instant answers with Ask Aura">
@@ -128,56 +129,7 @@ import { ArrowRight, Quote } from "@lucide/astro";
   </section>
 
   <!-- Word Is Out -->
-  <section class="py-24 md:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
-          Word is out
-        </h2>
-        <p class="mt-4 text-lg text-white/40 md:text-xl">
-          Trusted by leading retailers and brands worldwide.
-        </p>
-      </div>
-
-      <div class="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-4 -mx-6 px-6 scrollbar-none">
-        <!-- Quote 1 -->
-        <div class="min-w-[340px] max-w-[400px] flex-shrink-0 snap-start rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-          <Quote class="h-8 w-8 text-accent/30 mb-6" stroke-width={1.5} />
-          <p class="text-base leading-relaxed text-white/70 mb-8">
-            "Auravision transformed how we understand our stores. We went from guessing to knowing — and our conversion rates show it."
-          </p>
-          <div>
-            <p class="font-medium text-white/90">Client Name</p>
-            <p class="text-sm text-white/40">Role, Company</p>
-          </div>
-        </div>
-
-        <!-- Quote 2 -->
-        <div class="min-w-[340px] max-w-[400px] flex-shrink-0 snap-start rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-          <Quote class="h-8 w-8 text-accent/30 mb-6" stroke-width={1.5} />
-          <p class="text-base leading-relaxed text-white/70 mb-8">
-            "The ease of deployment is exactly what we needed. Ask Aura gives our team answers in seconds instead of waiting days for reports."
-          </p>
-          <div>
-            <p class="font-medium text-white/90">Client Name</p>
-            <p class="text-sm text-white/40">Role, Company</p>
-          </div>
-        </div>
-
-        <!-- Quote 3 -->
-        <div class="min-w-[340px] max-w-[400px] flex-shrink-0 snap-start rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-          <Quote class="h-8 w-8 text-accent/30 mb-6" stroke-width={1.5} />
-          <p class="text-base leading-relaxed text-white/70 mb-8">
-            "Privacy-first analytics that actually work at scale. Auravision is the only solution we found that checked every box."
-          </p>
-          <div>
-            <p class="font-medium text-white/90">Client Name</p>
-            <p class="text-sm text-white/40">Role, Company</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <Testimonials />
 
   <!-- Form and Function -->
   <section class="py-24 md:py-32">
