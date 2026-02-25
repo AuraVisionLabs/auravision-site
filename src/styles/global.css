@@ -11,12 +11,45 @@
   --color-accent-muted: #d946ef;
 }
 
-/* Gradient heading utility — cyan-200 → purple-300 */
+/* Heading utility — white text with cyan glow top-left, purple glow bottom-right */
 .text-gradient {
-  background: linear-gradient(135deg, #a5f3fc, #ffffff, #ffffff, #c084fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  position: relative;
+  color: #ffffff;
+  overflow: visible;
+}
+
+/* Shared pseudo-element base */
+.text-gradient::before,
+.text-gradient::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: -1.0em;
+  padding: 1.0em;
+  z-index: -1;
+  pointer-events: none;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Cyan glow — visible in the top-left region */
+.text-gradient::before {
+  color: #22d3ee;
+  opacity: 1;
+  text-shadow: 0 0 24px #22d3ee, 0 0 24px #22d3ee;
+  -webkit-mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 50%);
+  mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 50%);
+}
+
+/* Purple glow — visible in the bottom-right region */
+.text-gradient::after {
+  color: #c084fc;
+  opacity: 1;
+  text-shadow: 0 0 24px #c084fc, 0 0 24px #c084fc, 0 0 24px #c084fc;
+  -webkit-mask-image: linear-gradient(135deg, transparent 50%, black 100%, black 100%);
+  mask-image: linear-gradient(135deg, transparent 50%, black 100%, black 100%);
 }
 
 body {

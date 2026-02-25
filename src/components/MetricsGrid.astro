@@ -19,7 +19,7 @@ const metrics = [
     <div id="metrics-grid" class="grid grid-cols-5 md:grid-cols-7 lg:grid-cols-9 tracking-[0.05em] font-mono font-light text-xs tracking-widest text-white md:text-xs">
       {metrics.map(({ label, Icon }) => (
         <div class="metric-item flex flex-col items-center text-center cursor-default px-4 py-4">
-          <div class="icon-box mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
+          <div class="icon-box mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
             <Icon class="h-8 w-8 text-white" stroke-width={1.5} />
           </div>
           <p set:html={label} />
@@ -31,16 +31,19 @@ const metrics = [
 
 <style>
   .metric-item .icon-box {
-    transition: transform 600ms ease, background-color 300ms ease;
-    will-change: transform, background-color;
+    transition: transform 250ms ease, background-color 400ms ease, box-shadow 500ms ease;
+    will-change: transform, background-color, box-shadow;
+    transform: translateZ(0) scale(1);
   }
 
   .metric-item :global(svg) {
-    transition: color 600ms ease;
+    transition: color 250ms ease;
+    will-change: color;
   }
 
   .metric-item p {
-    transition: color 600ms ease;
+    transition: color 250ms ease;
+    will-change: color;
   }
 
   .metric-item:hover p,
@@ -50,8 +53,9 @@ const metrics = [
 
   .metric-item:hover .icon-box,
   .metric-item.sweep .icon-box {
-    transform: scale(1.1);
+    transform: translateZ(0) scale(1.1);
     background-color: rgb(34 211 238); /* cyan-400 */
+    box-shadow: 0 0 20px 4px rgb(34 211 238 / 0.45), 0 0 40px 8px rgb(34 211 238 / 0.2);
   }
 
   .metric-item:hover :global(svg),
@@ -108,7 +112,7 @@ const metrics = [
     resumeTimer = setTimeout(() => {
       sweepPaused = false;
       sweep();
-      sweepTimer = setInterval(sweep, 5000);
+      sweepTimer = setInterval(sweep, 3000);
     }, 5000);
   });
 
@@ -119,13 +123,13 @@ const metrics = [
       const t1 = setTimeout(() => {
         if (sweepPaused) return;
         item.classList.add("sweep");
-        const t2 = setTimeout(() => item.classList.remove("sweep"), 600);
+        const t2 = setTimeout(() => item.classList.remove("sweep"), 500);
         sweepTimeouts.push(t2);
-      }, i * 200);
+      }, i * 100);
       sweepTimeouts.push(t1);
     });
   }
 
   sweep();
-  sweepTimer = setInterval(sweep, 5000);
+  sweepTimer = setInterval(sweep, 7000);
 </script>
