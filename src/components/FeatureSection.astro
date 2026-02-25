@@ -33,9 +33,9 @@ const {
         <p class="mt-6 text-lg leading-relaxed text-white">
           {description}
         </p>
-        <a href={linkHref} class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent-light transition-colors hover:text-white">
+        <a href={linkHref} class="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition-colors hover:text-purple-300">
           {linkText}
-          <ArrowRight class="h-4 w-4" stroke-width={2} />
+          <ArrowRight class="h-4 w-4 text-cyan-500 transition-colors group-hover:text-purple-300" stroke-width={2} />
         </a>
       </div>
       <div class:list={[reversed && "order-2 md:order-1"]}>

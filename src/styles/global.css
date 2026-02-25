@@ -11,9 +11,9 @@
   --color-accent-muted: #d946ef;
 }
 
-/* Gradient heading utility — fuchsia-400 → cyan-300 */
+/* Gradient heading utility — cyan-200 → purple-300 */
 .text-gradient {
-  background: linear-gradient(to right, #e879f9, #67e8f9);
+  background: linear-gradient(135deg, #a5f3fc, #ffffff, #ffffff, #c084fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

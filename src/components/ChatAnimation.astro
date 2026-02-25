@@ -1,30 +1,28 @@
 ---
+import { Bot, FolderOpen } from "@lucide/astro";
 ---
 
-<div class="chat-animation relative h-[280px] md:h-[260px]">
-  <div class="chat-pair space-y-3 max-w-md ml-auto">
+<div class="chat-animation relative h-[280px] md:h-[260px] w-full">
+  <div class="chat-pair space-y-3 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2.5 opacity-0">
-      <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-5 py-3 shadow-lg bg-cyan-600 text-white font-medium">
+      <div class="max-w-[80%] text-base leading-relaxed rounded-2xl rounded-tr-sm px-5 py-3 shadow-lg bg-cyan-600 text-white font-medium">
       </div>
-      <div class="chat-user-avatar flex-shrink-0 w-7 h-7 rounded-full bg-cyan-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">
+      <div class="chat-user-avatar flex-shrink-0 w-9 h-9 rounded-full bg-cyan-600/50 flex items-center justify-center text-[11px] font-semibold text-white/70 mt-0.5">
       </div>
     </div>
     <div class="chat-bot-image flex justify-start items-start gap-2.5 opacity-0 pr-[38px]">
-      <div class="flex-shrink-0 w-7 h-7 rounded-full bg-purple-600/50 flex items-center justify-center mt-0.5">
-        <svg class="w-3.5 h-3.5 text-white/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+      <div class="flex-shrink-0 w-9 h-9 rounded-full bg-purple-600/50 flex items-center justify-center mt-0.5">
+        <Bot class="w-4 h-4 text-white/70" stroke-width={2} />
       </div>
       <div class="max-w-[80%] rounded-2xl rounded-tl-sm shadow-lg overflow-hidden bg-purple-600/20 border border-purple-500/20">
         <div class="chat-image-placeholder w-[240px] h-[100px] bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30 flex items-center justify-center">
-          <svg class="w-8 h-8 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 15l3-3 2 2 3-4" />
-          </svg>
+          <FolderOpen class="w-8 h-8 text-white/30" stroke-width={1.5} />
         </div>
       </div>
     </div>
     <div class="chat-bot flex justify-start items-start gap-2.5 opacity-0 pr-[38px]">
-      <div class="flex-shrink-0 w-7 h-7"></div>
-      <div class="min-w-[70px] min-h-[47px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-5 py-3 shadow-lg bg-purple-600 text-white font-medium">
+      <div class="flex-shrink-0 w-9 h-9"></div>
+      <div class="min-w-[70px] min-h-[47px] max-w-[80%] text-base leading-relaxed rounded-2xl rounded-tl-sm px-5 py-3 shadow-lg bg-purple-600 text-white font-medium">
       </div>
     </div>
   </div>
@@ -73,11 +71,36 @@
     function streamText(el: HTMLElement, text: string, onDone: () => void) {
       el.innerHTML = "";
       let i = 0;
+
+      // Pre-parse: split text into plain-text segments and HTML tags
+      const parts: string[] = [];
+      let cursor = 0;
+      const tagRegex = /<\/?[a-zA-Z][^>]*>/g;
+      let match;
+      while ((match = tagRegex.exec(text)) !== null) {
+        if (match.index > cursor) {
+          // push each plain char individually
+          for (let c = cursor; c < match.index; c++) {
+            parts.push(text[c]);
+          }
+        }
+        // push the full tag as one atomic unit
+        parts.push(match[0]);
+        cursor = match.index + match[0].length;
+      }
+      // remaining plain chars
+      for (let c = cursor; c < text.length; c++) {
+        parts.push(text[c]);
+      }
+
+      let accumulated = "";
       streamTimer = window.setInterval(() => {
-        // Build up the raw string and set as innerHTML so tags render
-        el.innerHTML = text.substring(0, i + 1);
-        i++;
-        if (i >= text.length) {
+        if (i < parts.length) {
+          accumulated += parts[i];
+          el.innerHTML = accumulated;
+          i++;
+        }
+        if (i >= parts.length) {
           clearInterval(streamTimer);
           streamTimer = undefined;
           onDone();
