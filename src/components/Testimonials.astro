@@ -21,9 +21,9 @@ const testimonials = [
 ---
 
 <section class="py-24 md:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
+      <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl text-gradient">
         Our clients have<br/>a thing or two to say...
       </h2>
     </div>
@@ -38,7 +38,7 @@ const testimonials = [
       {/* Triple the cards for seamless infinite scroll */}
       {[...testimonials, ...testimonials, ...testimonials].map(({ quote, name, role }) => (
         <div class="testimonial-card w-[360px] flex-shrink-0 rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-          <Quote class="h-8 w-8 text-accent/30 mb-6" stroke-width={1.5} />
+          <Quote class="h-8 w-8 text-cyan-400 mb-6" stroke-width={1.5} />
           <p class="text-base leading-relaxed text-white/70 mb-8">
             "{quote}"
           </p>

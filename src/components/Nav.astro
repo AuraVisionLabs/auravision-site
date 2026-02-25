@@ -1,60 +1,66 @@
-<header class="fixed top-0 inset-x-0 z-50 bg-slate-950 border-b-1 border-slate-700/50">
-  <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-    <!-- Logo (wordmark) -->
+---
+import { Menu, X } from "@lucide/astro";
+---
+
+<header class="relative">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 lg:py-4 lg:px-8">
+    <!-- Logo: icon on mobile, full wordmark on desktop -->
     <a href="/" class="flex-shrink-0">
+      <img
+        src="/images/aura-vision-icon.svg"
+        alt="Aura Vision"
+        class="h-20 w-auto lg:hidden"
+        loading="eager"
+      />
       <img
         src="/images/aura-vision-wordmark.svg"
         alt="Aura Vision"
-        class="h-8 w-auto"
+        class="hidden lg:block h-12 w-auto"
         loading="eager"
       />
     </a>
 
     <!-- Desktop links -->
-    <div class="hidden md:flex items-center gap-8 font-title text-lg text-white/80 tracking-[0.05em]">
+    <div class="hidden lg:flex items-center gap-8 font-title text-sm text-white tracking-[0.05em]">
       <a
         href="/case-studies"
-        class="hover:text-white transition-colors duration-200"
+        class="hover:text-white/70 transition-colors duration-200"
       >
         Case Studies
       </a>
       <a
         href="/contact"
-        class="hover:text-white transition-colors duration-200"
+        class="rounded-full bg-white px-6 py-2 text-slate-900 hover:bg-white/85 transition-colors duration-200"
       >
         Contact
       </a>
     </div>
 
-    <!-- Mobile hamburger -->
+    <!-- Mobile menu toggle -->
     <button
       id="mobile-menu-btn"
-      class="md:hidden flex flex-col gap-1.5 p-2"
+      class="lg:hidden p-1 text-white"
       aria-label="Toggle menu"
     >
-      <span class="block h-px w-6 bg-white transition-transform duration-200" id="bar1"></span>
-      <span class="block h-px w-6 bg-white transition-opacity duration-200" id="bar2"></span>
-      <span class="block h-px w-6 bg-white transition-transform duration-200" id="bar3"></span>
+      <Menu id="menu-icon" class="h-8 w-8" stroke-width={1.5} />
+      <X id="close-icon" class="h-8 w-8 hidden" stroke-width={1.5} />
     </button>
   </nav>
 
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden fixed inset-0 top-[57px] bg-slate-950 z-40"
+    class="hidden lg:hidden fixed inset-0 top-[65px] bg-slate-900 z-40"
   >
-    <div class="flex flex-col items-center justify-center gap-8 pt-20 text-lg">
+    <div class="flex flex-col items-start gap-8 px-6 pt-12 text-lg">
       <a href="/case-studies" class="text-white/70 hover:text-white transition-colors">
         Case Studies
       </a>
-      <a href="/contact" class="text-white/70 hover:text-white transition-colors">
-        Contact
-      </a>
       <a
         href="/contact"
-        class="mt-4 inline-flex items-center rounded-full bg-accent px-8 py-3 text-base font-medium text-white"
+        class="mt-4 inline-flex items-center rounded-full bg-white px-8 py-3 text-base font-medium text-slate-900 hover:bg-white/85 transition-colors"
       >
-        Book a Demo
+        Contact
       </a>
     </div>
   </div>
@@ -63,21 +69,12 @@
 <script>
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
-  const bar1 = document.getElementById("bar1");
-  const bar2 = document.getElementById("bar2");
-  const bar3 = document.getElementById("bar3");
+  const menuIcon = document.getElementById("menu-icon");
+  const closeIcon = document.getElementById("close-icon");
 
   btn?.addEventListener("click", () => {
-    const isOpen = !menu?.classList.contains("hidden");
     menu?.classList.toggle("hidden");
-    if (!isOpen) {
-      bar1?.classList.add("translate-y-[4px]", "rotate-45");
-      bar2?.classList.add("opacity-0");
-      bar3?.classList.add("-translate-y-[4px]", "-rotate-45");
-    } else {
-      bar1?.classList.remove("translate-y-[4px]", "rotate-45");
-      bar2?.classList.remove("opacity-0");
-      bar3?.classList.remove("-translate-y-[4px]", "-rotate-45");
-    }
+    menuIcon?.classList.toggle("hidden");
+    closeIcon?.classList.toggle("hidden");
   });
 </script>

@@ -14,15 +14,15 @@ import { ArrowRight } from "@lucide/astro";
   <Nav />
 
   <!-- Hero -->
-  <section class="relative pt-48 pb-32 overflow-hidden bg-gradient-to-t from-slate-900 via-indigo-950 to-purple-900">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8 w-full">
+  <section class="relative pt-24 pb-32 overflow-hidden">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8 w-full">
       <div class="grid items-center gap-12 md:grid-cols-2">
         <div class="max-w-2xl">
-          <h1 class="font-title text-4xl tracking-tight md:text-6xl lg:text-7xl leading-[1.05]">
+          <h1 class="font-title text-4xl tracking-tight md:text-6xl lg:text-7xl leading-[1.05] text-gradient">
             Instantly validate any store decision.
           </h1>
-          <p class="mt-8 max-w-lg text-2xl text-white/50 md:text-4xl leading-[1.4]">
-            Stop digging for answers,<br/>just <span class="text-white">Ask&nbsp;Aura</span>.
+          <p class="mt-8 max-w-lg text-2xl text-white/50 font-light md:text-4xl leading-[1.4]">
+            Stop digging for answers,<br/>just <span class="text-white font-semibold">Ask&nbsp;Aura</span>.
           </p>
           <div class="mt-12">
             <a
@@ -34,7 +34,9 @@ import { ArrowRight } from "@lucide/astro";
           </div>
         </div>
         <div class="hidden md:block">
-          <ChatAnimation />
+          <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-6">
+            <ChatAnimation />
+          </div>
         </div>
       </div>
     </div>
@@ -46,10 +48,10 @@ import { ArrowRight } from "@lucide/astro";
   <!-- Centered Tagline -->
   <section class="pt-24 md:pt-32">
     <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
-      <h2 class="font-title text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
+      <h2 class="font-title text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl text-gradient">
         Anonymous full-store analytics for enterprise retailers
       </h2>
-      <p class="mt-6 text-xl text-white md:text-2xl">
+      <p class="mt-6 text-xl text-white font-medium md:text-2xl">
         No new sensors. No personal data. Just answers.
       </p>
     </div>
@@ -138,9 +140,9 @@ import { ArrowRight } from "@lucide/astro";
 
   <!-- Form and Function -->
   <section class="py-24 md:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div class="mx-auto max-w-6xl px-6 lg:px-8">
       <div class="text-center mb-20">
-        <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
+        <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl text-gradient">
           We've got your stores covered
         </h2>
       </div>
@@ -177,20 +179,20 @@ import { ArrowRight } from "@lucide/astro";
         <!-- Visual / Highlights -->
         <div class="space-y-8">
           <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-            <h3 class="font-title text-2xl mb-3">No new sensors</h3>
-            <p class="text-base leading-relaxed text-white/50">
+            <h3 class="font-title text-2xl mb-3 text-white font-medium">No new sensors</h3>
+            <p class="text-lg leading-relaxed text-white">
               Leverage your existing security camera infrastructure. No footfall counters, wiring, or RFID tags.
             </p>
           </div>
           <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-            <h3 class="font-title text-2xl mb-3">Scales with you</h3>
-            <p class="text-base leading-relaxed text-white/50">
+            <h3 class="font-title text-2xl mb-3 text-white font-medium">Scales with you</h3>
+            <p class="text-lg leading-relaxed text-white">
               From a single entrance to an entire estate. Edge-first architecture means consistent performance whether you have one location or thousands.
             </p>
           </div>
           <div class="rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-            <h3 class="font-title text-2xl mb-3">Budget friendly</h3>
-            <p class="text-base leading-relaxed text-white/50">
+            <h3 class="font-title text-2xl mb-3 text-white font-medium">Budget friendly</h3>
+            <p class="text-lg leading-relaxed text-white">
               No upfront hardware costs. Simple per-camera pricing that scales down as you grow. Contact us for volume pricing.
             </p>
           </div>
@@ -201,11 +203,11 @@ import { ArrowRight } from "@lucide/astro";
 
   <!-- CTA -->
   <section class="py-24 md:py-32">
-    <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
-      <h2 class="font-title text-4xl tracking-tight md:text-5xl">
+    <div class="mx-auto max-w-6xl px-6 text-center lg:px-8">
+      <h2 class="font-title text-4xl tracking-tight md:text-5xl text-gradient">
         Your teams will want to use it
       </h2>
-      <p class="mx-auto mt-6 max-w-xl text-lg text-white/50">
+      <p class="mx-auto mt-6 max-w-xl text-lg text-white">
         If you're not convinced by now, well here it goes — we're the world's second best in-store analytics provider, honest.
       </p>
       <a

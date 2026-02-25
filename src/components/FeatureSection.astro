@@ -21,16 +21,16 @@ const {
 ---
 
 <section class="py-24 md:py-32">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+  <div class="mx-auto max-w-6xl px-6 lg:px-8">
     <div class="grid items-center gap-16 md:grid-cols-2">
       <div class:list={[reversed && "order-1 md:order-2"]}>
-        <h2 class="font-title text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
+        <h2 class="font-title text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl text-gradient">
           {title}
         </h2>
-        <p class="mt-4 text-xl text-white/40 md:text-2xl">
+        <p class="mt-4 text-xl text-white font-medium md:text-2xl">
           {subtitle}
         </p>
-        <p class="mt-6 text-base leading-relaxed text-white/50">
+        <p class="mt-6 text-lg leading-relaxed text-white">
           {description}
         </p>
         <a href={linkHref} class="mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent-light transition-colors hover:text-white">
