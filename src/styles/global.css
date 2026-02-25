@@ -6,9 +6,9 @@
   --font-body: "Open Sans", sans-serif;
   --font-mono: "Roboto Mono", monospace;
 
-  --color-accent: #8b5cf6;
-  --color-accent-light: #a78bfa;
-  --color-accent-muted: #7c3aed;
+  --color-accent: #e879f9;
+  --color-accent-light: #f0abfc;
+  --color-accent-muted: #d946ef;
 }
 
 body {
@@ -159,7 +159,7 @@ select,
 
   /* Links */
   & :where(a) {
-    @apply text-accent underline decoration-accent/30 underline-offset-4 transition-colors hover:text-accent-light hover:decoration-accent/60;
+    @apply text-cyan-400 no-underline transition-colors hover:text-cyan-300;
   }
 
   /* Lists */
