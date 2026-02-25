@@ -10,6 +10,15 @@ const caseStudies = defineCollection({
     summary: z.string(),
     tags: z.array(z.string()).optional().default([]),
     services: z.array(z.string()).optional().default([]),
+    metrics: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+        })
+      )
+      .optional()
+      .default([]),
   }),
 });
 

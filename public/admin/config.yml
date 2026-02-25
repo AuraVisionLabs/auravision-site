@@ -25,4 +25,11 @@ collections:
         name: "services"
         widget: "list"
         required: false
+      - label: "Key Metrics"
+        name: "metrics"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Value", name: "value", widget: "string" }
+          - { label: "Label", name: "label", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
