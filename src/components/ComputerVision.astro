@@ -1,0 +1,57 @@
+---
+const specs = [
+  { label: "Connectivity", value: "IP & RTSP cameras" },
+  { label: "Camera lense", value: "Fisheye and Standard" },
+  { label: "VIDEO Processing", value: "On-premise" },
+  { label: "Data access", value: "Cloud dashboard & API" },
+  { label: "Demographics", value: "Age, gender & staff-customer" },
+  { label: "Latency", value: "Real-time, 15 min granularity" },
+  { label: "Privacy", value: "No PII stored, no facial recognition" },
+  { label: "Security", value: "ISO27001 ISMS" },
+  { label: "Integrations", value: "REST API, Sales data, SSO" }
+];
+---
+
+<section class="cv-video-section relative overflow-hidden">
+  <!-- Full-width video background -->
+  <video
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="/videos/aura-vision-tech-demo.webm" type="video/webm" />
+    <source src="/videos/aura-vision-tech-demo.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Dark overlay on top of video -->
+  <div class="absolute inset-0"></div>
+
+  <!-- Bottom fade to page background -->
+  <div class="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-slate-900 pointer-events-none"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 py-24 md:py-36">
+    <!-- Dark specs panel -->
+    <div class="mx-auto max-w-5xl px-6 lg:px-8">
+      <div class="rounded-2xl bg-slate-950/50 backdrop-blur-xl p-8 md:p-12">
+        <div class="text-center mb-10">
+          <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
+            <span class="text-gradient block" data-text="Cutting-edge computer vision">Cutting-edge computer vision</span>
+            <span class="text-gradient block" data-text="that just works">that just works</span>
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-8 font-mono text-sm">
+          {specs.map((s) => (
+            <div class="pl-4">
+              <p class="text-[10px] uppercase tracking-[0.2em] text-cyan-400 mb-1">{s.label}</p>
+              <p class="text-white leading-relaxed">{s.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

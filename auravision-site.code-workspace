@@ -7,5 +7,9 @@
 			"path": "../aura assistant"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"chat.tools.terminal.autoApprove": {
+			"ffmpeg": true
+		}
+	}
 }
