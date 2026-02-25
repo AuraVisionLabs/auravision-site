@@ -8,6 +8,7 @@ import MetricsGrid from "../components/MetricsGrid.astro";
 import Testimonials from "../components/Testimonials.astro";
 import FeatureSection from "../components/FeatureSection.astro";
 import Button from "../components/Button.astro";
+import ContactForm from "../components/ContactForm.astro";
 import { ArrowRight } from "@lucide/astro";
 ---
 
@@ -176,20 +177,8 @@ import { ArrowRight } from "@lucide/astro";
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-24 md:py-32">
-    <div class="mx-auto max-w-6xl px-6 text-center lg:px-8">
-      <h2 class="font-title text-4xl tracking-tight md:text-5xl text-gradient" data-text="Your teams need more than sales data">
-        Your teams need more than sales data
-      </h2>
-      <p class="mx-auto mt-6 max-w-xl text-lg text-white">
-        You made it this far, so here goes — we're the world's second best in-store analytics provider, honest.
-      </p>
-      <Button href="/contact" class="mt-10">
-        Book a demo to find out why
-      </Button>
-    </div>
-  </section>
+  <!-- Contact Form -->
+  <ContactForm />
 
   <Footer />
 </BaseLayout>

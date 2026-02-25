@@ -1,0 +1,37 @@
+---
+interface Props {
+  heading?: string;
+  subheading?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+
+const {
+  heading = "Turn your cameras into clarity",
+  subheading = "Measure, optimise, and grow with Aura Vision.",
+  buttonText = "Contact Us",
+  buttonHref = "/contact",
+} = Astro.props;
+---
+
+<section class="border-t border-white/10">
+  <div class="mx-auto max-w-6xl px-6 py-20 lg:px-8 text-center">
+    <h2
+      class="text-gradient font-title text-3xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-tight"
+      data-text={heading}
+    >
+      {heading}
+    </h2>
+    {subheading && (
+      <p class="mt-4 text-base md:text-lg text-white/50 max-w-xl mx-auto">
+        {subheading}
+      </p>
+    )}
+    <a
+      href={buttonHref}
+      class="mt-8 inline-block rounded-full bg-white px-8 py-3 text-sm font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
+    >
+      {buttonText}
+    </a>
+  </div>
+</section>
