@@ -9,6 +9,8 @@
   --color-accent: #e879f9;
   --color-accent-light: #f0abfc;
   --color-accent-muted: #d946ef;
+
+  --max-width-site: 64rem;
 }
 
 /* Heading utility — white text with cyan glow top-left, purple glow bottom-right */

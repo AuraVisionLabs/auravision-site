@@ -1,24 +1,25 @@
 ---
-import { Footprints, UserStar, UsersRound, Map, Flame, Venus, ArrowLeftRight, Funnel, Clock } from "@lucide/astro";
+import { Footprints, UserStar, UsersRound, Map, Flame, VenusAndMars, ArrowLeftRight, Funnel, Clock, Eye } from "@lucide/astro";
 
 const metrics = [
   { label: "Footfall", Icon: Footprints },
+  { label: "Demo\u00ADgraphics", Icon: VenusAndMars },
   { label: "Staffing", Icon: UserStar },
   { label: "Queues", Icon: UsersRound },
   { label: "Journeys", Icon: Map },
   { label: "Heatmaps", Icon: Flame },
-  { label: "Demo\u00ADgraphics", Icon: Venus },
   { label: "Passers-by", Icon: ArrowLeftRight },
-  { label: "Capture rate", Icon: Funnel },
+  { label: "Capture", Icon: Funnel },
   { label: "Dwell time", Icon: Clock },
+  { label: "Impressions", Icon: Eye },
 ];
 ---
 
 <section class="py-16 md:py-24">
-  <div class="mx-auto px-6">
-    <div id="metrics-grid" class="grid grid-cols-5 md:grid-cols-7 lg:grid-cols-9 tracking-[0.05em] font-mono font-light text-xs tracking-widest text-white md:text-xs">
+  <div class="mx-auto max-w-site px-6">
+    <div id="metrics-grid" class="grid grid-cols-5 md:grid-cols-7 lg:grid-cols-10 tracking-[0.05em] font-mono font-light text-[0.6rem] tracking-widest text-white md:text-[0.7rem]">
       {metrics.map(({ label, Icon }) => (
-        <div class="metric-item flex flex-col items-center text-center cursor-default px-4 py-4">
+        <div class="metric-item flex flex-col items-center text-center cursor-default py-4">
           <div class="icon-box mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
             <Icon class="h-8 w-8 text-white" stroke-width={1.5} />
           </div>

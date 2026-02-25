@@ -10,6 +10,7 @@ import FeatureSection from "../components/FeatureSection.astro";
 import Button from "../components/Button.astro";
 import ContactForm from "../components/ContactForm.astro";
 import ComputerVision from "../components/ComputerVision.astro";
+import RecentCaseStudies from "../components/RecentCaseStudies.astro";
 import { ArrowRight } from "@lucide/astro";
 ---
 
@@ -23,7 +24,7 @@ import { ArrowRight } from "@lucide/astro";
 
   <!-- Centered Tagline -->
   <section class="pt-24 md:pt-32">
-    <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
+    <div class="mx-auto max-w-site px-6 text-center lg:px-8">
       <h2 class="font-title text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl text-gradient" data-text="Anonymous full-store analytics using your existing cameras">
         Anonymous full-store analytics using your existing cameras
       </h2>
@@ -116,6 +117,9 @@ import { ArrowRight } from "@lucide/astro";
 
   <!-- Cutting-Edge Computer Vision -->
   <ComputerVision />
+
+  <!-- Recent Case Studies -->
+  <RecentCaseStudies />
 
   <!-- Contact Form -->
   <ContactForm />
