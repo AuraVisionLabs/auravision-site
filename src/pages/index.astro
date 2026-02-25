@@ -4,7 +4,8 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import LogoMarquee from "../components/LogoMarquee.astro";
 import ChatAnimation from "../components/ChatAnimation.astro";
-import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumnIncreasing, Clock, ArrowRight, Quote } from "@lucide/astro";
+import MetricsGrid from "../components/MetricsGrid.astro";
+import { ArrowRight, Quote } from "@lucide/astro";
 ---
 
 <BaseLayout title="Instant answers with Ask Aura">
@@ -53,83 +54,15 @@ import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumn
   </section>
 
   <!-- Metrics Grid -->
-  <section class="py-16 md:py-24">
-    <div class="mx-auto max-w-5xl px-6 lg:px-8">
-      <div class="grid grid-cols-9 gap-x-8 gap-y-12 md:gap-y-16 tracking-[0.05em]">
-        <!-- Footfall -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <Users class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Footfall</p>
-        </div>
-        <!-- Staffing -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <UserCog class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Staffing</p>
-        </div>
-        <!-- Queues -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <List class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Queues</p>
-        </div>
-        <!-- Journeys -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <Map class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Journeys</p>
-        </div>
-        <!-- Heatmaps -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <Flame class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Heatmaps</p>
-        </div>
-        <!-- Demographics -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <PieChart class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Demographics</p>
-        </div>
-        <!-- Passers-by -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <ArrowLeftRight class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Passers-by</p>
-        </div>
-        <!-- Capture Rate -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <ChartColumnIncreasing class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Capture rate</p>
-        </div>
-        <!-- Dwell Time -->
-        <div class="flex flex-col items-center text-center">
-          <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/[0.04]">
-            <Clock class="h-8 w-8 text-white/60" stroke-width={1.5} />
-          </div>
-          <p class="font-mono font-light text-xs tracking-widest text-white/90 md:text-sm">Dwell time</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <MetricsGrid />
 
   <!-- Insanely Fast Install -->
-  <section class="border-t border-white/10 py-24 md:py-32">
+  <section class="py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid items-center gap-16 md:grid-cols-2">
         <div>
           <h2 class="font-title text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl">
-            Insanely fast install
+            Lightning fast install
           </h2>
           <p class="mt-4 text-xl text-white/40 md:text-2xl">
             Like, 100x faster.
@@ -169,7 +102,7 @@ import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumn
   </section>
 
   <!-- Instant Validation -->
-  <section class="border-t border-white/10 py-24 md:py-32">
+  <section class="py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="grid items-center gap-16 md:grid-cols-2">
         <div class="order-2 md:order-1 flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
@@ -195,7 +128,7 @@ import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumn
   </section>
 
   <!-- Word Is Out -->
-  <section class="border-t border-white/10 py-24 md:py-32">
+  <section class="py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
@@ -247,7 +180,7 @@ import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumn
   </section>
 
   <!-- Form and Function -->
-  <section class="border-t border-white/10 py-24 md:py-32">
+  <section class="py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="text-center mb-20">
         <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
@@ -313,7 +246,7 @@ import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumn
   </section>
 
   <!-- CTA -->
-  <section class="border-t border-white/10 py-24 md:py-32">
+  <section class="py-24 md:py-32">
     <div class="mx-auto max-w-7xl px-6 text-center lg:px-8">
       <h2 class="font-title text-4xl tracking-tight md:text-5xl">
         Ready to see it in action?
@@ -332,3 +265,5 @@ import { Users, UserCog, List, Map, Flame, PieChart, ArrowLeftRight, ChartColumn
 
   <Footer />
 </BaseLayout>
+
+

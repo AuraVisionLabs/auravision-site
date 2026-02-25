@@ -7,6 +7,9 @@ const clients = [
   { name: "Casper", logo: "/images/logos/casper.svg" },
   { name: "Browns", logo: "/images/logos/browns.svg" },
 ];
+
+// Repeat logos enough times so each half of the track is wider than the largest screens (5K+)
+const repeatedClients = [...clients, ...clients, ...clients, ...clients];
 ---
 
 <section class="py-16 overflow-hidden">
@@ -17,7 +20,7 @@ const clients = [
 
     <!-- Scrolling track: two copies for seamless loop -->
     <div class="animate-marquee flex w-max items-center gap-20">
-      {clients.map((client) => (
+      {repeatedClients.map((client) => (
         <img
           src={client.logo}
           alt={client.name}
@@ -26,7 +29,7 @@ const clients = [
         />
       ))}
       {/* Duplicate for seamless loop */}
-      {clients.map((client) => (
+      {repeatedClients.map((client) => (
         <img
           src={client.logo}
           alt={client.name}
