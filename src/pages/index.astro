@@ -11,6 +11,7 @@ import Button from "../components/Button.astro";
 import ContactForm from "../components/ContactForm.astro";
 import ComputerVision from "../components/ComputerVision.astro";
 import RecentCaseStudies from "../components/RecentCaseStudies.astro";
+import PathMapCompare from "../components/PathMapCompare.astro";
 import { ArrowRight } from "@lucide/astro";
 ---
 
@@ -88,28 +89,7 @@ import { ArrowRight } from "@lucide/astro";
     description="Unbelievably precise insights into who your customers are and how they're interacting with your sales associates."
     linkText="Ask Aura a question"
   >
-    <div slot="visual" class="flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
-      <div class="flex flex-col items-center gap-6 px-8 w-full">
-        <div class="w-full">
-          <div class="flex items-center justify-between text-xs text-white/40 mb-2">
-            <span>Traditional sensors</span>
-            <span>Weeks</span>
-          </div>
-          <div class="h-3 w-full rounded-full bg-white/5">
-            <div class="h-3 rounded-full bg-white/10" style="width: 100%"></div>
-          </div>
-        </div>
-        <div class="w-full">
-          <div class="flex items-center justify-between text-xs text-white/40 mb-2">
-            <span>Auravision</span>
-            <span>Minutes</span>
-          </div>
-          <div class="h-3 w-full rounded-full bg-white/5">
-            <div class="h-3 rounded-full bg-accent" style="width: 8%"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <PathMapCompare slot="visual" />
   </FeatureSection>
 
   <!-- Word Is Out -->
