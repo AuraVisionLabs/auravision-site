@@ -1,20 +1,34 @@
 ---
 // 3D CSS wireframe cuboid with dimension annotations
 // Proportions: 6cm (W) × 4cm (H) × 6cm (D)
+
+// Speaker grill: 7 rows of circles, alternating offset, shrinking radii
+const speakerRows = [
+  { y: 6,  r: 4.5, offset: false },
+  { y: 16, r: 4.2, offset: true  },
+  { y: 26, r: 3.8, offset: false },
+  { y: 36, r: 3.4, offset: true  },
+  { y: 46, r: 3.0, offset: false },
+  { y: 56, r: 2.6, offset: true  },
+  { y: 66, r: 2.2, offset: false },
+];
+const speakerCols = 10;
+const speakerSpacing = 18;
+const speakerOffset = 9; // half spacing for alternating rows
+
+// Top grill: 5 rows × 12 columns
+const grillRows = 5;
+const grillCols = 12;
 ---
 
 <div class="cube-scene">
-  <!-- Shared RJ45 symbol (defined once, used twice) -->
   <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
     <symbol id="rj45" viewBox="0 0 48 48" fill="none">
       <rect x="2" y="2" width="44" height="44" rx="5" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
       <path d="M10 8 h28 a2 2 0 0 1 2 2 v14 h-6 v8 h-20 v-8 h-6 V10 a2 2 0 0 1 2-2 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-      <line x1="14" y1="11" x2="14" y2="22" stroke="currentColor" stroke-width="1.2"/>
-      <line x1="18" y1="11" x2="18" y2="22" stroke="currentColor" stroke-width="1.2"/>
-      <line x1="22" y1="11" x2="22" y2="22" stroke="currentColor" stroke-width="1.2"/>
-      <line x1="26" y1="11" x2="26" y2="22" stroke="currentColor" stroke-width="1.2"/>
-      <line x1="30" y1="11" x2="30" y2="22" stroke="currentColor" stroke-width="1.2"/>
-      <line x1="34" y1="11" x2="34" y2="22" stroke="currentColor" stroke-width="1.2"/>
+      {[14,18,22,26,30,34].map(x => (
+        <line x1={x} y1="11" x2={x} y2="22" stroke="currentColor" stroke-width="1.2"/>
+      ))}
     </symbol>
     <symbol id="usbc" viewBox="0 0 36 20" fill="none">
       <rect x="1" y="1" width="30" height="17" rx="8" stroke="currentColor" stroke-width="1.2" opacity="0.2"/>
@@ -24,43 +38,30 @@
 
   <div class="cube">
     <div class="face front">
-      <svg class="eth-port" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <use href="#rj45"/>
-      </svg>
-      <svg class="eth-port" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <use href="#rj45"/>
-      </svg>
-      <svg class="usbc-port" viewBox="0 0 36 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <use href="#usbc"/>
-      </svg>
+      <svg class="port eth-port" viewBox="0 0 48 48" fill="none"><use href="#rj45"/></svg>
+      <svg class="port eth-port" viewBox="0 0 48 48" fill="none"><use href="#rj45"/></svg>
+      <svg class="port usbc-port" viewBox="0 0 36 20" fill="none"><use href="#usbc"/></svg>
     </div>
     <div class="face back"></div>
     <div class="face right">
-      <svg class="speaker-grill" viewBox="0 0 185 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Row 1: r=4.5, y=6 -->
-        <circle cx="8" cy="6" r="4.5"/><circle cx="26" cy="6" r="4.5"/><circle cx="44" cy="6" r="4.5"/><circle cx="62" cy="6" r="4.5"/><circle cx="80" cy="6" r="4.5"/><circle cx="98" cy="6" r="4.5"/><circle cx="116" cy="6" r="4.5"/><circle cx="134" cy="6" r="4.5"/><circle cx="152" cy="6" r="4.5"/><circle cx="170" cy="6" r="4.5"/>
-        <!-- Row 2: r=4.2, y=16, offset -->
-        <circle cx="17" cy="16" r="4.2"/><circle cx="35" cy="16" r="4.2"/><circle cx="53" cy="16" r="4.2"/><circle cx="71" cy="16" r="4.2"/><circle cx="89" cy="16" r="4.2"/><circle cx="107" cy="16" r="4.2"/><circle cx="125" cy="16" r="4.2"/><circle cx="143" cy="16" r="4.2"/><circle cx="161" cy="16" r="4.2"/>
-        <!-- Row 3: r=3.8, y=26 -->
-        <circle cx="8" cy="26" r="3.8"/><circle cx="26" cy="26" r="3.8"/><circle cx="44" cy="26" r="3.8"/><circle cx="62" cy="26" r="3.8"/><circle cx="80" cy="26" r="3.8"/><circle cx="98" cy="26" r="3.8"/><circle cx="116" cy="26" r="3.8"/><circle cx="134" cy="26" r="3.8"/><circle cx="152" cy="26" r="3.8"/><circle cx="170" cy="26" r="3.8"/>
-        <!-- Row 4: r=3.4, y=36, offset -->
-        <circle cx="17" cy="36" r="3.4"/><circle cx="35" cy="36" r="3.4"/><circle cx="53" cy="36" r="3.4"/><circle cx="71" cy="36" r="3.4"/><circle cx="89" cy="36" r="3.4"/><circle cx="107" cy="36" r="3.4"/><circle cx="125" cy="36" r="3.4"/><circle cx="143" cy="36" r="3.4"/><circle cx="161" cy="36" r="3.4"/>
-        <!-- Row 5: r=3.0, y=46 -->
-        <circle cx="8" cy="46" r="3.0"/><circle cx="26" cy="46" r="3.0"/><circle cx="44" cy="46" r="3.0"/><circle cx="62" cy="46" r="3.0"/><circle cx="80" cy="46" r="3.0"/><circle cx="98" cy="46" r="3.0"/><circle cx="116" cy="46" r="3.0"/><circle cx="134" cy="46" r="3.0"/><circle cx="152" cy="46" r="3.0"/><circle cx="170" cy="46" r="3.0"/>
-        <!-- Row 6: r=2.6, y=56, offset -->
-        <circle cx="17" cy="56" r="2.6"/><circle cx="35" cy="56" r="2.6"/><circle cx="53" cy="56" r="2.6"/><circle cx="71" cy="56" r="2.6"/><circle cx="89" cy="56" r="2.6"/><circle cx="107" cy="56" r="2.6"/><circle cx="125" cy="56" r="2.6"/><circle cx="143" cy="56" r="2.6"/><circle cx="161" cy="56" r="2.6"/>
-        <!-- Row 7: r=2.2, y=66 -->
-        <circle cx="8" cy="66" r="2.2"/><circle cx="26" cy="66" r="2.2"/><circle cx="44" cy="66" r="2.2"/><circle cx="62" cy="66" r="2.2"/><circle cx="80" cy="66" r="2.2"/><circle cx="98" cy="66" r="2.2"/><circle cx="116" cy="66" r="2.2"/><circle cx="134" cy="66" r="2.2"/><circle cx="152" cy="66" r="2.2"/><circle cx="170" cy="66" r="2.2"/>
+      <svg class="speaker-grill" viewBox="0 0 185 72" fill="none">
+        {speakerRows.map(row => {
+          const count = row.offset ? speakerCols - 1 : speakerCols;
+          const startX = row.offset ? speakerOffset + 8 : 8;
+          return Array.from({ length: count }, (_, i) => (
+            <circle cx={startX + i * speakerSpacing} cy={row.y} r={row.r}/>
+          ));
+        })}
       </svg>
     </div>
     <div class="face left"></div>
     <div class="face top">
       <div class="grill">
-        <div class="grill-row"><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div></div>
-        <div class="grill-row"><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div></div>
-        <div class="grill-row"><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div></div>
-        <div class="grill-row"><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div></div>
-        <div class="grill-row"><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div><div class="gc"></div></div>
+        {Array.from({ length: grillRows }, () => (
+          <div class="grill-row">
+            {Array.from({ length: grillCols }, () => <div class="gc"/>)}
+          </div>
+        ))}
       </div>
       <div class="power"></div>
     </div>
@@ -225,17 +226,9 @@
     gap: 12px;
   }
 
-  .eth-port {
-    width: 57px;
-    height: 52px;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .usbc-port {
-    width: 48px;
-    height: 28px;
-    color: rgba(255, 255, 255, 0.5);
-  }
+  .eth-port { width: 57px; height: 52px; }
+  .usbc-port { width: 48px; height: 28px; }
+  .port { color: rgba(255, 255, 255, 0.5); }
 
   /* X — 6cm along front bottom, flat on ground plane */
   .dim-x {
