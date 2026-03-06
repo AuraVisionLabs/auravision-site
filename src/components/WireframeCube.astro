@@ -39,9 +39,18 @@ const grillCols = 12;
 
   <div class="cube">
     <div class="face front">
-      <svg class="port eth-port" viewBox="0 0 48 48" fill="none"><use href="#rj45"/></svg>
-      <svg class="port eth-port" viewBox="0 0 48 48" fill="none"><use href="#rj45"/></svg>
-      <svg class="port usbc-port" viewBox="0 0 36 20" fill="none"><use href="#usbc"/></svg>
+      <div class="port-group">
+        <span class="port-label">cam</span>
+        <svg class="port eth-port" viewBox="0 0 48 48" fill="none"><use href="#rj45"/></svg>
+      </div>
+      <div class="port-group">
+        <span class="port-label">net</span>
+        <svg class="port eth-port" viewBox="0 0 48 48" fill="none"><use href="#rj45"/></svg>
+      </div>
+      <div class="port-group">
+        <span class="port-label">pwr</span>
+        <svg class="port usbc-port" viewBox="0 0 36 20" fill="none"><use href="#usbc"/></svg>
+      </div>
     </div>
     <div class="face right">
       <svg class="speaker-grill" viewBox="0 0 185 72" fill="none">
@@ -291,6 +300,22 @@ const grillCols = 12;
     align-items: center;
     justify-content: center;
     gap: 12px;
+  }
+
+  .port-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .port-label {
+    font-family: var(--font-mono, 'Roboto Mono', monospace);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
   }
 
   .eth-port { width: 57px; height: 52px; }
