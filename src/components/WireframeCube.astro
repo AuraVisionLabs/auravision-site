@@ -1,0 +1,179 @@
+---
+// 3D CSS wireframe cuboid with dimension annotations
+// Proportions: X=6cm (W), Y=4cm (H), Z=6cm (D) → 150×100×150 px
+---
+
+<div class="cube-scene">
+  <div class="cube">
+    <!-- Six faces -->
+    <div class="face front"></div>
+    <div class="face back"></div>
+    <div class="face right"></div>
+    <div class="face left"></div>
+    <div class="face top"></div>
+    <div class="face bottom"></div>
+
+    <!-- Dimension: X — 6 cm (front bottom edge) -->
+    <div class="dim dim-x">
+      <span class="dim-label">6cm</span>
+    </div>
+
+    <!-- Dimension: Y — 4 cm (front-right vertical edge) -->
+    <div class="dim dim-y">
+      <span class="dim-label">4cm</span>
+    </div>
+
+    <!-- Dimension: Z — 6 cm (bottom-right edge, into depth) -->
+    <div class="dim dim-z">
+      <span class="dim-label">6cm</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ---- Scene ---- */
+  .cube-scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+    perspective-origin: 50% 50%;
+  }
+
+  /* ---- Cube container ---- */
+  .cube {
+    position: relative;
+    width: 150px;
+    height: 100px;
+    transform-style: preserve-3d;
+    animation: cube-idle 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes cube-idle {
+    0%   { transform: rotateX(-30deg) rotateY(-40deg); }
+    100% { transform: rotateX(-30deg) rotateY(-50deg); }
+  }
+
+  /* ---- Faces ---- */
+  .face {
+    position: absolute;
+    backface-visibility: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: #0f172a; /* opaque — matches bg-slate-900 */
+  }
+
+  /* Front / Back  (W × H = 150 × 100) */
+  .face.front,
+  .face.back {
+    width: 150px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -50px;
+  }
+  .face.front { transform: translateZ(75px); }
+  .face.back  { transform: rotateY(180deg) translateZ(75px); }
+
+  /* Left / Right  (D × H = 150 × 100) */
+  .face.left,
+  .face.right {
+    width: 150px;
+    height: 100px;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -50px;
+  }
+  .face.right { transform: rotateY(90deg) translateZ(75px); }
+  .face.left  { transform: rotateY(-90deg) translateZ(75px); }
+
+  /* Top / Bottom  (W × D = 150 × 150) */
+  .face.top,
+  .face.bottom {
+    width: 150px;
+    height: 150px;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -75px;
+  }
+  .face.top    { transform: rotateX(90deg) translateZ(50px); }
+  .face.bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+  /* ---- Dimension lines ---- */
+  .dim {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* end-caps at each end */
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  /* connecting lines */
+  .dim::before,
+  .dim::after {
+    content: '';
+    flex: 1;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .dim-label {
+    padding: 0 6px;
+    font-family: var(--font-mono, 'Roboto Mono', monospace);
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  /*
+   * X — 6 cm — horizontal along front bottom edge
+   * Offset 18px below cube bottom (H/2=50 + 18=68)
+   * Offset 15px in front of front face (D/2=75 + 15=90)
+   */
+  .dim-x {
+    width: 150px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -7px;
+    transform: translate3d(0px, 68px, 90px);
+  }
+
+  /*
+   * Y — 4 cm — vertical along front-right edge
+   * Width = cube height (100px), then rotated vertical via rotateZ
+   * Offset 17px right of right face (W/2=75 + 17=92)
+   * In front of front face (z 90px)
+   */
+  .dim-y {
+    width: 100px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    margin-left: -50px;
+    margin-top: -7px;
+    transform: translate3d(92px, 0px, 90px) rotateZ(-90deg);
+  }
+
+  /*
+   * Z — 6 cm — along bottom-right edge going into depth
+   * Width = cube depth (150px), rotated via rotateY to extend along Z
+   * Offset right (92px) and below (68px)
+   */
+  .dim-z {
+    width: 150px;
+    height: 14px;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -7px;
+    transform: translate3d(92px, 68px, 0px) rotateY(90deg);
+  }
+</style>
