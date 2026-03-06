@@ -40,18 +40,38 @@
 .text-gradient::before {
   color: #22d3ee;
   opacity: 1;
-  text-shadow: 0 0 24px #22d3ee, 0 0 24px #22d3ee;
-  -webkit-mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 50%);
-  mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 50%);
+  text-shadow: 0 0 24px #22d3ee, 0 0 24px #22d3ee, 0 0 24px #22d3ee;
+  -webkit-mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 40%);
+  mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 40%);
 }
 
 /* Purple glow — visible in the bottom-right region */
 .text-gradient::after {
-  color: #c084fc;
+  color: #D946EF;
   opacity: 1;
-  text-shadow: 0 0 24px #c084fc, 0 0 24px #c084fc, 0 0 24px #c084fc;
-  -webkit-mask-image: linear-gradient(135deg, transparent 50%, black 100%, black 100%);
-  mask-image: linear-gradient(135deg, transparent 50%, black 100%, black 100%);
+  text-shadow: 0 0 24px #D946EF, 0 0 24px #D946EF, 0 0 24px #D946EF;
+  -webkit-mask-image: linear-gradient(135deg, transparent 40%, black 100%, black 100%);
+  mask-image: linear-gradient(135deg, transparent 40%, black 100%, black 100%);
+}
+
+/* Profile photo cyan-pink glow */
+.profile-glow::before,
+.profile-glow::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  z-index: 0;
+  filter: blur(5px);
+  opacity: 0.9;
+}
+
+.profile-glow::before {
+  background: radial-gradient(circle at 25% 25%, #22d3ee, transparent 100%);
+}
+
+.profile-glow::after {
+  background: radial-gradient(circle at 75% 75%, #D946EF, transparent 100%);
 }
 
 body {

@@ -66,11 +66,13 @@ const testimonials = [
           <div class="mt-auto flex items-center gap-4">
             {/* Profile photo */}
             {photo ? (
-              <img
-                src={photo}
-                alt={name}
-                class="h-14 w-14 rounded-full object-cover flex-shrink-0 border border-white/10"
-              />
+              <div class="profile-glow relative h-14 w-14 flex-shrink-0">
+                <img
+                  src={photo}
+                  alt={name}
+                  class="relative z-10 h-14 w-14 rounded-full object-cover ring-1 ring-white"
+                />
+              </div>
             ) : (
               <div class="h-14 w-14 rounded-full bg-white/10 flex-shrink-0" />
             )}
@@ -100,6 +102,7 @@ const testimonials = [
 
 <script>
   const track = document.getElementById("testimonials-track")!;
+  const container = track.parentElement!;
   const cards = track.querySelectorAll<HTMLElement>(".testimonial-card");
   const totalOriginal = cards.length / 3; // we tripled the cards
   const gap = 32; // gap-8 = 2rem = 32px
@@ -121,31 +124,104 @@ const testimonials = [
   let currentIndex = totalOriginal;
   centreCard(currentIndex);
 
-  function advance() {
-    currentIndex++;
-    track.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
-    centreCard(currentIndex);
-
-    // When we reach the end of the middle set, jump back seamlessly
+  // Silently normalize currentIndex into Set B before animating
+  function wrapIndex() {
     if (currentIndex >= totalOriginal * 2) {
-      setTimeout(() => {
-        track.style.transition = "none";
-        currentIndex = totalOriginal;
-        centreCard(currentIndex);
-      }, 750);
+      track.style.transition = "none";
+      currentIndex -= totalOriginal;
+      centreCard(currentIndex);
+      // Force reflow so the jump is painted before the animation
+      void track.offsetHeight;
+    } else if (currentIndex < totalOriginal) {
+      track.style.transition = "none";
+      currentIndex += totalOriginal;
+      centreCard(currentIndex);
+      void track.offsetHeight;
     }
   }
 
-  // Pause on hover
-  track.parentElement!.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
-  track.parentElement!.addEventListener("mouseleave", () => {
-    autoScrollTimer = setInterval(advance, 4000);
-  });
+  function advance() {
+    wrapIndex();
+    currentIndex++;
+    track.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
+    centreCard(currentIndex);
+  }
 
-  // Pause on touch
-  track.parentElement!.addEventListener("touchstart", () => clearInterval(autoScrollTimer), { passive: true });
-  track.parentElement!.addEventListener("touchend", () => {
+  // --- Drag handling ---
+  let isDragging = false;
+  let startX = 0;
+  let dragOffset = 0;
+  let currentTranslateX = 0;
+
+  function getTranslateX(): number {
+    const style = getComputedStyle(track);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return matrix.m41;
+  }
+
+  function onDragStart(x: number) {
+    isDragging = true;
+    startX = x;
+    currentTranslateX = getTranslateX();
+    track.style.transition = "none";
+    clearInterval(autoScrollTimer);
+    container.style.cursor = "grabbing";
+  }
+
+  function onDragMove(x: number) {
+    if (!isDragging) return;
+    dragOffset = x - startX;
+    track.style.transform = `translateX(${currentTranslateX + dragOffset}px)`;
+  }
+
+  function onDragEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    container.style.cursor = "grab";
+
+    const cardWidth = getCardWidth();
+    const threshold = cardWidth * 0.2;
+
+    if (dragOffset < -threshold) {
+      currentIndex++;
+    } else if (dragOffset > threshold) {
+      currentIndex--;
+    }
+
+    // Silently wrap before animating so there's no visible jump
+    wrapIndex();
+
+    track.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+    centreCard(currentIndex);
+
+    dragOffset = 0;
     autoScrollTimer = setInterval(advance, 4000);
+  }
+
+  // Mouse events
+  container.style.cursor = "grab";
+  container.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    onDragStart(e.clientX);
+  });
+  window.addEventListener("mousemove", (e) => onDragMove(e.clientX));
+  window.addEventListener("mouseup", () => onDragEnd());
+
+  // Touch events
+  container.addEventListener("touchstart", (e) => {
+    onDragStart(e.touches[0].clientX);
+  }, { passive: true });
+  container.addEventListener("touchmove", (e) => {
+    onDragMove(e.touches[0].clientX);
+  }, { passive: true });
+  container.addEventListener("touchend", () => onDragEnd());
+
+  // Pause on hover (non-drag)
+  container.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
+  container.addEventListener("mouseleave", () => {
+    if (!isDragging) {
+      autoScrollTimer = setInterval(advance, 4000);
+    }
   });
 
   // Re-centre on resize
