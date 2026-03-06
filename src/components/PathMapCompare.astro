@@ -36,9 +36,10 @@
 
   <!-- Toggle buttons -->
   <div class="pathmap-toggles">
-    <button class="pathmap-toggle" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
-    <button class="pathmap-toggle" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
-    <button class="pathmap-toggle active" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
+    <div class="pathmap-slider"></div>
+    <button class="pathmap-toggle" data-index="0" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
+    <button class="pathmap-toggle" data-index="1" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
+    <button class="pathmap-toggle active" data-index="2" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
   </div>
 </div>
 
@@ -138,34 +139,48 @@
   .pathmap-toggles {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    padding: 4px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .pathmap-slider {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    border-radius: 9999px;
+    background: white;
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
   }
 
   .pathmap-toggle {
-    padding: 0.4rem 1.2rem;
-    font-size: 0.75rem;
+    position: relative;
+    z-index: 1;
+    padding: 0.6rem 1.8rem;
+    font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    background: transparent;
+    border: none;
     border-radius: 9999px;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: color 0.25s ease;
   }
 
   .pathmap-toggle:hover {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .pathmap-toggle.active {
-    color: white;
-    background: rgba(6, 182, 212, 0.2);
-    border-color: rgba(6, 182, 212, 0.5);
-    box-shadow: 0 0 12px rgba(6, 182, 212, 0.15);
+    color: #0f172a;
   }
 </style>
 
@@ -230,6 +245,17 @@
       }
     }
 
+    /* ── sliding indicator ──────────────────────── */
+    const slider = wrapper.querySelector<HTMLElement>('.pathmap-slider')!;
+
+    function moveSlider(btn: HTMLButtonElement) {
+      const parentRect = btn.parentElement!.getBoundingClientRect();
+      const btnRect = btn.getBoundingClientRect();
+      const left = btnRect.left - parentRect.left;
+      slider.style.left = `${left}px`;
+      slider.style.width = `${btnRect.width}px`;
+    }
+
     /* ── toggle buttons ────────────────────────── */
     function applyView(btn: HTMLButtonElement) {
       const d = btn.dataset as Record<string, string>;
@@ -242,9 +268,17 @@
       labelLeft.textContent = d.leftLabel;
       labelRight.textContent = d.rightLabel;
       applyLabelColors(btn);
+      moveSlider(btn);
     }
 
     toggles.forEach(btn => btn.addEventListener('click', () => applyView(btn)));
+
+    // Position slider on initial active button
+    if (activeBtn) moveSlider(activeBtn);
+    window.addEventListener('resize', () => {
+      const current = wrapper.querySelector<HTMLButtonElement>('.pathmap-toggle.active');
+      if (current) moveSlider(current);
+    });
 
     /* ── pointer interaction ───────────────────── */
     function updateFromPointer(e: PointerEvent | MouseEvent | TouchEvent) {
