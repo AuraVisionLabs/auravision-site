@@ -1,0 +1,217 @@
+---
+/**
+ * Interactive before/after image comparison slider.
+ * Hover (or touch-drag) slides between Customer and Staff path maps.
+ * When idle the divider gently oscillates to hint at interactivity.
+ */
+---
+
+<div class="pathmap-compare rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video overflow-hidden select-none relative" role="img" aria-label="Compare customer and staff path maps">
+  <!-- Customer (left / base layer) -->
+  <img src="/images/cust path.jpg" alt="Customer path map" class="pathmap-img" draggable="false" />
+
+  <!-- Staff (right / reveal layer, clipped) -->
+  <div class="pathmap-reveal">
+    <img src="/images/staff path.jpg" alt="Staff path map" class="pathmap-img" draggable="false" />
+  </div>
+
+  <!-- Labels -->
+  <span class="pathmap-label left">Customer</span>
+  <span class="pathmap-label right">Staff</span>
+
+  <!-- Divider line + handle -->
+  <div class="pathmap-divider">
+    <div class="pathmap-handle">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<style>
+  .pathmap-compare {
+    position: relative;
+    cursor: col-resize;
+    --split: 0.5;          /* 0 = all customer, 1 = all staff */
+  }
+
+  .pathmap-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .pathmap-reveal {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 0 0 calc(var(--split) * 100%));
+    will-change: clip-path;
+  }
+
+  /* ── labels ────────────────────────────────────── */
+  .pathmap-label {
+    position: absolute;
+    top: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: white;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(6px);
+    padding: 4px 10px;
+    border-radius: 6px;
+    z-index: 3;
+    pointer-events: none;
+    user-select: none;
+  }
+  .pathmap-label.left  { left: 12px; }
+  .pathmap-label.right { right: 12px; }
+
+  /* ── divider ───────────────────────────────────── */
+  .pathmap-divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--split) * 100%);
+    width: 2px;
+    background: rgba(255, 255, 255, 0.6);
+    z-index: 2;
+    pointer-events: none;
+    transform: translateX(-50%);
+    will-change: left;
+  }
+
+  .pathmap-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  /* ── idle wobble animation ─────────────────────── */
+  @keyframes wobble {
+    0%, 100% { --split: 0.50; }
+    30%      { --split: 0.44; }
+    70%      { --split: 0.56; }
+  }
+
+  .pathmap-compare.idle {
+    animation: wobble 3s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  /* ---------- interactive slider logic ---------- */
+  document.querySelectorAll<HTMLElement>('.pathmap-compare').forEach(container => {
+    let interacting = false;
+    let idleTimer: ReturnType<typeof setTimeout> | null = null;
+    let raf: number | null = null;
+    let targetSplit = 0.5;
+
+    /* We can't animate CSS custom properties with plain @keyframes in all
+       browsers, so we drive the idle wobble from JS too.                  */
+    let wobbleRaf: number | null = null;
+    let wobbleStart: number | null = null;
+
+    function setSplit(value: number) {
+      container.style.setProperty('--split', String(Math.min(1, Math.max(0, value))));
+    }
+
+    /* ── pointer interaction ───────────────────── */
+    function updateFromPointer(e: PointerEvent | MouseEvent | TouchEvent) {
+      const rect = container.getBoundingClientRect();
+      let clientX: number;
+      if ('touches' in e) {
+        clientX = e.touches[0].clientX;
+      } else {
+        clientX = (e as MouseEvent).clientX;
+      }
+      targetSplit = (clientX - rect.left) / rect.width;
+      if (raf === null) {
+        raf = requestAnimationFrame(applyPointer);
+      }
+    }
+
+    function applyPointer() {
+      setSplit(targetSplit);
+      raf = null;
+    }
+
+    function startInteract(e: PointerEvent | MouseEvent | TouchEvent) {
+      interacting = true;
+      container.classList.remove('idle');
+      stopWobble();
+      if (idleTimer) clearTimeout(idleTimer);
+      updateFromPointer(e);
+    }
+
+    function stopInteract() {
+      interacting = false;
+      scheduleIdle();
+    }
+
+    /* ── mouse: track on hover ─────────────────── */
+    container.addEventListener('mouseenter', (e) => startInteract(e));
+    container.addEventListener('mousemove', (e) => {
+      if (!interacting) startInteract(e);
+      updateFromPointer(e);
+    });
+    container.addEventListener('mouseleave', () => stopInteract());
+
+    /* ── touch support ─────────────────────────── */
+    container.addEventListener('touchstart', (e) => { e.preventDefault(); startInteract(e); }, { passive: false });
+    container.addEventListener('touchmove', (e) => { e.preventDefault(); updateFromPointer(e); }, { passive: false });
+    container.addEventListener('touchend', () => stopInteract());
+    container.addEventListener('touchcancel', () => stopInteract());
+
+    /* ── idle wobble (JS-driven for cross-browser) */
+    function startWobble() {
+      container.classList.add('idle');
+      wobbleStart = performance.now();
+      function tick(now: number) {
+        if (interacting) return;
+        const elapsed = (now - (wobbleStart as number)) / 1000;
+        // gentle sine wobble: centre 0.5, amplitude 0.06, period 3s
+        const v = 0.5 + Math.sin(elapsed * ((2 * Math.PI) / 3)) * 0.06;
+        setSplit(v);
+        wobbleRaf = requestAnimationFrame(tick);
+      }
+      wobbleRaf = requestAnimationFrame(tick);
+    }
+
+    function stopWobble() {
+      if (wobbleRaf !== null) {
+        cancelAnimationFrame(wobbleRaf);
+        wobbleRaf = null;
+      }
+      wobbleStart = null;
+    }
+
+    function scheduleIdle() {
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        if (!interacting) startWobble();
+      }, 1500);
+    }
+
+    /* kick off idle wobble on load */
+    startWobble();
+  });
+</script>
