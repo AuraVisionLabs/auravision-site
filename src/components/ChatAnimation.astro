@@ -1,5 +1,22 @@
 ---
-import { Bot, FolderOpen } from "@lucide/astro";
+import { Bot } from "@lucide/astro";
+
+const heatmapDays = ["M","T","W","T","F","S","S"];
+const heatmapHours = ["9","10","11","12","1","2","3","4","5"];
+const heatmapGrid = [
+  ["o","o","g","g","g","g","g","g","g"], // Mon
+  ["g","g","g","g","o","o","o","g","g"], // Tue
+  ["g","g","g","g","g","g","g","g","g"], // Wed
+  ["g","g","g","g","g","o","o","o","g"], // Thu
+  ["g","g","g","g","g","g","g","g","g"], // Fri
+  ["g","g","o","o","o","r","r","o","g"], // Sat
+  ["g","g","g","r","o","g","g","g","g"], // Sun
+];
+const hmColor: Record<string, string> = {
+  g: "bg-emerald-500/70",
+  o: "bg-amber-500/80",
+  r: "bg-red-500",
+};
 ---
 
 <div class="chat-animation relative h-[280px] md:h-[260px] w-full">
@@ -15,8 +32,44 @@ import { Bot, FolderOpen } from "@lucide/astro";
         <Bot class="w-4 h-4 text-white/70" stroke-width={2} />
       </div>
       <div class="max-w-[80%] rounded-2xl rounded-tl-sm shadow-lg overflow-hidden bg-purple-600/20 border border-purple-500/20">
-        <div class="chat-image-placeholder w-[240px] h-[100px] bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30 flex items-center justify-center">
-          <FolderOpen class="w-8 h-8 text-white/30" stroke-width={1.5} />
+        <div class="chat-visual-container relative w-[200px] aspect-[5/3] bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30">
+
+          <!-- Visual 0: Entries image + stat -->
+          <div class="chat-visual hidden absolute inset-0" data-visual="0">
+            <img class="w-full h-full object-cover" src="/images/entries.png" alt="Store entries" />
+            <div class="absolute top-2 right-2 flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-md backdrop-blur-sm bg-emerald-500/80 text-white">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+              <span>+32%</span>
+            </div>
+          </div>
+
+          <!-- Visual 1: Capture image + stat -->
+          <div class="chat-visual hidden absolute inset-0" data-visual="1">
+            <img class="w-full h-full object-cover" src="/images/capture.png" alt="Capture rate" />
+            <div class="absolute top-2 right-2 flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-md backdrop-blur-sm bg-red-500/80 text-white">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+              <span>-2.1%</span>
+            </div>
+          </div>
+
+          <!-- Visual 2: Staffing heatmap -->
+          <div class="chat-visual hidden absolute inset-0 p-2" data-visual="2">
+            <div class="grid h-full w-full" style={`grid-template-columns: 14px repeat(${heatmapHours.length}, 1fr); grid-template-rows: 14px repeat(${heatmapDays.length}, 1fr); gap: 1.5px;`}>
+              <div></div>
+              {heatmapHours.map(h => (
+                <div class="flex items-center justify-center text-[7px] font-semibold text-white/50">{h}</div>
+              ))}
+              {heatmapDays.map((day, d) => (
+                <>
+                  <div class="flex items-center justify-center text-[7px] font-semibold text-white/50">{day}</div>
+                  {heatmapGrid[d].map(cell => (
+                    <div class={`rounded-[2px] ${hmColor[cell]}`}></div>
+                  ))}
+                </>
+              ))}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -33,14 +86,17 @@ import { Bot, FolderOpen } from "@lucide/astro";
     {
       user: "Was it worth opening stores the day after Christmas?",
       bot: "<strong>Yes.</strong> Stores saw 32% more traffic and 10% higher conversion than the previous week.",
+      visual: 0,
     },
     {
       user: "Are our new window displays delivering ROI?",
       bot: "<strong>Likely not.</strong> Capture rates decreased 2.1% during the period, despite an increase in traffic and engagement.",
+      visual: 1,
     },
     {
       user: "Are we staffed correctly for weekend peaks?",
-      bot: "<strong>In most but not all stores.</strong> Staff coverage often dips in the New York flagship on 3pm Saturdays.",
+      bot: "<strong>In most but not all stores.</strong> Staff coverage often dips in the New York flagship around 2-3pm Saturdays.",
+      visual: 2,
     },
   ];
 
@@ -55,6 +111,7 @@ import { Bot, FolderOpen } from "@lucide/astro";
     const userText = userBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
     const botText = botBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
     const avatarEl = container.querySelector(".chat-user-avatar") as HTMLElement;
+    const visualPanels = container.querySelectorAll(".chat-visual");
     let index = 0;
     let initialsIndex = 0;
     let streamTimer: number | undefined;
@@ -72,23 +129,19 @@ import { Bot, FolderOpen } from "@lucide/astro";
       el.innerHTML = "";
       let i = 0;
 
-      // Pre-parse: split text into plain-text segments and HTML tags
       const parts: string[] = [];
       let cursor = 0;
       const tagRegex = /<\/?[a-zA-Z][^>]*>/g;
       let match;
       while ((match = tagRegex.exec(text)) !== null) {
         if (match.index > cursor) {
-          // push each plain char individually
           for (let c = cursor; c < match.index; c++) {
             parts.push(text[c]);
           }
         }
-        // push the full tag as one atomic unit
         parts.push(match[0]);
         cursor = match.index + match[0].length;
       }
-      // remaining plain chars
       for (let c = cursor; c < text.length; c++) {
         parts.push(text[c]);
       }
@@ -114,6 +167,16 @@ import { Bot, FolderOpen } from "@lucide/astro";
       botText.textContent = "";
       avatarEl.textContent = INITIALS[initialsIndex];
       initialsIndex = (initialsIndex + 1) % INITIALS.length;
+
+      // Show the matching visual panel, hide the rest
+      visualPanels.forEach((panel) => {
+        const panelIndex = Number(panel.getAttribute("data-visual"));
+        if (panelIndex === pair.visual) {
+          panel.classList.remove("hidden");
+        } else {
+          panel.classList.add("hidden");
+        }
+      });
 
       // Reset all to hidden
       userBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
@@ -145,7 +208,6 @@ import { Bot, FolderOpen } from "@lucide/astro";
       // Replace dots with streaming text
       setTimeout(() => {
         streamText(botText, pair.bot, () => {
-          // Hold for a beat then fade all out
           const holdTime = 2400;
           setTimeout(() => {
             resetClasses(userBubble);
@@ -155,7 +217,6 @@ import { Bot, FolderOpen } from "@lucide/astro";
             botBubble.classList.add("chat-fade-out-up");
             botImageBubble.classList.add("chat-fade-out-up");
 
-            // Next pair
             setTimeout(() => {
               index = (index + 1) % messages.length;
               showPair();

@@ -3,19 +3,31 @@ import { Quote } from "@lucide/astro";
 
 const testimonials = [
   {
-    quote: "Auravision transformed how we understand our stores. We went from guessing to knowing — and our conversion rates show it.",
-    name: "Client Name",
-    role: "Role, Company",
+    headliner: "The data and insights we gain from Aura Vision are a game changer",
+    quote: "They give us a deeper understanding of our customers, which helps shape our strategy, and enables faster, smarter decision-making.",
+    name: "Carly Atherton",
+    role: "Head of Multichannel\nOperations Development",
+    company: "Virgin Media O2",
+    photo: "/images/carly.png",
+    logo: "/images/logos/vmo2.svg",
   },
   {
-    quote: "The ease of deployment is exactly what we needed. Ask Aura gives our team answers in seconds instead of waiting days for reports.",
-    name: "Client Name",
-    role: "Role, Company",
+    headliner: "This proves how impactful Aura Vision is as a tool",
+    quote: "It not only validates our strategies but also gives us the confidence to make data-driven decisions that ultimately grow the business.",
+    name: "Samantha Turner",
+    role: "Business Transformation\nManager",
+    company: "Adidas",
+    photo: "/images/samantha.png",
+    logo: "/images/logos/adidas.svg",
   },
   {
-    quote: "Privacy-first analytics that actually work at scale. Auravision is the only solution we found that checked every box.",
-    name: "Client Name",
-    role: "Role, Company",
+    headliner: "Aura Vision is our secret weapon",
+    quote: "Being able to segment our staff from our customers meant the accuracy of our conversion reporting went up 24%, leading us to make smarter decisions.",
+    name: "Tres White",
+    role: "Purple Innovation",
+    company: "Purple",
+    photo: "/images/tres.png",
+    logo: "/images/logos/purple.svg",
   },
 ];
 ---
@@ -37,15 +49,48 @@ const testimonials = [
 
     <div id="testimonials-track" class="flex gap-8 pb-4 scroll-smooth" style="overflow: visible;">
       {/* Triple the cards for seamless infinite scroll */}
-      {[...testimonials, ...testimonials, ...testimonials].map(({ quote, name, role }) => (
-        <div class="testimonial-card w-[360px] flex-shrink-0 rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8">
-          <Quote class="h-8 w-8 text-cyan-400 mb-6" stroke-width={1.5} />
+      {[...testimonials, ...testimonials, ...testimonials].map(({ headliner, quote, name, role, company, photo, logo }) => (
+        <div class="testimonial-card w-[420px] flex-shrink-0 rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8 flex flex-col">
+          <Quote class="h-8 w-8 text-cyan-400 mb-4" stroke-width={1.5} />
+
+          {headliner && (
+            <p class="text-lg font-semibold text-white/90 leading-snug mb-3">
+              {headliner}
+            </p>
+          )}
+
           <p class="text-base leading-relaxed text-white/70 mb-8">
-            "{quote}"
+            {quote}
           </p>
-          <div>
-            <p class="font-medium text-white/90">{name}</p>
-            <p class="text-sm text-white/40">{role}</p>
+
+          <div class="mt-auto flex items-center gap-4">
+            {/* Profile photo */}
+            {photo ? (
+              <img
+                src={photo}
+                alt={name}
+                class="h-14 w-14 rounded-full object-cover flex-shrink-0 border border-white/10"
+              />
+            ) : (
+              <div class="h-14 w-14 rounded-full bg-white/10 flex-shrink-0" />
+            )}
+
+            {/* Name / role / company */}
+            <div class="min-w-0 flex-1">
+              <p class="font-title font-medium text-white/90 leading-tight mb-1">{name}</p>
+              {role.split("\n").map((line: string) => (
+                <p class="font-title text-[11px] text-white/50 leading-tight">{line}</p>
+              ))}
+            </div>
+
+            {/* Company logo */}
+            {logo && (
+              <img
+                src={logo}
+                alt={company}
+                class="h-10 w-auto flex-shrink-0 opacity-60"
+              />
+            )}
           </div>
         </div>
       ))}
