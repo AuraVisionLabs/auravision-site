@@ -18,13 +18,20 @@ const hmColor: Record<string, string> = {
   o: "bg-amber-500/80",
   r: "bg-red-500",
 };
+
+const statVisuals = [
+  { src: "/images/entries.png", alt: "Store entries", color: "bg-emerald-500/80", icon: "up", label: "+32%" },
+  { src: "/images/capture.png", alt: "Capture rate", color: "bg-red-500/80", icon: "down", label: "-2.1%" },
+];
+
+const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-medium text-white transition-all duration-300 hover:bg-purple-500 hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] cursor-pointer";
 ---
 
 <div class="chat-animation-wrapper relative h-[480px] md:h-[480px] w-full overflow-visible">
   <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/5 pt-12 px-6 pb-6 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_90%)] transition-all duration-500">
     <div class="chat-pair space-y-2.5 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2 opacity-0">
-      <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg bg-cyan-600 text-white font-medium">
+      <div class="chat-user-text max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg bg-cyan-600 text-white font-medium">
       </div>
       <div class="chat-user-avatar flex-shrink-0 w-8 h-8 rounded-full bg-cyan-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">
       </div>
@@ -36,23 +43,19 @@ const hmColor: Record<string, string> = {
       <div class="max-w-[80%] rounded-2xl rounded-tl-sm shadow-lg overflow-hidden bg-purple-600/20 border border-purple-500/20">
         <div class="chat-visual-container relative w-[210px] aspect-[5/3] bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30">
 
-          <!-- Visual 0: Entries image + stat -->
-          <div class="chat-visual hidden absolute inset-0" data-visual="0">
-            <img class="w-full h-full object-cover" src="/images/entries.png" alt="Store entries" />
-            <div class="absolute top-2 right-2 flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-md backdrop-blur-sm bg-emerald-500/80 text-white">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-              <span>+32%</span>
+          {statVisuals.map((v, i) => (
+            <div class="chat-visual hidden absolute inset-0" data-visual={i}>
+              <img class="w-full h-full object-cover" src={v.src} alt={v.alt} />
+              <div class={`absolute top-2 right-2 flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-md backdrop-blur-sm ${v.color} text-white`}>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  {v.icon === "up"
+                    ? <path d="M12 19V5M5 12l7-7 7 7" />
+                    : <path d="M12 5v14M19 12l-7 7-7-7" />}
+                </svg>
+                <span>{v.label}</span>
+              </div>
             </div>
-          </div>
-
-          <!-- Visual 1: Capture image + stat -->
-          <div class="chat-visual hidden absolute inset-0" data-visual="1">
-            <img class="w-full h-full object-cover" src="/images/capture.png" alt="Capture rate" />
-            <div class="absolute top-2 right-2 flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-md backdrop-blur-sm bg-red-500/80 text-white">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-              <span>-2.1%</span>
-            </div>
-          </div>
+          ))}
 
           <!-- Visual 2: Staffing heatmap -->
           <div class="chat-visual hidden absolute inset-0 pt-2 pl-2 pb-3.5 pr-3.5" data-visual="2">
@@ -77,7 +80,7 @@ const hmColor: Record<string, string> = {
     </div>
     <div class="chat-bot flex justify-start items-start gap-2 opacity-0 pr-[34px]">
       <div class="flex-shrink-0 w-8 h-8"></div>
-      <div class="min-w-[60px] min-h-[40px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-lg bg-purple-600 text-white font-medium">
+      <div class="chat-bot-text min-w-[60px] min-h-[40px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-lg bg-purple-600 text-white font-medium">
       </div>
     </div>
   </div>
@@ -102,7 +105,7 @@ const hmColor: Record<string, string> = {
   <div class="chat-contact-form absolute inset-0 z-20 rounded-2xl px-6 py-6 overflow-visible opacity-0 pointer-events-none transition-all duration-500 translate-y-4 flex items-center">
     <div class="w-full lg:max-w-md lg:ml-auto">
       <h3 class="text-xs font-medium uppercase tracking-widest text-cyan-400 mb-4">Book a demo to Ask Aura a question</h3>
-      <ContactFormFields formName="contact-hero" compact={true} submitLabel="Book a demo" submitClass="rounded-full bg-purple-600 px-8 py-3 text-base font-medium text-white transition-all duration-300 hover:bg-purple-500 hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] cursor-pointer" />
+      <ContactFormFields formName="contact-hero" compact={true} submitLabel="Book a demo" submitClass={heroSubmitClass} />
     </div>
   </div>
 </div>
@@ -131,20 +134,22 @@ const hmColor: Record<string, string> = {
   const INITIALS = ["JT", "SR", "KM", "AL", "DP", "HW"];
 
   function initChatAnimation(container: Element) {
-    const userBubble = container.querySelector(".chat-user")!;
-    const botBubble = container.querySelector(".chat-bot")!;
-    const botImageBubble = container.querySelector(".chat-bot-image")!;
-    const userText = userBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
-    const botText = botBubble.querySelector(".max-w-\\[80\\%\\]") as HTMLElement;
+    const userBubble = container.querySelector(".chat-user") as HTMLElement;
+    const botBubble = container.querySelector(".chat-bot") as HTMLElement;
+    const botImageBubble = container.querySelector(".chat-bot-image") as HTMLElement;
+    const bubbles = [userBubble, botBubble, botImageBubble];
+    const userText = container.querySelector(".chat-user-text") as HTMLElement;
+    const botText = container.querySelector(".chat-bot-text") as HTMLElement;
     const avatarEl = container.querySelector(".chat-user-avatar") as HTMLElement;
     const visualPanels = container.querySelectorAll(".chat-visual");
     let index = 0;
     let initialsIndex = 0;
     let streamTimer: number | undefined;
 
-    function resetClasses(el: Element) {
+    function resetAndAnimate(el: HTMLElement, animation: string) {
       el.classList.remove("chat-fade-in-up", "chat-fade-out-up");
-      void (el as HTMLElement).offsetWidth;
+      void el.offsetWidth;
+      el.classList.add(animation);
     }
 
     function showThinkingDots(el: HTMLElement) {
@@ -153,31 +158,14 @@ const hmColor: Record<string, string> = {
 
     function streamText(el: HTMLElement, text: string, onDone: () => void) {
       el.innerHTML = "";
+      // Split into HTML tags (kept whole) and individual characters
+      const parts = text.match(/<\/?[a-zA-Z][^>]*>|[^<]/g) || [];
       let i = 0;
-
-      const parts: string[] = [];
-      let cursor = 0;
-      const tagRegex = /<\/?[a-zA-Z][^>]*>/g;
-      let match;
-      while ((match = tagRegex.exec(text)) !== null) {
-        if (match.index > cursor) {
-          for (let c = cursor; c < match.index; c++) {
-            parts.push(text[c]);
-          }
-        }
-        parts.push(match[0]);
-        cursor = match.index + match[0].length;
-      }
-      for (let c = cursor; c < text.length; c++) {
-        parts.push(text[c]);
-      }
-
       let accumulated = "";
       streamTimer = window.setInterval(() => {
         if (i < parts.length) {
-          accumulated += parts[i];
+          accumulated += parts[i++];
           el.innerHTML = accumulated;
-          i++;
         }
         if (i >= parts.length) {
           clearInterval(streamTimer);
@@ -196,58 +184,37 @@ const hmColor: Record<string, string> = {
 
       // Show the matching visual panel, hide the rest
       visualPanels.forEach((panel) => {
-        const panelIndex = Number(panel.getAttribute("data-visual"));
-        if (panelIndex === pair.visual) {
-          panel.classList.remove("hidden");
-        } else {
-          panel.classList.add("hidden");
-        }
+        panel.classList.toggle("hidden", Number(panel.getAttribute("data-visual")) !== pair.visual);
       });
 
-      // Reset all to hidden
-      userBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
-      botBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
-      botImageBubble.classList.remove("chat-fade-in-up", "chat-fade-out-up");
-      (userBubble as HTMLElement).style.opacity = "0";
-      (botBubble as HTMLElement).style.opacity = "0";
-      (botImageBubble as HTMLElement).style.opacity = "0";
+      // Reset all bubbles
+      bubbles.forEach((el) => {
+        el.classList.remove("chat-fade-in-up", "chat-fade-out-up");
+        el.style.opacity = "0";
+      });
 
       // Fade in user message
-      requestAnimationFrame(() => {
-        resetClasses(userBubble);
-        userBubble.classList.add("chat-fade-in-up");
-      });
+      requestAnimationFrame(() => resetAndAnimate(userBubble, "chat-fade-in-up"));
 
-      // Show image bubble first after user appears
-      setTimeout(() => {
-        resetClasses(botImageBubble);
-        botImageBubble.classList.add("chat-fade-in-up");
-      }, 800);
+      // Show image bubble after user appears
+      setTimeout(() => resetAndAnimate(botImageBubble, "chat-fade-in-up"), 800);
 
-      // Show bot text bubble with thinking dots after image
+      // Show bot text bubble with thinking dots
       setTimeout(() => {
         showThinkingDots(botText);
-        resetClasses(botBubble);
-        botBubble.classList.add("chat-fade-in-up");
+        resetAndAnimate(botBubble, "chat-fade-in-up");
       }, 1400);
 
       // Replace dots with streaming text
       setTimeout(() => {
         streamText(botText, pair.bot, () => {
-          const holdTime = 2400;
           setTimeout(() => {
-            resetClasses(userBubble);
-            resetClasses(botBubble);
-            resetClasses(botImageBubble);
-            userBubble.classList.add("chat-fade-out-up");
-            botBubble.classList.add("chat-fade-out-up");
-            botImageBubble.classList.add("chat-fade-out-up");
-
+            bubbles.forEach((el) => resetAndAnimate(el, "chat-fade-out-up"));
             setTimeout(() => {
               index = (index + 1) % messages.length;
               showPair();
             }, 800);
-          }, holdTime);
+          }, 2400);
         });
       }, 1400 + THINKING_DURATION);
     }
