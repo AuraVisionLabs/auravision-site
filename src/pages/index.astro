@@ -41,27 +41,25 @@ import { ArrowRight } from "@lucide/astro";
 
   <!-- Insanely Fast Install -->
   <FeatureSection
-    title="Lightning fast install"
-    subtitle="About 108x faster than a footfall counter."
-    description="plug & play our tiny Point your existing cameras at our cloud. No sensors to mount, no wiring to run, no ladders required. Most stores are live in under an hour."
+    title="Super fast install"
+    subtitle="Skip overhead wiring and expensive hardware"
+    description="Just plug & play our tiny APU into your store's internet and camera networks and we'll do the rest."
     linkText="How installation works"
   >
-    <div slot="visual" class="flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
+    <div slot="visual" class="flex items-center justify-center">
       <WireframeCube />
     </div>
   </FeatureSection>
 
   <!-- Instant Validation -->
   <FeatureSection
-    title="Accurate data"
-    subtitle="Segment Age, Gender and Staff without facial recognition."
+    title="Precise insights"
+    subtitle="Move beyond basic and inaccurate foot traffic"
     description="See occupancy the moment cameras connect. Ask Aura any question about your stores and get answers in seconds — no analyst required. Historical trends, live counts, and mobile access all included."
     linkText="See the dashboard"
     reversed
   >
-    <div slot="visual" class="flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
-      <p class="text-sm text-white/20">Dashboard screenshot coming soon</p>
-    </div>
+    <PathMapCompare slot="visual" />
   </FeatureSection>
 
   <!-- Unbelievably Precise Insights -->

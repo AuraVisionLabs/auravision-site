@@ -1,17 +1,18 @@
 ---
-import { Footprints, UserStar, UsersRound, Map, Flame, VenusAndMars, ArrowLeftRight, Funnel, Clock, Eye } from "@lucide/astro";
+import { Footprints, BadgePercent, UserStar, UsersRound, Map, Flame, VenusAndMars, ArrowLeftRight, Funnel, Clock, Eye } from "@lucide/astro";
 
 const metrics = [
   { label: "Footfall", Icon: Footprints },
-  { label: "Demo\u00ADgraphics", Icon: VenusAndMars },
   { label: "Staffing", Icon: UserStar },
   { label: "Queues", Icon: UsersRound },
-  { label: "Journeys", Icon: Map },
-  { label: "Heatmaps", Icon: Flame },
+  { label: "Demo\u00ADgraphics", Icon: VenusAndMars },
   { label: "Passers-by", Icon: ArrowLeftRight },
   { label: "Capture", Icon: Funnel },
-  { label: "Dwell time", Icon: Clock },
+  { label: "Dwell", Icon: Clock },
   { label: "Impressions", Icon: Eye },
+  { label: "Heatmaps", Icon: Flame },
+  { label: "Conversion", Icon: BadgePercent },
+  // { label: "Journeys", Icon: Map },
 ];
 ---
 
@@ -32,18 +33,18 @@ const metrics = [
 
 <style>
   .metric-item .icon-box {
-    transition: transform 250ms ease, background-color 400ms ease, box-shadow 500ms ease;
+    transition: transform 400ms ease, background-color 400ms ease, box-shadow 400ms ease;
     will-change: transform, background-color, box-shadow;
     transform: translateZ(0) scale(1);
   }
 
   .metric-item :global(svg) {
-    transition: color 250ms ease;
+    transition: color 400ms ease;
     will-change: color;
   }
 
   .metric-item p {
-    transition: color 250ms ease;
+    transition: color 400ms ease;
     will-change: color;
   }
 
@@ -52,10 +53,10 @@ const metrics = [
     color: rgb(34 211 238); /* cyan-400 */
   }
 
-  .metric-item:hover .icon-box,
+  .metric-item:hover .icon-box ,
   .metric-item.sweep .icon-box {
     transform: translateZ(0) scale(1.1);
-    background-color: rgb(34 211 238); /* cyan-400 */
+    background-color: rgba(34, 211, 238, 1.0); /* cyan-400 */
     box-shadow: 0 0 20px 4px rgb(34 211 238 / 0.45), 0 0 40px 8px rgb(34 211 238 / 0.2);
   }
 
@@ -109,12 +110,12 @@ const metrics = [
   });
 
   grid.addEventListener("mouseleave", () => {
-    // Wait at least 5 seconds before restarting the sweep
+    // Wait at least 3 seconds before restarting the sweep
     resumeTimer = setTimeout(() => {
       sweepPaused = false;
       sweep();
       sweepTimer = setInterval(sweep, 3000);
-    }, 5000);
+    }, 3000);
   });
 
   function sweep() {
@@ -124,7 +125,7 @@ const metrics = [
       const t1 = setTimeout(() => {
         if (sweepPaused) return;
         item.classList.add("sweep");
-        const t2 = setTimeout(() => item.classList.remove("sweep"), 500);
+        const t2 = setTimeout(() => item.classList.remove("sweep"), 400);
         sweepTimeouts.push(t2);
       }, i * 100);
       sweepTimeouts.push(t1);
