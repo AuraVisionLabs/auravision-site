@@ -14,6 +14,7 @@ import RecentCaseStudies from "../components/RecentCaseStudies.astro";
 import WireframeCube from "../components/WireframeCube.astro";
 import PathMapCompare from "../components/PathMapCompare.astro";
 import { ArrowRight } from "@lucide/astro";
+import ChatAnimation from "../components/ChatAnimation.astro";
 ---
 
 <BaseLayout title="Instant answers with Ask Aura">
@@ -42,7 +43,7 @@ import { ArrowRight } from "@lucide/astro";
   <!-- Insanely Fast Install -->
   <FeatureSection
     title="Super fast install"
-    subtitle="Skip more expensive hardware and overhead wiring."
+    subtitle="Skip installing more expensive hardware and overhead wiring."
     description="Just plug & play our tiny APU into your store's internet and camera networks and we'll do the rest."
     linkText="How installation works"
   >
@@ -54,8 +55,8 @@ import { ArrowRight } from "@lucide/astro";
   <!-- Instant Validation -->
   <FeatureSection
     title="Precise insights"
-    subtitle="Move beyond basic and inaccurate foot traffic"
-    description="See occupancy the moment cameras connect. Ask Aura any question about your stores and get answers in seconds — no analyst required. Historical trends, live counts, and mobile access all included."
+    subtitle="See how every type of customer interacts with your store and staff."
+    description="AI tailored to your stores ensures highly accurate counts, age, gender and staff segmentation."
     linkText="See the dashboard"
     reversed
   >
@@ -64,12 +65,12 @@ import { ArrowRight } from "@lucide/astro";
 
   <!-- Unbelievably Precise Insights -->
   <FeatureSection
-    title="Compelling stories"
-    subtitle="Bring you closer to customers and staff."
-    description="Unbelievably precise insights into who your customers are and how they're interacting with your sales associates."
+    title="Instant anwers"
+    subtitle="Enable teams to make faster decisions."
+    description="Ask Aura provides immediate answers and compelling stories, bringing everyone closer to customers and staff in-store."
     linkText="Ask Aura a question"
   >
-    <PathMapCompare slot="visual" />
+    <ChatAnimation slot="visual" />
   </FeatureSection>
 
   <!-- Word Is Out -->

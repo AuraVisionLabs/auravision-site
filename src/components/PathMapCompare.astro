@@ -1,32 +1,44 @@
 ---
 /**
  * Interactive before/after image comparison slider.
- * Hover (or touch-drag) slides between Customer and Staff path maps.
+ * Hover (or touch-drag) slides between two images.
  * When idle the divider gently oscillates to hint at interactivity.
+ * Toggle buttons below switch between Age, Gender, and Staff views.
  */
 ---
 
-<div class="pathmap-compare rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video overflow-hidden select-none relative" role="img" aria-label="Compare customer and staff path maps">
-  <!-- Customer (left / base layer) -->
-  <img src="/images/cust path.jpg" alt="Customer path map" class="pathmap-img" draggable="false" />
+<div class="pathmap-wrapper">
+  <div class="pathmap-compare rounded-2xl border border-white/5 bg-white/[0.03] overflow-hidden select-none relative" style="aspect-ratio: 16 / 10;" role="img" aria-label="Compare heatmaps">
+    <!-- Left (base layer) -->
+    <img src="/images/cust path.jpg" alt="Customer path map" class="pathmap-img pathmap-img-left" draggable="false" />
 
-  <!-- Staff (right / reveal layer, clipped) -->
-  <div class="pathmap-reveal">
-    <img src="/images/staff path.jpg" alt="Staff path map" class="pathmap-img" draggable="false" />
+    <!-- Left label (clipped to left side of split) -->
+    <div class="pathmap-left-clip">
+      <span class="pathmap-label left">Customer</span>
+    </div>
+
+    <!-- Right (reveal layer, clipped) -->
+    <div class="pathmap-reveal">
+      <img src="/images/staff path.jpg" alt="Staff path map" class="pathmap-img pathmap-img-right" draggable="false" />
+      <span class="pathmap-label right">Staff</span>
+    </div>
+
+    <!-- Divider line + handle -->
+    <div class="pathmap-divider">
+      <div class="pathmap-handle">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
   </div>
 
-  <!-- Labels -->
-  <span class="pathmap-label left">Customer</span>
-  <span class="pathmap-label right">Staff</span>
-
-  <!-- Divider line + handle -->
-  <div class="pathmap-divider">
-    <div class="pathmap-handle">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+  <!-- Toggle buttons -->
+  <div class="pathmap-toggles">
+    <button class="pathmap-toggle" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
+    <button class="pathmap-toggle" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
+    <button class="pathmap-toggle active" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
   </div>
 </div>
 
@@ -43,6 +55,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.3);
     pointer-events: none;
     user-select: none;
   }
@@ -54,22 +67,32 @@
     will-change: clip-path;
   }
 
+  .pathmap-left-clip {
+    position: absolute;
+    inset: 0;
+    clip-path: inset(0 calc((1 - var(--split)) * 100%) 0 0);
+    will-change: clip-path;
+    z-index: 3;
+  }
+
   /* ── labels ────────────────────────────────────── */
   .pathmap-label {
     position: absolute;
     top: 12px;
-    font-size: 0.7rem;
+    font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: white;
-    background: rgba(0, 0, 0, 0.45);
+    background: #0f172a;
     backdrop-filter: blur(6px);
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: 6px;
+    border: 1px solid white;
     z-index: 3;
     pointer-events: none;
     user-select: none;
+    transition: color 0.3s ease, border-color 0.3s ease;
   }
   .pathmap-label.left  { left: 12px; }
   .pathmap-label.right { right: 12px; }
@@ -106,33 +129,134 @@
   }
 
   /* ── idle wobble animation ─────────────────────── */
-  @keyframes wobble {
-    0%, 100% { --split: 0.50; }
-    30%      { --split: 0.44; }
-    70%      { --split: 0.56; }
+  /* Wobble is driven entirely from JS for smooth interpolation.
+     The .idle class is kept only as a state hook (no CSS animation). */
+
+  /* ── toggle buttons ────────────────────────────── */
+  .pathmap-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
-  .pathmap-compare.idle {
-    animation: wobble 3s ease-in-out infinite;
+  .pathmap-toggles {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .pathmap-toggle {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .pathmap-toggle:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .pathmap-toggle.active {
+    color: white;
+    background: rgba(6, 182, 212, 0.2);
+    border-color: rgba(6, 182, 212, 0.5);
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.15);
   }
 </style>
 
 <script>
   /* ---------- interactive slider logic ---------- */
-  document.querySelectorAll<HTMLElement>('.pathmap-compare').forEach(container => {
+  document.querySelectorAll<HTMLElement>('.pathmap-wrapper').forEach(wrapper => {
+    const container = wrapper.querySelector<HTMLElement>('.pathmap-compare')!;
+    const imgLeft = container.querySelector<HTMLImageElement>('.pathmap-img-left')!;
+    const imgRight = container.querySelector<HTMLImageElement>('.pathmap-img-right')!;
+    const labelLeft = container.querySelector<HTMLElement>('.pathmap-label.left')!;
+    const labelRight = container.querySelector<HTMLElement>('.pathmap-label.right')!;
+    const toggles = wrapper.querySelectorAll<HTMLButtonElement>('.pathmap-toggle');
+
     let interacting = false;
     let idleTimer: ReturnType<typeof setTimeout> | null = null;
-    let raf: number | null = null;
+    let lerpRaf: number | null = null;
+    let currentSplit = 0.5;
     let targetSplit = 0.5;
+    const lerpSpeed = 0.15; // 0–1, higher = snappier
 
-    /* We can't animate CSS custom properties with plain @keyframes in all
-       browsers, so we drive the idle wobble from JS too.                  */
     let wobbleRaf: number | null = null;
     let wobbleStart: number | null = null;
 
     function setSplit(value: number) {
-      container.style.setProperty('--split', String(Math.min(1, Math.max(0, value))));
+      currentSplit = Math.min(1, Math.max(0, value));
+      container.style.setProperty('--split', String(currentSplit));
     }
+
+    /* ── label colors ──────────────────────────── */
+    function hexToRgba(hex: string, alpha: number) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function applyLabelColors(btn: HTMLButtonElement) {
+      const leftColor = btn.dataset.leftColor!;
+      const rightColor = btn.dataset.rightColor!;
+      labelLeft.style.color = leftColor;
+      labelLeft.style.borderColor = leftColor;
+      labelRight.style.color = rightColor;
+      labelRight.style.borderColor = rightColor;
+    }
+
+    // Apply initial colors from the active button
+    const activeBtn = wrapper.querySelector<HTMLButtonElement>('.pathmap-toggle.active');
+    if (activeBtn) applyLabelColors(activeBtn);
+
+    /* ── smooth lerp loop ──────────────────────── */
+    function startLerp() {
+      if (lerpRaf !== null) return;
+      function tick() {
+        const diff = targetSplit - currentSplit;
+        if (Math.abs(diff) < 0.001) {
+          setSplit(targetSplit);
+          lerpRaf = null;
+          return;
+        }
+        setSplit(currentSplit + diff * lerpSpeed);
+        lerpRaf = requestAnimationFrame(tick);
+      }
+      lerpRaf = requestAnimationFrame(tick);
+    }
+
+    function stopLerp() {
+      if (lerpRaf !== null) {
+        cancelAnimationFrame(lerpRaf);
+        lerpRaf = null;
+      }
+    }
+
+    /* ── toggle buttons ────────────────────────── */
+    toggles.forEach(btn => {
+      btn.addEventListener('click', () => {
+        toggles.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        imgLeft.src = btn.dataset.leftSrc!;
+        imgLeft.alt = btn.dataset.leftLabel!;
+        imgRight.src = btn.dataset.rightSrc!;
+        imgRight.alt = btn.dataset.rightLabel!;
+        labelLeft.textContent = btn.dataset.leftLabel!;
+        labelRight.textContent = btn.dataset.rightLabel!;
+        applyLabelColors(btn);
+      });
+    });
 
     /* ── pointer interaction ───────────────────── */
     function updateFromPointer(e: PointerEvent | MouseEvent | TouchEvent) {
@@ -144,14 +268,7 @@
         clientX = (e as MouseEvent).clientX;
       }
       targetSplit = (clientX - rect.left) / rect.width;
-      if (raf === null) {
-        raf = requestAnimationFrame(applyPointer);
-      }
-    }
-
-    function applyPointer() {
-      setSplit(targetSplit);
-      raf = null;
+      startLerp();
     }
 
     function startInteract(e: PointerEvent | MouseEvent | TouchEvent) {
@@ -183,13 +300,13 @@
 
     /* ── idle wobble (JS-driven for cross-browser) */
     function startWobble() {
+      stopLerp();
       container.classList.add('idle');
       wobbleStart = performance.now();
       function tick(now: number) {
         if (interacting) return;
         const elapsed = (now - (wobbleStart as number)) / 1000;
-        // gentle sine wobble: centre 0.5, amplitude 0.06, period 3s
-        const v = 0.5 + Math.sin(elapsed * ((2 * Math.PI) / 3)) * 0.06;
+        const v = 0.5 + Math.sin(elapsed * ((2 * Math.PI) / 6)) * 0.18;
         setSplit(v);
         wobbleRaf = requestAnimationFrame(tick);
       }
