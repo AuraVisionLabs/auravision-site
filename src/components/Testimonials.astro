@@ -47,7 +47,7 @@ const testimonials = [
     <div class="pointer-events-none absolute left-0 top-0 bottom-0 z-10 w-32 bg-gradient-to-r from-slate-900 to-transparent"></div>
     <div class="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-32 bg-gradient-to-l from-slate-900 to-transparent"></div>
 
-    <div id="testimonials-track" class="flex gap-8 pb-4 scroll-smooth" style="overflow: visible;">
+    <div id="testimonials-track" class="flex gap-8 pb-4" style="overflow: visible;">
       {/* Triple the cards for seamless infinite scroll */}
       {[...testimonials, ...testimonials, ...testimonials].map(({ headliner, quote, name, role, company, photo, logo }) => (
         <div class="testimonial-card w-[420px] flex-shrink-0 rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8 flex flex-col">
@@ -104,128 +104,100 @@ const testimonials = [
   const track = document.getElementById("testimonials-track")!;
   const container = track.parentElement!;
   const cards = track.querySelectorAll<HTMLElement>(".testimonial-card");
-  const totalOriginal = cards.length / 3; // we tripled the cards
-  const gap = 32; // gap-8 = 2rem = 32px
+  const totalOriginal = cards.length / 3;
+  const GAP = 32;
+  const EASING = "cubic-bezier(0.4, 0, 0.2, 1)";
+  const AUTO_INTERVAL = 4000;
   let autoScrollTimer: ReturnType<typeof setInterval>;
+  let currentIndex = totalOriginal;
 
-  function getCardWidth() {
-    return cards[0].offsetWidth + gap;
+  function cardWidth() {
+    return cards[0].offsetWidth + GAP;
   }
 
-  // Centre the first card of the middle set initially
+  function setTransition(duration = 0) {
+    track.style.transition = duration ? `transform ${duration}s ${EASING}` : "none";
+  }
+
   function centreCard(index: number) {
-    const cardWidth = getCardWidth();
-    const viewportWidth = window.innerWidth;
-    const offset = index * cardWidth - (viewportWidth - cards[0].offsetWidth) / 2;
+    const offset = index * cardWidth() - (window.innerWidth - cards[0].offsetWidth) / 2;
     track.style.transform = `translateX(${-offset}px)`;
   }
 
-  // Start from the middle set so we can scroll both directions
-  let currentIndex = totalOriginal;
-  centreCard(currentIndex);
-
-  // Silently normalize currentIndex into Set B before animating
   function wrapIndex() {
     if (currentIndex >= totalOriginal * 2) {
-      track.style.transition = "none";
       currentIndex -= totalOriginal;
-      centreCard(currentIndex);
-      // Force reflow so the jump is painted before the animation
-      void track.offsetHeight;
     } else if (currentIndex < totalOriginal) {
-      track.style.transition = "none";
       currentIndex += totalOriginal;
-      centreCard(currentIndex);
-      void track.offsetHeight;
+    } else {
+      return;
     }
+    setTransition();
+    centreCard(currentIndex);
+    void track.offsetHeight; // force reflow before next animation
   }
+
+  function stopAuto() { clearInterval(autoScrollTimer); }
+  function startAuto() { autoScrollTimer = setInterval(advance, AUTO_INTERVAL); }
 
   function advance() {
     wrapIndex();
     currentIndex++;
-    track.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
+    setTransition(0.7);
     centreCard(currentIndex);
   }
 
-  // --- Drag handling ---
+  // --- Pointer (mouse + touch) drag handling ---
   let isDragging = false;
   let startX = 0;
   let dragOffset = 0;
-  let currentTranslateX = 0;
+  let dragStartTranslate = 0;
 
-  function getTranslateX(): number {
-    const style = getComputedStyle(track);
-    const matrix = new DOMMatrixReadOnly(style.transform);
-    return matrix.m41;
+  function getTranslateX() {
+    return new DOMMatrixReadOnly(getComputedStyle(track).transform).m41;
   }
 
-  function onDragStart(x: number) {
+  container.style.cursor = "grab";
+
+  container.addEventListener("pointerdown", (e) => {
     isDragging = true;
-    startX = x;
-    currentTranslateX = getTranslateX();
-    track.style.transition = "none";
-    clearInterval(autoScrollTimer);
+    startX = e.clientX;
+    dragStartTranslate = getTranslateX();
+    setTransition();
+    stopAuto();
     container.style.cursor = "grabbing";
-  }
+    container.setPointerCapture(e.pointerId);
+  });
 
-  function onDragMove(x: number) {
+  container.addEventListener("pointermove", (e) => {
     if (!isDragging) return;
-    dragOffset = x - startX;
-    track.style.transform = `translateX(${currentTranslateX + dragOffset}px)`;
-  }
+    dragOffset = e.clientX - startX;
+    track.style.transform = `translateX(${dragStartTranslate + dragOffset}px)`;
+  });
 
-  function onDragEnd() {
+  container.addEventListener("pointerup", () => {
     if (!isDragging) return;
     isDragging = false;
     container.style.cursor = "grab";
 
-    const cardWidth = getCardWidth();
-    const threshold = cardWidth * 0.2;
+    const threshold = cardWidth() * 0.2;
+    if (dragOffset < -threshold) currentIndex++;
+    else if (dragOffset > threshold) currentIndex--;
 
-    if (dragOffset < -threshold) {
-      currentIndex++;
-    } else if (dragOffset > threshold) {
-      currentIndex--;
-    }
-
-    // Silently wrap before animating so there's no visible jump
     wrapIndex();
-
-    track.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+    setTransition(0.5);
     centreCard(currentIndex);
 
     dragOffset = 0;
-    autoScrollTimer = setInterval(advance, 4000);
-  }
-
-  // Mouse events
-  container.style.cursor = "grab";
-  container.addEventListener("mousedown", (e) => {
-    e.preventDefault();
-    onDragStart(e.clientX);
-  });
-  window.addEventListener("mousemove", (e) => onDragMove(e.clientX));
-  window.addEventListener("mouseup", () => onDragEnd());
-
-  // Touch events
-  container.addEventListener("touchstart", (e) => {
-    onDragStart(e.touches[0].clientX);
-  }, { passive: true });
-  container.addEventListener("touchmove", (e) => {
-    onDragMove(e.touches[0].clientX);
-  }, { passive: true });
-  container.addEventListener("touchend", () => onDragEnd());
-
-  // Pause on hover (non-drag)
-  container.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
-  container.addEventListener("mouseleave", () => {
-    if (!isDragging) {
-      autoScrollTimer = setInterval(advance, 4000);
-    }
+    startAuto();
   });
 
-  // Re-centre on resize
+  // Pause on hover
+  container.addEventListener("mouseenter", stopAuto);
+  container.addEventListener("mouseleave", () => { if (!isDragging) startAuto(); });
+
   window.addEventListener("resize", () => centreCard(currentIndex));
 
-  autoScrollTimer = setInterval(advance, 4000);
+  centreCard(currentIndex);
+  startAuto();
 </script>
