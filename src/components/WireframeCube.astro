@@ -21,6 +21,7 @@ const grillRows = 5;
 const grillCols = 12;
 ---
 
+<div class="cube-container">
 <div class="cube-scene">
   <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
     <symbol id="rj45" viewBox="0 0 48 48" fill="none">
@@ -72,9 +73,19 @@ const grillCols = 12;
     <div class="dim dim-z"><span class="dim-label">6cm</span></div>
   </div>
 </div>
+</div>
 
 <style>
   /* All dimensions driven by these three variables */
+  .cube-container {
+    width: 100%;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
   .cube-scene {
     --w: 225px;   /* width  (6cm) */
     --h: 150px;   /* height (4cm) */
@@ -92,6 +103,7 @@ const grillCols = 12;
     align-items: center;
     justify-content: center;
     perspective: 1200px;
+    padding: 80px;
   }
 
   .cube {
@@ -99,12 +111,23 @@ const grillCols = 12;
     width: var(--w);
     height: var(--h);
     transform-style: preserve-3d;
-    animation: cube-idle 8s ease-in-out infinite alternate;
+    animation: cube-idle 5s ease-in-out infinite alternate;
+  }
+
+  /* Invisible hit-area so hover doesn't flicker at 3D edges */
+  .cube::before {
+    content: '';
+    position: absolute;
+    top: -80px;
+    left: -80px;
+    right: -80px;
+    bottom: -80px;
+    pointer-events: none;
   }
 
   @keyframes cube-idle {
-    0%   { transform: rotateX(-30deg) rotateY(-40deg); }
-    100% { transform: rotateX(-30deg) rotateY(-50deg); }
+    0%   { transform: rotateX(-25deg) rotateY(-30deg); }
+    100% { transform: rotateX(-35deg) rotateY(-60deg); }
   }
 
   /* ---- Faces (shared) ---- */
@@ -252,4 +275,61 @@ const grillCols = 12;
     margin-left: calc(-1 * var(--half-d));
     transform: translate3d(calc(var(--half-w) + var(--offset)), calc(var(--half-h) + var(--offset) + 5px), 0) rotateY(90deg) rotateX(90deg);
   }
+
+  /* Transition for smooth hover rotation */
+  .cube.is-hovering {
+    animation: none !important;
+  }
 </style>
+
+<script>
+  const container = document.querySelector('.cube-container') as HTMLElement;
+  const scene = document.querySelector('.cube-scene') as HTMLElement;
+  const cube = document.querySelector('.cube') as HTMLElement;
+  if (container && scene && cube) {
+    let isHovering = false;
+
+    container.addEventListener('mouseenter', () => {
+      isHovering = true;
+      // Freeze current animated transform as inline style before killing animation
+      const current = getComputedStyle(cube).transform;
+      cube.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      cube.style.transform = current;
+      // Force layout so the inline transform is applied before the class change
+      cube.offsetHeight;
+      cube.classList.add('is-hovering');
+      // Remove transition after it settles so mousemove is instant
+      setTimeout(() => {
+        if (isHovering) cube.style.transition = 'none';
+      }, 350);
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isHovering = false;
+      // Re-enable transition for smooth exit
+      cube.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      // Transition smoothly back to the animation start point before re-enabling
+      const midRotX = -25;  // matches 0% keyframe rotateX
+      const midRotY = -30;  // matches 0% keyframe rotateY
+      cube.style.transform = `rotateX(${midRotX}deg) rotateY(${midRotY}deg)`;
+      
+      const onDone = () => {
+        cube.removeEventListener('transitionend', onDone);
+        cube.classList.remove('is-hovering');
+        cube.style.transition = '';
+        cube.style.transform = '';
+      };
+      cube.addEventListener('transitionend', onDone);
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!isHovering) return;
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      const rotY = x * 60 - 45;   // ±30°
+      const rotX = -y * 30 - 30;  // ±30°
+      cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    });
+  }
+</script>
