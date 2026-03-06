@@ -128,10 +128,6 @@
     color: white;
   }
 
-  /* ── idle wobble animation ─────────────────────── */
-  /* Wobble is driven entirely from JS for smooth interpolation.
-     The .idle class is kept only as a state hook (no CSS animation). */
-
   /* ── toggle buttons ────────────────────────────── */
   .pathmap-wrapper {
     display: flex;
@@ -199,16 +195,8 @@
     }
 
     /* ── label colors ──────────────────────────── */
-    function hexToRgba(hex: string, alpha: number) {
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5, 7), 16);
-      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-    }
-
     function applyLabelColors(btn: HTMLButtonElement) {
-      const leftColor = btn.dataset.leftColor!;
-      const rightColor = btn.dataset.rightColor!;
+      const { leftColor, rightColor } = btn.dataset as { leftColor: string; rightColor: string };
       labelLeft.style.color = leftColor;
       labelLeft.style.borderColor = leftColor;
       labelRight.style.color = rightColor;
@@ -243,20 +231,20 @@
     }
 
     /* ── toggle buttons ────────────────────────── */
-    toggles.forEach(btn => {
-      btn.addEventListener('click', () => {
-        toggles.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    function applyView(btn: HTMLButtonElement) {
+      const d = btn.dataset as Record<string, string>;
+      toggles.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      imgLeft.src = d.leftSrc;
+      imgLeft.alt = d.leftLabel;
+      imgRight.src = d.rightSrc;
+      imgRight.alt = d.rightLabel;
+      labelLeft.textContent = d.leftLabel;
+      labelRight.textContent = d.rightLabel;
+      applyLabelColors(btn);
+    }
 
-        imgLeft.src = btn.dataset.leftSrc!;
-        imgLeft.alt = btn.dataset.leftLabel!;
-        imgRight.src = btn.dataset.rightSrc!;
-        imgRight.alt = btn.dataset.rightLabel!;
-        labelLeft.textContent = btn.dataset.leftLabel!;
-        labelRight.textContent = btn.dataset.rightLabel!;
-        applyLabelColors(btn);
-      });
-    });
+    toggles.forEach(btn => btn.addEventListener('click', () => applyView(btn)));
 
     /* ── pointer interaction ───────────────────── */
     function updateFromPointer(e: PointerEvent | MouseEvent | TouchEvent) {
@@ -273,7 +261,6 @@
 
     function startInteract(e: PointerEvent | MouseEvent | TouchEvent) {
       interacting = true;
-      container.classList.remove('idle');
       stopWobble();
       if (idleTimer) clearTimeout(idleTimer);
       updateFromPointer(e);
@@ -285,7 +272,6 @@
     }
 
     /* ── mouse: track on hover ─────────────────── */
-    container.addEventListener('mouseenter', (e) => startInteract(e));
     container.addEventListener('mousemove', (e) => {
       if (!interacting) startInteract(e);
       updateFromPointer(e);
@@ -301,7 +287,6 @@
     /* ── idle wobble (JS-driven for cross-browser) */
     function startWobble() {
       stopLerp();
-      container.classList.add('idle');
       wobbleStart = performance.now();
       function tick(now: number) {
         if (interacting) return;
