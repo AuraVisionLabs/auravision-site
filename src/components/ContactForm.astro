@@ -1,6 +1,5 @@
 ---
-const inputClass =
-  "w-full border-0 border-b border-white/20 bg-transparent px-0 py-3 text-base font-medium text-white placeholder:text-white/60 focus:border-accent/50 focus:outline-none transition-colors rounded-none";
+import ContactFormFields from "./ContactFormFields.astro";
 ---
 
 <section id="contact" class="py-24 md:py-32 relative overflow-hidden">
@@ -22,99 +21,7 @@ const inputClass =
 
       <!-- Right: Form -->
       <div>
-        <form name="contact-landing" method="POST" data-netlify="true" class="flex flex-col gap-5">
-          <input type="hidden" name="form-name" value="contact-landing" />
-
-          <!-- First name / Last name row -->
-          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div>
-              <input
-                id="first-name"
-                type="text"
-                name="first-name"
-                placeholder="First name"
-                required
-                class={inputClass}
-              />
-            </div>
-            <div>
-              <input
-                id="last-name"
-                type="text"
-                name="last-name"
-                placeholder="Last name"
-                required
-                class={inputClass}
-              />
-            </div>
-          </div>
-
-          <!-- Email -->
-          <div>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Email"
-              required
-              class={inputClass}
-            />
-          </div>
-
-          <!-- Company name / Company URL row -->
-          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            <div>
-              <input
-                id="company-name"
-                type="text"
-                name="company-name"
-                placeholder="Company name"
-                class={inputClass}
-              />
-            </div>
-            <div>
-              <input
-                id="company-url"
-                type="url"
-                name="company-url"
-                placeholder="Company URL"
-                class={inputClass}
-              />
-            </div>
-          </div>
-
-          <!-- Phone number -->
-          <div>
-            <input
-              id="phone"
-              type="tel"
-              name="phone"
-              placeholder="Phone number"
-              class={inputClass}
-            />
-          </div>
-
-          <!-- Message -->
-          <div>
-            <textarea
-              id="message"
-              name="message"
-              rows="4"
-              placeholder="What would you like to Ask Aura?"
-              class={`${inputClass} resize-none`}
-            ></textarea>
-          </div>
-
-          <!-- Submit -->
-          <div class="mt-2 flex justify-end">
-            <button
-              type="submit"
-              class="rounded-full bg-white px-8 py-3 text-base font-medium text-slate-900 transition-all duration-300 hover:bg-white/85 hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] cursor-pointer"
-            >
-              Contact us
-            </button>
-          </div>
-        </form>
+        <ContactFormFields />
       </div>
     </div>
   </div>

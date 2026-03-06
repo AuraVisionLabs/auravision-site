@@ -1,0 +1,112 @@
+---
+interface Props {
+  formName?: string;
+  messagePreFill?: string;
+  compact?: boolean;
+  submitLabel?: string;
+  submitClass?: string;
+}
+
+const {
+  formName = "contact-landing",
+  messagePreFill = "",
+  compact = false,
+  submitLabel = "Contact us",
+  submitClass = "rounded-full bg-white px-8 py-3 text-base font-medium text-slate-900 transition-all duration-300 hover:bg-white/85 hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] cursor-pointer",
+} = Astro.props;
+
+const inputClass =
+  "w-full border-0 border-b border-white/20 bg-transparent px-0 py-3 text-base font-medium text-white placeholder:text-white/60 focus:border-accent/50 focus:outline-none transition-colors rounded-none";
+
+const compactInputClass =
+  "w-full border-0 border-b border-white/20 bg-transparent px-0 py-2 text-sm font-medium text-white placeholder:text-white/60 focus:border-accent/50 focus:outline-none transition-colors rounded-none";
+
+const cls = compact ? compactInputClass : inputClass;
+---
+
+<form name={formName} method="POST" data-netlify="true" class={`flex flex-col ${compact ? 'gap-3' : 'gap-5'}`}>
+  <input type="hidden" name="form-name" value={formName} />
+
+  <!-- First name / Last name row -->
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+    <div>
+      <input
+        type="text"
+        name="first-name"
+        placeholder="First name"
+        required
+        class={cls}
+      />
+    </div>
+    <div>
+      <input
+        type="text"
+        name="last-name"
+        placeholder="Last name"
+        required
+        class={cls}
+      />
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div>
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      required
+      class={cls}
+    />
+  </div>
+
+  <!-- Company name / Company URL row -->
+  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+    <div>
+      <input
+        type="text"
+        name="company-name"
+        placeholder="Company name"
+        class={cls}
+      />
+    </div>
+    <div>
+      <input
+        type="url"
+        name="company-url"
+        placeholder="Company URL"
+        class={cls}
+      />
+    </div>
+  </div>
+
+  <!-- Phone number -->
+  <div>
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Phone number"
+      class={cls}
+    />
+  </div>
+
+  <!-- Message -->
+  <div>
+    <textarea
+      name="message"
+      rows={compact ? "2" : "4"}
+      placeholder="What would you like to Ask Aura?"
+      class={`${cls} resize-none`}
+    >{messagePreFill}</textarea>
+  </div>
+
+  <!-- Submit -->
+  <div class={`${compact ? 'mt-1' : 'mt-2'} flex justify-end`}>
+    <button
+      type="submit"
+      class={submitClass}
+    >
+      {submitLabel}
+    </button>
+  </div>
+</form>
