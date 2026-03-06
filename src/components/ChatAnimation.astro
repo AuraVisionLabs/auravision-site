@@ -20,8 +20,8 @@ const hmColor: Record<string, string> = {
 };
 ---
 
-<div class="chat-animation-wrapper relative h-[500px] md:h-[480px] w-full overflow-visible">
-  <div class="chat-animation absolute inset-0 rounded-2xl bg-white/5 pt-12 px-6 pb-6 overflow-hidden [mask-image:linear-gradient(to_bottom,black_75%,transparent_90%)] transition-all duration-500">
+<div class="chat-animation-wrapper relative h-[480px] md:h-[480px] w-full overflow-visible">
+  <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/5 pt-12 px-6 pb-6 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_90%)] transition-all duration-500">
     <div class="chat-pair space-y-2.5 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2 opacity-0">
       <div class="max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg bg-cyan-600 text-white font-medium">
@@ -84,7 +84,7 @@ const hmColor: Record<string, string> = {
   </div>
   <!-- Prompt bar - outside the masked container so it stays full opacity -->
   <div class="chat-prompt-bar absolute bottom-0 left-0 right-0 z-10 px-6 pb-4 w-full transition-all duration-500">
-    <div class="relative bg-white/5 rounded-full h-[64px] transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(34,211,238,1.0)] w-full lg:max-w-md lg:ml-auto">
+    <div class="relative bg-white/5 rounded-full h-[64px] shadow-[0_0_16px_rgba(255,255,255,0.3)] transition-shadow duration-500 hover:shadow-[0_0_25px_rgba(34,211,238,1.0)] w-full lg:max-w-md lg:ml-auto">
       <input
         type="text"
         placeholder="Ask Aura a question"
@@ -99,9 +99,10 @@ const hmColor: Record<string, string> = {
     </div>
   </div>
   <!-- Contact form overlay - hidden initially -->
-  <div class="chat-contact-form absolute inset-0 z-20 rounded-2xl px-6 py-6 overflow-visible opacity-0 pointer-events-none transition-all duration-500 translate-y-4">
+  <div class="chat-contact-form absolute inset-0 z-20 rounded-2xl px-6 py-6 overflow-visible opacity-0 pointer-events-none transition-all duration-500 translate-y-4 flex items-center">
     <div class="w-full lg:max-w-md lg:ml-auto">
-      <ContactFormFields formName="contact-hero" compact={true} submitLabel="Ask Aura a question" submitClass="rounded-full bg-purple-600 px-8 py-3 text-base font-medium text-white transition-all duration-300 hover:bg-purple-500 hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] cursor-pointer" />
+      <h3 class="text-xs font-medium uppercase tracking-widest text-cyan-400 mb-4">Book a demo to Ask Aura a question</h3>
+      <ContactFormFields formName="contact-hero" compact={true} submitLabel="Book a demo" submitClass="rounded-full bg-purple-600 px-8 py-3 text-base font-medium text-white transition-all duration-300 hover:bg-purple-500 hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] cursor-pointer" />
     </div>
   </div>
 </div>
@@ -265,7 +266,23 @@ const hmColor: Record<string, string> = {
     const contactForm = wrapper.querySelector(".chat-contact-form") as HTMLElement;
     const messageField = contactForm.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
 
+    const barContainer = wrapper.querySelector(".chat-prompt-bar .relative") as HTMLElement;
+
     let transitioned = false;
+
+    function updateSendButton() {
+      if (input.value.trim()) {
+        sendBtn.classList.add("bg-cyan-500", "text-white");
+        sendBtn.classList.remove("bg-white/5", "text-white/40");
+        barContainer.style.boxShadow = "0 0 25px rgba(34,211,238,1.0)";
+      } else {
+        sendBtn.classList.remove("bg-cyan-500", "text-white");
+        sendBtn.classList.add("bg-white/5", "text-white/40");
+        barContainer.style.boxShadow = "";
+      }
+    }
+
+    input.addEventListener("input", updateSendButton);
 
     function showContactForm() {
       const text = input.value.trim();
