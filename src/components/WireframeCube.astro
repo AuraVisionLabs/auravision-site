@@ -127,15 +127,17 @@ const grillCols = 12;
   }
   .face.front { transform: translateZ(var(--half-d)); }
   .face.back  { transform: rotateY(180deg) translateZ(var(--half-d)); }
-  .face.right { transform: rotateY(90deg)  translateZ(var(--half-w)); }
-  .face.left  { transform: rotateY(-90deg) translateZ(var(--half-w)); }
+  .face.right { transform: rotateY(90deg)  translateZ(var(--half-w)); border-left: none; }
+  .face.left  { transform: rotateY(-90deg) translateZ(var(--half-w)); border-left: none; border-right: none; }
 
-  /* Top, Bottom: W × D */
+  /* Top, Bottom: W × D — borders drawn by adjacent faces */
   .face.top, .face.bottom {
     width: var(--w);
     height: var(--d);
     margin-left: calc(-1 * var(--half-w));
     margin-top:  calc(-1 * var(--half-d));
+    border-bottom: none;
+    border-right: none;
   }
   .face.top    { transform: rotateX(90deg)  translateZ(var(--half-h)); }
   .face.bottom { transform: rotateX(-90deg) translateZ(var(--half-h)); }
