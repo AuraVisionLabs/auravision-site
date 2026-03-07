@@ -17,9 +17,9 @@ const recent = studies
           Customer Stories
         </h2>
       </div>
-      <a href="/case-studies" class="group shrink-0 self-start md:self-auto inline-flex items-center gap-2 text-lg font-medium text-cyan-300 transition-colors hover:text-purple-300">
+      <a href="/case-studies" class="shrink-0 self-start md:self-auto inline-flex items-center gap-2 rounded-full bg-white px-6 py-2.5 text-sm font-title font-medium text-slate-900 tracking-[0.05em] hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,255,255,0.7)]">
         See all posts
-        <ArrowRight class="h-5 w-5 text-cyan-500 transition-colors group-hover:text-purple-300" stroke-width={2} />
+        <ArrowRight class="h-4 w-4" stroke-width={2} />
       </a>
     </div>
 
@@ -29,7 +29,7 @@ const recent = studies
         recent.map((study) => (
           <a
             href={`/case-studies/${study.slug}`}
-            class="group rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-all hover:border-white/10 hover:bg-white/[0.05]"
+            class="group rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-white/20 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(8,145,178,0.15)]"
           >
             {study.data.coverImage && (
               <div class="aspect-video overflow-hidden bg-white/5">
@@ -41,20 +41,20 @@ const recent = studies
               </div>
             )}
             <div class="p-6">
-              <p class="text-xs uppercase tracking-widest text-white/40 mb-2">
+              <p class="text-xs uppercase tracking-widest text-white/40 mb-2 font-title">
                 {study.data.client}
               </p>
-              <h3 class="font-title text-xl tracking-tight mb-3 group-hover:text-accent transition-colors">
+              <h3 class="font-title text-xl tracking-tight mb-3 text-white group-hover:text-accent transition-colors duration-300">
                 {study.data.title}
               </h3>
-              <p class="text-sm text-white/50 leading-relaxed line-clamp-3 mb-4">
+              <p class="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4">
                 {study.data.summary}
               </p>
 
               {study.data.metrics && study.data.metrics.length > 0 && (
                 <div class="flex flex-wrap gap-3 mb-4">
                   {study.data.metrics.slice(0, 3).map((metric) => (
-                    <span class="text-xs px-3 py-1.5 rounded-full border border-white/5 bg-white/[0.03] text-white/60">
+                    <span class="text-xs px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.05] text-white/60">
                       <span class="font-semibold text-accent">{metric.value}</span>{" "}
                       {metric.label}
                     </span>
@@ -62,9 +62,9 @@ const recent = studies
                 </div>
               )}
 
-              <span class="inline-flex items-center gap-1.5 text-sm text-white/40 group-hover:text-accent transition-colors">
+              <span class="inline-flex items-center gap-1.5 text-sm font-medium text-white/50 group-hover:text-accent transition-colors duration-300">
                 Read story
-                <ArrowRight class="w-3.5 h-3.5" />
+                <ArrowRight class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </span>
             </div>
           </a>
