@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<BaseLayout title="Message sent" description="Thank you for contacting Aura Vision.">
+  <div class="flex flex-col min-h-screen">
+    <Nav />
+
+    <section class="section-major relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-800 via-purple-950 to-fuchsia-500"></div>
+      <div class="absolute inset-0 backdrop-blur-3xl"></div>
+
+      <div class="relative container-site text-center py-24">
+        <h1 class="heading-section text-gradient mb-6" data-text="Thank you!">
+          Thank you!
+        </h1>
+        <p class="text-xl text-white font-medium md:text-2xl max-w-xl mx-auto mb-10">
+          Your message has been sent. We'll get back to you shortly.
+        </p>
+        <a href="/" class="btn-pill">
+          Back to home
+        </a>
+      </div>
+    </section>
+
+    <div class="flex-1 bg-white">
+      <Footer />
+    </div>
+  </div>
+</BaseLayout>
