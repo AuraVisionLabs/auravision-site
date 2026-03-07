@@ -1,0 +1,59 @@
+---
+import { Quote } from "@lucide/astro";
+
+interface Props {
+  headliner: string;
+  quote: string;
+  name: string;
+  role: string;
+  photo?: string;
+  logo?: string;
+  company?: string;
+  class?: string;
+}
+
+const { headliner, quote, name, role, photo, logo, company, class: className = "" } = Astro.props;
+---
+
+<div class:list={["glass-card p-8 flex flex-col", className]}>
+  <Quote class="h-8 w-8 text-cyan-400 mb-4" stroke-width={1.5} />
+
+  {headliner && (
+    <p class="text-lg font-semibold text-white/90 leading-snug mb-3">
+      {headliner}
+    </p>
+  )}
+
+  <p class="text-base leading-relaxed text-white/70 mb-8">
+    {quote}
+  </p>
+
+  <div class="mt-auto flex items-center gap-4">
+    {photo ? (
+      <div class="profile-glow relative h-14 w-14 flex-shrink-0">
+        <img
+          src={photo}
+          alt={name}
+          class="relative z-10 h-14 w-14 rounded-full object-cover ring-1 ring-white"
+        />
+      </div>
+    ) : (
+      <div class="h-14 w-14 rounded-full bg-white/10 flex-shrink-0" />
+    )}
+
+    <div class="min-w-0 flex-1">
+      <p class="font-title font-medium text-white/90 leading-tight mb-1">{name}</p>
+      {role.split("\n").map((line: string) => (
+        <p class="font-title text-[11px] text-white/50 leading-tight">{line}</p>
+      ))}
+    </div>
+
+    {logo && (
+      <img
+        src={logo}
+        alt={company || ""}
+        class="h-10 w-auto flex-shrink-0 opacity-60"
+      />
+    )}
+  </div>
+</div>

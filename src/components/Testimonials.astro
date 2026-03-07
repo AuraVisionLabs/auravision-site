@@ -1,5 +1,5 @@
 ---
-import { Quote } from "@lucide/astro";
+import TestimonialCard from "./TestimonialCard.astro";
 
 const testimonials = [
   {
@@ -50,50 +50,16 @@ const testimonials = [
     <div id="testimonials-track" class="flex gap-8 pb-4" style="overflow: visible;">
       {/* Triple the cards for seamless infinite scroll */}
       {[...testimonials, ...testimonials, ...testimonials].map(({ headliner, quote, name, role, company, photo, logo }) => (
-        <div class="testimonial-card w-[420px] flex-shrink-0 glass-card p-8 flex flex-col">
-          <Quote class="h-8 w-8 text-cyan-400 mb-4" stroke-width={1.5} />
-
-          {headliner && (
-            <p class="text-lg font-semibold text-white/90 leading-snug mb-3">
-              {headliner}
-            </p>
-          )}
-
-          <p class="text-base leading-relaxed text-white/70 mb-8">
-            {quote}
-          </p>
-
-          <div class="mt-auto flex items-center gap-4">
-            {/* Profile photo */}
-            {photo ? (
-              <div class="profile-glow relative h-14 w-14 flex-shrink-0">
-                <img
-                  src={photo}
-                  alt={name}
-                  class="relative z-10 h-14 w-14 rounded-full object-cover ring-1 ring-white"
-                />
-              </div>
-            ) : (
-              <div class="h-14 w-14 rounded-full bg-white/10 flex-shrink-0" />
-            )}
-
-            {/* Name / role / company */}
-            <div class="min-w-0 flex-1">
-              <p class="font-title font-medium text-white/90 leading-tight mb-1">{name}</p>
-              {role.split("\n").map((line: string) => (
-                <p class="font-title text-[11px] text-white/50 leading-tight">{line}</p>
-              ))}
-            </div>
-
-            {/* Company logo */}
-            {logo && (
-              <img
-                src={logo}
-                alt={company}
-                class="h-10 w-auto flex-shrink-0 opacity-60"
-              />
-            )}
-          </div>
+        <div class="testimonial-card w-[420px] flex-shrink-0">
+          <TestimonialCard
+            headliner={headliner}
+            quote={quote}
+            name={name}
+            role={role}
+            photo={photo}
+            logo={logo}
+            company={company}
+          />
         </div>
       ))}
     </div>

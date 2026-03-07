@@ -13,22 +13,21 @@ metrics:
     label: "Improved staff allocation"
   - value: "9X"
     label: "Return on investment"
+testimonial:
+  headliner: "This proves how impactful Aura Vision is as a tool"
+  quote: "It not only validates our strategies but also gives us the confidence to make data-driven decisions that ultimately grow the business."
+  name: "Samantha Turner"
+  role: "Business Transformation Manager, Adidas"
+  photo: "/images/samantha.png"
 ---
 
 Adidas opened its first Middle East flagship in Dubai Mall — a massive store serving a diverse, international audience. The team already had strong retail instincts, but wanted to go further: sharper data on how customers engage with activations, more precise staffing, and a way to measure what drives results across every part of the store.
 
-<div class="case-study-testimonial">
-  <img src="/images/samantha.png" alt="Samantha Turner" class="case-study-testimonial-photo" />
-  <div>
-    <p class="case-study-testimonial-quote">"This proves how impactful Aura Vision is as a tool. It not only validates our strategies but also gives us the confidence to make data-driven decisions that ultimately grow the business."</p>
-    <p class="case-study-testimonial-name">Samantha Turner</p>
-    <p class="case-study-testimonial-role">Business Transformation Manager, Adidas</p>
-  </div>
-</div>
+<!-- testimonial -->
 
 ## Why Adidas Dubai chose Aura Vision
 
-Adidas Dubai wanted advanced analytics to elevate the flagship experience and build a data-driven activation strategy for the region. The key drivers were clear:
+The team wanted advanced analytics to build a stronger activation strategy for the UAE. The key drivers were clear:
 
 - **Demographic segmentation** — Understanding diverse customer behaviours across gender and age groups in the UAE.
 - **Optimising large-format stores** — Aligning staffing with visitor trends and peak hours.
@@ -40,14 +39,15 @@ After a thorough vendor evaluation, Adidas chose Aura Vision for its depth and s
 
 ## What the platform delivered
 
-Aura Vision gave the Adidas team a complete picture of how customers move through and interact with their stores:
+Aura Vision gave the Adidas team a complete picture of how customers move through and interact with their stores.
 
-- **Customer demographics** — Age and gender breakdowns, with staff automatically separated from customer counts.
-- **Product engagement tracking** — Clear data on which displays and categories get the most interaction.
-- **Heatmaps and path analysis** — Visual maps showing where customers linger, which routes they take, and where they skip.
-- **Till time monitoring** — Tracking cash desk wait times to keep service fast.
-- **Headcount planner** — Staff recommendations by area and time slot, based on actual visitor patterns.
-- **Custom dashboards** — Tailored views for store ops, visual merchandising, and area management, with a location summary dashboard for Area Managers to compare performance across stores.
+At the foundation is **AI-powered demographic analysis** — breaking down visitors by age and gender while automatically separating staff from customer counts. This alone transformed the accuracy of conversion reporting and gave the team a true read on who's in the store.
+
+From there, **product engagement tracking** showed exactly which displays and categories attract the most interaction, while **heatmaps and path analysis** revealed where customers linger, which routes they take, and which areas they skip. Together, these insights made it possible to redesign activations with real evidence behind every decision.
+
+On the operations side, **till time monitoring** kept service levels visible, and the **headcount planner** recommended precise staffing levels by area and time slot based on actual visitor patterns. No more guesswork on rotas.
+
+Finally, **custom dashboards** gave each team — store ops, visual merchandising, area management — their own tailored view, with a location summary dashboard that lets Area Managers compare performance across all flagship stores at a glance.
 
 ## What changed
 

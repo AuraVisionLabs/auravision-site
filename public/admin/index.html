@@ -8,5 +8,21 @@
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      CMS.registerEditorComponent({
+        id: "testimonial",
+        label: "Testimonial",
+        pattern: /^<!-- testimonial -->$/m,
+        fromBlock: function () {
+          return {};
+        },
+        toBlock: function () {
+          return "<!-- testimonial -->";
+        },
+        toPreview: function () {
+          return '<div style="padding:16px;border:1px dashed #888;border-radius:8px;text-align:center;color:#888;">📣 Testimonial (from frontmatter) will appear here</div>';
+        },
+      });
+    </script>
   </body>
 </html>

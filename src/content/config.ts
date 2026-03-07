@@ -19,6 +19,15 @@ const caseStudies = defineCollection({
       )
       .optional()
       .default([]),
+    testimonial: z
+      .object({
+        headliner: z.string(),
+        quote: z.string(),
+        name: z.string(),
+        role: z.string(),
+        photo: z.string().optional(),
+      })
+      .optional(),
   }),
 });
 

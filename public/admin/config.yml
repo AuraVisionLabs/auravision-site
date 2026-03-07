@@ -33,3 +33,13 @@ collections:
           - { label: "Value", name: "value", widget: "string" }
           - { label: "Label", name: "label", widget: "string" }
       - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Testimonial"
+        name: "testimonial"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Headliner", name: "headliner", widget: "string" }
+          - { label: "Quote", name: "quote", widget: "text" }
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Role", name: "role", widget: "string" }
+          - { label: "Photo", name: "photo", widget: "image", required: false }

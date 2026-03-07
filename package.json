@@ -13,6 +13,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^5.17.1",
+    "marked": "^17.0.4",
     "netlify-identity-widget": "^1.9.2",
     "tailwindcss": "^4.2.1"
   },

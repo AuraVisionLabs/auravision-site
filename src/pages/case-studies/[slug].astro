@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
+import TestimonialCard from "../../components/TestimonialCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { ArrowLeft } from "@lucide/astro";
 
@@ -18,12 +19,27 @@ interface Props {
 }
 
 const { study } = Astro.props;
-const { Content } = await study.render();
 
 const formattedDate = study.data.pubDate.toLocaleDateString("en-GB", {
   year: "numeric",
   month: "long",
 });
+
+// Split markdown body at testimonial marker, render each part to HTML
+import { marked } from "marked";
+
+const TESTIMONIAL_MARKER = "<!-- testimonial -->";
+const rawBody = study.body ?? "";
+const testimonial = study.data.testimonial;
+const hasMarker = testimonial && rawBody.includes(TESTIMONIAL_MARKER);
+
+let contentParts: string[];
+if (hasMarker) {
+  const [before, after] = rawBody.split(TESTIMONIAL_MARKER);
+  contentParts = [await marked.parse(before), await marked.parse(after)];
+} else {
+  contentParts = [await marked.parse(rawBody)];
+}
 ---
 
 <BaseLayout
@@ -82,8 +98,29 @@ const formattedDate = study.data.pubDate.toLocaleDateString("en-GB", {
 
       <!-- Article body -->
       <article class="case-study-prose mx-auto max-w-3xl">
-        <Content />
+        <Fragment set:html={contentParts[0]} />
       </article>
+
+      <!-- Testimonial (inline if marker present, otherwise after article) -->
+      {
+        testimonial && (
+          <div class="mx-auto max-w-xl my-12">
+            <TestimonialCard
+              headliner={testimonial.headliner}
+              quote={testimonial.quote}
+              name={testimonial.name}
+              role={testimonial.role}
+              photo={testimonial.photo}
+            />
+          </div>
+        )
+      }
+
+      {contentParts.length > 1 && (
+        <article class="case-study-prose mx-auto max-w-3xl">
+          <Fragment set:html={contentParts[1]} />
+        </article>
+      )}
 
       <!-- Tags -->
       {
