@@ -124,23 +124,17 @@ if (hasMarker) {
 
       <!-- Tags -->
       {
-        (() => {
-          const allTags = [
-            ...(study.data.services || []),
-            ...(study.data.tags || []),
-          ];
-          return allTags.length > 0 ? (
+        study.data.tags && study.data.tags.length > 0 && (
             <div class="mt-16 pt-8">
               <div class="flex flex-wrap gap-2">
-                {allTags.map((item: string) => (
+                {study.data.tags.map((tag: string) => (
                   <span class="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-white/40">
-                    {item}
+                    {tag}
                   </span>
                 ))}
               </div>
             </div>
-          ) : null;
-        })()
+        )
       }
     </div>
   </main>

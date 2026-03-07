@@ -21,10 +21,6 @@ collections:
         name: "tags"
         widget: "list"
         required: false
-      - label: "Services"
-        name: "services"
-        widget: "list"
-        required: false
       - label: "Key Metrics"
         name: "metrics"
         widget: "list"

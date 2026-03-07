@@ -3,9 +3,8 @@ title: "Supercharging In-Store Activations for Adidas Dubai"
 client: "Adidas UAE"
 pubDate: 2025-01-15
 coverImage: "/images/uploads/adidas-dubai.jpg"
-summary: "Adidas UAE used Aura Vision across its flagship stores to understand shoppers, sharpen staffing, and boost product engagement — delivering a 9X return on investment."
-tags: ["Retail Analytics", "Demographics", "Staffing Optimisation", "Visual Merchandising"]
-services: ["Full-Store Analytics", "Demographic Insights", "Heatmaps", "Headcount Planning"]
+summary: "Discover how Adidas UAE turned its existing CCTV into a powerful analytics engine — sharpening staffing, boosting product engagement, and delivering a 9X return on investment."
+tags: ["Retail Analytics", "Demographics", "Staffing Optimisation", "Visual Merchandising", "Full-Store Analytics", "Demographic Insights", "Heatmaps", "Headcount Planning"]
 metrics:
   - value: "33%"
     label: "More engagement with product displays"
