@@ -48,26 +48,7 @@ const formattedDate = study.data.pubDate.toLocaleDateString("en-GB", {
         <h1 class="font-title font-normal text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-4">
           {study.data.title}
         </h1>
-        <p class="text-lg text-white/50 leading-relaxed max-w-3xl mb-6">{study.data.summary}</p>
-
-        {/* Combined services & tags as pills */}
-        {
-          (() => {
-            const allTags = [
-              ...(study.data.services || []),
-              ...(study.data.tags || []),
-            ];
-            return allTags.length > 0 ? (
-              <div class="flex flex-wrap gap-2">
-                {allTags.map((item: string) => (
-                  <span class="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-white/40">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            ) : null;
-          })()
-        }
+        <p class="text-lg text-white/50 leading-relaxed max-w-3xl">{study.data.summary}</p>
       </div>
 
       <!-- Cover image -->
@@ -103,6 +84,27 @@ const formattedDate = study.data.pubDate.toLocaleDateString("en-GB", {
       <article class="case-study-prose mx-auto max-w-3xl">
         <Content />
       </article>
+
+      <!-- Tags -->
+      {
+        (() => {
+          const allTags = [
+            ...(study.data.services || []),
+            ...(study.data.tags || []),
+          ];
+          return allTags.length > 0 ? (
+            <div class="mx-auto max-w-3xl mt-16 pt-8 border-t border-white/10">
+              <div class="flex flex-wrap gap-2">
+                {allTags.map((item: string) => (
+                  <span class="text-xs px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-white/40">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null;
+        })()
+      }
     </div>
   </main>
 

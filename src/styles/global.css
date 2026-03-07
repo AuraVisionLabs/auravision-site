@@ -320,5 +320,27 @@ select,
   & :where(img) {
     @apply rounded-xl my-8;
   }
+
+  /* Inline testimonial card */
+  & .case-study-testimonial {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm
+           p-8 my-12 flex gap-6 items-start not-italic;
+  }
+
+  & .case-study-testimonial-photo {
+    @apply w-16 h-16 rounded-full object-cover ring-1 ring-white flex-shrink-0 !my-0;
+  }
+
+  & .case-study-testimonial-quote {
+    @apply text-lg leading-relaxed text-white/70 !mb-3 italic;
+  }
+
+  & .case-study-testimonial-name {
+    @apply font-title text-sm text-white/90 !mb-0;
+  }
+
+  & .case-study-testimonial-role {
+    @apply font-title text-xs text-white/50 !mb-0;
+  }
 }
 
