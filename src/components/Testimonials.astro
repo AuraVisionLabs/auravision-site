@@ -32,10 +32,10 @@ const testimonials = [
 ];
 ---
 
-<section class="py-24 md:py-32">
-  <div class="mx-auto max-w-site px-6 lg:px-8">
+<section class="section-major">
+  <div class="container-site">
     <div class="text-center mb-16">
-      <h2 class="font-title text-4xl tracking-tight md:text-5xl lg:text-6xl">
+      <h2 class="heading-section">
         <span class="text-gradient block" data-text="Our clients have">Our clients have</span>
         <span class="text-gradient block" data-text="a thing or two to say...">a thing or two to say...</span>
       </h2>
@@ -50,7 +50,7 @@ const testimonials = [
     <div id="testimonials-track" class="flex gap-8 pb-4" style="overflow: visible;">
       {/* Triple the cards for seamless infinite scroll */}
       {[...testimonials, ...testimonials, ...testimonials].map(({ headliner, quote, name, role, company, photo, logo }) => (
-        <div class="testimonial-card w-[420px] flex-shrink-0 rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8 flex flex-col">
+        <div class="testimonial-card w-[420px] flex-shrink-0 glass-card p-8 flex flex-col">
           <Quote class="h-8 w-8 text-cyan-400 mb-4" stroke-width={1.5} />
 
           {headliner && (

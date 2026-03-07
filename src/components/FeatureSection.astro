@@ -1,6 +1,4 @@
 ---
-import { ArrowRight } from "@lucide/astro";
-
 interface Props {
   title: string;
   subtitle: string;
@@ -20,29 +18,28 @@ const {
 } = Astro.props;
 ---
 
-<section class="py-24 md:py-24">
-  <div class="mx-auto max-w-site px-6 lg:px-8">
+<section class="section-major">
+  <div class="container-site">
     <div class="grid items-center gap-16 md:grid-cols-2">
       <div class:list={[reversed && "order-1 md:order-2"]}>
-        <h2 class="font-title text-4xl leading-tight tracking-tight md:text-5xl lg:text-6xl text-gradient" data-text={title}>
+        <h2 class="heading-section leading-tight text-gradient" data-text={title}>
           {title}
         </h2>
         <p class="mt-4 text-xl text-white font-medium md:text-2xl">
           {subtitle}
         </p>
-        <p class="mt-6 text-lg leading-relaxed text-white">
+        <p class="mt-6 text-body">
           {description}
         </p>
         {linkText && (
-          <a href={linkHref} class="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-cyan-300 transition-colors hover:text-purple-300">
+          <a href={linkHref} class="btn-pill mt-8">
             {linkText}
-            <ArrowRight class="h-4 w-4 text-cyan-500 transition-colors group-hover:text-purple-300" stroke-width={2} />
           </a>
         )}
       </div>
       <div class:list={[reversed && "order-2 md:order-1"]}>
         <slot name="visual">
-          <div class="flex items-center justify-center rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm aspect-video">
+          <div class="flex items-center justify-center glass-card aspect-video">
             <p class="text-sm text-white/20">Visual coming soon</p>
           </div>
         </slot>
