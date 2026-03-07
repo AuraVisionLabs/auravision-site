@@ -8,23 +8,25 @@
 ---
 
 <div class="pathmap-wrapper flex flex-col gap-3">
-  <div class="pathmap-compare relative cursor-col-resize rounded-2xl border border-white/5 bg-white/[0.03] overflow-hidden select-none" style="aspect-ratio: 16 / 10; --split: 0.5;" role="img" aria-label="Compare heatmaps">
+  <div class="pathmap-compare relative cursor-col-resize rounded-2xl bg-white/[0.03] overflow-hidden select-none" style="aspect-ratio: 16 / 10; --split: 0.5; --left-color: #34d399; --right-color: #fbbf24;" role="img" aria-label="Compare heatmaps">
     <!-- Left (base layer) -->
     <img src="/images/cust path.jpg" alt="Customer path map" data-role="img-left" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" draggable="false" />
 
     <!-- Left label (clipped to left side of split) -->
-    <div class="pathmap-left-clip absolute inset-0 z-[3] will-change-[clip-path]">
+    <div class="pathmap-left-clip absolute inset-0 z-[4] will-change-[clip-path]">
+      <div class="pathmap-border-left absolute inset-0 rounded-2xl border-2 pointer-events-none opacity-60" style="border-color: var(--left-color); transition: border-color 0.3s ease-in-out;"></div>
       <span data-role="label-left" class="absolute top-3 left-3 text-[0.85rem] font-semibold tracking-[0.06em] uppercase text-white bg-slate-900 backdrop-blur-[6px] px-3 py-[5px] rounded-md border border-white z-[3] pointer-events-none select-none transition-[color,border-color] duration-300 ease-in-out">Customer</span>
     </div>
 
     <!-- Right (reveal layer, clipped) -->
-    <div class="pathmap-reveal absolute inset-0 will-change-[clip-path]">
+    <div class="pathmap-reveal absolute inset-0 z-[2] will-change-[clip-path]">
       <img src="/images/staff path.jpg" alt="Staff path map" data-role="img-right" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" draggable="false" />
+      <div class="pathmap-border-right absolute inset-0 rounded-2xl border-2 pointer-events-none opacity-60" style="border-color: var(--right-color); transition: border-color 0.3s ease-in-out;"></div>
       <span data-role="label-right" class="absolute top-3 right-3 text-[0.85rem] font-semibold tracking-[0.06em] uppercase text-white bg-slate-900 backdrop-blur-[6px] px-3 py-[5px] rounded-md border border-white z-[3] pointer-events-none select-none transition-[color,border-color] duration-300 ease-in-out">Staff</span>
     </div>
 
     <!-- Divider line + handle -->
-    <div class="pathmap-divider absolute top-0 bottom-0 w-0.5 bg-white/60 z-[2] pointer-events-none -translate-x-1/2 will-change-[left]">
+    <div class="pathmap-divider absolute top-0 bottom-0 w-0.5 bg-white/60 z-[5] pointer-events-none -translate-x-1/2 will-change-[left]">
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-9 rounded-full bg-black/55 backdrop-blur border-2 border-white/60 flex items-center justify-center text-white">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,8 +37,8 @@
   </div>
 
   <!-- Toggle buttons -->
-  <div class="pathmap-toggles flex justify-center relative bg-white/[0.08] rounded-full p-1 w-fit mx-auto">
-    <div class="pathmap-slider absolute top-1 bottom-1 rounded-full bg-white shadow-[0_0_16px_rgba(255,255,255,0.2)] transition-[left,width] duration-300 ease-in-out z-0"></div>
+  <div class="pathmap-toggles flex justify-center relative border border-white/10 bg-white/[0.08] rounded-full p-2 w-fit mx-auto">
+    <div class="pathmap-slider absolute top-2 bottom-2 rounded-full bg-white shadow-[0_0_16px_rgba(255,255,255,0.2)] transition-[left,width] duration-300 ease-in-out z-0"></div>
     <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="0" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
     <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="1" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
     <button class="pathmap-toggle active relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="2" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
@@ -93,6 +95,8 @@
       labelLeft.style.borderColor = leftColor;
       labelRight.style.color = rightColor;
       labelRight.style.borderColor = rightColor;
+      container.style.setProperty('--left-color', leftColor);
+      container.style.setProperty('--right-color', rightColor);
     }
 
     // Apply initial colors from the active button
