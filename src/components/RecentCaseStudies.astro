@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { ArrowRight } from "@lucide/astro";
+import CaseStudyCard from "./CaseStudyCard.astro";
 
 const studies = await getCollection("case-studies");
 const recent = studies
@@ -27,36 +28,13 @@ const recent = studies
     <div class="grid gap-8 md:grid-cols-2">
       {
         recent.map((study) => (
-          <a
-            href={`/case-studies/${study.slug}`}
-            class="group rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-cyan-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(8,145,178,1.0)]"
-          >
-            {study.data.coverImage && (
-              <div class="aspect-video overflow-hidden bg-white/5">
-                <img
-                  src={study.data.coverImage}
-                  alt={study.data.title}
-                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-            )}
-            <div class="p-6">
-              <p class="text-xs uppercase tracking-widest text-white/40 mb-2 font-title">
-                {study.data.client}
-              </p>
-              <h3 class="font-title text-xl tracking-tight mb-3 text-white group-hover:text-accent transition-colors duration-300">
-                {study.data.title}
-              </h3>
-              <p class="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4">
-                {study.data.summary}
-              </p>
-
-              <span class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-white/10 text-white/70 group-hover:bg-accent/20 group-hover:text-accent transition-all duration-300">
-                Read story
-                <ArrowRight class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-              </span>
-            </div>
-          </a>
+          <CaseStudyCard
+            slug={study.slug}
+            title={study.data.title}
+            client={study.data.client}
+            summary={study.data.summary}
+            coverImage={study.data.coverImage}
+          />
         ))
       }
     </div>

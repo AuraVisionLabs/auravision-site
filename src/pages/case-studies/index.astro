@@ -2,8 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
+import CaseStudyCard from "../../components/CaseStudyCard.astro";
 import { getCollection } from "astro:content";
-import { ArrowRight } from "@lucide/astro";
 
 const studies = await getCollection("case-studies");
 const sorted = studies.sort(
@@ -17,63 +17,27 @@ const sorted = studies.sort(
 >
   <Nav />
 
-  <main class="pt-32 pb-24 px-6 md:px-12">
-    <div class="mx-auto max-w-site">
+  <main class="page-padding">
+    <div class="container-site">
       <!-- Header -->
-      <div class="mb-20 max-w-3xl">
-        <h1 class="font-title text-4xl md:text-6xl lg:text-7xl tracking-tight leading-tight">
+      <div class="mb-16 max-w-3xl">
+        <h1 class="heading-section text-gradient" data-text="Customer Stories">
           Customer Stories
         </h1>
-        <p class="mt-6 text-xl text-white/50 max-w-2xl leading-relaxed">
-          Explore how our retail partners turn their stores' data into business value using their existing CCTV infrastructure.
-        </p>
       </div>
 
       <!-- Grid -->
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {
           sorted.map((study) => (
-            <a
-              href={`/case-studies/${study.slug}`}
-              class="group rounded-2xl border border-white/5 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-all hover:border-white/10 hover:bg-white/[0.05]"
-            >
-              {study.data.coverImage && (
-                <div class="aspect-video overflow-hidden bg-white/5">
-                  <img
-                    src={study.data.coverImage}
-                    alt={study.data.title}
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-              )}
-              <div class="p-6">
-                <p class="text-xs uppercase tracking-widest text-white/40 mb-2">
-                  {study.data.client}
-                </p>
-                <h2 class="font-title text-xl tracking-tight mb-3 group-hover:text-accent transition-colors">
-                  {study.data.title}
-                </h2>
-                <p class="text-sm text-white/50 leading-relaxed line-clamp-3 mb-4">
-                  {study.data.summary}
-                </p>
-
-                {study.data.metrics && study.data.metrics.length > 0 && (
-                  <div class="flex flex-wrap gap-3 mb-4">
-                    {study.data.metrics.slice(0, 3).map((metric) => (
-                      <span class="text-xs px-3 py-1.5 rounded-full border border-white/5 bg-white/[0.03] text-white/60">
-                        <span class="font-semibold text-accent">{metric.value}</span>{" "}
-                        {metric.label}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <span class="inline-flex items-center gap-1.5 text-sm text-white/40 group-hover:text-accent transition-colors">
-                  Read story
-                  <ArrowRight class="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </a>
+            <CaseStudyCard
+              slug={study.slug}
+              title={study.data.title}
+              client={study.data.client}
+              summary={study.data.summary}
+              coverImage={study.data.coverImage}
+              headingLevel="h2"
+            />
           ))
         }
       </div>

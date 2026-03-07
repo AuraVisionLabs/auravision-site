@@ -25,6 +25,11 @@
 }
 
 /* Section vertical rhythm */
+/* Inner-page vertical padding (below fixed nav) */
+.page-padding {
+  @apply pt-8 pb-24 md:pt-12 md:pb-32;
+}
+
 .section-major {
   @apply py-24 md:py-32;
 }
