@@ -183,6 +183,9 @@
 
     function stopInteract() {
       interacting = false;
+      // Smoothly lerp back toward center before wobble kicks in
+      targetSplit = 0.5;
+      startLerp();
       scheduleIdle();
     }
 
@@ -202,11 +205,15 @@
     /* ── idle wobble (JS-driven for cross-browser) */
     function startWobble() {
       stopLerp();
-      wobbleStart = performance.now();
+      // Phase-match: start the sine wave from wherever the slider currently is
+      const offset = Math.max(-1, Math.min(1, (currentSplit - 0.5) / 0.4));
+      const phase = Math.asin(offset);
+      const phaseElapsed = phase / ((2 * Math.PI) / 6);
+      wobbleStart = performance.now() - phaseElapsed * 1000;
       function tick(now: number) {
         if (interacting) return;
         const elapsed = (now - (wobbleStart as number)) / 1000;
-        const v = 0.5 + Math.sin(elapsed * ((2 * Math.PI) / 6)) * 0.18;
+        const v = 0.5 + Math.sin(elapsed * ((2 * Math.PI) / 6)) * 0.4;
         setSplit(v);
         wobbleRaf = requestAnimationFrame(tick);
       }
