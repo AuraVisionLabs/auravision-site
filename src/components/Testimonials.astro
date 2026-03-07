@@ -104,100 +104,128 @@ const testimonials = [
   const track = document.getElementById("testimonials-track")!;
   const container = track.parentElement!;
   const cards = track.querySelectorAll<HTMLElement>(".testimonial-card");
-  const totalOriginal = cards.length / 3;
-  const GAP = 32;
-  const EASING = "cubic-bezier(0.4, 0, 0.2, 1)";
-  const AUTO_INTERVAL = 4000;
+  const totalOriginal = cards.length / 3; // we tripled the cards
+  const gap = 32; // gap-8 = 2rem = 32px
   let autoScrollTimer: ReturnType<typeof setInterval>;
-  let currentIndex = totalOriginal;
 
-  function cardWidth() {
-    return cards[0].offsetWidth + GAP;
+  function getCardWidth() {
+    return cards[0].offsetWidth + gap;
   }
 
-  function setTransition(duration = 0) {
-    track.style.transition = duration ? `transform ${duration}s ${EASING}` : "none";
-  }
-
+  // Centre the first card of the middle set initially
   function centreCard(index: number) {
-    const offset = index * cardWidth() - (window.innerWidth - cards[0].offsetWidth) / 2;
+    const cardWidth = getCardWidth();
+    const viewportWidth = window.innerWidth;
+    const offset = index * cardWidth - (viewportWidth - cards[0].offsetWidth) / 2;
     track.style.transform = `translateX(${-offset}px)`;
   }
 
+  // Start from the middle set so we can scroll both directions
+  let currentIndex = totalOriginal;
+  centreCard(currentIndex);
+
+  // Silently normalize currentIndex into Set B before animating
   function wrapIndex() {
     if (currentIndex >= totalOriginal * 2) {
+      track.style.transition = "none";
       currentIndex -= totalOriginal;
+      centreCard(currentIndex);
+      // Force reflow so the jump is painted before the animation
+      void track.offsetHeight;
     } else if (currentIndex < totalOriginal) {
+      track.style.transition = "none";
       currentIndex += totalOriginal;
-    } else {
-      return;
+      centreCard(currentIndex);
+      void track.offsetHeight;
     }
-    setTransition();
-    centreCard(currentIndex);
-    void track.offsetHeight; // force reflow before next animation
   }
-
-  function stopAuto() { clearInterval(autoScrollTimer); }
-  function startAuto() { autoScrollTimer = setInterval(advance, AUTO_INTERVAL); }
 
   function advance() {
     wrapIndex();
     currentIndex++;
-    setTransition(0.7);
+    track.style.transition = "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)";
     centreCard(currentIndex);
   }
 
-  // --- Pointer (mouse + touch) drag handling ---
+  // --- Drag handling ---
   let isDragging = false;
   let startX = 0;
   let dragOffset = 0;
-  let dragStartTranslate = 0;
+  let currentTranslateX = 0;
 
-  function getTranslateX() {
-    return new DOMMatrixReadOnly(getComputedStyle(track).transform).m41;
+  function getTranslateX(): number {
+    const style = getComputedStyle(track);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return matrix.m41;
   }
 
-  container.style.cursor = "grab";
-
-  container.addEventListener("pointerdown", (e) => {
+  function onDragStart(x: number) {
     isDragging = true;
-    startX = e.clientX;
-    dragStartTranslate = getTranslateX();
-    setTransition();
-    stopAuto();
+    startX = x;
+    currentTranslateX = getTranslateX();
+    track.style.transition = "none";
+    clearInterval(autoScrollTimer);
     container.style.cursor = "grabbing";
-    container.setPointerCapture(e.pointerId);
-  });
+  }
 
-  container.addEventListener("pointermove", (e) => {
+  function onDragMove(x: number) {
     if (!isDragging) return;
-    dragOffset = e.clientX - startX;
-    track.style.transform = `translateX(${dragStartTranslate + dragOffset}px)`;
-  });
+    dragOffset = x - startX;
+    track.style.transform = `translateX(${currentTranslateX + dragOffset}px)`;
+  }
 
-  container.addEventListener("pointerup", () => {
+  function onDragEnd() {
     if (!isDragging) return;
     isDragging = false;
     container.style.cursor = "grab";
 
-    const threshold = cardWidth() * 0.2;
-    if (dragOffset < -threshold) currentIndex++;
-    else if (dragOffset > threshold) currentIndex--;
+    const cardWidth = getCardWidth();
+    const threshold = cardWidth * 0.2;
 
+    if (dragOffset < -threshold) {
+      currentIndex++;
+    } else if (dragOffset > threshold) {
+      currentIndex--;
+    }
+
+    // Silently wrap before animating so there's no visible jump
     wrapIndex();
-    setTransition(0.5);
+
+    track.style.transition = "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
     centreCard(currentIndex);
 
     dragOffset = 0;
-    startAuto();
+    autoScrollTimer = setInterval(advance, 4000);
+  }
+
+  // Mouse events
+  container.style.cursor = "grab";
+  container.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    onDragStart(e.clientX);
+  });
+  window.addEventListener("mousemove", (e) => onDragMove(e.clientX));
+  window.addEventListener("mouseup", () => onDragEnd());
+
+  // Touch events
+  container.addEventListener("touchstart", (e) => {
+    onDragStart(e.touches[0].clientX);
+  }, { passive: true });
+  container.addEventListener("touchmove", (e) => {
+    onDragMove(e.touches[0].clientX);
+  }, { passive: true });
+  container.addEventListener("touchend", () => onDragEnd());
+
+  // Pause on hover (non-drag)
+  container.addEventListener("mouseenter", () => clearInterval(autoScrollTimer));
+  container.addEventListener("mouseleave", () => {
+    if (!isDragging) {
+      autoScrollTimer = setInterval(advance, 4000);
+    }
   });
 
-  // Pause on hover
-  container.addEventListener("mouseenter", stopAuto);
-  container.addEventListener("mouseleave", () => { if (!isDragging) startAuto(); });
-
+  // Re-centre on resize
   window.addEventListener("resize", () => centreCard(currentIndex));
 
-  centreCard(currentIndex);
-  startAuto();
+  autoScrollTimer = setInterval(advance, 4000);
 </script>
