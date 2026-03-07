@@ -67,34 +67,34 @@ if (hasMarker) {
         <p class="text-lg text-white/50 leading-relaxed max-w-3xl">{study.data.summary}</p>
       </div>
 
-      <!-- Cover image -->
-      {
-        study.data.coverImage && (
-          <div class="mb-12 rounded-2xl overflow-hidden bg-white/5 max-h-[480px]">
-            <img
-              src={study.data.coverImage}
-              alt={study.data.title}
-              class="w-full h-full object-cover"
-            />
-          </div>
-        )
-      }
-
-      <!-- Key Results panel -->
-      {
-        study.data.metrics && study.data.metrics.length > 0 && (
-          <div class="mb-16 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {study.data.metrics.map((metric: { value: string; label: string }) => (
-              <div class="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 text-center">
-                <p class="font-title text-3xl md:text-4xl tracking-tight text-accent leading-none mb-2">
-                  {metric.value}
-                </p>
-                <p class="font-title text-sm text-white/50">{metric.label}</p>
-              </div>
-            ))}
-          </div>
-        )
-      }
+      <!-- Cover image + Key Results -->
+      <div class="mb-16 rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-sm">
+        {
+          study.data.coverImage && (
+            <div class="max-h-[480px] overflow-hidden">
+              <img
+                src={study.data.coverImage}
+                alt={study.data.title}
+                class="w-full h-full object-cover"
+              />
+            </div>
+          )
+        }
+        {
+          study.data.metrics && study.data.metrics.length > 0 && (
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 border-t border-white/10">
+              {study.data.metrics.map((metric: { value: string; label: string }) => (
+                <div class="flex items-center gap-4 rounded-full bg-white/5 px-5 py-3">
+                  <p class="font-title text-2xl md:text-3xl tracking-tight text-accent leading-none shrink-0">
+                    {metric.value}
+                  </p>
+                  <p class="font-title text-sm text-white/50">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+          )
+        }
+      </div>
 
       <!-- Article body -->
       <article class="case-study-prose mx-auto max-w-3xl">
