@@ -27,7 +27,7 @@ const Heading = headingLevel;
 <a
   href={`/case-studies/${slug}`}
   class:list={[
-    "group rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-cyan-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(8,145,178,1.0)]",
+    "group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-cyan-400/30 hover:bg-white/[0.06] hover:shadow-[0_0_40px_rgba(8,145,178,1.0)]",
     className,
   ]}
 >
@@ -40,7 +40,7 @@ const Heading = headingLevel;
       />
     </div>
   )}
-  <div class="p-6">
+  <div class="p-6 flex flex-col flex-grow">
     <p class="text-xs uppercase tracking-widest text-white/40 mb-2 font-title">
       {client}
     </p>
@@ -51,7 +51,7 @@ const Heading = headingLevel;
       {summary}
     </p>
 
-    <span class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-white/10 text-white/70 group-hover:bg-accent/20 group-hover:text-accent transition-all duration-300">
+    <span class="mt-auto self-start inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-white/10 text-white/70 group-hover:bg-accent/20 group-hover:text-accent transition-all duration-300">
       Read story
       <ArrowRight class="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
     </span>
