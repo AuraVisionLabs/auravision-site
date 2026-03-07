@@ -28,8 +28,7 @@ const {
         <p class="mt-4 text-xl text-white font-medium md:text-2xl">
           {subtitle}
         </p>
-        <p class="mt-6 text-body">
-          {description}
+        <p class="mt-6 text-body" set:html={description}>
         </p>
         {linkText && (
           <a href={linkHref} class="btn-pill mt-8">
