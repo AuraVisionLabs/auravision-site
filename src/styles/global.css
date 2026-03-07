@@ -239,8 +239,6 @@ select,
   /* Headings — Questrial is a single-weight (400) font, so override prose bold */
   & :where(h2) {
     @apply font-title font-normal tracking-tight text-2xl md:text-3xl mt-16 mb-6 text-white;
-    border-bottom: 1px solid rgb(255 255 255 / 0.08);
-    padding-bottom: 0.75rem;
   }
 
   & :where(h3) {
