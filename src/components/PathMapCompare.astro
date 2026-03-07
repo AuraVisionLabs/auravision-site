@@ -7,25 +7,25 @@
  */
 ---
 
-<div class="pathmap-wrapper">
-  <div class="pathmap-compare rounded-2xl border border-white/5 bg-white/[0.03] overflow-hidden select-none relative" style="aspect-ratio: 16 / 10;" role="img" aria-label="Compare heatmaps">
+<div class="pathmap-wrapper flex flex-col gap-3">
+  <div class="pathmap-compare relative cursor-col-resize rounded-2xl border border-white/5 bg-white/[0.03] overflow-hidden select-none" style="aspect-ratio: 16 / 10; --split: 0.5;" role="img" aria-label="Compare heatmaps">
     <!-- Left (base layer) -->
-    <img src="/images/cust path.jpg" alt="Customer path map" class="pathmap-img pathmap-img-left" draggable="false" />
+    <img src="/images/cust path.jpg" alt="Customer path map" data-role="img-left" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" draggable="false" />
 
     <!-- Left label (clipped to left side of split) -->
-    <div class="pathmap-left-clip">
-      <span class="pathmap-label left">Customer</span>
+    <div class="pathmap-left-clip absolute inset-0 z-[3] will-change-[clip-path]">
+      <span data-role="label-left" class="absolute top-3 left-3 text-[0.85rem] font-semibold tracking-[0.06em] uppercase text-white bg-slate-900 backdrop-blur-[6px] px-3 py-[5px] rounded-md border border-white z-[3] pointer-events-none select-none transition-[color,border-color] duration-300 ease-in-out">Customer</span>
     </div>
 
     <!-- Right (reveal layer, clipped) -->
-    <div class="pathmap-reveal">
-      <img src="/images/staff path.jpg" alt="Staff path map" class="pathmap-img pathmap-img-right" draggable="false" />
-      <span class="pathmap-label right">Staff</span>
+    <div class="pathmap-reveal absolute inset-0 will-change-[clip-path]">
+      <img src="/images/staff path.jpg" alt="Staff path map" data-role="img-right" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" draggable="false" />
+      <span data-role="label-right" class="absolute top-3 right-3 text-[0.85rem] font-semibold tracking-[0.06em] uppercase text-white bg-slate-900 backdrop-blur-[6px] px-3 py-[5px] rounded-md border border-white z-[3] pointer-events-none select-none transition-[color,border-color] duration-300 ease-in-out">Staff</span>
     </div>
 
     <!-- Divider line + handle -->
-    <div class="pathmap-divider">
-      <div class="pathmap-handle">
+    <div class="pathmap-divider absolute top-0 bottom-0 w-0.5 bg-white/60 z-[2] pointer-events-none -translate-x-1/2 will-change-[left]">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 size-9 rounded-full bg-black/55 backdrop-blur border-2 border-white/60 flex items-center justify-center text-white">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <path d="M7 4L3 10L7 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M13 4L17 10L13 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -35,150 +35,27 @@
   </div>
 
   <!-- Toggle buttons -->
-  <div class="pathmap-toggles">
-    <div class="pathmap-slider"></div>
-    <button class="pathmap-toggle" data-index="0" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
-    <button class="pathmap-toggle" data-index="1" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
-    <button class="pathmap-toggle active" data-index="2" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
+  <div class="pathmap-toggles flex justify-center relative bg-white/[0.08] rounded-full p-1 w-fit mx-auto">
+    <div class="pathmap-slider absolute top-1 bottom-1 rounded-full bg-white shadow-[0_0_16px_rgba(255,255,255,0.2)] transition-[left,width] duration-300 ease-in-out z-0"></div>
+    <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="0" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
+    <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="1" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
+    <button class="pathmap-toggle active relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="2" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
   </div>
 </div>
 
 <style>
-  .pathmap-compare {
-    position: relative;
-    cursor: col-resize;
-    --split: 0.5;          /* 0 = all customer, 1 = all staff */
-  }
-
-  .pathmap-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.3);
-    pointer-events: none;
-    user-select: none;
-  }
-
+  /* Dynamic split position — requires CSS custom property */
   .pathmap-reveal {
-    position: absolute;
-    inset: 0;
     clip-path: inset(0 0 0 calc(var(--split) * 100%));
-    will-change: clip-path;
   }
-
   .pathmap-left-clip {
-    position: absolute;
-    inset: 0;
     clip-path: inset(0 calc((1 - var(--split)) * 100%) 0 0);
-    will-change: clip-path;
-    z-index: 3;
   }
-
-  /* ── labels ────────────────────────────────────── */
-  .pathmap-label {
-    position: absolute;
-    top: 12px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: white;
-    background: #0f172a;
-    backdrop-filter: blur(6px);
-    padding: 5px 12px;
-    border-radius: 6px;
-    border: 1px solid white;
-    z-index: 3;
-    pointer-events: none;
-    user-select: none;
-    transition: color 0.3s ease, border-color 0.3s ease;
-  }
-  .pathmap-label.left  { left: 12px; }
-  .pathmap-label.right { right: 12px; }
-
-  /* ── divider ───────────────────────────────────── */
   .pathmap-divider {
-    position: absolute;
-    top: 0;
-    bottom: 0;
     left: calc(var(--split) * 100%);
-    width: 2px;
-    background: rgba(255, 255, 255, 0.6);
-    z-index: 2;
-    pointer-events: none;
-    transform: translateX(-50%);
-    will-change: left;
   }
 
-  .pathmap-handle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(8px);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
-
-  /* ── toggle buttons ────────────────────────────── */
-  .pathmap-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .pathmap-toggles {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 9999px;
-    padding: 4px;
-    width: fit-content;
-    margin: 0 auto;
-  }
-
-  .pathmap-slider {
-    position: absolute;
-    top: 4px;
-    bottom: 4px;
-    border-radius: 9999px;
-    background: white;
-    box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
-    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 0;
-  }
-
-  .pathmap-toggle {
-    position: relative;
-    z-index: 1;
-    padding: 0.6rem 1.8rem;
-    font-size: 0.9rem;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-    background: transparent;
-    border: none;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: color 0.25s ease;
-  }
-
-  .pathmap-toggle:hover {
-    color: rgba(255, 255, 255, 0.85);
-  }
-
+  /* JS-toggled active state */
   .pathmap-toggle.active {
     color: #0f172a;
   }
@@ -188,10 +65,10 @@
   /* ---------- interactive slider logic ---------- */
   document.querySelectorAll<HTMLElement>('.pathmap-wrapper').forEach(wrapper => {
     const container = wrapper.querySelector<HTMLElement>('.pathmap-compare')!;
-    const imgLeft = container.querySelector<HTMLImageElement>('.pathmap-img-left')!;
-    const imgRight = container.querySelector<HTMLImageElement>('.pathmap-img-right')!;
-    const labelLeft = container.querySelector<HTMLElement>('.pathmap-label.left')!;
-    const labelRight = container.querySelector<HTMLElement>('.pathmap-label.right')!;
+    const imgLeft = container.querySelector<HTMLImageElement>('[data-role="img-left"]')!;
+    const imgRight = container.querySelector<HTMLImageElement>('[data-role="img-right"]')!;
+    const labelLeft = container.querySelector<HTMLElement>('[data-role="label-left"]')!;
+    const labelRight = container.querySelector<HTMLElement>('[data-role="label-right"]')!;
     const toggles = wrapper.querySelectorAll<HTMLButtonElement>('.pathmap-toggle');
 
     let interacting = false;
