@@ -34,7 +34,7 @@ The team wanted advanced analytics to build a stronger activation strategy for t
 - **Evaluating campaign performance** — Measuring the impact of visual merchandising and in-store promotions.
 - **Future-proof technology** — AI-powered insights that go beyond what previous tools could offer.
 
-After a thorough vendor evaluation, Adidas chose Aura Vision for its depth and simplicity. The platform works like Google Analytics for physical stores — privacy-first, AI-powered, and built for retail teams who need answers fast.
+The team had previous experience with full-store analytics, but wanted a solution that exceeded existing technologies. After a thorough vendor evaluation, Adidas chose Aura Vision for its depth and simplicity. The platform works like Google Analytics for physical stores — privacy-first, AI-powered, and built for retail teams who need answers fast.
 
 ## What the platform delivered
 

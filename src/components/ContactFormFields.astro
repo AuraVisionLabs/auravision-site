@@ -24,8 +24,11 @@ const compactInputClass =
 const cls = compact ? compactInputClass : inputClass;
 ---
 
-<form name={formName} method="POST" data-netlify="true" action="/contact/thanks" class={`flex flex-col ${compact ? 'gap-4' : 'gap-5'}`}>
+<form name={formName} method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact/thanks" class={`flex flex-col ${compact ? 'gap-4' : 'gap-5'}`}>
   <input type="hidden" name="form-name" value={formName} />
+  <p class="hidden">
+    <label>Don't fill this out: <input name="bot-field" /></label>
+  </p>
 
   <!-- First name / Last name row -->
   <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
