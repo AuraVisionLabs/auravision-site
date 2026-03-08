@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import LogoMarquee from "../../components/LogoMarquee.astro";
+import { Store, TrendingUp, LayoutDashboard, ShieldCheck, Eye, BarChart3 } from "@lucide/astro";
+
+const useCases = [
+  {
+    icon: Store,
+    title: "Fashion & apparel",
+    description: "Track changing room usage, measure visual merchandising impact and align staffing across every floor and department.",
+    caseStudy: { label: "See how Gymshark used it", href: "/case-studies/gymshark-x-aura-vision" },
+  },
+  {
+    icon: TrendingUp,
+    title: "Furniture & homewares",
+    description: "Discover revenue opportunities through product placement insights and dwell-time analysis across sprawling showroom layouts.",
+    caseStudy: { label: "See how DFS used it", href: "/case-studies/dfs-x-aura-vision" },
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Multi-brand retail",
+    description: "Provide brand partners with competitive performance insights on product engagement and demographic audiences.",
+    caseStudy: { label: "See how Neighborhood Goods used it", href: "/case-studies/neighborhood-goods-x-aura-vision" },
+  },
+  {
+    icon: Eye,
+    title: "Telecoms & electronics",
+    description: "Measure campaign effectiveness, optimise digital point-of-sale and roll out analytics at national scale.",
+    caseStudy: { label: "See how VMO2 achieved 22X ROI", href: "/case-studies/virgin-media-o2-x-aura-vision-full-scale-roll-out" },
+  },
+  {
+    icon: BarChart3,
+    title: "Sporting goods",
+    description: "Optimise store layouts and marketing campaigns to drive traffic and conversion for active lifestyle shoppers.",
+    caseStudy: { label: "See how Decathlon drove 6X ROI", href: "/case-studies/secrets-of-store-success-exploring-decathlon" },
+  },
+  {
+    icon: ShieldCheck,
+    title: "Luxury retail",
+    description: "Lift conversion and staff productivity at scale with path-to-purchase and basket recovery insights.",
+    caseStudy: { label: "See how Flannels used it", href: "/case-studies/flannels-x-aura-vision" },
+  },
+];
+
+const challenges = [
+  {
+    stat: "68%",
+    label: "of purchase decisions are made in-store",
+    detail: "Yet most retailers can't measure what drives those decisions.",
+  },
+  {
+    stat: "5–15%",
+    label: "conversion uplift",
+    detail: "Typical improvement from acting on in-store analytics data.",
+  },
+  {
+    stat: "30%+",
+    label: "staff efficiency gains",
+    detail: "By aligning rotas to real customer demand patterns.",
+  },
+];
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://auravision.ai" },
+    { "@type": "ListItem", "position": 2, "name": "Retail Analytics" }
+  ]
+};
+---
+
+<BaseLayout
+  title="Retail Analytics"
+  description="AI-powered in-store analytics for every retail vertical. Turn your existing CCTV into actionable insights — footfall, demographics, heatmaps and more."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <Nav />
+
+  <main class="page-padding">
+    <!-- Hero -->
+    <section class="pb-24 md:pb-32">
+      <div class="container-site">
+        <div class="max-w-3xl">
+          <h1 class="heading-section text-gradient" data-text="Retail analytics from your existing cameras">
+            Retail analytics from your existing cameras
+          </h1>
+          <p class="mt-6 text-xl text-white font-medium md:text-2xl">
+            Maximise the value of every brick-and-mortar location — no new sensors, no personal data, just answers.
+          </p>
+          <a href="/contact" class="btn-pill mt-10">
+            Talk to our team
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust bar -->
+    <LogoMarquee />
+
+    <!-- Industry challenges -->
+    <section class="section-major border-t border-white/10">
+      <div class="container-site">
+        <h2 class="font-title text-2xl tracking-tight text-white/80 mb-12">The retail challenge</h2>
+        <div class="grid gap-8 md:grid-cols-3">
+          {challenges.map((item) => (
+            <div class="glass-card p-8">
+              <p class="font-title text-4xl tracking-tight text-accent mb-2">{item.stat}</p>
+              <p class="font-title text-lg text-white mb-3">{item.label}</p>
+              <p class="text-sm text-white/50">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Use cases by vertical -->
+    <section class="section-major border-t border-white/10">
+      <div class="container-site">
+        <div class="max-w-3xl mb-16">
+          <h2 class="heading-section text-gradient" data-text="Built for every retail vertical">
+            Built for every retail vertical
+          </h2>
+          <p class="mt-6 text-xl text-white font-medium md:text-2xl">
+            From fashion flagships to 300+ store roll-outs, Aura Vision scales to any format.
+          </p>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {useCases.map((uc) => (
+            <div class="glass-card p-8 flex flex-col">
+              <uc.icon class="w-8 h-8 text-accent mb-5" stroke-width={1.5} />
+              <h3 class="font-title text-xl tracking-tight text-white mb-3">{uc.title}</h3>
+              <p class="text-body text-base mb-6 flex-grow">{uc.description}</p>
+              <a
+                href={uc.caseStudy.href}
+                class="text-sm text-accent hover:text-accent-light transition-colors duration-200"
+              >
+                {uc.caseStudy.label} &rarr;
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Aura Vision for retail -->
+    <section class="section-major border-t border-white/10">
+      <div class="container-site">
+        <div class="grid gap-16 md:grid-cols-2 items-start">
+          <div>
+            <h2 class="font-title text-3xl tracking-tight text-white mb-6">Why retailers choose Aura Vision</h2>
+            <div class="space-y-6">
+              {[
+                { title: "Uses existing cameras", detail: "No new sensors to buy or install. Works with any IP or analogue CCTV system." },
+                { title: "Scalable to every store", detail: "Designed to roll out across hundreds of locations with minimal overhead." },
+                { title: "100% anonymous", detail: "Compliant with GDPR and the world's strictest privacy regulations. No personal data is ever stored." },
+                { title: "Instant ROI", detail: "Clients typically see 4–22X return on investment within the first year." },
+              ].map((item) => (
+                <div>
+                  <h3 class="font-title text-base tracking-tight text-white">{item.title}</h3>
+                  <p class="text-sm text-white/50 mt-1">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div class="glass-card p-8">
+            <p class="font-title text-sm uppercase tracking-widest text-white/40 mb-6">By the numbers</p>
+            <div class="space-y-6">
+              {[
+                { value: "307", label: "stores rolled out for VMO2" },
+                { value: "22M+", label: "annual visitors tracked for Bedford Council" },
+                { value: "22X", label: "ROI achieved by Virgin Media O2" },
+                { value: "£9.9M", label: "revenue opportunity uncovered for Schuh" },
+              ].map((metric) => (
+                <div class="flex items-baseline gap-4">
+                  <span class="font-title text-3xl tracking-tight text-accent shrink-0">{metric.value}</span>
+                  <span class="text-sm text-white/50">{metric.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <ContactForm title="Ready to transform your stores?" subtitle="Talk to our team about how Aura Vision's AI-powered analytics can help your retail business thrive." />
+  <Footer />
+</BaseLayout>

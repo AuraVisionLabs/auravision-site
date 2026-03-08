@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import ContactForm from "../../components/ContactForm.astro";
+
+const milestones = [
+  { year: "2017", event: "Aura Vision founded by Daniel and Jaime after completing PhDs in Computer Vision and Machine Learning at the University of Southampton." },
+  { year: "2018", event: "First prototype exhibited at CES, Las Vegas with support from Future Worlds and featured on BBC Click" },
+  { year: "2019", event: "Joined Y Combinator (W19) and moved to Silicon Valley. Raised a $3M seed round. Attended NRF New York." },
+  { year: "2020", event: "Helped retailers adapt stores for customer safety during the pandemic with real-time occupancy monitoring." },
+  { year: "2022", event: "Expanded our first enterprise retail client with serveral hundred locations. Grew team in London." },
+  { year: "2024", event: "Partnered with Telefonica's Business team with Spatial Insights white label." },
+  { year: "2026", event: "Launched Ask Aura — AI-powered natural language interface for instant retail answers." },
+];
+
+const values = [
+    { title: "Privacy by design", description: "Protecting individual privacy is built into our technology from the ground up, not bolted on." },
+  { title: "Scalability first", description: "Every aspect of our solution is designed to ensure clients can scale full-location coverage to every store." },
+  { title: "Customer obsessed", description: "We help our clients engage every customer and maximise the value of every visit." },
+  { title: "Data guided", description: "Every strategy and product decision we make is backed by evidence and measurement." },
+  { title: "Continuous improvement", description: "Our strategy is a continuous improvement process — we never stop learning and getting better." },
+  { title: "Empower everyone", description: "We empower every team member — and every client — to work smarter with better information." },
+];
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Aura Vision",
+  "description": "Learn about Aura Vision's mission, story and values. Founded in 2017, we're building the world's most scalable in-store analytics platform.",
+  "url": "https://auravision.ai/about",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Aura Vision",
+    "url": "https://auravision.ai",
+    "foundingDate": "2017",
+    "founders": [
+      { "@type": "Person", "name": "Daniel" },
+      { "@type": "Person", "name": "Jaime" }
+    ],
+    "description": "AI-powered retail analytics from your existing cameras.",
+    "knowsAbout": ["Computer Vision", "Retail Analytics", "Machine Learning", "In-Store Analytics"],
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "81 Rivington Street",
+        "addressLocality": "London",
+        "postalCode": "EC2A 3AY",
+        "addressCountry": "GB"
+      }
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://auravision.ai" },
+    { "@type": "ListItem", "position": 2, "name": "About" }
+  ]
+};
+---
+
+<BaseLayout
+  title="About Us"
+  description="Founded in 2017 from PhDs in Computer Vision, Aura Vision is on a mission to help retailers maximise the value of every store using their existing cameras."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <Nav />
+
+  <main class="page-padding">
+    <!-- Hero -->
+    <section class="pb-24 md:pb-32">
+      <div class="container-site">
+        <div class="max-w-3xl">
+          <h1 class="heading-section text-gradient" data-text="We're on a mission">
+            We're on a mission
+          </h1>
+          <p class="mt-6 text-xl text-white font-medium md:text-2xl">
+            To enable retailers to maximise the value of every brick-and-mortar location using their existing camera infrastructure.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="section-major border-t border-white/10">
+      <div class="container-site">
+        <div class="grid gap-16 md:grid-cols-2 items-start">
+          <div>
+            <h2 class="font-title text-3xl tracking-tight text-white mb-6">Our story</h2>
+            <div class="space-y-4 text-body">
+              <p>
+                We founded Aura Vision in 2017 because we were excited about the potential of a new type of AI technique called "Deep Learning". When we applied these algorithms to low-quality security camera footage, we found for the first time that we could accurately count and estimate the demographics of every person.
+              </p>
+              <p>
+                Combined with our experience in retail, we set out to help retailers leverage the power of their existing security cameras and maximise the value of their stores.
+              </p>
+              <p>
+                Our founders, Daniel and Jaime, first demonstrated the technology at the University of Southampton's Dragon's Den competition as they completed their PhDs in Computer Vision and Machine Learning. They went on to exhibit the first Aura Vision prototype at CES Las Vegas, joined <span class="text-white font-semibold">Y Combinator</span> in early 2019, and raised a $2.1M seed round.
+              </p>
+              <p>
+                Today, Aura Vision has grown its team in London and continues to empower retailers globally with the world's most scalable in-store analytics solution.
+              </p>
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <div class="relative pl-8 border-l border-white/10">
+            <div class="space-y-8">
+              {milestones.map((m) => (
+                <div class="relative">
+                  <div class="absolute -left-[calc(2rem+6px)] top-1 w-3 h-3 rounded-full bg-accent/60 border-2 border-slate-900"></div>
+                  <p class="font-mono text-sm text-accent/70 mb-1">{m.year}</p>
+                  <p class="text-sm text-white/60">{m.event}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values -->
+    <section class="section-major border-t border-white/10">
+      <div class="container-site">
+        <div class="max-w-3xl mb-16">
+          <h2 class="heading-section text-gradient" data-text="Our values">
+            Our values
+          </h2>
+        </div>
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {values.map((value) => (
+            <div class="glass-card p-8">
+              <h3 class="font-title text-xl tracking-tight text-white mb-3">{value.title}</h3>
+              <p class="text-body text-base">{value.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section-major border-t border-white/10">
+      <div class="container-site">
+        <div class="grid gap-12 md:grid-cols-2 items-start">
+          <div>
+            <h2 class="font-title text-3xl tracking-tight text-white mb-6">Based in London</h2>
+            <p class="text-body mb-4">
+              Aura Vision's head office is in the heart of Shoreditch, London — an eclectic area filled with young creatives and artisan coffee shops. We value transparent communication, the acceptance of new ideas, and being our authentic selves.
+            </p>
+            <p class="text-body">
+              Our team is driven to deliver the best for our clients and each other.
+            </p>
+            <a href="/contact" class="btn-pill mt-10">
+              Get in touch
+            </a>
+          </div>
+
+          <!-- Map -->
+          <div class="rounded-2xl overflow-hidden border border-white/10 shadow-lg aspect-[4/3]">
+            <iframe
+              title="Aura Vision London Office"
+              src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=81+Rivington+Street,+London,+EC2A+3AY,+UK"
+              width="100%"
+              height="100%"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <ContactForm title="Join us on our mission" subtitle="Want to learn more about Aura Vision or explore how we can help your stores? We'd love to hear from you." />
+  <Footer />
+</BaseLayout>
