@@ -13,6 +13,11 @@
   --max-width-site: 64rem;
 }
 
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── Reusable layout & component utilities ─────────── */
 
 /* White pill button — shared across nav, CTAs, form submits */

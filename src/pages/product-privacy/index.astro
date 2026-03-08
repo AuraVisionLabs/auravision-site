@@ -1,0 +1,299 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import InfoCardGrid from "../../components/InfoCardGrid.astro";
+import {
+  EyeOff,
+  UserX,
+  ScanFace,
+  Cpu,
+  ShieldCheck,
+  Eraser,
+  Server,
+  VideoOff,
+  Unplug,
+  Brain,
+  Scale,
+  Landmark,
+  Bot,
+  Building2,
+  BadgeCheck,
+} from "@lucide/astro";
+
+const pdfUrl = "/images/uploads/Privacy_by_Design__Our_Commitment_to_Data_Protection_v1.5.pdf";
+
+/* ── Section: Privacy by Design ── */
+const privacyByDesignItems = [
+  {
+    title: "100% Anonymous",
+    body: "Video is converted into anonymous analytics on-premise and discarded immediately. Only aggregated counts reach the cloud.",
+    icon: EyeOff,
+  },
+  {
+    title: "No Customer Sign-Up",
+    body: "No T&Cs or WiFi sign-ups required. A simple entrance notice is typically sufficient for compliance.",
+    icon: UserX,
+  },
+  {
+    title: "Face Blurring",
+    body: "Faces are blurred at source before any image leaves the device. The process is non-reversible.",
+    icon: ScanFace,
+  },
+  {
+    title: "Edge Processing",
+    body: "All video is processed on-device — only anonymous analytics are transferred to the cloud.",
+    icon: Cpu,
+  },
+  {
+    title: "No Sensitive Data",
+    body: 'No <a href="https://gdpr-info.eu/art-9-gdpr/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Special Categories of Personal Data</a> are ever collected.',
+    icon: ShieldCheck,
+  },
+  {
+    title: "Clean Heatmaps",
+    body: "Heatmaps and thumbnails are pre-cleaned to remove any visible person before upload.",
+    icon: Eraser,
+  },
+];
+
+/* ── Section: Data Processing ── */
+const dataProcessingItems = [
+  {
+    title: "On-Premise Processing",
+    body: "A plug & play APU connects to each location's CCTV, converting live video into anonymous analytics in real-time.",
+    icon: Server,
+  },
+  {
+    title: "No Video Storage",
+    body: "No historic footage is stored or recalled. Surveillance remains with the existing camera system.",
+    icon: VideoOff,
+  },
+  {
+    title: "No Software Integration",
+    body: "The APU connects like another monitor — no changes to existing CCTV infrastructure.",
+    icon: Unplug,
+  },
+  {
+    title: "AI Model Training",
+    body: "During setup, face-blurred snapshots are sent to our AWS-hosted training service in the EEA. Blurring is non-reversible; images are deleted within two weeks.",
+    icon: Brain,
+  },
+];
+
+/* ── Section: Compliance ── */
+const complianceItems = [
+  {
+    title: "GDPR",
+    body: 'Privacy-by-design approach following <a href="https://gdpr-info.eu/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GDPR</a> principles. Aura Vision acts as a Data Processor on behalf of the client (Data Controller).',
+    icon: Scale,
+  },
+  {
+    title: "CCPA",
+    body: 'Compliant with the <a href="https://oag.ca.gov/privacy/ccpa" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">California Consumer Privacy Act</a>.',
+    icon: Landmark,
+  },
+  {
+    title: "EU AI Act",
+    body: "Assessed as limited / minimal risk (the 2 lowest of 4 levels) by Mishcon de Reya. AI Literacy measures are in place for all team members operating AI systems.",
+    icon: Bot,
+  },
+  {
+    title: "Data Controller & Processor",
+    body: "The client is the Data Controller; Aura Vision is the Data Processor converting CCTV footage into anonymous analytics on their behalf.",
+    icon: Building2,
+  },
+  {
+    title: "ICO Registration",
+    body: "Registered with the Information Commissioner's Office.",
+    icon: BadgeCheck,
+  },
+];
+
+/* ── Card-grid sections ── */
+interface Section {
+  id: string;
+  label: string;
+  title: string;
+  subtitle: string;
+  items: typeof privacyByDesignItems;
+  columns?: 2 | 3;
+}
+
+const sections: Section[] = [
+  {
+    id: "privacy-by-design",
+    label: "Privacy by Design",
+    title: "Privacy by Design",
+    subtitle: "Built in the UK since 2017 following privacy-by-design principles. No facial recognition — faces are never stored or identified.",
+    items: privacyByDesignItems,
+  },
+  {
+    id: "data-processing",
+    label: "Data Processing",
+    title: "Data Processing",
+    subtitle: "All video is processed on-premise at the edge. Only anonymous analytics reach the cloud platform on AWS in the EEA.",
+    items: dataProcessingItems,
+  },
+  {
+    id: "compliance",
+    label: "Compliance",
+    title: "Compliance",
+    subtitle: "Compliant with the world's most stringent data protection regulations across the EU, UK and US.",
+    items: complianceItems,
+    columns: 3,
+  },
+];
+
+const navLabels = sections.map((s) => ({ id: s.id, label: s.label }));
+
+/* ── JSON-LD structured data ── */
+const faqEntries = [
+  ...privacyByDesignItems,
+  ...dataProcessingItems,
+  ...complianceItems,
+].map((item) => ({
+  "@type": "Question",
+  name: item.title,
+  acceptedAnswer: {
+    "@type": "Answer",
+    text: item.body.replace(/<[^>]+>/g, ""),
+  },
+}));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      name: "Product Privacy — Aura Vision",
+      description:
+        "Learn how Aura Vision protects customer and employee privacy with 100% anonymous, privacy-by-design analytics from your existing CCTV cameras.",
+      url: "https://auravision.ai/product-privacy/",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqEntries,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Product Privacy"
+  description="Learn how Aura Vision protects customer and employee privacy with 100% anonymous, privacy-by-design analytics from your existing CCTV cameras."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <Nav />
+
+  <main class="bg-white text-slate-800">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div class="mx-auto max-w-site px-6 py-28 lg:px-8 lg:py-36 text-center">
+        <p class="text-sm uppercase tracking-[0.2em] text-blue-400 mb-4 font-title">Privacy by Design</p>
+        <h1 class="font-title text-4xl md:text-6xl font-medium tracking-tight mb-6">
+          Our Commitment to Data Protection
+        </h1>
+        <p class="mx-auto max-w-2xl text-lg md:text-xl text-slate-300 leading-relaxed">
+          Powerful insights from your existing cameras — 100% anonymous, privacy-by-design.
+        </p>
+
+        <!-- Section quick-links -->
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+          {navLabels.map((s) => (
+            <a
+              href={`#${s.id}`}
+              class="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Legal quote + PDF download -->
+    <section class="border-b border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-site px-6 py-16 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="max-w-3xl">
+          <blockquote>
+            <p class="text-lg md:text-xl italic text-slate-700 leading-relaxed">
+              "Aura Vision's insights and analytics are anonymised data, do not constitute
+              personal data under the EU GDPR and UK GDPR, and are created in line with
+              regulatory guidance."
+            </p>
+            <footer class="mt-4 text-sm text-slate-500">— Mishcon de Reya, December 2025</footer>
+          </blockquote>
+        </div>
+        <a
+          href={pdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-medium text-white shadow transition hover:bg-blue-700"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download White Paper (PDF)
+        </a>
+      </div>
+    </section>
+
+    <!-- Card-grid sections -->
+    {sections.map((sec, i) => (
+      <section
+        id={sec.id}
+        class:list={["py-20 lg:py-28", i % 2 === 1 ? "bg-slate-50" : "bg-white"]}
+      >
+        <div class="mx-auto max-w-site px-6 lg:px-8">
+          <div class="mb-14 max-w-2xl">
+            <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
+              {sec.title}
+            </h2>
+            <p class="text-lg text-slate-500 leading-relaxed">
+              {sec.subtitle}
+            </p>
+          </div>
+
+          <InfoCardGrid items={sec.items} columns={sec.columns ?? 2} />
+        </div>
+      </section>
+    ))}
+
+    <!-- Cross-link to Security -->
+    <section class="border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-site px-6 py-14 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="font-title text-lg font-medium text-slate-900">Looking for security details?</h3>
+          <p class="text-sm text-slate-500 mt-1">Learn about our hardware, network and account security measures.</p>
+        </div>
+        <a
+          href="/security"
+          class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+        >
+          View Security &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div class="mx-auto max-w-site px-6 py-20 lg:px-8 text-center">
+        <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight mb-4">
+          Ready to learn more?
+        </h2>
+        <p class="mx-auto max-w-xl text-slate-400 mb-8">
+          Get in touch to see how Aura Vision can deliver powerful, privacy-first analytics for your spaces.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block rounded-full bg-white px-8 py-3 text-sm font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
+        >
+          Contact Us
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,245 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import InfoCardGrid from "../../components/InfoCardGrid.astro";
+import {
+  Factory,
+  KeyRound,
+  RefreshCw,
+  Lock,
+  ShieldCheck,
+  Cloud,
+  ShieldBan,
+  Globe,
+  Fingerprint,
+  Users,
+  Key,
+  ClipboardCheck,
+} from "@lucide/astro";
+
+const hardwareItems = [
+  {
+    title: "Trusted Manufacturers",
+    body: "Our device hardware is manufactured by trusted partners who adhere to the same stringent security policies that we do.",
+    icon: Factory,
+  },
+  {
+    title: "Firmware Signing",
+    body: "All software shipped to our APUs is 'signed' with Aura Vision's secret key. That means nobody can run code on our devices but us.",
+    icon: KeyRound,
+  },
+  {
+    title: "Over-the-Air Updates",
+    body: 'APUs automatically apply firmware updates during off hours. All devices run the latest <a href="https://ubuntu.com/core" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Ubuntu Core</a>, and we use <a href="https://canonical.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Canonical Snapcraft</a> to securely deploy our own software updates.',
+    icon: RefreshCw,
+  },
+  {
+    title: "Encrypted Filesystem",
+    body: "The root filesystem on every APU is encrypted, with a dedicated confined memory space for temporary video and analytics data. Only Aura Vision-signed software can execute and access the filesystem.",
+    icon: Lock,
+  },
+];
+
+const networkItems = [
+  {
+    title: "End-to-End Encryption",
+    body: "All data between our cloud platform and APUs is encrypted with AES-128 and transferred over HTTPS / TLS v1.3. Data at rest is encrypted with AES-256.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Amazon Web Services",
+    body: 'We host all web services on <a href="https://aws.amazon.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">AWS</a>, featuring world-class data security and reliability. Read more about <a href="https://aws.amazon.com/security/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">AWS Cloud Security</a>.',
+    icon: Cloud,
+  },
+  {
+    title: "No Inbound Connections",
+    body: "Our APUs don't accept inbound connection requests, following industry best practice. Bad actors cannot alter device software remotely.",
+    icon: ShieldBan,
+  },
+  {
+    title: "No Complicated Firewalls",
+    body: "All data enters and exits through secure port 443 (HTTPS). We typically require no additional firewall rules.",
+    icon: Globe,
+  },
+  {
+    title: "ISO 27001 ISMS",
+    body: 'Our information security management system follows the <a href="https://www.iso.org/standard/27001" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">ISO 27001</a> specification, covering risk assessment, access control, incident management and continuous improvement.',
+    icon: ClipboardCheck,
+  },
+];
+
+const accountItems = [
+  {
+    title: "Auth0",
+    body: 'We partner with <a href="https://auth0.com/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Auth0</a> to enable SSO, LDAP and Multi-Factor authentication.',
+    icon: Fingerprint,
+  },
+  {
+    title: "Role Based Access Control",
+    body: "Customisable permission levels give specific users access to the dashboard, API and team management.",
+    icon: Users,
+  },
+  {
+    title: "Data Access",
+    body: "All data is secured and can only be accessed with encrypted tokens, via our dashboard or API.",
+    icon: Key,
+  },
+];
+
+interface Section {
+  id: string;
+  label: string;
+  title: string;
+  subtitle: string;
+  items: typeof hardwareItems;
+}
+
+const sections: Section[] = [
+  {
+    id: "hardware",
+    label: "Hardware",
+    title: "Hardware Security",
+    subtitle: "The APU is built with industry-standard best practices for data protection and security, covering hardware, software and networking infrastructure.",
+    items: hardwareItems,
+  },
+  {
+    id: "network",
+    label: "Network",
+    title: "Network Security",
+    subtitle: "Network security is critical for any cloud-connected infrastructure. At Aura Vision, we ensure your data is protected at every stage of transfer.",
+    items: networkItems,
+  },
+  {
+    id: "account",
+    label: "Account",
+    title: "Account Security",
+    subtitle: "Our security measures extend to each user who logs into our software — giving you full control over access and permissions.",
+    items: accountItems,
+  },
+];
+
+/* ── JSON-LD structured data ── */
+const faqEntries = [
+  ...hardwareItems,
+  ...networkItems,
+  ...accountItems,
+].map((item) => ({
+  "@type": "Question",
+  name: item.title,
+  acceptedAnswer: {
+    "@type": "Answer",
+    text: item.body.replace(/<[^>]+>/g, ""),
+  },
+}));
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      name: "Security — Aura Vision",
+      description:
+        "Learn how Aura Vision protects your data with hardware, network and account security best practices.",
+      url: "https://auravision.ai/security/",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqEntries,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Security"
+  description="Learn how Aura Vision protects your data with hardware, network and account security best practices — including encryption, firmware signing and role-based access control."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <Nav />
+
+  <main class="bg-white text-slate-800">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div class="mx-auto max-w-site px-6 py-28 lg:px-8 lg:py-36 text-center">
+        <h1 class="font-title text-4xl md:text-6xl font-medium tracking-tight mb-6">
+          Security
+        </h1>
+        <p class="mx-auto max-w-2xl text-lg md:text-xl text-slate-300 leading-relaxed">
+          Enterprise-grade security across every layer — from signed firmware and encrypted
+          filesystems to ISO 27001-aligned processes and strict access controls.
+        </p>
+
+        <!-- Section quick-links -->
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+          {sections.map((s) => (
+            <a
+              href={`#${s.id}`}
+              class="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Sections -->
+    {sections.map((sec, i) => (
+      <section
+        id={sec.id}
+        class:list={["py-20 lg:py-28", i % 2 === 1 ? "bg-slate-50" : "bg-white"]}
+      >
+        <div class="mx-auto max-w-site px-6 lg:px-8">
+          <div class="mb-14 max-w-2xl">
+            <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
+              {sec.title}
+            </h2>
+            <p class="text-lg text-slate-500 leading-relaxed">
+              {sec.subtitle}
+            </p>
+          </div>
+
+          <InfoCardGrid items={sec.items} columns={2} />
+        </div>
+      </section>
+    ))}
+
+    <!-- Cross-link to Privacy -->
+    <section class="border-t border-slate-200 bg-slate-50">
+      <div class="mx-auto max-w-site px-6 py-14 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="font-title text-lg font-medium text-slate-900">Looking for privacy details?</h3>
+          <p class="text-sm text-slate-500 mt-1">Learn about our privacy-by-design approach, data processing and compliance.</p>
+        </div>
+        <a
+          href="/product-privacy"
+          class="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50"
+        >
+          View Product Privacy &rarr;
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div class="mx-auto max-w-site px-6 py-20 lg:px-8 text-center">
+        <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight mb-4">
+          Ready to learn more?
+        </h2>
+        <p class="mx-auto max-w-xl text-slate-400 mb-8">
+          Get in touch to see how Aura Vision can deliver powerful, privacy-first analytics for your spaces.
+        </p>
+        <a
+          href="/contact"
+          class="inline-block rounded-full bg-white px-8 py-3 text-sm font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
+        >
+          Contact Us
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
