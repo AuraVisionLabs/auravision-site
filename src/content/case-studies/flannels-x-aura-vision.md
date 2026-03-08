@@ -1,10 +1,11 @@
 ---
-title: "Flannels x Aura Vision"
+title: "Flannels Lifted Conversion by 0.75% and Staff Productivity by 34% Across 50+ Stores"
 client: "Flannels"
 clientLogo: "/images/logos/flannels.svg"
 pubDate: 2023-07-15
+sortOrder: 4
 coverImage: "/images/uploads/flannels.jpg"
-summary: "Discover how Flannels rolled-out Aura Vision to all 50+ UK stores to help elevate in-store operations."
+summary: "Flannels rolled out Aura Vision across all 50+ UK stores — using Precision Staff Planning to boost conversion by 0.75%, improve staffing allocation by 34%, and deliver 4.5X ROI from a single use case."
 tags: ["Retail", "Luxury Retail", "Footfall", "Conversion", "Workforce Optimisation", "Staff Planning", "Path to Purchase", "Basket Recovery"]
 metrics:
   - value: "0.75%"

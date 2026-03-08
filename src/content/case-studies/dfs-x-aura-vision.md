@@ -1,10 +1,10 @@
 ---
-title: "DFS x Aura Vision"
+title: "DFS Discovered a £2M Revenue Opportunity by Rethinking Product Placement"
 client: "DFS"
 clientLogo: "/images/logos/dfs.svg"
 pubDate: 2023-01-15
 coverImage: "/images/uploads/dfs.png"
-summary: "Find out how Aura Vision supports DFS physical retail."
+summary: "DFS used heatmaps and demographic insights to move high-engagement products away from the entrance — increasing dwell time by 12%, improving customer flow, and uncovering a £2M revenue opportunity."
 tags: ["Retail", "Furniture", "Heatmaps", "Demographics", "Store Design", "Footfall"]
 metrics:
   - value: "£2M"

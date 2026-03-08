@@ -1,10 +1,10 @@
 ---
-title: "How Aura Vision Identified a £9.9m Revenue Opportunity for Schuh"
+title: "How Schuh Uncovered a £9.9M Revenue Opportunity with Digital PoS Testing"
 client: "Schuh"
 clientLogo: "/images/logos/schuh.svg"
 pubDate: 2023-05-15
 coverImage: "/images/uploads/schuh.jpg"
-summary: "Transforming Schuh's visual-merchandising strategy from intuition-based to data-driven"
+summary: "Schuh used Aura Vision's demographic A/B testing to pinpoint optimal digital point-of-sale placement — attributing £9.9M in annual revenue to getting screen positioning right."
 tags: ["Retail Analytics", "Visual Merchandising", "A/B Testing", "Capture Rate", "Demographics", "Digital Point of Sale", "Store Design"]
 metrics:
   - value: "£9.9m"

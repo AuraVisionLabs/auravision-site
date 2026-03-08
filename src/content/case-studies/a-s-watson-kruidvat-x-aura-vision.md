@@ -1,10 +1,10 @@
 ---
-title: "A.S. Watson Kruidvat x Aura Vision"
+title: "How Kruidvat Achieved 4X ROI by Fixing Checkout Queues and Footfall Accuracy"
 client: "A.S. Watson (Kruidvat)"
 clientLogo: "/images/logos/aswatson.png"
 pubDate: 2023-11-15
 coverImage: "/images/uploads/as-watson-kruidvat.jpg"
-summary: "Discover how Kruidvat leveraged Aura Vision's in-store analytics to improve customer experiences with automatic staff segmentation."
+summary: "Kruidvat partnered with Aura Vision to go beyond basic footfall counters — automatically segmenting staff from customers for 8% more accurate counts, optimising checkout layouts, and delivering a 4X annual return on investment."
 tags: ["In-Store Analytics", "Footfall Counting", "Staff Segmentation", "Queue Management", "Customer Experience", "Retail Operations"]
 metrics:
   - value: "4X"

@@ -1,10 +1,10 @@
 ---
-title: "Situ Live x Aura Vision"
+title: "How Situ Live Measured Brand Engagement in a Till-Less Retail Concept"
 client: "Situ Live"
 clientLogo: "/images/logos/situ.png"
 pubDate: 2023-03-15
 coverImage: "/images/uploads/situ-live.webp"
-summary: "A unique retail experience demanding equally innovative analytics from Aura Vision"
+summary: "Situ Live used Aura Vision to turn its experiential Westfield destination into a measurable brand platform — tracking demographics, optimising staff coverage, and giving brand partners quantifiable engagement data for the first time."
 tags: ["Retail Analytics", "Experiential Retail", "Demographics", "Store Design", "Heatmaps", "Capture Rate", "Occupancy", "Visual Merchandising", "Campaign Effectiveness"]
 metrics: []
 ---

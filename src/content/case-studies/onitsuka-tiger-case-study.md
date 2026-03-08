@@ -1,10 +1,10 @@
 ---
-title: "Onitsuka Tiger x Aura Vision"
+title: "How Onitsuka Tiger Turned Its Flagship CCTV into a 5X ROI Analytics Engine"
 client: "Onitsuka Tiger"
 clientLogo: "/images/logos/onitsuka.svg"
 pubDate: 2023-10-15
 coverImage: "/images/uploads/onitsuka-tiger.jpg"
-summary: "Explore how Onitsuka Tiger's team became data driven decision makers using Aura Vision's insight."
+summary: "Onitsuka Tiger harnessed its existing CCTV to measure every zone in its London flagship — giving trading, marketing, and store teams the data to optimise layouts, staffing, and visual merchandising for a 5X return on investment."
 tags: ["Retail Analytics", "Footfall Analytics", "Store Performance", "CCTV Analytics", "Customer Behaviour", "Visual Merchandising", "Staffing Optimisation"]
 metrics:
   - value: "5X"

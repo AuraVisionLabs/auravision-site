@@ -1,10 +1,10 @@
 ---
-title: "Neighborhood Goods x Aura Vision"
+title: "Turning Neighborhood Goods into a Data Platform for Brand Partners"
 client: "Neighborhood Goods"
 clientLogo: "/images/logos/neighborhood-goods.svg"
 pubDate: 2023-02-15
 coverImage: "/images/uploads/neighborhood-goods.webp"
-summary: "See How Aura Vision enabled Neighborhood Goods to be an insight platform for it's brand partners"
+summary: "Neighborhood Goods replaced unreliable footfall sensors with Aura Vision across all three US locations — delivering 30% more accurate customer counts, 45% better store utilisation, and zone-level engagement reports that turned the retailer into an insights platform for its brand partners."
 tags: ["Retail", "Customer Analytics", "Store Optimisation", "Brand Partnerships", "Footfall Counting", "Conversion Rate"]
 metrics:
   - value: "30%"

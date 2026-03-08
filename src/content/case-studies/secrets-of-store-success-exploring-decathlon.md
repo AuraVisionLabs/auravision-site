@@ -1,10 +1,11 @@
 ---
-title: "Secrets of Store Success: Exploring Decathlon"
+title: "Driving 6X ROI for Decathlon Through Campaign and Layout Optimisation"
 client: "Decathlon"
 clientLogo: "/images/logos/decathlon.svg"
 pubDate: 2024-03-15
+sortOrder: 3
 coverImage: "/images/uploads/decathlon.jpg"
-summary: "Decathlon achieved 0.5% conversion uplift and 6X ROI by identifying how each campaign and store layout can increase customer flow and product impressions."
+summary: "Decathlon deployed Aura Vision as a plug-and-play pilot across multiple stores — tracking segment performance, benchmarking refits, and delivering a 0.5% conversion uplift and 6X return on investment in just weeks."
 tags: ["Visual Merchandising", "Retail Analytics", "Footfall Counting", "Conversion Optimisation", "Store Layout", "Sporting Goods"]
 metrics:
   - value: "0.5%"

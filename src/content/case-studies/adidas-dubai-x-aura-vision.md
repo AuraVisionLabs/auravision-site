@@ -3,6 +3,7 @@ title: "Supercharging In-Store Activations for Adidas Dubai"
 client: "Adidas UAE"
 clientLogo: "/images/logos/adidas.svg"
 pubDate: 2025-01-15
+sortOrder: 2
 coverImage: "/images/uploads/adidas-dubai.jpg"
 summary: "Discover how Adidas UAE turned its existing CCTV into a powerful analytics engine — sharpening staffing, boosting product engagement, and delivering a 9X return on investment."
 tags: ["Retail Analytics", "Demographics", "Staffing Optimisation", "Visual Merchandising", "Full-Store Analytics", "Demographic Insights", "Heatmaps", "Headcount Planning"]

@@ -5,8 +5,8 @@ import CaseStudyCard from "./CaseStudyCard.astro";
 
 const studies = await getCollection("case-studies");
 const recent = studies
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 2);
+  .sort((a, b) => (a.data.sortOrder ?? 999) - (b.data.sortOrder ?? 999) || b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
 ---
 
 <section class="section-major">
@@ -25,7 +25,7 @@ const recent = studies
     </div>
 
     <!-- Cards -->
-    <div class="grid gap-8 md:grid-cols-2">
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {
         recent.map((study) => (
           <CaseStudyCard
