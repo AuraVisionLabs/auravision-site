@@ -14,6 +14,7 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Client", name: "client", widget: "string" }
+      - { label: "Client Logo", name: "clientLogo", widget: "image", required: false }
       - { label: "Publish Date", name: "pubDate", widget: "datetime" }
       - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
       - { label: "Summary", name: "summary", widget: "text" }

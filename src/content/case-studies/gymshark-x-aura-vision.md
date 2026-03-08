@@ -1,6 +1,7 @@
 ---
 title: "How Gymshark Boosted Changing Room Usage by 63% with Store Analytics"
 client: "Gymshark"
+clientLogo: "/images/logos/gymshark.svg"
 pubDate: 2024-06-10
 coverImage: "/images/uploads/gymshark.png"
 summary: "Gymshark used Aura Vision to redesign its Regent Street flagship — lifting changing room usage by 63%, increasing key zone engagement by 5X, and building the playbook for every store that followed."

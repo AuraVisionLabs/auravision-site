@@ -64,7 +64,16 @@ if (hasMarker) {
         <h1 class="font-title font-normal text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 text-gradient" data-text={study.data.title}>
           {study.data.title}
         </h1>
-        <p class="text-lg text-white/50 leading-relaxed max-w-3xl">{study.data.summary}</p>
+        <div class="flex items-center justify-between gap-8">
+          <p class="text-lg text-white/50 leading-relaxed max-w-3xl">{study.data.summary}</p>
+          {study.data.clientLogo && (
+            <img
+              src={study.data.clientLogo}
+              alt={study.data.client}
+              class="hidden md:block max-h-[57.6px] max-w-[150px] w-auto shrink-0 object-contain opacity-50 [filter:brightness(0)_invert(1)]"
+            />
+          )}
+        </div>
       </div>
 
       <!-- Cover image + Key Results -->
@@ -111,6 +120,8 @@ if (hasMarker) {
               name={testimonial.name}
               role={testimonial.role}
               photo={testimonial.photo}
+              logo={study.data.clientLogo}
+              company={study.data.client}
             />
           </div>
         )

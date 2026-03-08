@@ -5,6 +5,7 @@ const caseStudies = defineCollection({
   schema: z.object({
     title: z.string(),
     client: z.string(),
+    clientLogo: z.string().optional(),
     pubDate: z.coerce.date(),
     coverImage: z.string().optional(),
     summary: z.string(),
