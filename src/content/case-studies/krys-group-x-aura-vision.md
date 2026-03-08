@@ -3,21 +3,15 @@ title: "Unlocking a €1.1M Revenue Opportunity for Krys Group"
 client: "Krys Group"
 clientLogo: "/images/logos/krys.png"
 pubDate: 2024-01-15
-coverImage: "/images/uploads/krys-group.jpg"
-summary: "Discover how Krys Group used Aura Vision's full-store analytics to uncover a €1.1M revenue uplift opportunity — optimising service areas, reducing walk-outs, and pinpointing their highest-converting customer demographic."
+coverImage: "/images/uploads/krys-group.webp"
+summary: "Using Aura Vision's demographic and behavioural insights to transform service levels and grow conversion"
 tags: ["Retail Analytics", "Demographics", "Full-Store Analytics", "Heatmaps", "Queue Analysis", "Merchandising", "Store Design", "Capture Rate", "Service Area Optimisation"]
 metrics:
   - value: "€1.1M"
     label: "Revenue uplift opportunity uncovered"
-  - value: "Actions"
-    label: "Identified across service areas"
-  - value: "Pinpointed"
-    label: "Opportunities with demographics"
 ---
 
 KRYS GROUP is a leading French optician co-operative founded in 1966. With a network of around 1,600 stores across its brands, it brings together over 6,000 employees and serves more than 10 million customers. The group operates under four main banners and spans both optics and hearing-care markets, combining retail distribution with manufacturing capabilities in France. This dual role as producer-distributor, together with its cooperative model, gives KRYS GROUP a strong platform for growth, innovation and customer-centric services.
-
-<!-- testimonial -->
 
 ## Why Krys Group chose Aura Vision
 
