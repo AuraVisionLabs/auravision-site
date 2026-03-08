@@ -1,21 +1,32 @@
 ---
-title: "How Kruidvat Achieved 4X ROI by Fixing Checkout Queues and Footfall Accuracy"
-client: "A.S. Watson (Kruidvat)"
-clientLogo: "/images/logos/aswatson.png"
+title: How Kruidvat Achieved 4X ROI by Fixing Checkout Queues and Footfall Accuracy
+client: A.S. Watson (Kruidvat)
 pubDate: 2023-11-15
-coverImage: "/images/uploads/as-watson-kruidvat.jpg"
-summary: "Kruidvat partnered with Aura Vision to go beyond basic footfall counters — automatically segmenting staff from customers for 8% more accurate counts, optimising checkout layouts, and delivering a 4X annual return on investment."
-tags: ["In-Store Analytics", "Footfall Counting", "Staff Segmentation", "Queue Management", "Customer Experience", "Retail Operations"]
+summary: Kruidvat partnered with Aura Vision to go beyond basic footfall
+  counters — automatically segmenting staff from customers for 8% more accurate
+  counts, optimising checkout layouts, and delivering a 4X annual return on
+  investment.
+clientLogo: /images/logos/aswatson.png
+coverImage: /images/uploads/as-watson-kruidvat.jpg
+tags:
+  - In-Store Analytics
+  - Footfall Counting
+  - Staff Segmentation
+  - Queue Management
+  - Customer Experience
+  - Retail Operations
 metrics:
-  - value: "4X"
-    label: "ROI annually"
-  - value: "8%"
-    label: "More accurate footfall counting"
+  - value: 4X
+    label: ROI annually
+  - value: 8%
+    label: More accurate footfall counting
 testimonial:
-  headliner: "Simplicity and ease of integration"
-  quote: "I really like the simplicity and ease of integration with our existing camera system, which basically every store has."
-  name: ""
-  role: "Store Innovation Lead, A.S. Watson Group"
+  headliner: Simplicity and ease of integration
+  quote: I really like the simplicity and ease of integration with our existing
+    camera system, which basically every store has.
+  name: Frenkel Tel
+  role: Store Innovation Lead, A.S. Watson Group
+  photo: /images/frenkel.jpg
 ---
 
 Kruidvat, a leading health and beauty retailer in the Netherlands and Belgium, partnered with Aura Vision to enhance in-store analytics and drive operational improvements. By integrating seamlessly with existing camera systems, Aura Vision provided actionable insights that boosted customer experience and operational efficiency, delivering a 4X ROI annually.

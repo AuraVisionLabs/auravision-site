@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
+    "cms": "npx decap-server",
+    "dev:cms": "npx decap-server & astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -20,6 +22,7 @@
   },
   "devDependencies": {
     "@types/netlify-identity-widget": "^1.9.7",
+    "decap-server": "^3.5.2",
     "sharp": "^0.34.5",
     "svgo": "^4.0.0"
   }

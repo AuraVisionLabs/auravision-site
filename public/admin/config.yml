@@ -8,35 +8,114 @@ public_folder: /images/uploads
 collections:
   - name: "case-studies"
     label: "Case Studies"
+    label_singular: "Case Study"
     folder: "src/content/case-studies"
     create: true
     slug: "{{slug}}"
+    sortable_fields: ["pubDate", "title", "client"]
+    summary: "{{client}} — {{title}}"
+    editor:
+      size: half
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Client", name: "client", widget: "string" }
-      - { label: "Client Logo", name: "clientLogo", widget: "image", required: false }
-      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
-      - { label: "Cover Image", name: "coverImage", widget: "image", required: false }
-      - { label: "Summary", name: "summary", widget: "text" }
+      # ── Core info ──
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "SEO-friendly headline for the case study"
+
+      - label: "Client"
+        name: "client"
+        widget: "string"
+
+      - label: "Publish Date"
+        name: "pubDate"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: "Sort Order"
+        name: "sortOrder"
+        widget: "number"
+        default: 999
+        value_type: "int"
+        hint: "Lower numbers appear first (default 999)"
+        required: false
+
+      - label: "Summary"
+        name: "summary"
+        widget: "text"
+        hint: "Short description used in cards and SEO meta"
+
+      # ── Images ──
+      - label: "Client Logo"
+        name: "clientLogo"
+        widget: "image"
+        required: false
+        hint: "SVG or PNG logo displayed on the case study card"
+
+      - label: "Cover Image"
+        name: "coverImage"
+        widget: "image"
+        required: false
+        hint: "Hero image shown at the top of the case study"
+
+      # ── Taxonomy ──
       - label: "Tags"
         name: "tags"
         widget: "list"
         required: false
+        collapsed: true
+        hint: "Comma-separated or add individually"
+        summary: "{{fields.tag}}"
+
+      # ── Key Metrics ──
       - label: "Key Metrics"
         name: "metrics"
         widget: "list"
         required: false
+        collapsed: true
+        minimize_collapsed: true
+        summary: "{{fields.value}} — {{fields.label}}"
+        hint: "Headline stats shown at the top of the case study (e.g. '63%' / 'Increase in changing room entries')"
         fields:
-          - { label: "Value", name: "value", widget: "string" }
-          - { label: "Label", name: "label", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+          - label: "Value"
+            name: "value"
+            widget: "string"
+            hint: "e.g. 5X, 63%, 10%"
+          - label: "Label"
+            name: "label"
+            widget: "string"
+            hint: "e.g. Increase in changing room entries"
+
+      # ── Body ──
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "Main content — use ## for section headings"
+
+      # ── Testimonial ──
       - label: "Testimonial"
         name: "testimonial"
         widget: "object"
         required: false
+        collapsed: true
+        hint: "Optional client quote displayed as a highlight block"
         fields:
-          - { label: "Headliner", name: "headliner", widget: "string" }
-          - { label: "Quote", name: "quote", widget: "text" }
-          - { label: "Name", name: "name", widget: "string" }
-          - { label: "Role", name: "role", widget: "string" }
-          - { label: "Photo", name: "photo", widget: "image", required: false }
+          - label: "Headliner"
+            name: "headliner"
+            widget: "string"
+            hint: "Short pull-quote or headline"
+          - label: "Quote"
+            name: "quote"
+            widget: "text"
+          - label: "Name"
+            name: "name"
+            widget: "string"
+          - label: "Role"
+            name: "role"
+            widget: "string"
+          - label: "Photo"
+            name: "photo"
+            widget: "image"
+            required: false
