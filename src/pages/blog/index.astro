@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+const sorted = posts.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Blog | Aura Vision",
+  "description": "Insights, trends, and thought leadership on retail analytics, computer vision, and in-store intelligence.",
+  "url": "https://auravision.ai/blog",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": sorted.map((post, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": post.data.title,
+      "url": `https://auravision.ai/blog/${post.slug}`,
+    })),
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://auravision.ai" },
+    { "@type": "ListItem", "position": 2, "name": "Blog" },
+  ],
+};
+---
+
+<BaseLayout
+  title="Blog"
+  description="Insights, trends, and thought leadership on retail analytics, computer vision, and in-store intelligence."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <Nav />
+
+  <main class="page-padding">
+    <div class="container-site">
+      <!-- Header -->
+      <div class="mb-16 max-w-3xl">
+        <h1 class="heading-section text-gradient" data-text="Blog">
+          Blog
+        </h1>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          sorted.map((post) => (
+            <BlogCard
+              slug={post.slug}
+              title={post.data.title}
+              author={post.data.author}
+              pubDate={post.data.pubDate}
+              summary={post.data.summary}
+              coverImage={post.data.coverImage}
+              tags={post.data.tags}
+              headingLevel="h2"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -170,3 +170,54 @@ collections:
         name: "summary"
         widget: "text"
         hint: "Short description of the article"
+  - name: "blog"
+    label: "Blog"
+    label_singular: "Blog Post"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: ["pubDate", "title"]
+    summary: "{{title}}"
+    editor:
+      size: half
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "Headline for the blog post"
+
+      - label: "Author"
+        name: "author"
+        widget: "string"
+        required: false
+        hint: "Author name"
+
+      - label: "Publish Date"
+        name: "pubDate"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: "Cover Image"
+        name: "coverImage"
+        widget: "image"
+        required: false
+        hint: "Hero image shown at the top of the blog post"
+
+      - label: "Summary"
+        name: "summary"
+        widget: "text"
+        hint: "Short description used in cards and SEO meta"
+
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        required: false
+        collapsed: true
+        hint: "Comma-separated or add individually"
+
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        hint: "Main content — use ## for section headings"
