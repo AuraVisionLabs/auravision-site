@@ -20,19 +20,19 @@ const hmColor: Record<string, string> = {
 };
 
 const gridVisuals = [
-  // Visual 0: store entries grid
+  // Visual 0: store entries grid (entrance1-4)
   [
-    { src: "/images/entries.png", alt: "Store 1", color: "bg-emerald-500/80", icon: "up", label: "+32%" },
-    { src: "/images/capture.png", alt: "Store 2", color: "bg-emerald-500/80", icon: "up", label: "+18%" },
-    { src: "/images/entries.png", alt: "Store 3", color: "bg-red-500/80", icon: "down", label: "-4%" },
-    { src: "/images/capture.png", alt: "Store 4", color: "bg-emerald-500/80", icon: "up", label: "+27%" },
+    { src: "/images/entrance1.jpeg", alt: "Store 1", color: "bg-emerald-500/80", icon: "up", label: "+32%" },
+    { src: "/images/entrance2.jpeg", alt: "Store 2", color: "bg-emerald-500/80", icon: "up", label: "+18%" },
+    { src: "/images/entrance3.jpeg", alt: "Store 3", color: "bg-red-500/80", icon: "down", label: "-4%" },
+    { src: "/images/entrance4.jpeg", alt: "Store 4", color: "bg-emerald-500/80", icon: "up", label: "+27%" },
   ],
-  // Visual 1: capture rate grid
+  // Visual 1: activation display grid (act73ivation1-4)
   [
-    { src: "/images/capture.png", alt: "Camera 1", color: "bg-red-500/80", icon: "down", label: "-2.1%" },
-    { src: "/images/entries.png", alt: "Camera 2", color: "bg-red-500/80", icon: "down", label: "-5.3%" },
-    { src: "/images/capture.png", alt: "Camera 3", color: "bg-emerald-500/80", icon: "up", label: "+1.2%" },
-    { src: "/images/entries.png", alt: "Camera 4", color: "bg-red-500/80", icon: "down", label: "-3.7%" },
+    { src: "/images/activation1.jpeg", alt: "Display 1", color: "bg-red-500/80", icon: "down", label: "-2.1%" },
+    { src: "/images/activation2.jpeg", alt: "Display 2", color: "bg-red-500/80", icon: "down", label: "-5.3%" },
+    { src: "/images/activation3.jpeg", alt: "Display 3", color: "bg-emerald-500/80", icon: "up", label: "+1.2%" },
+    { src: "/images/activation4.jpeg", alt: "Display 4", color: "bg-red-500/80", icon: "down", label: "-3.7%" },
   ],
 ];
 
@@ -40,7 +40,7 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
 ---
 
 <div class="chat-animation-wrapper relative h-[480px] md:h-[480px] w-full overflow-visible">
-  <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/5 border border-white/10 pt-12 px-6 pb-6 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_90%)] transition-all duration-500">
+  <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/5 border border-white/10 pt-8 px-6 pb-6 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_90%)] transition-all duration-500">
     <div class="chat-pair space-y-3 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2 opacity-0">
       <div class="chat-user-text max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg bg-cyan-600 text-white font-medium">
@@ -63,7 +63,7 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
         <div class="chat-visual-container relative">
 
           {gridVisuals.map((cells, i) => (
-            <div class="chat-visual hidden grid grid-cols-4 grid-rows-1 gap-[2px] w-[300px] h-[60px]" data-visual={i}>
+            <div class="chat-visual hidden grid grid-cols-4 grid-rows-1 gap-[4px] w-[320px] h-[70px]" data-visual={i}>
               {cells.map((v) => (
                 <div class="chat-grid-cell relative overflow-hidden rounded-sm opacity-0 shadow-lg">
                   <img class="w-full h-full object-cover" src={v.src} alt={v.alt} />
@@ -138,13 +138,13 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
     {
       user: "Was it worth opening stores the day after Christmas?",
       preBot: "Assessing store traffic gains…",
-      bot: "<strong>Yes.</strong> Stores saw 32% more traffic and 10% higher conversion than the previous week.",
+      bot: "<strong>Yes.</strong> Stores saw 18% more traffic and 11% higher conversion than the previous week.",
       visual: 0,
     },
     {
-      user: "Are our new window displays delivering ROI?",
-      preBot: "Comparing entrance capture rates…",
-      bot: "<strong>Likely not.</strong> Capture rates decreased 2.1% during the period, despite an increase in traffic and engagement.",
+      user: "Are our new activation displays delivering ROI?",
+      preBot: "Comparing activation display impressions…",
+      bot: "<strong>Likely not.</strong> Impression rates decreased 2.5% during the period, despite an increase in traffic and overall dwell times.",
       visual: 1,
     },
     {
