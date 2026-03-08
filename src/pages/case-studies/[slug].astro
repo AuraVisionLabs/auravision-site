@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import TestimonialCard from "../../components/TestimonialCard.astro";
+import CaseStudyCard from "../../components/CaseStudyCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import { ArrowLeft } from "@lucide/astro";
 
@@ -40,6 +41,21 @@ if (hasMarker) {
 } else {
   contentParts = [await marked.parse(rawBody)];
 }
+
+// Find related case studies by tag overlap
+const allStudies = await getCollection("case-studies");
+const currentTags = new Set(study.data.tags ?? []);
+
+const related = allStudies
+  .filter((s) => s.slug !== study.slug)
+  .map((s) => {
+    const overlap = (s.data.tags ?? []).filter((t) => currentTags.has(t)).length;
+    return { study: s, overlap };
+  })
+  .filter((r) => r.overlap > 0)
+  .sort((a, b) => b.overlap - a.overlap)
+  .slice(0, 3)
+  .map((r) => r.study);
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -174,6 +190,27 @@ const breadcrumbSchema = {
                 ))}
               </div>
             </div>
+        )
+      }
+
+      <!-- Related Case Studies -->
+      {
+        related.length > 0 && (
+          <div class="mt-20 pt-12">
+            <h2 class="font-title text-2xl tracking-tight mb-8 text-white/80">Related stories</h2>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => (
+                <CaseStudyCard
+                  slug={r.slug}
+                  title={r.data.title}
+                  client={r.data.client}
+                  clientLogo={r.data.clientLogo}
+                  summary={r.data.summary}
+                  coverImage={r.data.coverImage}
+                />
+              ))}
+            </div>
+          </div>
         )
       }
     </div>
