@@ -17,7 +17,18 @@ import { ArrowRight } from "@lucide/astro";
 import ChatAnimation from "../components/ChatAnimation.astro";
 ---
 
-<BaseLayout title="Instant answers with Ask Aura">
+<BaseLayout title="AI-Powered Retail Analytics From Your Existing Cameras">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Aura Vision",
+    "url": "https://auravision.ai",
+    "logo": "https://auravision.ai/images/aura-vision-logo.svg",
+    "description": "AI-powered retail analytics from your existing cameras. No new sensors. No personal data. Just answers.",
+    "sameAs": [
+      "https://www.linkedin.com/company/auravisionlabs"
+    ]
+  })} />
   <Nav />
 
   <Hero />
@@ -80,7 +91,7 @@ import ChatAnimation from "../components/ChatAnimation.astro";
   <RecentCaseStudies />
 
   <!-- Contact Form -->
-  <ContactForm />
+  <ContactForm title="Change doesn't have to be scary" subtitle="Let's talk it through together." />
 
   <Footer />
 </BaseLayout>

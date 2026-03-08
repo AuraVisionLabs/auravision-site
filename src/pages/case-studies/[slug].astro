@@ -40,6 +40,33 @@ if (hasMarker) {
 } else {
   contentParts = [await marked.parse(rawBody)];
 }
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": study.data.title,
+  "description": study.data.summary,
+  "image": study.data.coverImage ? new URL(study.data.coverImage, Astro.site).href : undefined,
+  "datePublished": study.data.pubDate.toISOString(),
+  "publisher": {
+    "@type": "Organization",
+    "name": "Aura Vision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://auravision.ai/images/aura-vision-logo.svg"
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://auravision.ai" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://auravision.ai/case-studies" },
+    { "@type": "ListItem", "position": 3, "name": study.data.title }
+  ]
+};
 ---
 
 <BaseLayout
@@ -47,6 +74,8 @@ if (hasMarker) {
   description={study.data.summary}
   ogImage={study.data.coverImage}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <Nav />
 
   <main class="page-padding">

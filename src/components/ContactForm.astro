@@ -1,5 +1,14 @@
 ---
 import ContactFormFields from "./ContactFormFields.astro";
+
+interface Props {
+  headingLevel?: 'h1' | 'h2';
+  title?: string;
+  subtitle?: string;
+}
+
+const { headingLevel = 'h2', title = 'Get in touch', subtitle = "Whether you're ready for a demo or just exploring, we'd love to hear from you." } = Astro.props;
+const Heading = headingLevel;
 ---
 
 <section id="contact" class="section-major relative overflow-hidden">
@@ -11,11 +20,11 @@ import ContactFormFields from "./ContactFormFields.astro";
     <div class="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
       <!-- Left: Heading -->
       <div class="flex flex-col">
-        <h2 class="heading-section text-gradient" data-text="Get in touch">
-          Get in touch
-        </h2>
+        <Heading class="heading-section text-gradient" data-text={title}>
+          {title}
+        </Heading>
         <p class="mt-6 text-xl text-white font-medium md:text-2xl">
-          Whether you're ready for a demo or just exploring, we'd love to hear from you.
+          {subtitle}
         </p>
       </div>
 
