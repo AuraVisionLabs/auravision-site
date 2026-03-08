@@ -99,11 +99,18 @@ const grillCols = 12;
   /* All dimensions driven by these three variables */
   .cube-container {
     width: 100%;
-    min-height: 450px;
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    touch-action: none;
+  }
+
+  @media (min-width: 768px) {
+    .cube-container {
+      min-height: 450px;
+    }
   }
 
   .cube-scene {
@@ -123,7 +130,16 @@ const grillCols = 12;
     align-items: center;
     justify-content: center;
     perspective: 1200px;
-    padding: 80px;
+    padding: 40px;
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+
+  @media (min-width: 768px) {
+    .cube-scene {
+      padding: 80px;
+      transform: scale(1);
+    }
   }
 
   .cube {
@@ -356,30 +372,26 @@ const grillCols = 12;
   if (container && scene && cube) {
     let isHovering = false;
 
-    container.addEventListener('mouseenter', () => {
+    function startInteraction() {
+      if (isHovering) return;
       isHovering = true;
-      // Freeze current animated transform as inline style before killing animation
       const current = getComputedStyle(cube).transform;
       cube.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
       cube.style.transform = current;
-      // Force layout so the inline transform is applied before the class change
       cube.offsetHeight;
       cube.classList.add('is-hovering');
-      // Remove transition after it settles so mousemove is instant
       setTimeout(() => {
         if (isHovering) cube.style.transition = 'none';
       }, 350);
-    });
+    }
 
-    container.addEventListener('mouseleave', () => {
+    function endInteraction() {
+      if (!isHovering) return;
       isHovering = false;
-      // Re-enable transition for smooth exit
       cube.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
-      // Transition smoothly back to the animation start point before re-enabling
-      const midRotX = -25;  // matches 0% keyframe rotateX
-      const midRotY = -30;  // matches 0% keyframe rotateY
+      const midRotX = -25;
+      const midRotY = -30;
       cube.style.transform = `rotateX(${midRotX}deg) rotateY(${midRotY}deg)`;
-      
       const onDone = () => {
         cube.removeEventListener('transitionend', onDone);
         cube.classList.remove('is-hovering');
@@ -387,16 +399,38 @@ const grillCols = 12;
         cube.style.transform = '';
       };
       cube.addEventListener('transitionend', onDone);
-    });
+    }
 
-    container.addEventListener('mousemove', (e) => {
+    function updateRotation(clientX: number, clientY: number) {
       if (!isHovering) return;
       const rect = container.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      const rotY = x * 60 - 45;   // ±30°
-      const rotX = -y * 30 - 30;  // ±30°
+      const x = (clientX - rect.left) / rect.width - 0.5;
+      const y = (clientY - rect.top) / rect.height - 0.5;
+      const rotY = x * 60 - 45;
+      const rotX = -y * 30 - 30;
       cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-    });
+    }
+
+    // Mouse events
+    container.addEventListener('mouseenter', startInteraction);
+    container.addEventListener('mouseleave', endInteraction);
+    container.addEventListener('mousemove', (e) => updateRotation(e.clientX, e.clientY));
+
+    // Touch events
+    container.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      startInteraction();
+      const touch = e.touches[0];
+      updateRotation(touch.clientX, touch.clientY);
+    }, { passive: false });
+
+    container.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      updateRotation(touch.clientX, touch.clientY);
+    }, { passive: false });
+
+    container.addEventListener('touchend', () => endInteraction());
+    container.addEventListener('touchcancel', () => endInteraction());
   }
 </script>

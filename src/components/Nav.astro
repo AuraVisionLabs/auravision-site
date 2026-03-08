@@ -65,9 +65,9 @@ import { Menu, X } from "@lucide/astro";
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="hidden lg:hidden fixed inset-0 top-[65px] bg-slate-900 z-40"
+    class="hidden lg:hidden fixed inset-x-0 bottom-0 z-40 bg-slate-800 border-t border-white/10"
   >
-    <div class="flex flex-col items-start gap-8 px-6 pt-12 text-lg">
+    <div class="flex flex-col items-start gap-6 px-6 py-8 text-lg">
       <a href="/case-studies" class="text-white/70 hover:text-white transition-colors">
         Case Studies
       </a>
@@ -93,9 +93,19 @@ import { Menu, X } from "@lucide/astro";
   const menuIcon = document.getElementById("menu-icon");
   const closeIcon = document.getElementById("close-icon");
 
+  function setMenuTop() {
+    const nav = document.querySelector("header nav");
+    if (nav && menu) {
+      menu.style.top = nav.offsetHeight + "px";
+    }
+  }
+
   btn?.addEventListener("click", () => {
     menu?.classList.toggle("hidden");
     menuIcon?.classList.toggle("hidden");
     closeIcon?.classList.toggle("hidden");
+    setMenuTop();
   });
+
+  window.addEventListener("resize", setMenuTop);
 </script>

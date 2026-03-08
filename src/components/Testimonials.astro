@@ -59,7 +59,7 @@ const testimonials = [
     <div id="testimonials-track" class="flex items-stretch gap-8 pb-4" style="overflow: visible;">
       {/* Triple the cards for seamless infinite scroll */}
       {[...testimonials, ...testimonials, ...testimonials].map(({ headliner, quote, name, role, company, photo, logo }) => (
-        <div class="testimonial-card w-[420px] flex-shrink-0 flex">
+        <div class="testimonial-card w-[calc(100vw-3rem)] sm:w-[420px] flex-shrink-0 flex">
           <TestimonialCard
             headliner={headliner}
             quote={quote}

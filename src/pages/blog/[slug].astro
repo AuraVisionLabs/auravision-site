@@ -51,7 +51,6 @@ const articleSchema = {
   "description": post.data.summary,
   "image": post.data.coverImage ? new URL(post.data.coverImage, Astro.site).href : undefined,
   "datePublished": post.data.pubDate.toISOString(),
-  "author": post.data.author ? { "@type": "Person", "name": post.data.author } : undefined,
   "publisher": {
     "@type": "Organization",
     "name": "Aura Vision",
@@ -95,9 +94,6 @@ const breadcrumbSchema = {
       <div class="mb-8">
         <div class="flex items-center gap-4 mb-4">
           <p class="text-xs uppercase tracking-widest text-white/40">{formattedDate}</p>
-          {post.data.author && (
-            <span class="text-xs text-white/40">by {post.data.author}</span>
-          )}
         </div>
         <h1 class="font-title font-normal text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight mb-4 text-gradient" data-text={post.data.title}>
           {post.data.title}
@@ -145,7 +141,6 @@ const breadcrumbSchema = {
               <BlogCard
                 slug={r.slug}
                 title={r.data.title}
-                author={r.data.author}
                 pubDate={r.data.pubDate}
                 summary={r.data.summary}
                 coverImage={r.data.coverImage}
