@@ -9,12 +9,40 @@ const studies = await getCollection("case-studies");
 const sorted = studies.sort(
   (a, b) => (a.data.sortOrder ?? 999) - (b.data.sortOrder ?? 999) || b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Case Studies | Aura Vision",
+  "description": "Explore how our retail partners turn their stores' data into business value using their existing CCTV infrastructure.",
+  "url": "https://auravision.ai/case-studies",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": sorted.map((study, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": study.data.title,
+      "url": `https://auravision.ai/case-studies/${study.slug}`
+    }))
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://auravision.ai" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies" }
+  ]
+};
 ---
 
 <BaseLayout
   title="Case Studies"
   description="Explore how our retail partners turn their stores' data into business value using their existing CCTV infrastructure."
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <Nav />
 
   <main class="page-padding">
