@@ -19,9 +19,21 @@ const hmColor: Record<string, string> = {
   r: "bg-red-500",
 };
 
-const statVisuals = [
-  { src: "/images/entries.png", alt: "Store entries", color: "bg-emerald-500/80", icon: "up", label: "+32%" },
-  { src: "/images/capture.png", alt: "Capture rate", color: "bg-red-500/80", icon: "down", label: "-2.1%" },
+const gridVisuals = [
+  // Visual 0: store entries grid
+  [
+    { src: "/images/entries.png", alt: "Store 1", color: "bg-emerald-500/80", icon: "up", label: "+32%" },
+    { src: "/images/capture.png", alt: "Store 2", color: "bg-emerald-500/80", icon: "up", label: "+18%" },
+    { src: "/images/entries.png", alt: "Store 3", color: "bg-red-500/80", icon: "down", label: "-4%" },
+    { src: "/images/capture.png", alt: "Store 4", color: "bg-emerald-500/80", icon: "up", label: "+27%" },
+  ],
+  // Visual 1: capture rate grid
+  [
+    { src: "/images/capture.png", alt: "Camera 1", color: "bg-red-500/80", icon: "down", label: "-2.1%" },
+    { src: "/images/entries.png", alt: "Camera 2", color: "bg-red-500/80", icon: "down", label: "-5.3%" },
+    { src: "/images/capture.png", alt: "Camera 3", color: "bg-emerald-500/80", icon: "up", label: "+1.2%" },
+    { src: "/images/entries.png", alt: "Camera 4", color: "bg-red-500/80", icon: "down", label: "-3.7%" },
+  ],
 ];
 
 const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-medium text-white transition-all duration-300 hover:bg-purple-500 hover:shadow-[0_0_20px_rgba(147,51,234,0.8)] cursor-pointer";
@@ -29,44 +41,55 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
 
 <div class="chat-animation-wrapper relative h-[480px] md:h-[480px] w-full overflow-visible">
   <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/5 border border-white/10 pt-12 px-6 pb-6 overflow-hidden [mask-image:linear-gradient(to_bottom,black_60%,transparent_90%)] transition-all duration-500">
-    <div class="chat-pair space-y-2.5 w-full lg:max-w-md lg:ml-auto">
+    <div class="chat-pair space-y-3 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2 opacity-0">
       <div class="chat-user-text max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg bg-cyan-600 text-white font-medium">
       </div>
       <div class="chat-user-avatar flex-shrink-0 w-8 h-8 rounded-full bg-cyan-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">
       </div>
     </div>
+    <div class="chat-bot-pre flex justify-start items-start gap-2 opacity-0 pr-[34px]">
+      <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-600/50 flex items-center justify-center mt-0.5">
+        <Bot class="w-3.5 h-3.5 text-white/70" stroke-width={2} />
+      </div>
+      <div class="chat-bot-pre-text min-w-[60px] min-h-[40px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-lg bg-purple-600 text-white font-medium italic">
+      </div>
+    </div>
     <div class="chat-bot-image flex justify-start items-start gap-2 opacity-0 pr-[34px]">
       <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-600/50 flex items-center justify-center mt-0.5">
         <Bot class="w-3.5 h-3.5 text-white/70" stroke-width={2} />
       </div>
-      <div class="max-w-[80%] rounded-2xl rounded-tl-sm shadow-lg overflow-hidden bg-purple-600/20 border border-purple-500/20">
-        <div class="chat-visual-container relative w-[210px] aspect-[5/3] bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30">
+      <div class="rounded-2xl rounded-tl-sm overflow-visible">
+        <div class="chat-visual-container relative">
 
-          {statVisuals.map((v, i) => (
-            <div class="chat-visual hidden absolute inset-0" data-visual={i}>
-              <img class="w-full h-full object-cover" src={v.src} alt={v.alt} />
-              <div class={`absolute top-2 right-2 flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-bold shadow-md backdrop-blur-sm ${v.color} text-white`}>
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                  {v.icon === "up"
-                    ? <path d="M12 19V5M5 12l7-7 7 7" />
-                    : <path d="M12 5v14M19 12l-7 7-7-7" />}
-                </svg>
-                <span>{v.label}</span>
-              </div>
+          {gridVisuals.map((cells, i) => (
+            <div class="chat-visual hidden grid grid-cols-4 grid-rows-1 gap-[2px] w-[300px] h-[60px]" data-visual={i}>
+              {cells.map((v) => (
+                <div class="chat-grid-cell relative overflow-hidden rounded-sm opacity-0 shadow-lg">
+                  <img class="w-full h-full object-cover" src={v.src} alt={v.alt} />
+                  <div class={`absolute top-0.5 right-0.5 flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[10px] font-bold shadow-sm backdrop-blur-sm ${v.color} text-white`}>
+                    <svg class="w-2.5 h-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      {v.icon === "up"
+                        ? <path d="M12 19V5M5 12l7-7 7 7" />
+                        : <path d="M12 5v14M19 12l-7 7-7-7" />}
+                    </svg>
+                    <span>{v.label}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           ))}
 
           <!-- Visual 2: Staffing heatmap -->
-          <div class="chat-visual hidden absolute inset-0 pt-2 pl-2 pb-3.5 pr-3.5" data-visual="2">
-            <div class="grid h-full w-full" style={`grid-template-columns: 14px repeat(${heatmapHours.length}, 1fr); grid-template-rows: 14px repeat(${heatmapDays.length}, 1fr); gap: 1.5px;`}>
+          <div class="chat-visual hidden w-[200px] h-[100px] p-1.5 bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-600/30 shadow-lg rounded-lg" data-visual="2">
+            <div class="grid h-full w-full" style={`grid-template-columns: 12px repeat(${heatmapHours.length}, 1fr); grid-template-rows: 12px repeat(${heatmapDays.length}, 1fr); gap: 1.5px;`}>
               <div></div>
               {heatmapHours.map(h => (
-                <div class="flex items-center justify-center text-[7px] font-semibold text-white/50">{h}</div>
+                <div class="flex items-center justify-center text-[6px] font-semibold text-white/50">{h}</div>
               ))}
               {heatmapDays.map((day, d) => (
                 <>
-                  <div class="flex items-center justify-center text-[7px] font-semibold text-white/50">{day}</div>
+                  <div class="flex items-center justify-center text-[6px] font-semibold text-white/50">{day}</div>
                   {heatmapGrid[d].map(cell => (
                     <div class={`rounded-[2px] ${hmColor[cell]}`}></div>
                   ))}
@@ -78,7 +101,7 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
         </div>
       </div>
     </div>
-    <div class="chat-bot flex justify-start items-start gap-2 opacity-0 pr-[34px]">
+    <div class="chat-bot flex justify-start items-start gap-2 opacity-0 pr-[34px] mt-3">
       <div class="flex-shrink-0 w-8 h-8"></div>
       <div class="chat-bot-text min-w-[60px] min-h-[40px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-lg bg-purple-600 text-white font-medium">
       </div>
@@ -114,109 +137,124 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
   const messages = [
     {
       user: "Was it worth opening stores the day after Christmas?",
+      preBot: "Assessing store traffic gains…",
       bot: "<strong>Yes.</strong> Stores saw 32% more traffic and 10% higher conversion than the previous week.",
       visual: 0,
     },
     {
       user: "Are our new window displays delivering ROI?",
+      preBot: "Comparing entrance capture rates…",
       bot: "<strong>Likely not.</strong> Capture rates decreased 2.1% during the period, despite an increase in traffic and engagement.",
       visual: 1,
     },
     {
       user: "Are we staffed correctly for weekend peaks?",
+      preBot: "Analysing peak service coverage…",
       bot: "<strong>In most but not all stores.</strong> Staff coverage often dips in the New York flagship around 2-3pm Saturdays.",
       visual: 2,
     },
   ];
 
-  const CHAR_INTERVAL = 18;
-  const THINKING_DURATION = 1200;
+  const CHAR_MS = 18;
+  const THINK_MS = 1200;
+  const CELL_STAGGER_MS = 400;
   const INITIALS = ["JT", "SR", "KM", "AL", "DP", "HW"];
+  const ANIM_IN = { left: "chat-fade-in-left", right: "chat-fade-in-right" } as const;
+  const ANIM_OUT = { left: "chat-fade-out-left", right: "chat-fade-out-right" } as const;
+  const ALL_ANIM = [...Object.values(ANIM_IN), ...Object.values(ANIM_OUT)];
+
+  const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  function animate(el: HTMLElement, cls: string) {
+    el.classList.remove(...ALL_ANIM);
+    void el.offsetWidth;
+    el.classList.add(cls);
+  }
+
+  function streamText(el: HTMLElement, html: string): Promise<void> {
+    el.innerHTML = "";
+    const parts = html.match(/<\/?[a-zA-Z][^>]*>|[^<]/g) || [];
+    let i = 0, acc = "";
+    return new Promise((resolve) => {
+      const id = window.setInterval(() => {
+        if (i < parts.length) { acc += parts[i++]; el.innerHTML = acc; }
+        if (i >= parts.length) { clearInterval(id); resolve(); }
+      }, CHAR_MS);
+    });
+  }
 
   function initChatAnimation(container: Element) {
-    const userBubble = container.querySelector(".chat-user") as HTMLElement;
-    const botBubble = container.querySelector(".chat-bot") as HTMLElement;
-    const botImageBubble = container.querySelector(".chat-bot-image") as HTMLElement;
-    const bubbles = [userBubble, botBubble, botImageBubble];
-    const userText = container.querySelector(".chat-user-text") as HTMLElement;
-    const botText = container.querySelector(".chat-bot-text") as HTMLElement;
-    const avatarEl = container.querySelector(".chat-user-avatar") as HTMLElement;
+    const $ = (sel: string) => container.querySelector(sel) as HTMLElement;
+    const userBubble = $(".chat-user"), botPreBubble = $(".chat-bot-pre");
+    const botImageBubble = $(".chat-bot-image"), botBubble = $(".chat-bot");
+    const userText = $(".chat-user-text"), botPreText = $(".chat-bot-pre-text");
+    const botText = $(".chat-bot-text"), avatarEl = $(".chat-user-avatar");
+    const allBubbles = [userBubble, botPreBubble, botImageBubble, botBubble];
     const visualPanels = container.querySelectorAll(".chat-visual");
-    let index = 0;
-    let initialsIndex = 0;
-    let streamTimer: number | undefined;
+    const gridCells = () => container.querySelectorAll(".chat-grid-cell") as NodeListOf<HTMLElement>;
+    let idx = 0, initIdx = 0;
 
-    function resetAndAnimate(el: HTMLElement, animation: string) {
-      el.classList.remove("chat-fade-in-up", "chat-fade-out-up");
-      void el.offsetWidth;
-      el.classList.add(animation);
+    function reset() {
+      allBubbles.forEach((el) => { el.classList.remove(...ALL_ANIM); el.style.opacity = "0"; });
+      gridCells().forEach((c) => { c.classList.remove("chat-cell-in"); c.style.opacity = "0"; });
     }
 
-    function showThinkingDots(el: HTMLElement) {
+    function fadeOutAll() {
+      animate(userBubble, ANIM_OUT.right);
+      [botPreBubble, botImageBubble, botBubble].forEach((el) => animate(el, ANIM_OUT.left));
+    }
+
+    function showDots(el: HTMLElement) {
       el.innerHTML = '<span class="thinking-dots"><span></span><span></span><span></span></span>';
     }
 
-    function streamText(el: HTMLElement, text: string, onDone: () => void) {
-      el.innerHTML = "";
-      // Split into HTML tags (kept whole) and individual characters
-      const parts = text.match(/<\/?[a-zA-Z][^>]*>|[^<]/g) || [];
-      let i = 0;
-      let accumulated = "";
-      streamTimer = window.setInterval(() => {
-        if (i < parts.length) {
-          accumulated += parts[i++];
-          el.innerHTML = accumulated;
-        }
-        if (i >= parts.length) {
-          clearInterval(streamTimer);
-          streamTimer = undefined;
-          onDone();
-        }
-      }, CHAR_INTERVAL);
-    }
+    async function showPair() {
+      const msg = messages[idx];
 
-    function showPair() {
-      const pair = messages[index];
-      userText.textContent = pair.user;
+      // Setup
+      userText.textContent = msg.user;
       botText.textContent = "";
-      avatarEl.textContent = INITIALS[initialsIndex];
-      initialsIndex = (initialsIndex + 1) % INITIALS.length;
+      avatarEl.textContent = INITIALS[initIdx];
+      initIdx = (initIdx + 1) % INITIALS.length;
+      visualPanels.forEach((p) => p.classList.toggle("hidden", Number(p.getAttribute("data-visual")) !== msg.visual));
+      reset();
 
-      // Show the matching visual panel, hide the rest
-      visualPanels.forEach((panel) => {
-        panel.classList.toggle("hidden", Number(panel.getAttribute("data-visual")) !== pair.visual);
-      });
+      // 1. User message
+      await delay(0);
+      animate(userBubble, ANIM_IN.right);
 
-      // Reset all bubbles
-      bubbles.forEach((el) => {
-        el.classList.remove("chat-fade-in-up", "chat-fade-out-up");
-        el.style.opacity = "0";
-      });
+      // 2. Bot pre-text (thinking → stream)
+      await delay(800);
+      showDots(botPreText);
+      animate(botPreBubble, ANIM_IN.left);
+      await delay(THINK_MS);
+      await streamText(botPreText, msg.preBot);
 
-      // Fade in user message
-      requestAnimationFrame(() => resetAndAnimate(userBubble, "chat-fade-in-up"));
+      // 3. Visual bubble + staggered grid cells
+      await delay(400);
+      animate(botImageBubble, ANIM_IN.left);
+      const cells = container.querySelector(`.chat-visual[data-visual="${msg.visual}"]:not([data-visual="2"])`)
+        ?.querySelectorAll(".chat-grid-cell") as NodeListOf<HTMLElement> | undefined;
+      if (cells?.length) {
+        cells.forEach((c, i) => setTimeout(() => c.classList.add("chat-cell-in"), i * CELL_STAGGER_MS));
+        await delay((cells.length - 1) * CELL_STAGGER_MS + 350);
+      } else {
+        await delay(400);
+      }
 
-      // Show image bubble after user appears
-      setTimeout(() => resetAndAnimate(botImageBubble, "chat-fade-in-up"), 800);
+      // 4. Bot answer (thinking → stream)
+      await delay(400);
+      showDots(botText);
+      animate(botBubble, ANIM_IN.left);
+      await delay(THINK_MS);
+      await streamText(botText, msg.bot);
 
-      // Show bot text bubble with thinking dots
-      setTimeout(() => {
-        showThinkingDots(botText);
-        resetAndAnimate(botBubble, "chat-fade-in-up");
-      }, 1400);
-
-      // Replace dots with streaming text
-      setTimeout(() => {
-        streamText(botText, pair.bot, () => {
-          setTimeout(() => {
-            bubbles.forEach((el) => resetAndAnimate(el, "chat-fade-out-up"));
-            setTimeout(() => {
-              index = (index + 1) % messages.length;
-              showPair();
-            }, 800);
-          }, 2400);
-        });
-      }, 1400 + THINKING_DURATION);
+      // 5. Pause, then fade out and loop
+      await delay(2400);
+      fadeOutAll();
+      await delay(800);
+      idx = (idx + 1) % messages.length;
+      showPair();
     }
 
     showPair();
@@ -226,27 +264,22 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
 
   // Transition: prompt bar → contact form
   document.querySelectorAll(".chat-animation-wrapper").forEach((wrapper) => {
-    const input = wrapper.querySelector(".chat-prompt-input") as HTMLInputElement;
-    const sendBtn = wrapper.querySelector(".chat-prompt-send") as HTMLButtonElement;
-    const chatArea = wrapper.querySelector(".chat-animation") as HTMLElement;
-    const promptBar = wrapper.querySelector(".chat-prompt-bar") as HTMLElement;
-    const contactForm = wrapper.querySelector(".chat-contact-form") as HTMLElement;
+    const $ = (sel: string) => wrapper.querySelector(sel) as HTMLElement;
+    const input = $(".chat-prompt-input") as HTMLInputElement;
+    const sendBtn = $(".chat-prompt-send") as HTMLButtonElement;
+    const chatArea = $(".chat-animation"), promptBar = $(".chat-prompt-bar");
+    const contactForm = $(".chat-contact-form");
     const messageField = contactForm.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
-
-    const barContainer = wrapper.querySelector(".chat-prompt-bar .relative") as HTMLElement;
-
+    const barContainer = $(".chat-prompt-bar .relative");
     let transitioned = false;
 
     function updateSendButton() {
-      if (input.value.trim()) {
-        sendBtn.classList.add("bg-cyan-500", "text-white");
-        sendBtn.classList.remove("bg-white/5", "text-white/40");
-        barContainer.style.boxShadow = "0 0 25px rgba(34,211,238,1.0)";
-      } else {
-        sendBtn.classList.remove("bg-cyan-500", "text-white");
-        sendBtn.classList.add("bg-white/5", "text-white/40");
-        barContainer.style.boxShadow = "";
-      }
+      const hasText = !!input.value.trim();
+      sendBtn.classList.toggle("bg-cyan-500", hasText);
+      sendBtn.classList.toggle("text-white", hasText);
+      sendBtn.classList.toggle("bg-white/5", !hasText);
+      sendBtn.classList.toggle("text-white/40", !hasText);
+      barContainer.style.boxShadow = hasText ? "0 0 25px rgba(34,211,238,1.0)" : "";
     }
 
     input.addEventListener("input", updateSendButton);
@@ -255,34 +288,22 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
       const text = input.value.trim();
       if (!text || transitioned) return;
       transitioned = true;
+      if (messageField) messageField.value = text;
 
-      // Pre-fill the message field
-      if (messageField) {
-        messageField.value = text;
-      }
-
-      // Fade out chat + prompt bar
       chatArea.style.opacity = "0";
       chatArea.style.transform = "translateY(-10px)";
       promptBar.style.opacity = "0";
       promptBar.style.transform = "translateY(10px)";
       promptBar.style.pointerEvents = "none";
 
-      // Fade in contact form
       setTimeout(() => {
         contactForm.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
         contactForm.classList.add("opacity-100", "translate-y-0");
-        const firstNameField = contactForm.querySelector('input[name="first-name"]') as HTMLInputElement;
-        if (firstNameField) firstNameField.focus();
+        (contactForm.querySelector('input[name="first-name"]') as HTMLInputElement)?.focus();
       }, 200);
     }
 
     sendBtn.addEventListener("click", showContactForm);
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        showContactForm();
-      }
-    });
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); showContactForm(); } });
   });
 </script>
