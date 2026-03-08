@@ -65,6 +65,7 @@
   position: relative;
   color: #ffffff;
   overflow: visible;
+  width: fit-content;
 }
 
 /* Shared pseudo-element base */
@@ -88,8 +89,8 @@
   color: #22d3ee;
   opacity: 1;
   text-shadow: 0 0 24px #22d3ee, 0 0 24px #22d3ee, 0 0 24px #22d3ee;
-  -webkit-mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 40%);
-  mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 40%);
+  -webkit-mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 50%);
+  mask-image: linear-gradient(135deg, black 0%, black 0%, transparent 50%);
 }
 
 /* Purple glow — visible in the bottom-right region */
@@ -97,8 +98,8 @@
   color: #D946EF;
   opacity: 1;
   text-shadow: 0 0 24px #D946EF, 0 0 24px #D946EF, 0 0 24px #D946EF;
-  -webkit-mask-image: linear-gradient(135deg, transparent 40%, black 100%, black 100%);
-  mask-image: linear-gradient(135deg, transparent 40%, black 100%, black 100%);
+  -webkit-mask-image: linear-gradient(135deg, transparent 50%, black 100%, black 100%);
+  mask-image: linear-gradient(135deg, transparent 50%, black 100%, black 100%);
 }
 
 /* Profile photo cyan-pink glow */

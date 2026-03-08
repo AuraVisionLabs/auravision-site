@@ -1,7 +1,7 @@
 ---
 title: "A.S. Watson Kruidvat x Aura Vision"
 client: "A.S. Watson (Kruidvat)"
-clientLogo: "/images/logos/750px-AS-Watson-Group-198x.svg.png"
+clientLogo: "/images/logos/aswatson.png"
 pubDate: 2023-11-15
 coverImage: "/images/uploads/as-watson-kruidvat.jpg"
 summary: "Discover how Kruidvat leveraged Aura Vision's in-store analytics to improve customer experiences with automatic staff segmentation."
