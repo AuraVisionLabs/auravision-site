@@ -186,12 +186,6 @@ collections:
         widget: "string"
         hint: "Headline for the blog post"
 
-      - label: "Author"
-        name: "author"
-        widget: "string"
-        required: false
-        hint: "Author name"
-
       - label: "Publish Date"
         name: "pubDate"
         widget: "datetime"

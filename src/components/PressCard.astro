@@ -70,9 +70,13 @@ const formattedDate = pubDate.toLocaleDateString("en-GB", {
       </span>
     </div>
 
-    <Heading class="font-title text-xl tracking-tight mb-5 text-white group-hover:text-accent transition-colors duration-300">
+    <Heading class="font-title text-xl tracking-tight mb-3 text-white group-hover:text-accent transition-colors duration-300">
       {title}
     </Heading>
+
+    <p class="text-sm text-white/50 leading-relaxed mb-5 line-clamp-3">
+      {summary}
+    </p>
 
     <div class="mt-auto">
       <span class="shrink-0 inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full bg-white/10 text-white/70 group-hover:bg-accent/20 group-hover:text-accent transition-all duration-300 whitespace-nowrap">
