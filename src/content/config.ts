@@ -32,6 +32,20 @@ const caseStudies = defineCollection({
   }),
 });
 
+const press = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    publication: z.string(),
+    pubDate: z.coerce.date(),
+    externalUrl: z.string(),
+    coverImage: z.string().optional(),
+    containImage: z.boolean().optional().default(false),
+    summary: z.string(),
+  }),
+});
+
 export const collections = {
   "case-studies": caseStudies,
+  press,
 };

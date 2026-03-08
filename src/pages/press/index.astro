@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import PressCard from "../../components/PressCard.astro";
+import { getCollection } from "astro:content";
+
+const articles = await getCollection("press");
+const sorted = articles.sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Press | Aura Vision",
+  "description": "Aura Vision in the news — coverage from leading technology and retail publications.",
+  "url": "https://auravision.ai/press",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": sorted.map((article, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": article.data.title,
+      "url": article.data.externalUrl,
+    })),
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://auravision.ai" },
+    { "@type": "ListItem", "position": 2, "name": "Press" },
+  ],
+};
+---
+
+<BaseLayout
+  title="Press"
+  description="Aura Vision in the news — coverage from leading technology and retail publications."
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <Nav />
+
+  <main class="page-padding">
+    <div class="container-site">
+      <!-- Header -->
+      <div class="mb-16 max-w-3xl">
+        <h1 class="heading-section text-gradient" data-text="Press & Media">
+          Press & Media
+        </h1>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {
+          sorted.map((article) => (
+            <PressCard
+              title={article.data.title}
+              publication={article.data.publication}
+              pubDate={article.data.pubDate}
+              externalUrl={article.data.externalUrl}
+              coverImage={article.data.coverImage}
+              containImage={article.data.containImage}
+              summary={article.data.summary}
+              headingLevel="h2"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -119,3 +119,54 @@ collections:
             name: "photo"
             widget: "image"
             required: false
+
+  - name: "press"
+    label: "Press"
+    label_singular: "Press Article"
+    folder: "src/content/press"
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: ["pubDate", "title", "publication"]
+    summary: "{{publication}} — {{title}}"
+    editor:
+      size: half
+    fields:
+      - label: "Title"
+        name: "title"
+        widget: "string"
+        hint: "Headline of the article"
+
+      - label: "Publication"
+        name: "publication"
+        widget: "string"
+        hint: "Name of the publication (e.g. TechCrunch, Forbes)"
+
+      - label: "Publish Date"
+        name: "pubDate"
+        widget: "datetime"
+        date_format: "YYYY-MM-DD"
+        time_format: false
+        format: "YYYY-MM-DD"
+
+      - label: "External URL"
+        name: "externalUrl"
+        widget: "string"
+        hint: "Full URL to the original article"
+
+      - label: "Cover Image"
+        name: "coverImage"
+        widget: "image"
+        required: false
+        hint: "Cover image for the press card"
+
+      - label: "Contain Image"
+        name: "containImage"
+        widget: "boolean"
+        default: false
+        required: false
+        hint: "Show the full image (contained) instead of cropping to fill"
+
+      - label: "Summary"
+        name: "summary"
+        widget: "text"
+        hint: "Short description of the article"

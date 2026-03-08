@@ -182,12 +182,12 @@ select,
   0% {
     opacity: 1;
     filter: blur(0);
-    transform: perspective(800px) rotateY(0deg);
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
     filter: blur(6px);
-    transform: perspective(800px) rotateY(40deg) translateY(-20px);
+    transform: translateY(-30px);
   }
 }
 
@@ -195,12 +195,12 @@ select,
   0% {
     opacity: 1;
     filter: blur(0);
-    transform: perspective(800px) rotateY(0deg);
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
     filter: blur(6px);
-    transform: perspective(800px) rotateY(-40deg) translateY(-20px);
+    transform: translateY(-30px);
   }
 }
 
