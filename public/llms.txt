@@ -38,7 +38,6 @@ Aura Vision serves enterprise retailers, shopping centres, transport hubs, and p
 - Case Studies: https://auravision.ai/case-studies
 - Blog: https://auravision.ai/blog
 - Press: https://auravision.ai/press
-- Compare: https://auravision.ai/compare
 - Contact: https://auravision.ai/contact
 - LinkedIn: https://www.linkedin.com/company/auravisionlabs
 

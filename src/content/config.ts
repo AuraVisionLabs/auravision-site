@@ -56,8 +56,32 @@ const blog = defineCollection({
   }),
 });
 
+const glossary = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    category: z.enum(["analytics", "technology", "privacy", "operations"]),
+    relatedTerms: z.array(z.string()).optional().default([]),
+    relatedCaseStudies: z.array(z.string()).optional().default([]),
+    relatedBlogPosts: z.array(z.string()).optional().default([]),
+    faq: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        })
+      )
+      .optional()
+      .default([]),
+    publishedDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
   "case-studies": caseStudies,
   press,
   blog,
+  glossary,
 };

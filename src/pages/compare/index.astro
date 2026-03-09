@@ -1,0 +1,638 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import {
+  Check,
+  X,
+  Minus,
+  Camera,
+  Cpu,
+  ShieldCheck,
+  Zap,
+  Users,
+  BarChart3,
+  Brain,
+  DollarSign,
+  HardDrive,
+  Eye,
+  Lock,
+  Globe,
+  MessageSquare,
+  type IconNode,
+} from "@lucide/astro";
+
+/* ── Comparison table data ── */
+interface Competitor {
+  name: string;
+  slug: string;
+  tagline: string;
+  description: string;
+}
+
+const competitors: Competitor[] = [
+  {
+    name: "RetailNext",
+    slug: "retailnext",
+    tagline: "Proprietary IoT sensor (Aurora)",
+    description:
+      "US-based retail analytics platform that manufactures proprietary overhead IoT sensors (Aurora) combining 3D depth sensing, video and AI. Requires purchasing and installing Aurora hardware at every location. Processes analytics on-device but retains video on the sensor for security and audit. Offers traffic counting, shopper journey mapping, gender-based demographics (no age), staff interaction analysis, and visual merchandising. 560+ brands, 100K+ sensors, 100+ countries.",
+  },
+  {
+    name: "ShopperTrak",
+    slug: "shoppertrak",
+    tagline: "Dedicated overhead sensors",
+    description:
+      "Part of Sensormatic Solutions (Johnson Controls). Uses dedicated overhead stereo-vision and thermal sensors for footfall counting. Focused on loss prevention, inventory intelligence and traffic analytics. Offers an Employee Exclusion solution to filter staff from counts (method not publicly disclosed — likely tag/wearable-based given overhead sensors cannot visually identify staff). No demographics, no journey mapping. Requires purchasing and maintaining dedicated sensor hardware at every entrance. Strong enterprise presence in large retail chains.",
+  },
+  {
+    name: "Cisco Meraki",
+    slug: "cisco-meraki",
+    tagline: "Cloud-managed cameras + third-party marketplace",
+    description:
+      "Part of Cisco's networking ecosystem. Sells proprietary cloud-managed MV smart cameras with a marketplace of third-party computer vision partners for analytics. Requires buying Cisco Meraki camera hardware — you cannot use existing CCTV. Video is cloud-managed and streamed to Cisco infrastructure. For people analytics you need an additional marketplace vendor, adding complexity, cost and a second vendor relationship. Primarily a security camera platform.",
+  },
+  {
+    name: "Springboard (MRI OnLocation)",
+    slug: "springboard",
+    tagline: "AI analytics on existing cameras",
+    description:
+      "Now part of MRI Software as MRI OnLocation. Uses AI algorithms on existing camera networks for footfall counting, age & gender demographics, movement and dwell analysis. Strong in shopping centres, retail parks and high-street benchmarking. 218m+ footfalls counted per week, 14,300+ counting points. No mention of edge processing across any product documentation — analytics are delivered via a cloud platform. No staff segmentation or conversational AI interface. Demographics method (age & gender) is not publicly disclosed.",
+  },
+];
+
+/* ── Comparison grid — Density-style descriptive cells ── */
+interface ComparisonCategory {
+  heading: string;
+  rows: ComparisonRow[];
+}
+
+interface ComparisonRow {
+  feature: string;
+  tooltip?: string;
+  aura: CellData;
+  retailnext: CellData;
+  shoppertrak: CellData;
+  meraki: CellData;
+  springboard: CellData;
+}
+
+interface CellData {
+  status: "yes" | "no" | "partial";
+  note: string;
+}
+
+const comparisonCategories: ComparisonCategory[] = [
+  {
+    heading: "Technology & Hardware",
+    rows: [
+      {
+        feature: "Core technology",
+        aura: { status: "yes", note: "Computer vision AI on existing CCTV" },
+        retailnext: { status: "partial", note: "Proprietary Aurora IoT sensor with onboard AI" },
+        shoppertrak: { status: "partial", note: "Dedicated overhead stereo & thermal sensors" },
+        meraki: { status: "partial", note: "Cisco cloud cameras + third-party CV marketplace" },
+        springboard: { status: "yes", note: "Computer vision AI on existing cameras" },
+      },
+      {
+        feature: "Works with existing cameras",
+        tooltip: "Can the system use the CCTV cameras you already have?",
+        aura: { status: "yes", note: "Any ONVIF-compatible CCTV camera" },
+        retailnext: { status: "no", note: "Requires proprietary Aurora sensors" },
+        shoppertrak: { status: "no", note: "Requires dedicated overhead sensors" },
+        meraki: { status: "no", note: "Requires Cisco Meraki MV cameras" },
+        springboard: { status: "yes", note: "Uses existing camera networks" },
+      },
+      {
+        feature: "Edge processing (on-premise)",
+        tooltip: "Is video processed locally, keeping footage off the internet?",
+        aura: { status: "yes", note: "All AI runs on-premise APU — no video leaves the building" },
+        retailnext: { status: "partial", note: "Analyses on-device; analytic data sent to RetailNext cloud each second; video stored on sensor" },
+        shoppertrak: { status: "partial", note: "Sensor counts locally; data sent to cloud" },
+        meraki: { status: "no", note: "Cloud-managed — video streams to Cisco cloud" },
+        springboard: { status: "no", note: "No edge processing documented — analytics delivered via cloud platform" },
+      },
+      {
+        feature: "No new hardware required",
+        tooltip: "Can you get started with zero new cameras or sensors?",
+        aura: { status: "yes", note: "Just a small plug-and-play APU per location" },
+        retailnext: { status: "no", note: "Aurora sensor at every entrance & zone" },
+        shoppertrak: { status: "no", note: "Overhead sensors at every entrance" },
+        meraki: { status: "no", note: "Cisco MV cameras at every location" },
+        springboard: { status: "partial", note: "Uses existing cameras but requires cloud processing infrastructure" },
+      },
+      {
+        feature: "Same-day installation",
+        tooltip: "How quickly can you go from hardware to live data?",
+        aura: { status: "yes", note: "Plug in APU, connect to cameras — live in hours" },
+        retailnext: { status: "no", note: "Professional ceiling-mount install required" },
+        shoppertrak: { status: "no", note: "Professional installation & calibration" },
+        meraki: { status: "no", note: "Camera install + marketplace partner setup" },
+        springboard: { status: "no", note: "Integration and calibration period required" },
+      },
+      {
+        feature: "Cost per location",
+        tooltip: "Relative cost including hardware, installation, and software.",
+        aura: { status: "yes", note: "$ — APU + software licence, no sensor costs" },
+        retailnext: { status: "no", note: "$$$ — Proprietary sensors + install + subscription" },
+        shoppertrak: { status: "no", note: "$$$ — Dedicated sensors + install + licence" },
+        meraki: { status: "no", note: "$$$ — Cisco cameras + licence + marketplace partner" },
+        springboard: { status: "partial", note: "$$ — Software + processing infrastructure" },
+      },
+    ],
+  },
+  {
+    heading: "Privacy & Security",
+    rows: [
+      {
+        feature: "No video stored or transmitted",
+        tooltip: "Does any video footage leave the premises or get stored?",
+        aura: { status: "yes", note: "Video converted to anonymous data on-device, immediately discarded" },
+        retailnext: { status: "no", note: "Video stored on Aurora sensor for audit & security" },
+        shoppertrak: { status: "yes", note: "Thermal/stereo sensors — no recognisable video" },
+        meraki: { status: "no", note: "Video cloud-managed, stored on camera & in cloud" },
+        springboard: { status: "no", note: "Camera feeds processed via cloud — no edge processing documented" },
+      },
+      {
+        feature: "100% anonymous (no PII)",
+        tooltip: "Does the system guarantee no personally identifiable information is captured?",
+        aura: { status: "yes", note: "Faces blurred at source, only anonymous counts exported" },
+        retailnext: { status: "partial", note: "Anonymous analytics, but video retained on device" },
+        shoppertrak: { status: "yes", note: "Thermal/stereo — no identifiable video captured" },
+        meraki: { status: "no", note: "HD video captured and cloud-managed" },
+        springboard: { status: "partial", note: "AI on camera feeds — privacy and data handling approach not publicly documented" },
+      },
+      {
+        feature: "GDPR & CCPA compliant",
+        aura: { status: "yes", note: "Confirmed by Mishcon de Reya legal review" },
+        retailnext: { status: "yes", note: "Fine-grained privacy controls" },
+        shoppertrak: { status: "yes", note: "Johnson Controls compliance framework" },
+        meraki: { status: "yes", note: "Cisco enterprise compliance" },
+        springboard: { status: "yes", note: "MRI Software compliance framework" },
+      },
+      {
+        feature: "EU AI Act assessed",
+        aura: { status: "yes", note: "Proactively assessed and classified" },
+        retailnext: { status: "no", note: "Not publicly stated" },
+        shoppertrak: { status: "no", note: "Not publicly stated" },
+        meraki: { status: "no", note: "Not publicly stated" },
+        springboard: { status: "no", note: "Not publicly stated" },
+      },
+      {
+        feature: "SOC 2 Type II",
+        aura: { status: "yes", note: "Certified" },
+        retailnext: { status: "yes", note: "Certified" },
+        shoppertrak: { status: "yes", note: "Johnson Controls certified" },
+        meraki: { status: "yes", note: "Cisco certified" },
+        springboard: { status: "partial", note: "MRI Software — not confirmed" },
+      },
+    ],
+  },
+  {
+    heading: "Analytics Capabilities",
+    rows: [
+      {
+        feature: "Age & gender demographics",
+        tooltip: "Can the system determine visitor age and gender — without facial recognition?",
+        aura: { status: "yes", note: "Age and gender from body shape, gait & clothing — no facial recognition" },
+        retailnext: { status: "partial", note: "Gender only — no age segmentation" },
+        shoppertrak: { status: "no", note: "Not available on thermal/stereo sensors" },
+        meraki: { status: "no", note: "Not natively available — depends on marketplace partner" },
+        springboard: { status: "partial", note: "Age and gender available — method (facial recognition vs body analysis) not disclosed" },
+      },
+      {
+        feature: "Staff vs. customer segmentation",
+        tooltip: "Can the system automatically distinguish staff from customers?",
+        aura: { status: "yes", note: "AI trained on staff uniform appearance — no RFID tags or beacons needed" },
+        retailnext: { status: "partial", note: "Staff excluded from counts — Aurora has integrated beacon; method not fully disclosed" },
+        shoppertrak: { status: "partial", note: "Employee Exclusion solution available — method not disclosed (likely tag/wearable)" },
+        meraki: { status: "no", note: "No people segmentation" },
+        springboard: { status: "no", note: "No staff segmentation" },
+      },
+      {
+        feature: "In-situ AI training",
+        tooltip: "Is the AI trained for your specific cameras and environment for guaranteed accuracy?",
+        aura: { status: "yes", note: "Trained per-location — works in any geography, guaranteed accuracy" },
+        retailnext: { status: "partial", note: "Algorithms tuned over years, not per-location" },
+        shoppertrak: { status: "no", note: "Sensor-based counting — limited AI tuning" },
+        meraki: { status: "no", note: "Depends on marketplace partner" },
+        springboard: { status: "partial", note: "AI algorithms — per-site training not confirmed" },
+      },
+      {
+        feature: "Customer journey mapping",
+        tooltip: "Can you see how customers move through your space?",
+        aura: { status: "yes", note: "Full path tracking, zone transitions, heatmaps" },
+        retailnext: { status: "yes", note: "Shopper journey, zone traversal, kinetic maps" },
+        shoppertrak: { status: "no", note: "Entrance counting only" },
+        meraki: { status: "partial", note: "Basic movement via third-party partner" },
+        springboard: { status: "partial", note: "Movement and dwell analysis" },
+      },
+      {
+        feature: "Zone-level analytics",
+        aura: { status: "yes", note: "Multi-zone counting, dwell and conversion per zone" },
+        retailnext: { status: "yes", note: "Zone analytics via Aurora sensors" },
+        shoppertrak: { status: "partial", note: "Limited to entrance zones" },
+        meraki: { status: "partial", note: "Basic zone via marketplace partner" },
+        springboard: { status: "partial", note: "Zone-level data segregation available" },
+      },
+      {
+        feature: "Queue & dwell analytics",
+        aura: { status: "yes", note: "Queue length, wait times and dwell per zone" },
+        retailnext: { status: "yes", note: "Dwell time and visit duration" },
+        shoppertrak: { status: "no", note: "Not available" },
+        meraki: { status: "no", note: "Not natively available" },
+        springboard: { status: "partial", note: "Dwell analysis available" },
+      },
+      {
+        feature: "Conversational AI interface",
+        tooltip: "Can non-technical users ask questions in natural language and get instant answers?",
+        aura: { status: "yes", note: "Ask Aura — natural language AI for instant answers from your data" },
+        retailnext: { status: "partial", note: "Integrated BI tool for slicing data, but no natural language" },
+        shoppertrak: { status: "no", note: "Traditional reporting dashboards" },
+        meraki: { status: "no", note: "Dashboard only — depends on partner" },
+        springboard: { status: "no", note: "Traditional analytics dashboards" },
+      },
+      {
+        feature: "A/B testing (campaigns & layouts)",
+        aura: { status: "yes", note: "Test layout changes, displays and campaigns with real data" },
+        retailnext: { status: "yes", note: "Visual merchandising and layout testing" },
+        shoppertrak: { status: "no", note: "Not available" },
+        meraki: { status: "no", note: "Not available" },
+        springboard: { status: "no", note: "Not available" },
+      },
+    ],
+  },
+];
+
+/* ── Key differentiators ── */
+const differentiators = [
+  {
+    icon: Eye,
+    title: "Age & gender without facial recognition",
+    description:
+      "Our AI determines demographics from body shape, gait and clothing — never from faces. This delivers the rich age and gender data retailers need while being genuinely privacy-safe. Most competitors either can't do demographics at all, or only offer gender.",
+  },
+  {
+    icon: Users,
+    title: "Staff segmented by uniform, not badges",
+    description:
+      "We train our AI to recognise staff uniforms at each location — no RFID tags, beacons or manual exclusion zones. This means accurate customer-only footfall and true conversion rates, even in stores where staff move freely throughout the floor.",
+  },
+  {
+    icon: Cpu,
+    title: "Edge AI — video never leaves the building",
+    description:
+      "All processing happens on a local APU. No video is streamed to the cloud, stored or transmitted — ever. This eliminates bandwidth costs, removes cybersecurity attack surface, and makes privacy compliance straightforward. Other vendors stream to the cloud or store video on sensors.",
+  },
+  {
+    icon: Globe,
+    title: "In-situ trained AI — guaranteed accuracy",
+    description:
+      "We train the AI specifically for your cameras, lighting and environment at every location. This means consistently high accuracy regardless of geography, camera model or ceiling height — not a one-size-fits-all model that degrades in non-standard environments.",
+  },
+  {
+    icon: Brain,
+    title: "Ask Aura — conversational analytics",
+    description:
+      "The only in-store analytics platform where anyone can ask questions in plain English and get instant, data-backed answers. No data expertise, no complex dashboards, no BI training — just answers. RetailNext offers BI tools, but no natural language AI.",
+  },
+  {
+    icon: DollarSign,
+    title: "Lowest total cost of ownership",
+    description:
+      "No new cameras. No ceiling-mounted sensors. No specialist installers. No per-sensor hardware fees. Just a small APU per location at a fraction of the cost of proprietary sensor deployments that scale linearly with every new store.",
+  },
+];
+
+/* ── Key questions to ask ── */
+const questions = [
+  {
+    category: "Privacy",
+    question: "What does the system 'see' — and what data leaves the building?",
+    detail:
+      "Some systems stream raw video to the cloud for processing, creating PII risk and bandwidth costs. Others store footage locally on sensors. Ask to see exactly what raw data the system captures and what leaves the premises. Aura Vision processes everything on a local APU — only anonymous aggregated counts are exported. No video, no images, no personal data ever leaves the building.",
+  },
+  {
+    category: "Hardware",
+    question: "Do I need to buy and install new sensors, cameras or infrastructure?",
+    detail:
+      "Many vendors require proprietary overhead sensors or cameras at every entrance and zone — meaning weeks of installation, disruption and ongoing hardware maintenance. Ask exactly what hardware is needed per location, who installs it, and what happens when it breaks. Aura Vision needs zero new sensors — just a plug-and-play APU connected to your existing CCTV.",
+  },
+  {
+    category: "Demographics",
+    question: "How does the system determine age and gender — and does it use facial recognition?",
+    detail:
+      "Some systems use facial recognition for demographics, creating significant privacy and compliance risks under GDPR and the EU AI Act. Many can't do demographics at all, or only offer gender. Ask whether the system uses facial recognition, and whether it can determine both age and gender. Aura Vision determines demographics from body shape, gait and clothing — never from faces — and the AI is trained specifically for your environment.",
+  },
+  {
+    category: "Staff",
+    question: "How does the system distinguish staff from customers?",
+    detail:
+      "Most people-counting solutions count everyone equally — staff, delivery drivers and shoppers all inflate your footfall and dilute conversion rates. Some vendors offer employee exclusion but require tags, beacons or wearables that staff can forget, lose or that need batteries. Ask how the system separates staff and whether it requires anything worn or carried. Aura Vision trains the AI to recognise staff uniforms at each location for reliable, maintenance-free separation — nothing to wear, nothing to remember.",
+  },
+  {
+    category: "Accuracy",
+    question: "Is the AI trained for my specific environment — or is it one-size-fits-all?",
+    detail:
+      "Generic pre-trained models can struggle with unusual camera angles, lighting conditions, or demographics in different geographies. Ask whether the system is calibrated and trained specifically for your cameras and environment, and whether accuracy is guaranteed. Aura Vision trains the AI in-situ for every deployment, which is why counting accuracy, demographics and staff segmentation work reliably across all regions.",
+  },
+  {
+    category: "AI Interface",
+    question: "Can non-technical team members get instant answers from the data?",
+    detail:
+      "Traditional dashboards require someone who knows which report to run and how to interpret it. Ask whether the system offers a natural language AI interface that anyone can use. Aura Vision's Ask Aura lets store managers, operations teams and executives ask questions in plain English and get immediate, actionable answers — no training or data expertise required.",
+  },
+];
+
+/* ── Structured data ── */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      name: "Compare Aura Vision — Retail Analytics Comparison",
+      description:
+        "See how Aura Vision compares to RetailNext, ShopperTrak, Cisco Meraki and Springboard for in-store retail analytics.",
+      url: "https://auravision.ai/compare/",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: questions.map((q) => ({
+        "@type": "Question",
+        name: q.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: q.detail,
+        },
+      })),
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://auravision.ai" },
+        { "@type": "ListItem", position: 2, name: "Compare" },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Compare — How Aura Vision Stacks Up"
+  description="See how Aura Vision compares to RetailNext, ShopperTrak, Cisco Meraki and Springboard for in-store retail analytics. Edge AI, no new sensors, demographics without facial recognition."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+  <Nav />
+
+  <main class="bg-white text-slate-800">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div data-fade class="mx-auto max-w-site px-6 py-28 lg:px-8 lg:py-36 text-center">
+        <p class="text-sm uppercase tracking-[0.2em] text-blue-400 mb-4 font-title">Competitor Comparison</p>
+        <h1 class="font-title text-4xl md:text-6xl font-medium tracking-tight mb-6">
+          How Aura Vision compares
+        </h1>
+        <p class="mx-auto max-w-2xl text-lg md:text-xl text-slate-300 leading-relaxed">
+          Find the in-store analytics solution that's right for your business. We believe in transparency — here's how we stack up against every alternative.
+        </p>
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a href="#comparison" class="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+            Feature comparison
+          </a>
+          <a href="#differentiators" class="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+            Key differences
+          </a>
+          <a href="#questions" class="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+            Questions to ask
+          </a>
+          <a href="#competitors" class="rounded-full border border-white/20 px-5 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white">
+            About each vendor
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison table — Density-style with descriptive cells -->
+    <section id="comparison" class="py-20 lg:py-28 bg-white">
+      <div class="mx-auto max-w-site px-6 lg:px-8">
+        <div data-fade class="mb-14 max-w-2xl">
+          <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
+            You've got options
+          </h2>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            If you're evaluating in-store analytics, here's how the leading solutions compare across the features that matter most.
+          </p>
+        </div>
+
+        {comparisonCategories.map((category, catIdx) => (
+          <div data-fade={String(catIdx * 80)} class="mb-16 last:mb-0">
+            <div class="overflow-x-auto -mx-6 px-6">
+              <table class="w-full min-w-[960px] text-sm border-collapse">
+                <thead>
+                  <tr>
+                    <th class="py-3 pr-3 text-left w-[180px] align-bottom">
+                      <span class="text-xs uppercase tracking-widest text-slate-400 font-medium">{category.heading}</span>
+                    </th>
+                    <th class="py-3 px-2 text-center min-w-[165px] align-bottom">
+                      <div class="rounded-t-lg bg-blue-600 text-white px-3 py-2.5 text-sm font-semibold shadow-sm">
+                        Aura Vision
+                      </div>
+                    </th>
+                    <th class="py-3 px-2 text-center min-w-[165px] align-bottom">
+                      <div class="rounded-t-lg bg-slate-100 text-slate-600 px-3 py-2.5 text-sm font-medium">RetailNext</div>
+                    </th>
+                    <th class="py-3 px-2 text-center min-w-[165px] align-bottom">
+                      <div class="rounded-t-lg bg-slate-100 text-slate-600 px-3 py-2.5 text-sm font-medium">ShopperTrak</div>
+                    </th>
+                    <th class="py-3 px-2 text-center min-w-[165px] align-bottom">
+                      <div class="rounded-t-lg bg-slate-100 text-slate-600 px-3 py-2.5 text-sm font-medium">Cisco Meraki</div>
+                    </th>
+                    <th class="py-3 px-2 text-center min-w-[165px] align-bottom">
+                      <div class="rounded-t-lg bg-slate-100 text-slate-600 px-3 py-2.5 text-sm font-medium">Springboard</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {category.rows.map((row, i) => {
+                    const keys = ["aura", "retailnext", "shoppertrak", "meraki", "springboard"] as const;
+                    return (
+                      <tr class:list={[
+                        "border-b border-slate-100",
+                        i === 0 && "border-t border-slate-200",
+                      ]}>
+                        <td class="py-4 pr-3 align-top">
+                          <span class="font-medium text-slate-700 text-sm leading-snug">{row.feature}</span>
+                          {row.tooltip && (
+                            <p class="text-[11px] text-slate-400 mt-0.5 leading-snug">{row.tooltip}</p>
+                          )}
+                        </td>
+                        {keys.map((key) => {
+                          const cell = row[key];
+                          const isAura = key === "aura";
+                          return (
+                            <td class:list={[
+                              "py-4 px-2 align-top",
+                              isAura && "bg-blue-50/60 border-x border-blue-100/80",
+                            ]}>
+                              <div class="flex items-start gap-1.5">
+                                <span class:list={[
+                                  "shrink-0 mt-px",
+                                  cell.status === "yes" ? "text-emerald-600" : cell.status === "no" ? "text-red-400" : "text-amber-500",
+                                ]}>
+                                  {cell.status === "yes" ? (
+                                    <Check class="w-3.5 h-3.5" />
+                                  ) : cell.status === "no" ? (
+                                    <X class="w-3.5 h-3.5" />
+                                  ) : (
+                                    <Minus class="w-3.5 h-3.5" />
+                                  )}
+                                </span>
+                                <span class:list={[
+                                  "text-[12px] leading-relaxed",
+                                  isAura ? "text-slate-700 font-medium" : "text-slate-500",
+                                ]}>
+                                  {cell.note}
+                                </span>
+                              </div>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+
+        <p class="mt-4 text-xs text-slate-400">
+          Spot an error? <a href="/contact" class="text-blue-500 hover:underline">Let us know</a> and we'll fix it right away. Last updated March 2026.
+        </p>
+      </div>
+    </section>
+
+    <!-- Key differentiators -->
+    <section id="differentiators" class="py-20 lg:py-28 bg-slate-50">
+      <div class="mx-auto max-w-site px-6 lg:px-8">
+        <div data-fade class="mb-14 max-w-2xl">
+          <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
+            What makes Aura Vision different
+          </h2>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            The differences that matter most when choosing an in-store analytics platform.
+          </p>
+        </div>
+
+        <div data-fade="100" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {differentiators.map((d) => (
+            <div class="rounded-2xl border border-slate-200 bg-white p-8 transition hover:shadow-md hover:border-slate-300">
+              <d.icon class="w-8 h-8 text-blue-600 mb-4" />
+              <h3 class="font-title text-lg font-medium text-slate-900 mb-2">{d.title}</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">{d.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Questions to ask — Density-style "Breaking it down" -->
+    <section id="questions" class="py-20 lg:py-28 bg-white">
+      <div class="mx-auto max-w-site px-6 lg:px-8">
+        <div data-fade class="mb-14 max-w-2xl">
+          <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
+            Questions to ask every vendor
+          </h2>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            Here are the key questions to consider when deciding which analytics solution to go with. If a vendor can't answer these clearly, they probably haven't built a system ready for your needs.
+          </p>
+        </div>
+
+        <div data-fade="100" class="space-y-6 max-w-4xl">
+          {questions.map((q) => (
+            <details class="group rounded-2xl border border-slate-200 bg-white transition-all hover:border-slate-300">
+              <summary class="flex cursor-pointer items-start gap-4 p-6 select-none">
+                <span class="shrink-0 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-600 mt-0.5">
+                  {q.category}
+                </span>
+                <span class="flex-1 font-title text-base font-medium text-slate-900 group-open:text-blue-700 transition-colors">
+                  {q.question}
+                </span>
+                <svg
+                  class="w-5 h-5 shrink-0 text-slate-400 transition-transform group-open:rotate-180 mt-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 text-sm text-slate-500 leading-relaxed max-w-3xl ml-[calc(theme(spacing.3)*2+theme(spacing.4))]">
+                {q.detail}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Individual competitor breakdowns -->
+    <section id="competitors" class="py-20 lg:py-28 bg-slate-50">
+      <div class="mx-auto max-w-site px-6 lg:px-8">
+        <div data-fade class="mb-14 max-w-2xl">
+          <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
+            About each vendor
+          </h2>
+          <p class="text-lg text-slate-500 leading-relaxed">
+            A closer look at the analytics providers you may be evaluating.
+          </p>
+        </div>
+
+        <div data-fade="100" class="grid gap-6 md:grid-cols-2">
+          {competitors.map((c) => (
+            <div id={c.slug} class="rounded-2xl border border-slate-200 bg-white p-8">
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  <h3 class="font-title text-xl font-medium text-slate-900">{c.name}</h3>
+                  <p class="text-sm text-slate-400 mt-1">{c.tagline}</p>
+                </div>
+              </div>
+              <p class="text-sm text-slate-500 leading-relaxed">{c.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+      <div data-fade class="mx-auto max-w-site px-6 py-20 lg:px-8 text-center">
+        <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight mb-4">
+          See Aura Vision in action
+        </h2>
+        <p class="mx-auto max-w-xl text-slate-400 mb-8">
+          Book a demo to see how we deliver powerful analytics from your existing cameras — with edge AI, no new hardware and demographics without facial recognition.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/contact"
+            class="inline-block rounded-full bg-white px-8 py-3 text-sm font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
+          >
+            Book a Demo
+          </a>
+          <a
+            href="/case-studies"
+            class="inline-block rounded-full border border-white/20 px-8 py-3 text-sm font-medium text-white/80 tracking-widest uppercase hover:bg-white/10 hover:text-white transition-all duration-300"
+          >
+            View Case Studies
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
