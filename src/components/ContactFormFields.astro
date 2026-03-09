@@ -64,7 +64,7 @@ const cls = compact ? compactInputClass : inputClass;
   </div>
 
   <!-- Company name / Company URL row -->
-  <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+  <div class={`grid grid-cols-1 gap-5 sm:grid-cols-2 ${compact ? 'sm:grid-cols-1' : ''}`}>
     <div>
       <input
         type="text"
@@ -73,25 +73,29 @@ const cls = compact ? compactInputClass : inputClass;
         class={cls}
       />
     </div>
-    <div>
-      <input
-        type="url"
-        name="company-url"
-        placeholder="Company URL"
-        class={cls}
-      />
-    </div>
+    {!compact && (
+      <div>
+        <input
+          type="url"
+          name="company-url"
+          placeholder="Company URL"
+          class={cls}
+        />
+      </div>
+    )}
   </div>
 
   <!-- Phone number -->
-  <div>
-    <input
-      type="tel"
-      name="phone"
-      placeholder="Phone number"
-      class={cls}
-    />
-  </div>
+  {!compact && (
+    <div>
+      <input
+        type="tel"
+        name="phone"
+        placeholder="Phone number"
+        class={cls}
+      />
+    </div>
+  )}
 
   <!-- Message -->
   <div>
