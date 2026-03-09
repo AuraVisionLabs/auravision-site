@@ -65,33 +65,53 @@ import { Menu, X } from "@lucide/astro";
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="hidden lg:hidden fixed inset-x-0 bottom-0 z-40 bg-slate-800 border-t border-white/10"
+    class="pointer-events-none lg:hidden fixed inset-x-0 bottom-0 z-40 bg-slate-800 border-t border-white/10 opacity-0 transition-opacity duration-300 ease-out"
   >
     <div class="flex flex-col items-start gap-6 px-6 py-8 text-lg">
-      <a href="/case-studies" class="text-white/70 hover:text-white transition-colors">
+      <a href="/case-studies" class="mobile-nav-link text-white/70 hover:text-white transition-colors">
         Case Studies
       </a>
-      <a href="/blog" class="text-white/70 hover:text-white transition-colors">
+      <a href="/blog" class="mobile-nav-link text-white/70 hover:text-white transition-colors">
         Blog
       </a>
-      <a href="/press" class="text-white/70 hover:text-white transition-colors">
+      <a href="/press" class="mobile-nav-link text-white/70 hover:text-white transition-colors">
         Press
       </a>
-      <a href="/about" class="text-white/70 hover:text-white transition-colors">
+      <a href="/about" class="mobile-nav-link text-white/70 hover:text-white transition-colors">
         About
       </a>
-      <a href="/contact" class="btn-pill mt-4">
+      <a href="/contact" class="mobile-nav-link btn-pill mt-4">
         Contact
       </a>
     </div>
   </div>
 </header>
 
+<style>
+  .mobile-nav-link {
+    opacity: 0;
+    transform: translateX(-1.5rem);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  }
+
+  #mobile-menu.menu-open .mobile-nav-link {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  #mobile-menu.menu-open .mobile-nav-link:nth-child(1) { transition-delay: 0.05s; }
+  #mobile-menu.menu-open .mobile-nav-link:nth-child(2) { transition-delay: 0.1s; }
+  #mobile-menu.menu-open .mobile-nav-link:nth-child(3) { transition-delay: 0.15s; }
+  #mobile-menu.menu-open .mobile-nav-link:nth-child(4) { transition-delay: 0.2s; }
+  #mobile-menu.menu-open .mobile-nav-link:nth-child(5) { transition-delay: 0.25s; }
+</style>
+
 <script>
   const btn = document.getElementById("mobile-menu-btn");
   const menu = document.getElementById("mobile-menu");
   const menuIcon = document.getElementById("menu-icon");
   const closeIcon = document.getElementById("close-icon");
+  let isOpen = false;
 
   function setMenuTop() {
     const nav = document.querySelector("header nav");
@@ -100,11 +120,33 @@ import { Menu, X } from "@lucide/astro";
     }
   }
 
-  btn?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
-    menuIcon?.classList.toggle("hidden");
-    closeIcon?.classList.toggle("hidden");
+  function openMenu() {
+    if (!menu) return;
     setMenuTop();
+    menu.classList.remove("pointer-events-none");
+    menu.classList.add("opacity-100");
+    menu.classList.add("menu-open");
+    menuIcon?.classList.add("hidden");
+    closeIcon?.classList.remove("hidden");
+    isOpen = true;
+  }
+
+  function closeMenu() {
+    if (!menu) return;
+    menu.classList.remove("menu-open");
+    menu.classList.remove("opacity-100");
+    menu.classList.add("pointer-events-none");
+    menuIcon?.classList.remove("hidden");
+    closeIcon?.classList.add("hidden");
+    isOpen = false;
+  }
+
+  btn?.addEventListener("click", () => {
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
   window.addEventListener("resize", setMenuTop);
