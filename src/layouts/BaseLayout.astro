@@ -29,6 +29,7 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, 
     <!-- Google Fonts: Questrial (titles) + Open Sans (body) + Roboto Mono (labels) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <link
       rel="preload"
       as="style"
@@ -67,21 +68,49 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, 
     <!-- Structured Data -->
     <slot name="head" />
 
-    <!-- Google Analytics (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JWFF6CDCHE"></script>
+    <!-- Google Analytics (gtag.js) — deferred until idle to reduce unused JS on initial load -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-JWFF6CDCHE');
+      function _loadGA() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-JWFF6CDCHE';
+        document.head.appendChild(s);
+      }
+      if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(_loadGA);
+      } else {
+        setTimeout(_loadGA, 2500);
+      }
     </script>
 
-    <!-- HubSpot Tracking -->
-    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4084500.js"></script>
+    <!-- HubSpot Tracking — deferred until after page is idle to avoid forced reflows -->
+    <script is:inline>
+      if (typeof requestIdleCallback === 'function') {
+        requestIdleCallback(function () {
+          var s = document.createElement('script');
+          s.id = 'hs-script-loader';
+          s.src = '//js.hs-scripts.com/4084500.js';
+          document.head.appendChild(s);
+        });
+      } else {
+        setTimeout(function () {
+          var s = document.createElement('script');
+          s.id = 'hs-script-loader';
+          s.src = '//js.hs-scripts.com/4084500.js';
+          document.head.appendChild(s);
+        }, 3000);
+      }
+    </script>
 
   </head>
   <body class="min-h-screen bg-slate-900 text-white antialiased">
-    <slot />
+    <main>
+      <slot />
+    </main>
 
     <script>
       // Scroll fade-in observer
