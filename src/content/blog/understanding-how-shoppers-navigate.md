@@ -2,7 +2,7 @@
 title: "Understanding How Shoppers Navigate Through Your Stores"
 author: "Ghita EL Haitmy"
 pubDate: 2022-03-10
-coverImage: "/images/uploads/blog/shoppers-navigate-stores.png"
+coverImage: "/images/uploads/blog/shoppers-navigate-stores.jpg"
 summary: "Learn how pathway analytics and dwell time metrics help retailers understand customer journeys, optimize store layouts, and improve the in-store shopping experience."
 tags: ["Retail Analytics", "Customer Experience", "In-Store Analytics"]
 ---

@@ -10,7 +10,7 @@
 <div class="pathmap-wrapper flex flex-col gap-3">
   <div class="pathmap-compare relative cursor-col-resize rounded-2xl bg-white/[0.03] overflow-hidden select-none" style="aspect-ratio: 16 / 10; --split: 0.5; --left-color: #34d399; --right-color: #fbbf24;" role="img" aria-label="Compare heatmaps">
     <!-- Left (base layer) -->
-    <img src="/images/cust path.jpg" alt="Customer path map" data-role="img-left" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" draggable="false" />
+    <img src="/images/cust-path.jpg" alt="Customer path map" data-role="img-left" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" width="853" height="480" draggable="false" />
 
     <!-- Left label (clipped to left side of split) -->
     <div class="pathmap-left-clip absolute inset-0 z-[4] will-change-[clip-path]">
@@ -20,7 +20,7 @@
 
     <!-- Right (reveal layer, clipped) -->
     <div class="pathmap-reveal absolute inset-0 z-[2] will-change-[clip-path]">
-      <img src="/images/staff path.jpg" alt="Staff path map" data-role="img-right" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" draggable="false" />
+      <img src="/images/staff-path.jpg" alt="Staff path map" data-role="img-right" class="absolute inset-0 w-full h-full object-cover scale-130 pointer-events-none select-none" width="853" height="480" draggable="false" />
       <div class="pathmap-border-right absolute inset-0 rounded-2xl border-2 pointer-events-none opacity-60" style="border-color: var(--right-color); transition: border-color 0.3s ease-in-out;"></div>
       <span data-role="label-right" class="absolute top-3 right-3 text-[0.85rem] font-semibold tracking-[0.06em] uppercase text-white bg-slate-900 backdrop-blur-[6px] px-3 py-[5px] rounded-md border border-white z-[3] pointer-events-none select-none transition-[color,border-color] duration-300 ease-in-out">Staff</span>
     </div>
@@ -39,9 +39,9 @@
   <!-- Toggle buttons -->
   <div class="pathmap-toggles flex justify-center relative border border-white/10 bg-white/[0.08] rounded-full p-2 w-fit mx-auto">
     <div class="pathmap-slider absolute top-2 bottom-2 rounded-full bg-white shadow-[0_0_16px_rgba(255,255,255,0.2)] transition-[left,width] duration-300 ease-in-out z-0"></div>
-    <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="0" data-left-src="/images/16 dwell.jpg" data-right-src="/images/25 dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
-    <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="1" data-left-src="/images/female dwell.jpg" data-right-src="/images/male dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
-    <button class="pathmap-toggle active relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="2" data-left-src="/images/cust path.jpg" data-right-src="/images/staff path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
+    <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="0" data-left-src="/images/16-dwell.jpg" data-right-src="/images/25-dwell.jpg" data-left-label="Age 16" data-right-label="Age 25" data-left-color="#f97316" data-right-color="#ec4899">Age</button>
+    <button class="pathmap-toggle relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="1" data-left-src="/images/female-dwell.jpg" data-right-src="/images/male-dwell.jpg" data-left-label="Female" data-right-label="Male" data-left-color="#f472b6" data-right-color="#60a5fa">Gender</button>
+    <button class="pathmap-toggle active relative z-[1] px-[1.8rem] py-[0.6rem] text-[0.9rem] font-semibold tracking-[0.06em] uppercase text-white/50 bg-transparent border-none rounded-full cursor-pointer transition-colors duration-[250ms] ease-in-out hover:text-white/85" data-index="2" data-left-src="/images/cust-path.jpg" data-right-src="/images/staff-path.jpg" data-left-label="Customer" data-right-label="Staff" data-left-color="#34d399" data-right-color="#fbbf24">Staff</button>
   </div>
 </div>
 

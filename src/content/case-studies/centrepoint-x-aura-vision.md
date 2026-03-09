@@ -3,7 +3,7 @@ title: "Centrepoint Saved $955K in Lost Revenue by Optimising Self-Service Check
 client: "Centrepoint"
 clientLogo: "/images/logos/centerpoint.png"
 pubDate: 2023-04-15
-coverImage: "/images/uploads/centrepoint.png"
+coverImage: "/images/uploads/centrepoint.jpg"
 summary: "Centrepoint used Aura Vision's Basket Recovery tools to monitor queue times and transaction speeds across staffed and self-service checkouts — saving $955K in lost revenue, surfacing a $1.8M sales opportunity, and delivering 4X ROI."
 tags: ["Retail", "Checkout Optimisation", "Queue Management", "Basket Recovery", "Self-Service", "Workforce Optimisation"]
 metrics:

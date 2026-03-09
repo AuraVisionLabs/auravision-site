@@ -3,7 +3,7 @@ title: "How c2c Recovered Lost Ticket Revenue with 99% Counting Accuracy"
 client: "c2c"
 clientLogo: "/images/logos/c2c.svg"
 pubDate: 2022-11-15
-coverImage: "/images/uploads/c2c.png"
+coverImage: "/images/uploads/c2c.jpg"
 summary: "c2c used Aura Vision's AI-powered footfall analytics on existing station CCTV to count passengers through open barriers with 99% accuracy — reclaiming lost ticket revenue without disrupting a single journey."
 tags: ["Transport", "Revenue Recovery", "Footfall Analytics", "CCTV Integration"]
 metrics:
