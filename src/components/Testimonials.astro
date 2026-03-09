@@ -17,7 +17,7 @@ const testimonials = [
     name: "Samantha Turner",
     role: "Business Transformation\nManager",
     company: "Adidas",
-    photo: "/images/samantha.png",
+    photo: "/images/samantha.webp",
     logo: "/images/logos/adidas.svg",
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
     name: "Tres White",
     role: "Purple Innovation",
     company: "Purple",
-    photo: "/images/tres.png",
+    photo: "/images/tres.webp",
     logo: "/images/logos/purple.svg",
   },
   {
@@ -35,8 +35,8 @@ const testimonials = [
     name: "Frenkel Tel",
     role: "Store Innovation Lead",
     company: "A.S. Watson (Kruidvat)",
-    photo: "/images/frenkel.jpg",
-    logo: "/images/logos/aswatson.png",
+    photo: "/images/frenkel.webp",
+    logo: "/images/logos/aswatson.webp",
   },
 ];
 ---
@@ -129,9 +129,14 @@ const testimonials = [
   let currentTranslateX = 0;
 
   function getTranslateX(): number {
-    const style = getComputedStyle(track);
-    const matrix = new DOMMatrixReadOnly(style.transform);
-    return matrix.m41;
+    const transform = getComputedStyle(track).transform;
+    if (!transform || transform === "none") return 0;
+    const match = transform.match(/matrix\(([^)]+)\)/);
+    if (match) {
+      const values = match[1].split(",").map((v) => parseFloat(v.trim()));
+      return values[4] || 0;
+    }
+    return 0;
   }
 
   function onDragStart(x: number) {

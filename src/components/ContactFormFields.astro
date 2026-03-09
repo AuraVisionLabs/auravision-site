@@ -76,9 +76,11 @@ const cls = compact ? compactInputClass : inputClass;
     {!compact && (
       <div>
         <input
-          type="url"
+          type="text"
           name="company-url"
           placeholder="Company URL"
+          pattern=".*\.[a-zA-Z]{2,}.*"
+          title="Please enter a valid URL with a domain (e.g. example.com)"
           class={cls}
         />
       </div>

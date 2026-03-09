@@ -18,12 +18,13 @@ const specs = [
 <section class="cv-video-section relative overflow-hidden">
   <!-- Full-width video background -->
   <video
+    id="cv-bg-video"
     class="absolute inset-0 h-full w-full object-cover"
     autoplay
     muted
     loop
     playsinline
-    preload="auto"
+    preload="none"
   >
     <source src="/videos/aura-vision-tech-demo.webm" type="video/webm" />
     <source src="/videos/aura-vision-tech-demo.mp4" type="video/mp4" />
@@ -57,3 +58,23 @@ const specs = [
     </div>
   </div>
 </section>
+
+<script>
+  // Lazy-load the background video when it scrolls near the viewport
+  const video = document.getElementById("cv-bg-video") as HTMLVideoElement | null;
+  if (video) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.preload = "auto";
+            video.load();
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(video);
+  }
+</script>
