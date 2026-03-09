@@ -1,0 +1,161 @@
+# Aura Vision — Full Site Content for LLMs
+
+> AI-powered retail analytics from your existing security cameras. No new sensors. No personal data. Just answers.
+
+## Company Overview
+
+Aura Vision is a computer vision and AI company that transforms existing in-store CCTV cameras into an anonymous analytics platform for physical retail. The platform provides footfall counting, demographic estimation, customer journey mapping, zone analytics, and an AI-powered natural language interface called "Ask Aura."
+
+- **Founded:** 2017
+- **Founders:** Daniel and Jaime — PhDs in Computer Vision and Machine Learning, University of Southampton
+- **Headquarters:** 81 Rivington Street, London EC2A 3AY, United Kingdom
+- **Accelerator:** Y Combinator (W19)
+- **Website:** https://auravision.ai
+- **LinkedIn:** https://www.linkedin.com/company/auravisionlabs
+
+## How It Works
+
+1. A small plug-and-play APU (Analytics Processing Unit) connects to a store's existing camera network
+2. All video is processed on-device using computer vision and deep learning
+3. Video is immediately discarded — only anonymous, aggregated analytics reach the cloud
+4. Retailers access insights via a dashboard or the "Ask Aura" natural language interface
+
+No new cameras or sensors are required. No personal data is collected or stored.
+
+## Key Capabilities
+
+- **Footfall counting** — accurate customer counts across all store entrances and zones
+- **Demographic estimation** — anonymous age and gender segmentation (no biometric identification)
+- **Customer journey mapping** — pathmaps and heatmaps showing how shoppers navigate stores
+- **Staff vs. customer separation** — distinguish employees from shoppers for accurate metrics
+- **Zone analytics** — dwell time, engagement, and conversion by store area
+- **Queue analytics** — service-desk utilisation, wait times, and basket recovery
+- **Campaign & layout A/B testing** — measure the impact of display changes, refits, and promotions
+- **Ask Aura** — AI-powered natural language interface for instant retail insights
+
+## Privacy & Compliance
+
+Aura Vision is privacy-by-design. A legal opinion from Mishcon de Reya (December 2025) confirms: "Aura Vision's insights and analytics are anonymised data, do not constitute personal data under the EU GDPR and UK GDPR, and are created in line with regulatory guidance."
+
+### Privacy by Design
+- **100% anonymous** — video converted to anonymous analytics on-premise, then immediately discarded. Only aggregated counts reach the cloud.
+- **Face blurring** — non-reversible, applied at source before any image leaves the device
+- **No video storage** — no historic footage stored or recalled
+- **No customer sign-up** — no T&Cs or WiFi sign-ups required
+- **Edge processing** — all video processed on-device
+- **No sensitive data** — no Special Categories of Personal Data (Art. 9 GDPR) collected
+- **Clean heatmaps** — heatmaps and thumbnails pre-cleaned to remove any visible person
+
+### Compliance
+- **GDPR** compliant — acts as Data Processor; client is Data Controller
+- **CCPA** compliant (California Consumer Privacy Act)
+- **EU AI Act** — assessed as limited/minimal risk by Mishcon de Reya
+- **SOC 2 Type II** certified
+- **ICO registered** (UK Information Commissioner's Office)
+- **ISO 27001** aligned information security management
+
+### Security
+- **Firmware signing** — all software shipped to APUs is signed with Aura Vision's secret key
+- **Encrypted filesystem** — root filesystem on every APU is encrypted
+- **End-to-end encryption** — AES-128 in transit (HTTPS/TLS v1.3), AES-256 at rest
+- **No inbound connections** — APUs don't accept inbound connection requests
+- **AWS hosted** — all web services on Amazon Web Services
+- **Auth0** — SSO, LDAP, and Multi-Factor Authentication
+- **Role-based access control** — customisable permission levels
+
+## Company Timeline
+
+- **2017** — Founded after completing PhDs in Computer Vision and Machine Learning at the University of Southampton
+- **2018** — First prototype exhibited at CES, Las Vegas; featured on BBC Click
+- **2019** — Joined Y Combinator (W19), moved to Silicon Valley, raised a $3M seed round, attended NRF New York
+- **2020** — Helped retailers adapt stores during COVID-19 with real-time occupancy monitoring
+- **2022** — Expanded first enterprise retail client to several hundred locations; grew team in London
+- **2024** — Partnered with Telefonica's Business team with Spatial Insights white label
+- **2026** — Launched Ask Aura — AI-powered natural language interface for instant retail answers
+
+## Company Values
+
+- **Privacy by design** — protecting individual privacy is built into the technology from the ground up
+- **Scalability first** — designed to ensure clients can scale full-location coverage to every store
+- **Customer obsessed** — helping clients engage every customer and maximise the value of every visit
+- **Data guided** — every strategy and product decision backed by evidence and measurement
+- **Continuous improvement** — never stop learning and getting better
+- **Empower everyone** — empower every team member and client to work smarter with better information
+
+## Case Studies
+
+### Gymshark — 63% Increase in Changing Room Usage
+Gymshark used Aura Vision to redesign its Regent Street flagship — lifting changing room usage by 63%, increasing key zone engagement by 5X, and building the playbook for every store that followed. Key metrics: 5X utilisation of key in-store zones, 63% increase in changing room entries, 10% increase in capture rates for target demographics.
+
+### Virgin Media O2 — 22X ROI Across 307 Stores
+Virgin Media O2 chose Aura Vision as its preferred analytics supplier — optimising handset display engagement for a 22X return on investment and deploying full-store analytics across all 307 retail locations nationwide.
+
+### Flannels — 4.5X ROI Across 50+ Stores
+Flannels rolled out Aura Vision across all 50+ UK stores — using Precision Staff Planning to boost conversion by 0.75%, improve staffing allocation by 34%, and deliver 4.5X ROI from a single use case.
+
+### DFS — £2M Revenue Opportunity
+DFS used heatmaps and demographic insights to move high-engagement products away from the entrance — increasing dwell time by 12%, improving customer flow, and uncovering a £2M revenue opportunity.
+
+### Schuh — £9.9M Revenue Attributed to Digital PoS Testing
+Schuh used Aura Vision's demographic A/B testing to pinpoint optimal digital point-of-sale placement — attributing £9.9M in annual revenue to getting screen positioning right.
+
+### Adidas Dubai — 9X ROI
+Adidas UAE turned its existing CCTV into a powerful analytics engine — sharpening staffing, boosting product engagement by 33%, improving staff allocation by 15%, and delivering a 9X return on investment.
+
+### A.S. Watson (Kruidvat) — 4X ROI
+Kruidvat partnered with Aura Vision to automatically segment staff from customers for 8% more accurate footfall counts, optimise checkout layouts, and deliver a 4X annual return on investment.
+
+### Centrepoint — $955K Saved in Lost Revenue
+Centrepoint used Aura Vision's Basket Recovery tools to monitor queue times and transaction speeds — saving $955K in lost revenue, surfacing a $1.8M sales opportunity, and delivering 4X ROI.
+
+### Onitsuka Tiger — 5X ROI
+Onitsuka Tiger harnessed its existing CCTV to measure every zone in its London flagship — giving trading, marketing, and store teams the data to optimise layouts, staffing, and visual merchandising for a 5X return on investment.
+
+### Purple — 5X ROI Across 78 US Showrooms
+Purple deployed Aura Vision across all 78 US showrooms — replacing manual counts with 24% more accurate analytics and delivering a 5X return on investment.
+
+### Decathlon — 6X ROI
+Decathlon deployed Aura Vision as a plug-and-play pilot — tracking segment performance, benchmarking refits, and delivering a 0.5% conversion uplift and 6X return on investment in just weeks.
+
+### Krys Group — €1.1M Revenue Opportunity
+Krys Group deployed Aura Vision across three pilot stores to understand queue behaviour and customer demographics — uncovering a €1.1M revenue uplift opportunity and a replicable blueprint for 1,600 locations.
+
+### c2c — 99% Counting Accuracy
+c2c used Aura Vision's AI-powered footfall analytics on existing station CCTV to count passengers through open barriers with 99% accuracy — reclaiming lost ticket revenue without disrupting a single journey.
+
+### Neighborhood Goods — 30% More Accurate Counts
+Neighborhood Goods replaced unreliable footfall sensors with Aura Vision across all three US locations — delivering 30% more accurate customer counts and 45% better store utilisation.
+
+### Bedford City Council — 22M+ Annual Visitors Tracked
+Bedford City Council connected Aura Vision to existing town-centre CCTV — counting over 22 million visitors a year and using insights to validate multi-million-pound infrastructure investments.
+
+### Situ Live — Measurable Brand Engagement
+Situ Live used Aura Vision to turn its experiential Westfield destination into a measurable brand platform — tracking demographics, optimising staff coverage, and giving brand partners quantifiable engagement data.
+
+## Industries Served
+
+- Retail (fashion, footwear, electronics, grocery, home furnishings, beauty, sport)
+- Shopping centres and malls
+- Transport hubs (train stations)
+- Public spaces and high streets
+- Experiential retail
+
+## Contact
+
+- Website: https://auravision.ai/contact
+- General enquiries via the website contact form
+- LinkedIn: https://www.linkedin.com/company/auravisionlabs
+
+## Site Pages
+
+- Home: https://auravision.ai
+- About: https://auravision.ai/about
+- Product Privacy: https://auravision.ai/product-privacy
+- Security: https://auravision.ai/security
+- Case Studies: https://auravision.ai/case-studies
+- Blog: https://auravision.ai/blog
+- Press: https://auravision.ai/press
+- Compare: https://auravision.ai/compare
+- Contact: https://auravision.ai/contact
+- Privacy Policy: https://auravision.ai/privacy
+- Data Processing Addendum: https://auravision.ai/data-processing-addendum

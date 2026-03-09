@@ -76,6 +76,8 @@ const breadcrumbSchema = {
   title={post.data.title}
   description={post.data.summary}
   ogImage={post.data.coverImage}
+  ogType="article"
+  publishedTime={post.data.pubDate.toISOString()}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

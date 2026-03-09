@@ -132,6 +132,8 @@ const metrics = [
     });
   }
 
-  sweep();
-  sweepTimer = setInterval(sweep, 7000);
+  setTimeout(() => {
+    sweep();
+    sweepTimer = setInterval(sweep, 7000);
+  }, 4000);
 </script>

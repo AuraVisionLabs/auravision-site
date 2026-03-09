@@ -5,12 +5,16 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogType?: string;
+  publishedTime?: string;
 }
 
 const {
   title,
   description = "Aura Vision — Your in-store AI analyst, no new sensors needed.",
   ogImage = "/og-default.jpg",
+  ogType = "website",
+  publishedTime,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -52,12 +56,15 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, 
     <meta name="description" content={description} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | Aura Vision`} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={absoluteOgImage} />
     <meta property="og:site_name" content="Aura Vision" />
+    <meta property="og:locale" content="en_GB" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {ogType === "article" && <meta property="article:publisher" content="https://www.linkedin.com/company/auravisionlabs" />}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

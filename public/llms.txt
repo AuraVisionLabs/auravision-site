@@ -1,0 +1,47 @@
+# Aura Vision
+
+> AI-powered retail analytics from your existing security cameras. No new sensors. No personal data. Just answers.
+
+Aura Vision is a computer vision and AI company that transforms existing in-store CCTV cameras into an anonymous analytics platform for physical retail. Founded in 2017 by Daniel and Jaime (PhDs in Computer Vision and Machine Learning, University of Southampton), Aura Vision participated in Y Combinator (W19) and is headquartered in London, UK.
+
+## What Aura Vision Does
+
+Aura Vision provides in-store analytics for retailers by connecting a small plug-and-play APU (Analytics Processing Unit) to a store's existing camera network. All video is processed on-device — only anonymous, aggregated data reaches the cloud. No personal data is ever collected or stored.
+
+Key capabilities:
+- **Footfall counting** — accurate customer counts across all store entrances and zones
+- **Demographic estimation** — anonymous age and gender segmentation (no biometric identification)
+- **Customer journey mapping** — pathmaps and heatmaps showing how shoppers navigate stores
+- **Staff vs. customer separation** — distinguish employees from shoppers for accurate metrics
+- **Zone analytics** — dwell time, engagement and conversion by store area
+- **Ask Aura** — AI-powered natural language interface for instant retail insights
+
+## Privacy & Compliance
+
+Aura Vision is privacy-by-design:
+- 100% anonymous — video converted to anonymous analytics on-premise, then immediately discarded
+- Face blurring — non-reversible, applied at source before any image leaves the device
+- No video storage — no historic footage stored or recalled
+- GDPR, CCPA and EU AI Act compliant
+- SOC 2 Type II certified
+- ICO registered (UK data protection authority)
+
+## Clients & Industries
+
+Aura Vision serves enterprise retailers, shopping centres, transport hubs, and public spaces. Notable clients include Gymshark, DFS, Schuh, Flannels, Onitsuka Tiger, Adidas, A.S. Watson (Kruidvat), Virgin Media O2, Centrepoint, and Bedford City Council.
+
+## Links
+
+- Website: https://auravision.ai
+- About: https://auravision.ai/about
+- Product Privacy: https://auravision.ai/product-privacy
+- Case Studies: https://auravision.ai/case-studies
+- Blog: https://auravision.ai/blog
+- Press: https://auravision.ai/press
+- Compare: https://auravision.ai/compare
+- Contact: https://auravision.ai/contact
+- LinkedIn: https://www.linkedin.com/company/auravisionlabs
+
+## Optional
+
+- [Full site content for LLMs](https://auravision.ai/llms-full.txt)
