@@ -162,7 +162,7 @@ const jsonLd = {
   <main class="bg-white text-slate-800">
     <!-- Hero -->
     <section class="relative overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-      <div class="mx-auto max-w-site px-6 py-28 lg:px-8 lg:py-36 text-center">
+      <div data-fade class="mx-auto max-w-site px-6 py-28 lg:px-8 lg:py-36 text-center">
         <h1 class="font-title text-4xl md:text-6xl font-medium tracking-tight mb-6">
           Security
         </h1>
@@ -192,7 +192,7 @@ const jsonLd = {
         class:list={["py-20 lg:py-28", i % 2 === 1 ? "bg-slate-50" : "bg-white"]}
       >
         <div class="mx-auto max-w-site px-6 lg:px-8">
-          <div class="mb-14 max-w-2xl">
+          <div data-fade class="mb-14 max-w-2xl">
             <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight text-slate-900 mb-4">
               {sec.title}
             </h2>
@@ -201,14 +201,16 @@ const jsonLd = {
             </p>
           </div>
 
-          <InfoCardGrid items={sec.items} columns={2} />
+          <div data-fade="100">
+            <InfoCardGrid items={sec.items} columns={2} />
+          </div>
         </div>
       </section>
     ))}
 
     <!-- Cross-link to Privacy -->
     <section class="border-t border-slate-200 bg-slate-50">
-      <div class="mx-auto max-w-site px-6 py-14 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div data-fade class="mx-auto max-w-site px-6 py-14 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div>
           <h3 class="font-title text-lg font-medium text-slate-900">Looking for privacy details?</h3>
           <p class="text-sm text-slate-500 mt-1">Learn about our privacy-by-design approach, data processing and compliance.</p>
@@ -224,7 +226,7 @@ const jsonLd = {
 
     <!-- CTA -->
     <section class="bg-gradient-to-b from-slate-900 to-slate-800 text-white">
-      <div class="mx-auto max-w-site px-6 py-20 lg:px-8 text-center">
+      <div data-fade class="mx-auto max-w-site px-6 py-20 lg:px-8 text-center">
         <h2 class="font-title text-3xl md:text-4xl font-medium tracking-tight mb-4">
           Ready to learn more?
         </h2>

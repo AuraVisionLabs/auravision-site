@@ -17,7 +17,7 @@ testimonial:
   quote: "They give us a deeper understanding of our customers, which helps shape our strategy, and enables faster, smarter decision-making."
   name: "Carly Atherton"
   role: "Head of Multichannel Operations Development, Virgin Media O2"
-  photo: "/images/carly.png"
+  photo: "/images/carly.webp"
 ---
 
 Virgin Media O2, the UK's leading telecommunications provider, has selected Aura Vision as its preferred in-store analytics supplier, rolling out the full-store analytics solution across its entire estate of 307 retail stores.

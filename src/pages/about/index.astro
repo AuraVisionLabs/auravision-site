@@ -75,7 +75,7 @@ const breadcrumbSchema = {
     <!-- Hero -->
     <section class="pb-24 md:pb-32">
       <div class="container-site">
-        <div class="max-w-3xl">
+        <div data-fade class="max-w-3xl">
           <h1 class="heading-section text-gradient" data-text="We're on a mission">
             We're on a mission
           </h1>
@@ -90,7 +90,7 @@ const breadcrumbSchema = {
     <section class="section-major border-t border-white/10">
       <div class="container-site">
         <div class="grid gap-16 md:grid-cols-2 items-start">
-          <div>
+          <div data-fade>
             <h2 class="font-title text-3xl tracking-tight text-white mb-6">Our story</h2>
             <div class="space-y-4 text-body">
               <p>
@@ -109,7 +109,7 @@ const breadcrumbSchema = {
           </div>
 
           <!-- Timeline -->
-          <div class="relative pl-8 border-l border-white/10">
+          <div data-fade="100" class="relative pl-8 border-l border-white/10">
             <div class="space-y-8">
               {milestones.map((m) => (
                 <div class="relative">
@@ -127,15 +127,15 @@ const breadcrumbSchema = {
     <!-- Values -->
     <section class="section-major border-t border-white/10">
       <div class="container-site">
-        <div class="max-w-3xl mb-16">
+        <div data-fade class="max-w-3xl mb-16">
           <h2 class="heading-section text-gradient" data-text="Our values">
             Our values
           </h2>
         </div>
 
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {values.map((value) => (
-            <div class="glass-card p-8">
+          {values.map((value, i) => (
+            <div data-fade={i * 80} class="glass-card p-8">
               <h3 class="font-title text-xl tracking-tight text-white mb-3">{value.title}</h3>
               <p class="text-body text-base">{value.description}</p>
             </div>
@@ -148,7 +148,7 @@ const breadcrumbSchema = {
     <section class="section-major border-t border-white/10">
       <div class="container-site">
         <div class="grid gap-12 md:grid-cols-2 items-start">
-          <div>
+          <div data-fade>
             <h2 class="font-title text-3xl tracking-tight text-white mb-6">Based in London</h2>
             <p class="text-body mb-4">
               Aura Vision's head office is in the heart of Shoreditch, London — an eclectic area filled with young creatives and artisan coffee shops. We value transparent communication, the acceptance of new ideas, and being our authentic selves.
@@ -162,7 +162,7 @@ const breadcrumbSchema = {
           </div>
 
           <!-- Map -->
-          <div class="rounded-2xl overflow-hidden border border-white/10 shadow-lg aspect-[4/3]">
+          <div data-fade="100" class="rounded-2xl overflow-hidden border border-white/10 shadow-lg aspect-[4/3]">
             <iframe
               title="Aura Vision London Office"
               src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=81+Rivington+Street,+London,+EC2A+3AY,+UK"

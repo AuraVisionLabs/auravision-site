@@ -21,7 +21,7 @@ const {
 <section class="section-major">
   <div class="container-site">
     <div class="grid items-center gap-16 md:grid-cols-2">
-      <div class:list={[reversed && "order-1 md:order-2"]}>
+      <div data-fade class:list={[reversed && "order-1 md:order-2"]}>
         <h2 class="heading-section leading-tight text-gradient" data-text={title}>
           {title}
         </h2>
@@ -36,7 +36,7 @@ const {
           </a>
         )}
       </div>
-      <div class:list={[reversed && "order-2 md:order-1"]}>
+      <div data-fade="100" class:list={[reversed && "order-2 md:order-1"]}>
         <slot name="visual">
           <div class="flex items-center justify-center glass-card aspect-video">
             <p class="text-sm text-white/20">Visual coming soon</p>

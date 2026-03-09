@@ -6,7 +6,7 @@ const clients = [
   { name: "Purple", logo: "/images/logos/purple.svg" },
   { name: "Casper", logo: "/images/logos/casper.svg" },
   { name: "Browns", logo: "/images/logos/browns.svg" },
-  { name: "Bedford", logo: "/images/logos/bedford.png" },
+  { name: "Bedford", logo: "/images/logos/bedford.webp" },
 ];
 
 // Repeat logos enough times so each half of the track is wider than the largest screens (5K+)
@@ -25,7 +25,7 @@ const repeatedClients = [...clients, ...clients, ...clients, ...clients];
         <img
           src={client.logo}
           alt={client.name}
-          class={`max-h-[57.6px] max-w-[150px] flex-shrink-0 object-contain opacity-50 ${client.logo.endsWith('.png') ? '[filter:grayscale(1)]' : '[filter:brightness(0)_invert(1)]'}`}
+          class={`max-h-[57.6px] max-w-[150px] flex-shrink-0 object-contain opacity-50 ${client.logo.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)]'}`}
           loading="lazy"
         />
       ))}
@@ -34,7 +34,7 @@ const repeatedClients = [...clients, ...clients, ...clients, ...clients];
         <img
           src={client.logo}
           alt={client.name}
-          class={`max-h-[57.6px] max-w-[150px] flex-shrink-0 object-contain opacity-50 ${client.logo.endsWith('.png') ? '[filter:grayscale(1)]' : '[filter:brightness(0)_invert(1)]'}`}
+          class={`max-h-[57.6px] max-w-[150px] flex-shrink-0 object-contain opacity-50 ${client.logo.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)]'}`}
           loading="lazy"
         />
       ))}

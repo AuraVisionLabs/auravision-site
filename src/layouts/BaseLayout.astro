@@ -84,6 +84,22 @@ const absoluteOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, 
     <slot />
 
     <script>
+      // Scroll fade-in observer
+      const fades = document.querySelectorAll<HTMLElement>('[data-fade]');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target as HTMLElement;
+            const delay = el.dataset.fade || '0';
+            setTimeout(() => el.classList.add('is-visible'), Number(delay));
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.15 });
+      fades.forEach(el => io.observe(el));
+    </script>
+
+    <script>
       // Only load Netlify Identity widget on admin pages or auth redirects
       const hash = window.location.hash;
       const isAuthRedirect =

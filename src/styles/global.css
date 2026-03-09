@@ -275,6 +275,18 @@ select,
   animation-delay: 0.4s;
 }
 
+/* ── Scroll fade-in ────────────────────────────────── */
+[data-fade] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-fade].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee {
     animation: none;
@@ -294,6 +306,12 @@ select,
   .thinking-dots span {
     animation: none;
     opacity: 0.6;
+  }
+
+  [data-fade] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
