@@ -5,5 +5,5 @@ pubDate: 2021-07-13
 externalUrl: "https://news.virginmediao2.co.uk/o2-business-launches-new-ai-technology-to-improve-customer-experiences-in-stores/"
 coverImage: "/images/uploads/press/vmo2-logo.png"
 containImage: true
-summary: "O2 Business partners with Aura Vision to launch Spatial Insights, using video analytics and AI to enhance customer experience across 20 high street stores."
+summary: "Virgin Media O2 announces Spatial Insights — a new AI-powered partnership with Aura Vision rolling out video analytics across 20 high street stores to sharpen the customer experience."
 ---

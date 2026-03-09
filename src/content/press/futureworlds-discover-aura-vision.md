@@ -4,5 +4,5 @@ publication: "Future Worlds"
 pubDate: 2017-10-12
 externalUrl: "https://futureworlds.com/discover-aura-vision-labs/"
 coverImage: "/images/uploads/press/futureworlds-aura-vision.jpg"
-summary: "Original founding profile of Aura Vision Labs through University of Southampton's Future Worlds incubator, covering the founding team's PhD research in Computer Vision."
+summary: "The origin story — how a team of PhD researchers at the University of Southampton turned cutting-edge computer vision research into a retail analytics startup through the Future Worlds incubator."
 ---
