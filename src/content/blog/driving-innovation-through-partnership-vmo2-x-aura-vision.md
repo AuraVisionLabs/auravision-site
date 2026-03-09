@@ -1,7 +1,7 @@
 ---
 title: "Driving Innovation Through Partnership: VMO2 x Aura Vision"
 author: "Ghita EL Haitmy"
-pubDate: 2023-06-10
+pubDate: 2025-10-28
 coverImage: "/images/uploads/blog/vmo2-aura-vision-partnership.png"
 summary: "Learn how the collaboration between Virgin Media O2 and Aura Vision is helping VMO2 tackle retail challenges — from proof of concept to rolling out computer vision technology in over 300 stores."
 tags: ["Partnership", "Retail Analytics", "Computer Vision"]

@@ -1,7 +1,7 @@
 ---
 title: "Exploring the Future of Retail through In-Store Analytics: How Aura Vision is Revolutionizing the Retail Landscape"
 author: "Ghita EL Haitmy"
-pubDate: 2023-08-25
+pubDate: 2026-01-14
 coverImage: "/images/uploads/blog/future-retail-in-store-analytics.jpeg"
 summary: "Discover how Aura Vision's plug-and-play in-store analytics solution is helping retailers enhance customer experience, streamline operations, and create personalised shopping journeys."
 tags: ["Retail Analytics", "In-Store Analytics", "Customer Experience"]

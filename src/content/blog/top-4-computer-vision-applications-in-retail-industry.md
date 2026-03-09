@@ -1,7 +1,7 @@
 ---
 title: "Top 4 Computer Vision Applications in Retail Industry"
 author: "Ghita EL Haitmy"
-pubDate: 2022-11-18
+pubDate: 2025-06-22
 coverImage: "/images/uploads/blog/computer-vision-retail.webp"
 summary: "Explore the top four ways computer vision is transforming retail — from inventory management and targeted advertising to customer engagement and performance tracking."
 tags: ["Computer Vision", "Retail Analytics", "Technology"]

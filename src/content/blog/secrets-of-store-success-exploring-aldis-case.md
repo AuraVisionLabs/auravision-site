@@ -1,7 +1,7 @@
 ---
 title: "Secrets of Store Success: Exploring Aldi's Case"
 author: "Ghita EL Haitmy"
-pubDate: 2023-03-16
+pubDate: 2025-08-12
 coverImage: "/images/uploads/blog/aldi-store-success.jpg"
 summary: "Discover how Aldi leverages store analytics and data-driven strategies to deliver low prices, high quality, and a personalised shopping experience across 10,000+ stores worldwide."
 tags: ["Retail Analytics", "Store Analytics", "Customer Experience"]
