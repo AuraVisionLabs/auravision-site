@@ -2,7 +2,7 @@
 title: "Inside Frasers Group's Retail Empire: How Data Could Unlock a Multi-Brand Strategy"
 author: "Aura Vision"
 pubDate: 2026-03-08
-coverImage: "/images/uploads/blog/frasers-sports-retail.jpg"
+coverImage: "/images/uploads/blog/frasers-sports-retail.webp"
 summary: "Frasers Group just took a near 6% stake in Puma, adding to a sprawling portfolio of 1,500+ stores across 20+ brands. Here's why managing a retail empire this diverse demands in-store intelligence."
 tags: ["Retail Analytics", "Store Analytics", "Computer Vision"]
 ---

@@ -4,7 +4,7 @@ client: "Flannels"
 clientLogo: "/images/logos/flannels.svg"
 pubDate: 2023-07-15
 sortOrder: 4
-coverImage: "/images/uploads/flannels.jpg"
+coverImage: "/images/uploads/flannels.webp"
 summary: "Flannels rolled out Aura Vision across all 50+ UK stores — using Precision Staff Planning to boost conversion by 0.75%, improve staffing allocation by 34%, and deliver 4.5X ROI from a single use case."
 tags: ["Retail", "Luxury Retail", "Footfall", "Conversion", "Workforce Optimisation", "Staff Planning", "Path to Purchase", "Basket Recovery"]
 metrics:

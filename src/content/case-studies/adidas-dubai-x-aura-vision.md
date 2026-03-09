@@ -4,7 +4,7 @@ client: "Adidas UAE"
 clientLogo: "/images/logos/adidas.svg"
 pubDate: 2025-01-15
 sortOrder: 2
-coverImage: "/images/uploads/adidas-dubai.jpg"
+coverImage: "/images/uploads/adidas-dubai.webp"
 summary: "Discover how Adidas UAE turned its existing CCTV into a powerful analytics engine — sharpening staffing, boosting product engagement, and delivering a 9X return on investment."
 tags: ["Retail Analytics", "Demographics", "Staffing Optimisation", "Visual Merchandising", "Full-Store Analytics", "Demographic Insights", "Heatmaps", "Headcount Planning"]
 metrics:
@@ -19,7 +19,7 @@ testimonial:
   quote: "It not only validates our strategies but also gives us the confidence to make data-driven decisions that ultimately grow the business."
   name: "Samantha Turner"
   role: "Business Transformation Manager, Adidas"
-  photo: "/images/samantha.png"
+  photo: "/images/samantha.webp"
 ---
 
 Adidas opened its first Middle East flagship in Dubai Mall — a massive store serving a diverse, international audience. The team already had strong retail instincts, but wanted to go further: sharper data on how customers engage with activations, more precise staffing, and a way to measure what drives results across every part of the store.

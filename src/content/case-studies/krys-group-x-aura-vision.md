@@ -1,7 +1,7 @@
 ---
 title: "Unlocking a €1.1M Revenue Opportunity for Krys Group with Queue Analytics"
 client: "Krys Group"
-clientLogo: "/images/logos/krys.png"
+clientLogo: "/images/logos/krys.webp"
 pubDate: 2024-01-15
 coverImage: "/images/uploads/krys-group.webp"
 summary: "Krys Group deployed Aura Vision across three pilot stores to understand queue behaviour, service-desk utilisation, and customer demographics — uncovering a €1.1M revenue uplift opportunity and a replicable blueprint for 1,600 locations."

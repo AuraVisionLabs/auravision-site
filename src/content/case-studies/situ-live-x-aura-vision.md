@@ -1,7 +1,7 @@
 ---
 title: "How Situ Live Measured Brand Engagement in a Till-Less Retail Concept"
 client: "Situ Live"
-clientLogo: "/images/logos/situ.png"
+clientLogo: "/images/logos/situ.webp"
 pubDate: 2023-03-15
 coverImage: "/images/uploads/situ-live.webp"
 summary: "Situ Live used Aura Vision to turn its experiential Westfield destination into a measurable brand platform — tracking demographics, optimising staff coverage, and giving brand partners quantifiable engagement data for the first time."

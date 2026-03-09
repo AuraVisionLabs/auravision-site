@@ -6,8 +6,8 @@ summary: Kruidvat partnered with Aura Vision to go beyond basic footfall
   counters — automatically segmenting staff from customers for 8% more accurate
   counts, optimising checkout layouts, and delivering a 4X annual return on
   investment.
-clientLogo: /images/logos/aswatson.png
-coverImage: /images/uploads/as-watson-kruidvat.jpg
+clientLogo: /images/logos/aswatson.webp
+coverImage: /images/uploads/as-watson-kruidvat.webp
 tags:
   - In-Store Analytics
   - Footfall Counting
@@ -26,7 +26,7 @@ testimonial:
     camera system, which basically every store has.
   name: Frenkel Tel
   role: Store Innovation Lead, A.S. Watson Group
-  photo: /images/frenkel.jpg
+  photo: /images/frenkel.webp
 ---
 
 Kruidvat, a leading health and beauty retailer in the Netherlands and Belgium, partnered with Aura Vision to enhance in-store analytics and drive operational improvements. By integrating seamlessly with existing camera systems, Aura Vision provided actionable insights that boosted customer experience and operational efficiency, delivering a 4X ROI annually.

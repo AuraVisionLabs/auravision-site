@@ -4,7 +4,7 @@ client: "Decathlon"
 clientLogo: "/images/logos/decathlon.svg"
 pubDate: 2024-03-15
 sortOrder: 3
-coverImage: "/images/uploads/decathlon.jpg"
+coverImage: "/images/uploads/decathlon.webp"
 summary: "Decathlon deployed Aura Vision as a plug-and-play pilot across multiple stores — tracking segment performance, benchmarking refits, and delivering a 0.5% conversion uplift and 6X return on investment in just weeks."
 tags: ["Visual Merchandising", "Retail Analytics", "Footfall Counting", "Conversion Optimisation", "Store Layout", "Sporting Goods"]
 metrics:

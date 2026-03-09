@@ -2,7 +2,7 @@
 title: "What Retailers Can Learn from Target's Billion-Dollar Turnaround Bet"
 author: "Aura Vision"
 pubDate: 2026-03-08
-coverImage: "/images/uploads/blog/target-turnaround-store.jpg"
+coverImage: "/images/uploads/blog/target-turnaround-store.webp"
 summary: "Target is investing $1 billion into its in-store experience in 2026 — from beauty studios and baby boutiques to AI-powered operations. Here's what the turnaround strategy reveals about the future of physical retail."
 tags: ["Retail Analytics", "Customer Experience", "Store Analytics"]
 ---

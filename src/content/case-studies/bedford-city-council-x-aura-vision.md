@@ -3,7 +3,7 @@ title: "Bedford City Council Tracks 22M+ Annual Visitors to Validate Regeneratio
 client: "Bedford City Council"
 clientLogo: "/images/logos/bedford.webp"
 pubDate: 2023-06-15
-coverImage: "/images/uploads/bedford.jpg"
+coverImage: "/images/uploads/bedford.webp"
 summary: "Bedford City Council connected Aura Vision to existing town-centre CCTV — counting over 22 million visitors a year, segmenting by age and gender, and using the insights to validate multi-million-pound infrastructure investments."
 tags: ["Smart Cities", "Footfall Analytics", "Demographics", "Heatmaps", "CCTV Analytics", "Infrastructure Investment", "Town Centre Analytics"]
 metrics:

@@ -4,7 +4,7 @@ client: "Purple"
 clientLogo: "/images/logos/purple.svg"
 pubDate: 2023-08-15
 sortOrder: 5
-coverImage: "/images/uploads/purple.jpg"
+coverImage: "/images/uploads/purple.webp"
 summary: "Purple deployed Aura Vision across all 78 US showrooms — replacing manual counts with 24% more accurate analytics, tracking exactly which mattresses attract the most engagement, and delivering a 5X return on investment."
 tags: ["Retail Analytics", "Footfall Counting", "Conversion Optimisation", "Product Engagement", "Customer Segmentation"]
 metrics:

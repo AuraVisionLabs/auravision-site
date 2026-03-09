@@ -4,7 +4,7 @@ client: "Virgin Media O2"
 clientLogo: "/images/logos/vmo2.svg"
 pubDate: 2023-09-15
 sortOrder: 1
-coverImage: "/images/uploads/vmo2.jpg"
+coverImage: "/images/uploads/vmo2.webp"
 summary: "Virgin Media O2 chose Aura Vision as its preferred analytics supplier — optimising handset display engagement for a 22X return on investment and deploying full-store analytics across all 307 retail locations nationwide."
 tags: ["Retail Analytics", "Footfall Analytics", "Demographics", "Full-Store Analytics", "Path to Purchase", "Visual Merchandising", "Staffing Optimisation", "Campaign Analytics"]
 metrics:
