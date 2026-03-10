@@ -65,7 +65,7 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
         inset: 0;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         opacity: 0;
         pointer-events: none;
@@ -92,7 +92,7 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
       }
 
       /* Ensure slide content sits above the gradient */
-      .deck > section > * {
+      .deck > section > *:not(.slide-watermark):not(.slide-heading-wrap) {
         position: relative;
         z-index: 1;
       }
@@ -105,13 +105,40 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
       /* Watermark logo on every slide (bottom-right) */
       .slide-watermark {
         position: absolute;
-        bottom: 16px;
-        right: 20px;
-        z-index: 2;
-        opacity: 0.18;
-        height: 24px;
-        width: 24px;
+        bottom: 24px;
+        right: 28px;
+        z-index: 10;
+        opacity: 0.75;
+        height: 72px;
+        width: 72px;
         pointer-events: none;
+      }
+      /* Full-width slide heading bar (injected via JS) */
+      .slide-heading-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        padding: 28px 48px 24px;
+        pointer-events: none;
+      }
+
+      .slide-category {
+        font-family: "Roboto Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(34, 211, 238, 0.5);
+        margin-bottom: 6px;
+      }
+
+      .slide-heading {
+        font-family: "Questrial", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 0.01em;
+        color: #ffffff;
+        line-height: 1.2;
       }
 
       /* Profile glow in slides */
@@ -268,6 +295,43 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
         img.alt = "";
         img.className = "slide-watermark";
         section.appendChild(img);
+      });
+
+      // Inject heading bar for slides that have data-heading
+      const categoryMap: Record<string, string> = {
+        "slide-tech": "Technology",
+        "slide-process": "Process",
+        "slide-roi-table": "Product",
+        "slide-testimonials-pricing": "Testimonials",
+        "slide-timeline": "Process",
+        "slide-case-study-detail": "Case Study",
+        "slide-contact": "Contact",
+      };
+
+      slides.forEach((section) => {
+        const heading = section.dataset.heading;
+        if (heading) {
+          const wrap = document.createElement("div");
+          wrap.className = "slide-heading-wrap";
+
+          // Determine category from section class
+          const slideClass = Array.from(section.classList).find(c => c.startsWith("slide-"));
+          const category = slideClass ? categoryMap[slideClass] || "" : "";
+
+          if (category) {
+            const cat = document.createElement("div");
+            cat.className = "slide-category";
+            cat.textContent = category;
+            wrap.appendChild(cat);
+          }
+
+          const h = document.createElement("div");
+          h.className = "slide-heading";
+          h.textContent = heading;
+          wrap.appendChild(h);
+
+          section.prepend(wrap);
+        }
       });
 
       // Read initial slide from hash

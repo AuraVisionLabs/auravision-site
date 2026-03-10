@@ -1,0 +1,36 @@
+---
+interface Props {
+  heading?: string;
+  title: string;
+  subtitle?: string;
+  steps: Array<{ number: string; title: string; description?: string }>;
+}
+
+const { heading, title, subtitle, steps } = Astro.props;
+---
+
+<section class="slide-process" data-heading={heading}>
+  <div class="flex flex-col items-start justify-center h-full px-16 w-full">
+    <h2 class="font-title text-5xl tracking-tight text-white leading-snug">
+      {title}
+    </h2>
+
+    {subtitle && (
+      <p class="mt-4 text-4xl text-white font-body">
+        {subtitle}
+      </p>
+    )}
+
+    <div class="mt-12 grid grid-cols-2 gap-8 w-full">
+      {steps.map((step) => (
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+          <span class="inline-block font-mono text-sm text-cyan-400/70 mb-3">{step.number}</span>
+          <h3 class="font-title text-2xl text-white mb-3">{step.title}</h3>
+          {step.description && (
+            <p class="text-sm text-white/50 font-light leading-relaxed">{step.description}</p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

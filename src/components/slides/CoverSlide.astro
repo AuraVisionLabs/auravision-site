@@ -2,11 +2,12 @@
 interface Props {
   title: string;
   subtitle?: string;
+  deckType?: string;
   logo?: string;
   background?: string;
 }
 
-const { title, subtitle, logo, background } = Astro.props;
+const { title, subtitle, deckType, logo, background } = Astro.props;
 ---
 
 <section
@@ -15,26 +16,28 @@ const { title, subtitle, logo, background } = Astro.props;
 >
   {background && <div class="absolute inset-0 bg-slate-900/80" />}
 
-  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-16">
+  <div class="relative z-10 flex flex-col items-start justify-center h-full px-16">
     {logo ? (
-      <img src={logo} alt="" class="w-full max-w-4xl mb-12 object-contain [filter:brightness(0)_invert(1)]" />
+      <img src={logo} alt="" class="w-full h-auto mb-10 object-contain object-left [filter:brightness(0)_invert(1)]" />
     ) : (
-      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full max-w-4xl mb-12 object-contain" />
+      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full h-auto mb-10 object-contain object-left" />
     )}
 
-    <h1 class="font-title text-7xl tracking-tight text-white leading-tight max-w-4xl">
+    <h1 class="font-title text-5xl tracking-tight text-white leading-tight w-full">
       {title}
     </h1>
 
-    {subtitle && (
-      <p class="mt-6 text-2xl text-white/60 font-light max-w-2xl">
-        {subtitle}
+    {deckType && (
+      <p class="mt-8 text-6xl text-white font-body tracking-wide">
+        {deckType}
       </p>
     )}
+  </div>
 
-    <div class="mt-16 flex items-center gap-3 text-white/30 text-sm font-mono">
-      <img src="/images/aura-vision-icon.svg" alt="" class="h-5 w-5 opacity-40" />
-      <span>auravision.ai</span>
-    </div>
+  {/* Bottom-left company attribution */}
+  <div class="absolute bottom-8 left-16 z-10">
+    <p class="text-sm text-white font-light">
+      {subtitle || "Aura Vision Labs Ltd"} · auravision.ai
+    </p>
   </div>
 </section>

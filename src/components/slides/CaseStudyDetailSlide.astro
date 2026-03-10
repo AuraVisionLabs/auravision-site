@@ -1,0 +1,57 @@
+---
+interface Props {
+  heading?: string;
+  category: string;
+  client: string;
+  description: string;
+  roiValue: string;
+  quote: string;
+  attribution: string;
+  metrics?: string[];
+  logo?: string;
+}
+
+const { heading, category, client, description, roiValue, quote, attribution, metrics = [], logo } = Astro.props;
+---
+
+<section class="slide-case-study-detail" data-heading={heading}>
+  <div class="flex items-center h-full px-16 w-full">
+    <div class="grid grid-cols-2 gap-16 w-full items-start">
+      {/* Left: description */}
+      <div>
+        {logo && (
+          <img src={logo} alt={client} class="h-8 mb-6 object-contain opacity-60 [filter:brightness(0)_invert(1)]" />
+        )}
+
+        <p class="text-base text-white/60 font-light leading-relaxed">
+          {description}
+        </p>
+      </div>
+
+      {/* Right: ROI + quote + metrics */}
+      <div>
+        <div class="flex items-baseline gap-3 mb-4">
+          <span class="font-title text-5xl text-cyan-400">{roiValue}</span>
+          <span class="text-lg text-white/40">ROI</span>
+        </div>
+
+        <blockquote class="border-l-2 border-cyan-400/30 pl-4 mb-4">
+          <p class="text-sm text-white/70 font-light italic leading-relaxed">
+            "{quote}"
+          </p>
+          <p class="mt-2 text-xs text-white/40 font-mono">— {attribution}</p>
+        </blockquote>
+
+        {metrics.length > 0 && (
+          <div class="mt-6 flex flex-wrap gap-2">
+            {metrics.map((metric) => (
+              <span class="inline-block rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs text-white/50">
+                {metric}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

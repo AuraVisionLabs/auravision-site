@@ -1,0 +1,44 @@
+---
+interface Props {
+  heading?: string;
+  title: string;
+  subtitle?: string;
+  rows: Array<{ useCase: string; description: string; roi: string }>;
+}
+
+const { heading, title, subtitle, rows } = Astro.props;
+---
+
+<section class="slide-roi-table" data-heading={heading}>
+  <div class="flex flex-col items-start justify-center h-full px-16 w-full">
+    <h2 class="font-title text-8xl tracking-tight text-white leading-snug">
+      {title}
+    </h2>
+
+    {subtitle && (
+      <p class="mt-4 text-4xl text-white font-body">
+        {subtitle}
+      </p>
+    )}
+
+    <div class="mt-10 w-full">
+      {/* Header row */}
+      <div class="grid grid-cols-[1fr_2fr_auto] gap-4 pb-3 border-b border-white/10 mb-2">
+        <span class="text-xs text-white/30 font-mono uppercase tracking-widest">Use Case</span>
+        <span class="text-xs text-white/30 font-mono uppercase tracking-widest">Description</span>
+        <span class="text-xs text-white/30 font-mono uppercase tracking-widest text-right">ROI</span>
+      </div>
+
+      {rows.map((row, i) => (
+        <div class:list={[
+          "grid grid-cols-[1fr_2fr_auto] gap-4 py-3 items-center",
+          i < rows.length - 1 && "border-b border-white/5"
+        ]}>
+          <span class="text-sm font-medium text-white/90">{row.useCase}</span>
+          <span class="text-sm text-white/50 font-light leading-relaxed">{row.description}</span>
+          <span class="text-right font-title text-xl text-cyan-400 whitespace-nowrap min-w-[80px]">{row.roi}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

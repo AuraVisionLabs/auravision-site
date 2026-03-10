@@ -5,107 +5,132 @@ const coverSlide = z.object({
   type: z.literal("cover"),
   title: z.string(),
   subtitle: z.string().optional(),
+  deckType: z.string().optional(),
   logo: z.string().optional(),
   background: z.string().optional(),
 });
 
-const metricsSlide = z.object({
-  type: z.literal("metrics"),
-  title: z.string().optional(),
-  items: z.array(
+const techSlide = z.object({
+  type: z.literal("tech"),
+  heading: z.string().optional(),
+  title: z.string(),
+  subtitle: z.string().optional(),
+  badges: z.array(z.string()).optional().default([]),
+  body: z.string().optional(),
+  callout: z.string().optional(),
+  video: z.string().optional(),
+  background: z.string().optional(),
+});
+
+const processSlide = z.object({
+  type: z.literal("process"),
+  heading: z.string().optional(),
+  title: z.string(),
+  subtitle: z.string().optional(),
+  steps: z.array(
     z.object({
-      value: z.string(),
-      label: z.string(),
+      number: z.string(),
+      title: z.string(),
+      description: z.string().optional(),
     })
   ),
 });
 
-const caseStudySlide = z.object({
-  type: z.literal("case-study"),
-  ref: z.string(), // slug from case-studies collection
-});
-
-const testimonialSlide = z.object({
-  type: z.literal("testimonial"),
-  headliner: z.string(),
-  quote: z.string(),
-  name: z.string(),
-  role: z.string(),
-  photo: z.string().optional(),
-  logo: z.string().optional(),
-  company: z.string().optional(),
-});
-
-const featureSlide = z.object({
-  type: z.literal("feature"),
+const roiTableSlide = z.object({
+  type: z.literal("roi-table"),
+  heading: z.string().optional(),
   title: z.string(),
   subtitle: z.string().optional(),
-  bullets: z.array(z.string()).optional().default([]),
-  image: z.string().optional(),
-  reversed: z.boolean().optional().default(false),
+  rows: z.array(
+    z.object({
+      useCase: z.string(),
+      description: z.string(),
+      roi: z.string(),
+    })
+  ),
 });
 
-const logoWallSlide = z.object({
-  type: z.literal("logo-wall"),
-  title: z.string().optional(),
-  logos: z
+const testimonialsPricingSlide = z.object({
+  type: z.literal("testimonials-pricing"),
+  heading: z.string().optional(),
+  title: z.string(),
+  quotes: z.array(
+    z.object({
+      text: z.string(),
+      attribution: z.string(),
+    })
+  ),
+  pricing: z
     .array(
       z.object({
-        name: z.string(),
-        src: z.string(),
+        tier: z.string(),
+        price: z.string(),
+        perCamera: z.string().optional(),
       })
     )
     .optional()
     .default([]),
 });
 
-const imageSlide = z.object({
-  type: z.literal("image"),
-  src: z.string(),
-  alt: z.string().optional(),
-  caption: z.string().optional(),
-});
-
-const textSlide = z.object({
-  type: z.literal("text"),
+const timelineSlide = z.object({
+  type: z.literal("timeline"),
+  heading: z.string().optional(),
   title: z.string(),
   subtitle: z.string().optional(),
-  body: z.string().optional(),
-  bullets: z.array(z.string()).optional().default([]),
+  steps: z.array(
+    z.object({
+      number: z.string(),
+      title: z.string(),
+      description: z.string().optional(),
+    })
+  ),
+  milestones: z
+    .array(
+      z.object({
+        duration: z.string(),
+        label: z.string(),
+      })
+    )
+    .optional()
+    .default([]),
 });
 
-const comparisonSlide = z.object({
-  type: z.literal("comparison"),
-  title: z.string().optional(),
-  left: z.object({
-    heading: z.string(),
-    items: z.array(z.string()),
-  }),
-  right: z.object({
-    heading: z.string(),
-    items: z.array(z.string()),
-  }),
+const caseStudyDetailSlide = z.object({
+  type: z.literal("case-study-detail"),
+  heading: z.string().optional(),
+  category: z.string(),
+  client: z.string(),
+  description: z.string(),
+  roiValue: z.string(),
+  quote: z.string(),
+  attribution: z.string(),
+  metrics: z.array(z.string()).optional().default([]),
+  logo: z.string().optional(),
 });
 
-const ctaSlide = z.object({
-  type: z.literal("cta"),
+const contactSlide = z.object({
+  type: z.literal("contact"),
+  heading: z.string().optional(),
   title: z.string(),
-  subtitle: z.string().optional(),
-  buttonText: z.string().optional(),
-  buttonHref: z.string().optional(),
+  contacts: z.array(
+    z.object({
+      name: z.string(),
+      email: z.string().optional(),
+      phone: z.string().optional(),
+      website: z.string().optional(),
+    })
+  ),
 });
 
 const slideSchema = z.discriminatedUnion("type", [
   coverSlide,
-  metricsSlide,
-  caseStudySlide,
-  testimonialSlide,
-  featureSlide,
-  logoWallSlide,
-  imageSlide,
-  textSlide,
-  comparisonSlide,
-  ctaSlide,
+  techSlide,
+  processSlide,
+  roiTableSlide,
+  testimonialsPricingSlide,
+  timelineSlide,
+  caseStudyDetailSlide,
+  contactSlide,
 ]);
 
 // ── Decks collection ──────────────────────────────────

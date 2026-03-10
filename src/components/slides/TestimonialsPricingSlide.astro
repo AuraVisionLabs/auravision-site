@@ -1,0 +1,50 @@
+---
+interface Props {
+  heading?: string;
+  title: string;
+  quotes: Array<{ text: string; attribution: string }>;
+  pricing?: Array<{ tier: string; price: string; perCamera?: string }>;
+}
+
+const { heading, title, quotes, pricing } = Astro.props;
+---
+
+<section class="slide-testimonials-pricing" data-heading={heading}>
+  <div class="flex flex-col items-start justify-center h-full px-16 w-full">
+    <h2 class="font-title text-8xl tracking-tight text-white leading-snug mb-12">
+      {title}
+    </h2>
+
+    <div class={`grid ${pricing && pricing.length > 0 ? 'grid-cols-2' : 'grid-cols-1'} gap-12 w-full`}>
+      {/* Quotes */}
+      <div class="space-y-6">
+        {quotes.map((q) => (
+          <div class="rounded-xl border border-white/10 bg-white/[0.03] p-6">
+            <p class="text-sm text-white/70 font-light leading-relaxed italic mb-3">
+              "{q.text}"
+            </p>
+            <p class="text-xs text-white/40 font-mono">— {q.attribution}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Pricing */}
+      {pricing && pricing.length > 0 && (
+        <div class="space-y-3">
+          <h3 class="text-xs text-white/30 font-mono uppercase tracking-widest mb-4">Pricing</h3>
+          {pricing.map((p) => (
+            <div class="flex items-baseline justify-between rounded-xl border border-white/10 bg-white/[0.03] px-6 py-4">
+              <div>
+                <p class="text-sm font-medium text-white/90">{p.tier}</p>
+                {p.perCamera && (
+                  <p class="text-xs text-white/40 mt-1">{p.perCamera}</p>
+                )}
+              </div>
+              <p class="font-title text-lg text-cyan-400">{p.price}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

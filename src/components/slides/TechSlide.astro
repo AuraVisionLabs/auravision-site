@@ -1,0 +1,69 @@
+---
+interface Props {
+  heading?: string;
+  title: string;
+  subtitle?: string;
+  badges?: string[];
+  body?: string;
+  callout?: string;
+  video?: string;
+  background?: string;
+}
+
+const { heading, title, subtitle, badges = [], body, callout, video, background } = Astro.props;
+---
+
+<section class="slide-tech" data-heading={heading} style={background && !video ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}>
+  {video && (
+    <video
+      class="absolute inset-0 w-full h-full object-cover"
+      src={video}
+      autoplay
+      muted
+      loop
+      playsinline
+    />
+  )}
+
+  <div class="relative z-10 flex flex-col items-start justify-center h-full px-16 w-full">
+    <div class="bg-[#0a0f1e]/75 backdrop-blur-sm rounded-2xl p-12 w-full">
+      <h2 class="font-title text-8xl tracking-tight text-white leading-snug">
+        {title}
+      </h2>
+
+      {subtitle && (
+        <p class="mt-4 text-4xl text-white font-body">
+          {subtitle}
+        </p>
+      )}
+
+      {badges.length > 0 && (
+        <div class="mt-8 flex flex-wrap gap-3">
+          {badges.map((badge) => (
+            <span class="inline-flex items-center gap-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-4 py-2 text-sm text-cyan-300">
+              <svg class="h-3.5 w-3.5 text-cyan-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              {badge}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {body && (
+        <p class="mt-8 text-base text-white/60 font-light leading-relaxed">
+          {body}
+        </p>
+      )}
+
+      {callout && (
+        <div class="mt-8 flex items-center gap-3 rounded-xl bg-white/5 border border-white/10 px-5 py-3">
+          <svg class="h-5 w-5 text-cyan-400 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+          </svg>
+          <span class="text-sm text-white/70">{callout}</span>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
