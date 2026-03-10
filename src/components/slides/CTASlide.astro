@@ -1,0 +1,42 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  buttonText?: string;
+  buttonHref?: string;
+}
+
+const {
+  title,
+  subtitle,
+  buttonText = "Get in Touch",
+  buttonHref = "/contact",
+} = Astro.props;
+---
+
+<section class="slide-cta">
+  <div class="flex flex-col items-center justify-center h-full px-16 text-center">
+    <img src="/images/aura-vision-wordmark.webp" alt="Aura Vision" class="h-8 mb-12 object-contain opacity-60" />
+
+    <h2 class="font-title text-6xl tracking-tight text-white leading-tight max-w-3xl">
+      {title}
+    </h2>
+
+    {subtitle && (
+      <p class="mt-6 text-xl text-white/60 font-light max-w-xl">
+        {subtitle}
+      </p>
+    )}
+
+    <a
+      href={buttonHref}
+      class="mt-12 inline-block rounded-full bg-white px-10 py-4 text-base font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
+    >
+      {buttonText}
+    </a>
+
+    <div class="mt-20 text-white/30 text-sm font-mono">
+      auravision.ai
+    </div>
+  </div>
+</section>

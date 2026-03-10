@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  body?: string;
+  bullets?: string[];
+}
+
+const { title, subtitle, body, bullets = [] } = Astro.props;
+---
+
+<section class="slide-text">
+  <div class="flex flex-col items-center justify-center h-full px-16 text-center">
+    <h2 class="font-title text-6xl tracking-tight text-white leading-tight max-w-4xl">
+      {title}
+    </h2>
+
+    {subtitle && (
+      <p class="mt-4 text-2xl text-white/60 font-light max-w-2xl">
+        {subtitle}
+      </p>
+    )}
+
+    {body && (
+      <p class="mt-8 text-lg text-white/70 font-light leading-relaxed max-w-2xl">
+        {body}
+      </p>
+    )}
+
+    {bullets.length > 0 && (
+      <ul class="mt-10 space-y-4 text-left max-w-2xl w-full">
+        {bullets.map((bullet) => (
+          <li class="fragment flex items-start gap-3 text-white/70">
+            <span class="mt-1.5 h-2 w-2 rounded-full bg-cyan-400 flex-shrink-0" />
+            <span class="text-lg leading-relaxed">{bullet}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>

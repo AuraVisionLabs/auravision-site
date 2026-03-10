@@ -14,6 +14,6 @@ export default defineConfig({
   },
 
   integrations: [sitemap({
-    filter: (page) => !page.includes('/platform') && !page.includes('/retail-analytics') && !page.includes('/glossary') && !page.includes('/compare'),
+    filter: (page) => !page.includes('/platform') && !page.includes('/retail-analytics') && !page.includes('/glossary') && !page.includes('/compare') && !page.includes('/decks'),
   })]
 });

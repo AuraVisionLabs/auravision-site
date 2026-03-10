@@ -1,0 +1,73 @@
+---
+import { getCollection } from "astro:content";
+
+interface Props {
+  ref: string;
+}
+
+const { ref } = Astro.props;
+
+const allCaseStudies = await getCollection("case-studies");
+const study = allCaseStudies.find((s) => s.id === ref || s.slug === ref);
+
+const data = study?.data;
+---
+
+{data ? (
+  <section class="slide-case-study">
+    <div class="flex items-center justify-center h-full px-16">
+      <div class="grid grid-cols-2 gap-12 max-w-5xl w-full items-center">
+        <!-- Left: text -->
+        <div>
+          {data.clientLogo && (
+            <img
+              src={data.clientLogo}
+              alt={data.client}
+              class="h-10 mb-8 object-contain opacity-70 [filter:brightness(0)_invert(1)]"
+            />
+          )}
+
+          <h2 class="font-title text-4xl tracking-tight text-white leading-snug mb-4">
+            {data.title}
+          </h2>
+
+          <p class="text-base text-white/60 font-light leading-relaxed">
+            {data.summary}
+          </p>
+
+          {data.metrics.length > 0 && (
+            <div class="mt-8 flex gap-8">
+              {data.metrics.slice(0, 3).map((m) => (
+                <div class="fragment">
+                  <p class="font-title text-3xl text-cyan-400">{m.value}</p>
+                  <p class="text-xs text-white/50 mt-1 max-w-[10rem]">{m.label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Right: image -->
+        <div>
+          {data.coverImage ? (
+            <img
+              src={data.coverImage}
+              alt={data.title}
+              class="rounded-2xl w-full object-cover aspect-video"
+            />
+          ) : (
+            <div class="rounded-2xl bg-white/5 border border-white/10 aspect-video flex items-center justify-center">
+              <p class="text-white/20 text-sm">No image</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  <section>
+    <div class="flex items-center justify-center h-full">
+      <p class="text-white/40">Case study not found: {ref}</p>
+    </div>
+  </section>
+)}

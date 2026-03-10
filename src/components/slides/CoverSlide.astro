@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  logo?: string;
+  background?: string;
+}
+
+const { title, subtitle, logo, background } = Astro.props;
+---
+
+<section
+  class="slide-cover"
+  style={background ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}
+>
+  {background && <div class="absolute inset-0 bg-slate-900/80" />}
+
+  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-16">
+    {logo ? (
+      <img src={logo} alt="" class="w-full max-w-4xl mb-12 object-contain [filter:brightness(0)_invert(1)]" />
+    ) : (
+      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full max-w-4xl mb-12 object-contain" />
+    )}
+
+    <h1 class="font-title text-7xl tracking-tight text-white leading-tight max-w-4xl">
+      {title}
+    </h1>
+
+    {subtitle && (
+      <p class="mt-6 text-2xl text-white/60 font-light max-w-2xl">
+        {subtitle}
+      </p>
+    )}
+
+    <div class="mt-16 flex items-center gap-3 text-white/30 text-sm font-mono">
+      <img src="/images/aura-vision-icon.svg" alt="" class="h-5 w-5 opacity-40" />
+      <span>auravision.ai</span>
+    </div>
+  </div>
+</section>

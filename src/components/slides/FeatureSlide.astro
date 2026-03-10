@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  bullets?: string[];
+  image?: string;
+  reversed?: boolean;
+}
+
+const { title, subtitle, bullets = [], image, reversed = false } = Astro.props;
+---
+
+<section class="slide-feature">
+  <div class="flex items-center justify-center h-full px-16">
+    <div class="grid grid-cols-2 gap-16 max-w-5xl w-full items-center">
+      <div class:list={[reversed && "order-2"]}>
+        <h2 class="font-title text-5xl tracking-tight text-white leading-snug">
+          {title}
+        </h2>
+
+        {subtitle && (
+          <p class="mt-4 text-lg text-white/60 font-light">
+            {subtitle}
+          </p>
+        )}
+
+        {bullets.length > 0 && (
+          <ul class="mt-8 space-y-4">
+            {bullets.map((bullet) => (
+              <li class="fragment flex items-start gap-3 text-white/70">
+                <span class="mt-1.5 h-2 w-2 rounded-full bg-cyan-400 flex-shrink-0" />
+                <span class="text-base leading-relaxed">{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div class:list={[reversed && "order-1"]}>
+        {image ? (
+          <img src={image} alt={title} class="rounded-2xl w-full object-cover" />
+        ) : (
+          <div class="rounded-2xl bg-white/5 border border-white/10 aspect-video flex items-center justify-center">
+            <p class="text-sm text-white/20">Visual</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

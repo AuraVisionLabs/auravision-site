@@ -1,0 +1,335 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  prospect?: string;
+}
+
+const { title, prospect } = Astro.props;
+
+const pageTitle = prospect ? `${title} — ${prospect}` : title;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- Prevent indexing of deck pages -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Questrial&family=Roboto+Mono:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{pageTitle} | Aura Vision</title>
+
+    <style is:global>
+      /* ── Deck slide system ───────────────────────────────── */
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #020309; /* near-black outside slide area */
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .deck {
+        position: relative;
+        /* Fit the largest 16:9 box inside the viewport */
+        width: min(100vw, calc(100vh * 16 / 9));
+        height: min(100vh, calc(100vw * 9 / 16));
+        overflow: hidden;
+        flex-shrink: 0;
+        border-radius: 2px;
+        box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
+      }
+
+      .deck > section {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        will-change: opacity;
+        background: #0a0f1e;
+      }
+
+      /* Subtle cyan→fuchsia gradient glow at the bottom of every slide */
+      .deck > section::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40%;
+        background: linear-gradient(
+          to top,
+          rgba(34, 211, 238, 0.06) 0%,
+          rgba(217, 70, 239, 0.04) 40%,
+          transparent 100%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Ensure slide content sits above the gradient */
+      .deck > section > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .deck > section.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* Watermark logo on every slide (bottom-right) */
+      .slide-watermark {
+        position: absolute;
+        bottom: 16px;
+        right: 20px;
+        z-index: 2;
+        opacity: 0.18;
+        height: 24px;
+        width: 24px;
+        pointer-events: none;
+      }
+
+      /* Profile glow in slides */
+      .profile-glow::before,
+      .profile-glow::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 9999px;
+        z-index: 0;
+        filter: blur(5px);
+        opacity: 0.9;
+      }
+
+      .profile-glow::before {
+        background: radial-gradient(circle at 25% 25%, #22d3ee, transparent 100%);
+      }
+
+      .profile-glow::after {
+        background: radial-gradient(circle at 75% 75%, #D946EF, transparent 100%);
+      }
+
+      /* ── Print / PDF styles ──────────────────────────────── */
+      @media print {
+        html, body {
+          width: 13.333in;
+          height: auto;
+          margin: 0;
+          padding: 0;
+          background: #0a0f1e !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          overflow: visible;
+          display: block;
+        }
+
+        .deck {
+          position: static;
+          width: 13.333in;
+          height: auto;
+          overflow: visible;
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        .deck > section {
+          position: relative;
+          opacity: 1;
+          pointer-events: auto;
+          width: 13.333in;
+          height: 7.5in;
+          min-height: 7.5in;
+          max-height: 7.5in;
+          background: #0a0f1e !important;
+          page-break-after: always;
+          break-after: page;
+          page-break-inside: avoid;
+          break-inside: avoid;
+          overflow: hidden;
+          box-sizing: border-box;
+        }
+
+        .deck > section:last-child {
+          page-break-after: avoid;
+          break-after: avoid;
+        }
+
+        .deck-controls,
+        #progress,
+        .print\\:hidden {
+          display: none !important;
+        }
+
+        /* Force background colors/images to print */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+    </style>
+
+    <!-- @page must be in an is:inline style to avoid Tailwind/Vite stripping it -->
+    <style is:inline>
+      @page {
+        size: 13.333in 7.5in;
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#020309] overflow-hidden">
+    <div class="deck" id="deck">
+      <slot />
+    </div>
+
+    <!-- Controls -->
+    <div class="deck-controls fixed bottom-4 right-4 z-50 flex items-center gap-2 print:hidden">
+      <!-- Slide counter -->
+      <span id="slide-counter" class="text-white/20 text-xs font-mono mr-1"></span>
+
+      <!-- PDF button -->
+      <button
+        id="pdf-btn"
+        title="Print to PDF"
+        class="flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs text-white/30 font-mono backdrop-blur-sm cursor-pointer hover:bg-white/10 hover:text-white/60 transition-all duration-300"
+      >
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        PDF
+      </button>
+
+      <!-- Fullscreen button -->
+      <button
+        id="fs-btn"
+        title="Toggle fullscreen"
+        class="flex items-center gap-1.5 rounded-full bg-white/5 border border-white/10 px-3 py-1.5 text-xs text-white/30 font-mono backdrop-blur-sm cursor-pointer hover:bg-white/10 hover:text-white/60 transition-all duration-300"
+      >
+        <svg id="fs-icon-expand" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9" />
+          <polyline points="9 21 3 21 3 15" />
+          <line x1="21" y1="3" x2="14" y2="10" />
+          <line x1="3" y1="21" x2="10" y2="14" />
+        </svg>
+        <svg id="fs-icon-shrink" class="h-3.5 w-3.5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 14 10 14 10 20" />
+          <polyline points="20 10 14 10 14 4" />
+          <line x1="14" y1="10" x2="21" y2="3" />
+          <line x1="3" y1="21" x2="10" y2="14" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="fixed bottom-0 left-0 right-0 h-[2px] bg-white/5 z-50 print:hidden">
+      <div id="progress" class="h-full bg-cyan-400/40 transition-all duration-200" style="width: 0%"></div>
+    </div>
+
+    <script>
+      const deck = document.getElementById("deck")!;
+      const slides = Array.from(deck.querySelectorAll<HTMLElement>(":scope > section"));
+      const counter = document.getElementById("slide-counter")!;
+      const progress = document.getElementById("progress")!;
+      const total = slides.length;
+      let current = 0;
+
+      // Inject watermark logo into every slide
+      slides.forEach((section) => {
+        const img = document.createElement("img");
+        img.src = "/images/aura-vision-icon.svg";
+        img.alt = "";
+        img.className = "slide-watermark";
+        section.appendChild(img);
+      });
+
+      // Read initial slide from hash
+      const hashMatch = window.location.hash.match(/^#(\d+)$/);
+      if (hashMatch) {
+        const idx = parseInt(hashMatch[1], 10) - 1;
+        if (idx >= 0 && idx < total) current = idx;
+      }
+
+      function showSlide(index: number) {
+        if (index < 0 || index >= total) return;
+        slides[current].classList.remove("active");
+        current = index;
+        slides[current].classList.add("active");
+        counter.textContent = `${current + 1} / ${total}`;
+        progress.style.width = `${((current + 1) / total) * 100}%`;
+        window.location.hash = `#${current + 1}`;
+      }
+
+      // Initialize
+      showSlide(current);
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " ") {
+          e.preventDefault();
+          showSlide(current + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+          e.preventDefault();
+          showSlide(current - 1);
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          showSlide(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          showSlide(total - 1);
+        }
+      });
+
+      // PDF
+      document.getElementById("pdf-btn")?.addEventListener("click", () => {
+        window.print();
+      });
+
+      // Fullscreen
+      const fsBtn = document.getElementById("fs-btn")!;
+      const fsExpand = document.getElementById("fs-icon-expand")!;
+      const fsShrink = document.getElementById("fs-icon-shrink")!;
+
+      fsBtn.addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      document.addEventListener("fullscreenchange", () => {
+        const isFs = !!document.fullscreenElement;
+        fsExpand.classList.toggle("hidden", isFs);
+        fsShrink.classList.toggle("hidden", !isFs);
+      });
+    </script>
+  </body>
+</html>

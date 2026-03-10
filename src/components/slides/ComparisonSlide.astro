@@ -1,0 +1,51 @@
+---
+interface Props {
+  title?: string;
+  left: { heading: string; items: string[] };
+  right: { heading: string; items: string[] };
+}
+
+const { title, left, right } = Astro.props;
+---
+
+<section class="slide-comparison">
+  <div class="flex flex-col items-center justify-center h-full px-16">
+    {title && (
+      <h2 class="font-title text-5xl tracking-tight text-white mb-14 text-center">
+        {title}
+      </h2>
+    )}
+
+    <div class="grid grid-cols-2 gap-8 max-w-5xl w-full">
+      <!-- Left column -->
+      <div class="fragment rounded-2xl border border-white/10 bg-white/[0.03] p-8">
+        <h3 class="font-title text-xl text-white/50 mb-6 text-center uppercase tracking-widest text-sm">
+          {left.heading}
+        </h3>
+        <ul class="space-y-3">
+          {left.items.map((item) => (
+            <li class="flex items-start gap-3 text-white/60">
+              <span class="mt-1.5 h-2 w-2 rounded-full bg-white/20 flex-shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Right column (highlighted) -->
+      <div class="fragment rounded-2xl border border-cyan-400/30 bg-cyan-400/[0.05] p-8">
+        <h3 class="font-title text-xl text-cyan-400 mb-6 text-center uppercase tracking-widest text-sm">
+          {right.heading}
+        </h3>
+        <ul class="space-y-3">
+          {right.items.map((item) => (
+            <li class="flex items-start gap-3 text-white/80">
+              <span class="mt-1.5 h-2 w-2 rounded-full bg-cyan-400 flex-shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
