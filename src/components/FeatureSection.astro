@@ -13,7 +13,7 @@ const {
   subtitle,
   description,
   linkText,
-  linkHref = "/contact",
+  linkHref = "https://calendly.com/zach-n5m/aura-vision-introduction",
   reversed = false,
 } = Astro.props;
 ---
@@ -31,7 +31,7 @@ const {
         <p class="mt-6 text-body" set:html={description}>
         </p>
         {linkText && (
-          <a href={linkHref} class="btn-pill mt-8">
+          <a href={linkHref} class="btn-pill mt-8" {...(linkHref.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>
             {linkText}
           </a>
         )}
