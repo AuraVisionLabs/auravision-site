@@ -106,6 +106,19 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
       <div class="chat-bot-text min-w-[60px] min-h-[40px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-lg bg-purple-600 text-white font-medium">
       </div>
     </div>
+    <div class="chat-followup-user flex justify-end items-start gap-2 opacity-0">
+      <div class="chat-followup-user-text max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tr-sm px-4 py-2.5 shadow-lg bg-cyan-600 text-white font-medium">
+      </div>
+      <div class="chat-followup-user-avatar flex-shrink-0 w-8 h-8 rounded-full bg-cyan-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5">
+      </div>
+    </div>
+    <div class="chat-followup-bot flex justify-start items-start gap-2 opacity-0 pr-[34px] mt-3">
+      <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-600/50 flex items-center justify-center mt-0.5">
+        <Bot class="w-3.5 h-3.5 text-white/70" stroke-width={2} />
+      </div>
+      <div class="chat-followup-bot-text min-w-[60px] min-h-[40px] max-w-[80%] text-sm leading-relaxed rounded-2xl rounded-tl-sm px-4 py-2.5 shadow-lg bg-purple-600 text-white font-medium">
+      </div>
+    </div>
   </div>
   </div>
   <!-- Prompt bar - outside the masked container so it stays full opacity -->
@@ -136,18 +149,24 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
       preBot: "Assessing store traffic gains…",
       bot: "<strong>Yes.</strong> Stores saw 18% more traffic and 11% higher conversion than the previous week.",
       visual: 0,
+      followUpUser: "Which stores should we open next year?",
+      followUpBot: "<strong>17 of 98 stores</strong> show strong enough passerby traffic growth to justify post-holiday openings next year.",
     },
     {
       user: "Are our new activation displays delivering ROI?",
       preBot: "Comparing activation display impressions…",
       bot: "<strong>Likely not.</strong> Impression rates decreased 2.5% during the period, despite an increase in traffic and overall dwell times.",
       visual: 1,
+      followUpUser: "Which displays should we replace first?",
+      followUpBot: "<strong>Displays 1, 2 and 4</strong> have the lowest engagement rates. Replacing with interactive formats could recover an estimated 3.8% in impressions.",
     },
     {
       user: "Are we staffed correctly for weekend peaks?",
       preBot: "Analysing peak service coverage…",
       bot: "<strong>In most but not all stores.</strong> Staff coverage often dips in the New York flagship around 2-3pm Saturdays.",
       visual: 2,
+      followUpUser: "How many extra staff do we need on Saturdays?",
+      followUpBot: "<strong>3 additional staff</strong> between 1–4pm at the New York flagship would bring service coverage in line with weekday levels.",
     },
   ];
 
@@ -206,10 +225,13 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
     const botImageBubble = $(".chat-bot-image"), botBubble = $(".chat-bot");
     const userText = $(".chat-user-text"), botPreText = $(".chat-bot-pre-text");
     const botText = $(".chat-bot-text"), avatarEl = $(".chat-user-avatar");
+    const followUpUserBubble = $(".chat-followup-user"), followUpBotBubble = $(".chat-followup-bot");
+    const followUpUserText = $(".chat-followup-user-text"), followUpBotText = $(".chat-followup-bot-text");
+    const followUpAvatarEl = $(".chat-followup-user-avatar");
     const input = $(".chat-prompt-input") as HTMLElement;
     const sendBtn = $(".chat-prompt-send") as HTMLElement;
     const barContainer = $(".chat-bar-container") as HTMLElement;
-    const allBubbles = [userBubble, botPreBubble, botImageBubble, botBubble];
+    const allBubbles = [userBubble, botPreBubble, botImageBubble, botBubble, followUpUserBubble, followUpBotBubble];
     const visualPanels = container.querySelectorAll(".chat-visual");
     const gridCells = () => container.querySelectorAll(".chat-grid-cell") as NodeListOf<HTMLElement>;
     let idx = 0, initIdx = 0;
@@ -236,7 +258,8 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
 
     function fadeOutAll() {
       animate(userBubble, ANIM_OUT.right);
-      [botPreBubble, botImageBubble, botBubble].forEach((el) => animate(el, ANIM_OUT.left));
+      animate(followUpUserBubble, ANIM_OUT.right);
+      [botPreBubble, botImageBubble, botBubble, followUpBotBubble].forEach((el) => animate(el, ANIM_OUT.left));
     }
 
     function showDots(el: HTMLElement) {
@@ -318,7 +341,33 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
       await delay(THINK_MS);
       await streamText(botText, msg.bot);
 
-      // 7. Pause, then fade out and loop
+      // 7. Follow-up: stream question into input bar
+      await delay(1200);
+      setBarGlow(true);
+      await streamInput(input, msg.followUpUser);
+
+      // 8. Animate send button press
+      await animateSendBtn();
+
+      // 9. Clear input, show follow-up user bubble
+      clearInput(input);
+      highlightSendBtn(false);
+      setBarGlow(false);
+      followUpUserText.textContent = msg.followUpUser;
+      followUpAvatarEl.textContent = INITIALS[initIdx];
+      showBubble(followUpUserBubble);
+      await delay(0);
+      animate(followUpUserBubble, ANIM_IN.right);
+
+      // 10. Follow-up bot answer (thinking → stream)
+      await delay(1200);
+      showDots(followUpBotText);
+      showBubble(followUpBotBubble);
+      animate(followUpBotBubble, ANIM_IN.left);
+      await delay(THINK_MS);
+      await streamText(followUpBotText, msg.followUpBot);
+
+      // 11. Pause, then fade out and loop
       await delay(2400);
       fadeOutAll();
       await delay(800);
