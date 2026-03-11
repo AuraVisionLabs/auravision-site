@@ -40,7 +40,6 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
 ---
 
 <div class="chat-animation-wrapper relative h-[480px] md:h-[480px] w-full overflow-visible">
-  <img src="/images/camera.webp" alt="" class="absolute -top-18 -right-30 w-60 h-auto rounded-lg z-20 pointer-events-none" width="480" height="270" loading="lazy" />
   <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/[0.02] border border-white/10 px-6 pb-[100px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0%,black_15%,black_70%,transparent_95%)] transition-all duration-500 flex flex-col justify-end">
     <div class="chat-pair space-y-3 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2 opacity-0">
@@ -124,7 +123,7 @@ const heroSubmitClass = "rounded-full bg-purple-600 px-8 py-3 text-base font-med
   <!-- Prompt bar - outside the masked container so it stays full opacity -->
   <div class="chat-prompt-bar absolute bottom-0 left-0 right-0 z-10 px-6 pb-4 w-full transition-all duration-500">
     <div class="chat-bar-container relative border border-white/10 bg-white/5 rounded-full h-[60px] shadow-[0_0_16px_rgba(255,255,255,0.15)] transition-shadow duration-500 w-full lg:max-w-md lg:ml-auto flex items-center">
-      <span class="chat-prompt-input w-full pl-5 pr-14 text-sm leading-relaxed text-white/40 font-medium">Ask Aura a question</span>
+      <span class="chat-prompt-input w-full pl-5 pr-14 text-base leading-relaxed text-white/40 font-medium">Ask Aura a question</span>
       <button
         class="chat-prompt-send absolute right-3 inset-y-0 my-auto flex h-9 w-9 items-center justify-center rounded-full bg-white/5 transition-all duration-300 text-white/40 pointer-events-none"
         aria-label="Send message"
