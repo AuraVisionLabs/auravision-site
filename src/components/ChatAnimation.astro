@@ -37,7 +37,7 @@ const gridVisuals = [
 
 ---
 
-<div class="chat-animation-wrapper relative h-[500px] md:h-[500px] w-full overflow-hidden">
+<div class="chat-animation-wrapper relative h-[440px] md:h-[440px] w-full overflow-hidden">
   <div class="chat-animation absolute inset-0 rounded-[32px] bg-white/[0.02] border border-white/10 px-6 pb-[100px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0%,black_15%,black_70%,transparent_95%)] transition-all duration-500 flex flex-col justify-end">
     <div class="chat-pair space-y-3 w-full lg:max-w-md lg:ml-auto">
     <div class="chat-user flex justify-end items-start gap-2 opacity-0">
@@ -226,6 +226,7 @@ const gridVisuals = [
     const visualPanels = container.querySelectorAll(".chat-visual");
     const gridCells = () => container.querySelectorAll(".chat-grid-cell") as NodeListOf<HTMLElement>;
     let idx = 0, initIdx = 0;
+    let isFirstRun = true;
 
     function reset() {
       allBubbles.forEach((el) => {
@@ -286,6 +287,63 @@ const gridVisuals = [
       initIdx = (initIdx + 1) % INITIALS.length;
       visualPanels.forEach((p) => p.classList.toggle("hidden", Number(p.getAttribute("data-visual")) !== msg.visual));
       reset();
+
+      if (isFirstRun) {
+        isFirstRun = false;
+
+        // Pre-populate first 3 bubbles instantly
+        userText.textContent = msg.user;
+        showBubble(userBubble);
+        userBubble.style.opacity = "1";
+
+        botPreText.textContent = msg.preBot;
+        showBubble(botPreBubble);
+        botPreBubble.style.opacity = "1";
+
+        showBubble(botImageBubble);
+        botImageBubble.style.opacity = "1";
+        const cells = container.querySelector(`.chat-visual[data-visual="${msg.visual}"]:not([data-visual="2"])`)
+          ?.querySelectorAll(".chat-grid-cell") as NodeListOf<HTMLElement> | undefined;
+        if (cells?.length) {
+          cells.forEach((c) => c.classList.add("chat-cell-in"));
+        }
+
+        // Continue animation from bot answer (step 6)
+        await delay(800);
+        showDots(botText);
+        showBubble(botBubble);
+        animate(botBubble, ANIM_IN.left);
+        await delay(THINK_MS);
+        await streamText(botText, msg.bot);
+
+        // Continue with follow-up from step 7
+        await delay(1200);
+        setBarGlow(true);
+        await streamInput(input, msg.followUpUser);
+        await animateSendBtn();
+        clearInput(input);
+        highlightSendBtn(false);
+        setBarGlow(false);
+        followUpUserText.textContent = msg.followUpUser;
+        followUpAvatarEl.textContent = INITIALS[initIdx];
+        showBubble(followUpUserBubble);
+        await delay(0);
+        animate(followUpUserBubble, ANIM_IN.right);
+
+        await delay(1200);
+        showDots(followUpBotText);
+        showBubble(followUpBotBubble);
+        animate(followUpBotBubble, ANIM_IN.left);
+        await delay(THINK_MS);
+        await streamText(followUpBotText, msg.followUpBot);
+
+        await delay(2400);
+        fadeOutAll();
+        await delay(800);
+        idx = (idx + 1) % messages.length;
+        showPair();
+        return;
+      }
 
       // 1. Stream user question into input bar
       setBarGlow(true);
