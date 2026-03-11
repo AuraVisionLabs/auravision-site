@@ -16,6 +16,7 @@
 /* Smooth scroll for anchor links */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* ── Reusable layout & component utilities ─────────── */
@@ -133,6 +134,7 @@ body {
   cursor: default;
   -webkit-user-select: none;
   user-select: none;
+  overflow-x: hidden;
 }
 
 input,
