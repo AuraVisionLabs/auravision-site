@@ -8,7 +8,7 @@ const contactSchema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "name": "Fix Your Stores with Aura Vision",
-  "description": "Aura uses your existing cameras to reveal exactly what's happening in your stores — from customer flow to conversion. Book a demo.",
+  "description": "Aura uses your existing cameras to reveal exactly what's happening in your stores — from customer flow to conversion. Book a call.",
   "url": "https://auravision.ai/contact/fix-stores",
   "mainEntity": {
     "@type": "Organization",
@@ -33,7 +33,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<BaseLayout title="Let's fix your stores" description="Aura uses your existing cameras to reveal exactly what's happening in your stores — from customer flow to conversion. Book a demo.">
+<BaseLayout title="Let's fix your stores" description="Aura uses your existing cameras to reveal exactly what's happening in your stores — from customer flow to conversion. Book a call.">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(contactSchema)} />
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <div class="flex flex-col min-h-screen">
@@ -43,7 +43,7 @@ const breadcrumbSchema = {
       headingLevel="h1"
       title="Let's fix your stores"
       subtitle="Aura uses your existing cameras to reveal exactly what's happening in your stores — from customer flow to conversion. See the insights for yourself."
-      buttonText="Book a demo"
+      buttonText="Book a call"
     />
 
     <div class="flex-1 bg-white">
