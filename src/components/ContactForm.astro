@@ -5,9 +5,10 @@ interface Props {
   headingLevel?: 'h1' | 'h2';
   title?: string;
   subtitle?: string;
+  submitLabel?: string;
 }
 
-const { headingLevel = 'h2', title = 'Get in touch', subtitle = "Whether you're ready for a demo or just exploring, we'd love to hear from you." } = Astro.props;
+const { headingLevel = 'h2', title = 'Get in touch', subtitle = "Whether you're ready for a demo or just exploring, we'd love to hear from you.", submitLabel } = Astro.props;
 const Heading = headingLevel;
 ---
 
@@ -30,7 +31,7 @@ const Heading = headingLevel;
 
       <!-- Right: Form -->
       <div data-fade="100">
-        <ContactFormFields />
+        <ContactFormFields submitLabel={submitLabel} />
       </div>
     </div>
   </div>
