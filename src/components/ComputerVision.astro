@@ -1,20 +1,37 @@
 ---
-const specs = [
-  { label: "Connectivity", value: "Any IP, RTSP, ONVIF camera" },
-  { label: "Camera types", value: "Fisheye & Standard lenses", tags: ["Fisheye", "Standard lenses"] },
-  { label: "Video Processing", value: "On-premise / edge" },
-  { label: "Bandwidth", value: "< 50 Kb/s per camera" },
-  { label: "AI", value: "Tailored to every retailer" },
-  { label: "Accuracy", value: "Audited for every store" },
-  { label: "Data access", value: "Cloud dashboard, REST API", tags: ["Cloud dashboard", "REST API"] },
-  { label: "Integrations", value: "POS, SSO", tags: ["POS", "SSO"] },
-  { label: "Latency", value: "Real-time, 15-min intervals" },
-  { label: "Demographics", value: "Age, gender, staff-customer", tags: ["Age", "Gender", "Staff-customer"] },
-  { label: "Zone coverage", value: "Entrances, departments, products, queues, service areas", tags: ["Entrances", "Departments", "Products", "Displays", "Activations", "Queues", "Checkouts", "Service areas"] },
-  { label: "Analytics", value: "20+ metrics" },
-  { label: "Privacy", value: "Zero PII stored or shared" },
-  { label: "Facial recognition", value: "Never" },
-  { label: "Security", value: "ISO27001 ISMS" }
+const specGroups = [
+  {
+    title: "Works with your cameras",
+    specs: [
+      { label: "Connectivity", value: "Any IP, RTSP, ONVIF camera" },
+      { label: "Camera types", value: "Fisheye & standard lenses" },
+      { label: "Video processing", value: "On-premise / edge" },
+    ],
+  },
+  {
+    title: "Privacy by design",
+    specs: [
+      { label: "Personal data", value: "Zero PII stored or shared" },
+      { label: "Facial recognition", value: "Never" },
+      { label: "Security", value: "ISO 27001 ISMS" },
+    ],
+  },
+  {
+    title: "Accuracy you can audit",
+    specs: [
+      { label: "AI", value: "Tailored per retailer, audited per store" },
+      { label: "Analytics", value: "20+ metrics, 15-min intervals" },
+      { label: "Segmentation", value: "Age, gender, staff-customer" },
+    ],
+  },
+  {
+    title: "Scales with your stores",
+    specs: [
+      { label: "Bandwidth", value: "< 50 Kb/s per camera" },
+      { label: "Data access", value: "Cloud dashboard, REST API" },
+      { label: "Integrations", value: "POS & SSO" },
+    ],
+  },
 ];
 ---
 
@@ -48,23 +65,22 @@ const specs = [
       <div data-fade class="rounded-2xl border border-white/10 bg-slate-950/50 backdrop-blur-xl p-8 md:p-12">
         <div class="text-center mb-10">
           <h2 class="heading-section">
-            <span class="text-gradient block mx-auto" data-text="Cutting-edge computer vision">Cutting-edge computer vision</span>
-            <span class="text-gradient block mx-auto" data-text="that just works">that just works</span>
+            <span class="text-gradient block mx-auto" data-text="Get the latest Computer vision AI,">Get the latest Computer vision AI,</span>
+            <span class="text-gradient block mx-auto" data-text="with much less hassle">with much less hassle</span>
           </h2>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 sm:gap-x-10 sm:gap-y-8 font-mono text-sm">
-          {specs.map((s, i) => (
-            <div data-fade style={`transition-delay: ${i * 80}ms`} class="pl-2 sm:pl-4">
-              <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-cyan-200 font-semibold mb-0.5 sm:mb-1">{s.label}</p>
-              {s.tags ? (
-                <div class="flex flex-wrap gap-1 sm:gap-1.5 mt-1">
-                  {s.tags.map((tag: string) => (
-                    <span class="inline-block text-[10px] sm:text-xs text-slate-900 bg-white/90 rounded-full px-2 py-0.5 leading-tight font-medium">{tag}</span>
-                  ))}
-                </div>
-              ) : (
-                <p class="text-white leading-snug sm:leading-relaxed text-xs sm:text-sm">{s.value}</p>
-              )}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 sm:gap-y-10 font-mono text-sm max-w-4xl mx-auto">
+          {specGroups.map((group, gi) => (
+            <div data-fade style={`transition-delay: ${gi * 100}ms`}>
+              <p class="text-xs sm:text-sm uppercase tracking-[0.15em] text-cyan-200 font-semibold mb-3 sm:mb-4">{group.title}</p>
+              <div class="space-y-2 sm:space-y-3 pl-2 sm:pl-4 border-l border-white/10">
+                {group.specs.map((s) => (
+                  <div>
+                    <p class="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/40 font-medium">{s.label}</p>
+                    <p class="text-white leading-snug text-xs sm:text-sm">{s.value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           ))}
         </div>
