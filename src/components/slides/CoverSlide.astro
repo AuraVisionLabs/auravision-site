@@ -13,24 +13,24 @@ const { title, tagline, logo } = Astro.props;
 <SlideWrapper
   class="slide-cover"
 >
-  <div class="relative z-10 flex flex-col items-start justify-center h-full px-[3rem]">
+  <div class="relative z-10 flex flex-col items-start justify-center h-full w-[70%] px-[5rem]">
     {logo ? (
       <img src={logo} alt="" class="w-full h-auto mb-10 object-contain object-left [filter:brightness(0)_invert(1)]" />
     ) : (
-      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full h-auto mb-10 object-contain object-left" />
+      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full h-auto mb-12 object-contain object-left" />
     )}
 
-    <p class="text-5xl text-white leading-tight w-full">
+    <p class="text-5xl text-white leading-tight w-full px-[2rem]">
       {tagline}
     </p>
 
-    <h1 class="mt-8 text-8xl text-white font-body tracking-wide">
+    <h1 class="mt-10 text-8xl text-white font-body tracking-wide  px-[2rem]">
       {title}
     </h1>
   </div>
 
   {/* Bottom-left company attribution */}
-  <div class="absolute bottom-8 left-[3rem] z-10">
+  <div class="absolute bottom-8 left-[3rem] z-10  px-[5rem]">
     <p class="text-sm text-white font-light">
       Aura Vision Labs Ltd · auravision.ai
     </p>

@@ -276,6 +276,12 @@ const pageTitle = title;
         }
       });
 
+      // Click navigation
+      deck.addEventListener("click", (e) => {
+        if ((e.target as HTMLElement).closest("a, button, video, input, textarea, select")) return;
+        showSlide(current + 1);
+      });
+
       // PDF
       document.getElementById("pdf-btn")?.addEventListener("click", () => {
         window.print();
