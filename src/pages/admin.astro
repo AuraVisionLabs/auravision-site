@@ -71,283 +71,7 @@ const isDev = import.meta.env.DEV;
         a { color: #6366f1; text-decoration: underline; }
       `, { raw: true });
 
-      /* ── Deck preview template ─────────────────────────── */
-      var defined = function(v) { return v !== undefined && v !== null && v !== ''; };
-
-      var slideColors = {
-        'cover': '#22d3ee',
-        'tech': '#6366f1',
-        'process': '#10b981',
-        'roi-table': '#f59e0b',
-        'testimonials-pricing': '#ec4899',
-        'timeline': '#8b5cf6',
-        'case-study-detail': '#06b6d4',
-        'contact': '#d946ef',
-        'metrics': '#f97316',
-        'case-study': '#14b8a6',
-        'testimonial': '#ec4899',
-        'feature': '#3b82f6',
-        'logo-wall': '#a855f7',
-        'image': '#64748b',
-        'text': '#6366f1',
-        'comparison': '#059669',
-        'cta': '#e11d48',
-      };
-
-      function renderSlidePreview(slide, index) {
-        var type = slide.type || 'unknown';
-        var accent = slideColors[type] || '#94a3b8';
-        var h = window.h;
-
-        var heading = slide.heading || '';
-        var title = slide.title || '';
-        var subtitle = slide.subtitle || '';
-
-        /* inner content varies by slide type */
-        var inner = [];
-
-        switch (type) {
-          case 'cover':
-            inner.push(
-              h('div', { style: { fontSize: '9px', color: '#94a3b8', marginBottom: '6px', letterSpacing: '1px', textTransform: 'uppercase' } }, slide.deckType || ''),
-              h('div', { style: { fontSize: '16px', fontWeight: 700, color: '#fff', lineHeight: 1.3 } }, title),
-              h('div', { style: { fontSize: '10px', color: '#94a3b8', marginTop: '6px' } }, subtitle)
-            );
-            break;
-
-          case 'tech':
-            if (slide.badges && slide.badges.length) {
-              inner.push(h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '6px' } },
-                slide.badges.map(function(b, i) {
-                  return h('span', { key: i, style: { fontSize: '7px', background: 'rgba(34,211,238,0.15)', color: '#22d3ee', padding: '2px 6px', borderRadius: '8px', border: '1px solid rgba(34,211,238,0.3)' } }, b);
-                })
-              ));
-            }
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff' } }, title));
-            if (slide.body) inner.push(h('div', { style: { fontSize: '8px', color: '#94a3b8', marginTop: '4px', lineHeight: 1.4 } }, slide.body.substring(0, 100) + (slide.body.length > 100 ? '…' : '')));
-            if (slide.callout) inner.push(h('div', { style: { fontSize: '8px', color: '#22d3ee', marginTop: '4px', fontWeight: 600 } }, '▸ ' + slide.callout));
-            break;
-
-          case 'process':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            if (slide.steps && slide.steps.length) {
-              inner.push(h('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap' } },
-                slide.steps.map(function(s, i) {
-                  return h('div', { key: i, style: { flex: '1 1 45%', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', padding: '6px', minWidth: '60px' } },
-                    h('div', { style: { fontSize: '10px', fontWeight: 700, color: '#10b981' } }, s.number + '. ' + s.title),
-                    s.description ? h('div', { style: { fontSize: '7px', color: '#94a3b8', marginTop: '2px' } }, s.description.substring(0, 60)) : null
-                  );
-                })
-              ));
-            }
-            break;
-
-          case 'roi-table':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            if (slide.rows && slide.rows.length) {
-              inner.push(h('table', { style: { width: '100%', fontSize: '7px', borderCollapse: 'collapse' } },
-                h('thead', {},
-                  h('tr', {},
-                    h('th', { style: { textAlign: 'left', color: '#94a3b8', padding: '2px 4px', borderBottom: '1px solid rgba(255,255,255,0.1)' } }, 'Use Case'),
-                    h('th', { style: { textAlign: 'right', color: '#94a3b8', padding: '2px 4px', borderBottom: '1px solid rgba(255,255,255,0.1)' } }, 'ROI')
-                  )
-                ),
-                h('tbody', {},
-                  slide.rows.slice(0, 4).map(function(r, i) {
-                    return h('tr', { key: i },
-                      h('td', { style: { color: '#e2e8f0', padding: '2px 4px' } }, r.useCase),
-                      h('td', { style: { color: '#22d3ee', padding: '2px 4px', textAlign: 'right', fontWeight: 600 } }, r.roi)
-                    );
-                  })
-                )
-              ));
-              if (slide.rows.length > 4) inner.push(h('div', { style: { fontSize: '7px', color: '#64748b', marginTop: '2px' } }, '+' + (slide.rows.length - 4) + ' more'));
-            }
-            break;
-
-          case 'testimonials-pricing':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            if (slide.quotes && slide.quotes.length) {
-              inner.push(h('div', { style: { fontSize: '8px', color: '#e2e8f0', fontStyle: 'italic', borderLeft: '2px solid #ec4899', paddingLeft: '6px', marginBottom: '4px' } },
-                '"' + slide.quotes[0].text.substring(0, 80) + '…"'
-              ));
-              if (slide.quotes.length > 1) inner.push(h('div', { style: { fontSize: '7px', color: '#64748b' } }, '+' + (slide.quotes.length - 1) + ' more quotes'));
-            }
-            if (slide.pricing && slide.pricing.length) {
-              inner.push(h('div', { style: { display: 'flex', gap: '4px', marginTop: '4px' } },
-                slide.pricing.slice(0, 3).map(function(p, i) {
-                  return h('div', { key: i, style: { flex: 1, background: 'rgba(255,255,255,0.05)', borderRadius: '4px', padding: '4px', textAlign: 'center' } },
-                    h('div', { style: { fontSize: '7px', color: '#94a3b8' } }, p.tier),
-                    h('div', { style: { fontSize: '9px', color: '#22d3ee', fontWeight: 600 } }, p.price)
-                  );
-                })
-              ));
-            }
-            break;
-
-          case 'timeline':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            if (slide.milestones && slide.milestones.length) {
-              inner.push(h('div', { style: { display: 'flex', alignItems: 'center', gap: '2px', marginTop: '6px' } },
-                slide.milestones.map(function(m, i) {
-                  return h('div', { key: i, style: { flex: 1, textAlign: 'center' } },
-                    h('div', { style: { height: '3px', background: 'linear-gradient(90deg, #22d3ee, #d946ef)', borderRadius: '2px', marginBottom: '3px' } }),
-                    h('div', { style: { fontSize: '8px', fontWeight: 600, color: '#22d3ee' } }, m.duration),
-                    h('div', { style: { fontSize: '7px', color: '#94a3b8' } }, m.label)
-                  );
-                })
-              ));
-            }
-            break;
-
-          case 'case-study-detail':
-            inner.push(
-              h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' } },
-                h('div', { style: { fontSize: '10px', fontWeight: 600, color: '#fff' } }, slide.client || ''),
-                h('div', { style: { fontSize: '14px', fontWeight: 700, color: '#22d3ee' } }, slide.roiValue || '')
-              ),
-              h('div', { style: { fontSize: '7px', color: '#94a3b8', lineHeight: 1.4 } }, (slide.description || '').substring(0, 100) + '…'),
-              slide.quote ? h('div', { style: { fontSize: '8px', color: '#e2e8f0', fontStyle: 'italic', borderLeft: '2px solid #22d3ee', paddingLeft: '6px', marginTop: '6px' } }, '"' + slide.quote.substring(0, 60) + '…"') : null
-            );
-            break;
-
-          case 'contact':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            if (slide.contacts && slide.contacts.length) {
-              slide.contacts.forEach(function(c, i) {
-                inner.push(h('div', { key: i, style: { marginBottom: '4px' } },
-                  h('div', { style: { fontSize: '9px', fontWeight: 500, color: '#e2e8f0' } }, c.name),
-                  h('div', { style: { fontSize: '7px', color: '#64748b' } }, [c.email, c.phone, c.website].filter(Boolean).join(' · '))
-                ));
-              });
-            }
-            break;
-
-          case 'metrics':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            if (slide.items && slide.items.length) {
-              inner.push(h('div', { style: { display: 'flex', gap: '6px', flexWrap: 'wrap' } },
-                slide.items.map(function(item, i) {
-                  return h('div', { key: i, style: { textAlign: 'center', flex: '1 1 40px' } },
-                    h('div', { style: { fontSize: '14px', fontWeight: 700, color: '#22d3ee' } }, item.value),
-                    h('div', { style: { fontSize: '7px', color: '#94a3b8' } }, item.label)
-                  );
-                })
-              ));
-            }
-            break;
-
-          case 'feature':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '4px' } }, title));
-            if (subtitle) inner.push(h('div', { style: { fontSize: '8px', color: '#94a3b8', marginBottom: '4px' } }, subtitle));
-            if (slide.bullets && slide.bullets.length) {
-              inner.push(h('ul', { style: { paddingLeft: '12px', margin: 0, listStyle: 'disc' } },
-                slide.bullets.slice(0, 4).map(function(b, i) {
-                  return h('li', { key: i, style: { fontSize: '7px', color: '#e2e8f0', marginBottom: '2px' } }, b);
-                })
-              ));
-            }
-            break;
-
-          case 'text':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '4px' } }, title));
-            if (subtitle) inner.push(h('div', { style: { fontSize: '8px', color: '#94a3b8', marginBottom: '4px' } }, subtitle));
-            if (slide.body) inner.push(h('div', { style: { fontSize: '7px', color: '#e2e8f0', lineHeight: 1.5 } }, slide.body.substring(0, 120)));
-            if (slide.bullets && slide.bullets.length) {
-              inner.push(h('ul', { style: { paddingLeft: '12px', margin: '4px 0 0', listStyle: 'disc' } },
-                slide.bullets.slice(0, 3).map(function(b, i) {
-                  return h('li', { key: i, style: { fontSize: '7px', color: '#e2e8f0', marginBottom: '2px' } }, b);
-                })
-              ));
-            }
-            break;
-
-          case 'comparison':
-            if (title) inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title));
-            inner.push(h('div', { style: { display: 'flex', gap: '6px' } },
-              ['left', 'right'].map(function(side) {
-                var col = slide[side] || {};
-                return h('div', { key: side, style: { flex: 1, background: 'rgba(255,255,255,0.05)', borderRadius: '4px', padding: '6px' } },
-                  h('div', { style: { fontSize: '8px', fontWeight: 600, color: side === 'left' ? '#ef4444' : '#22c55e', marginBottom: '4px' } }, col.heading || ''),
-                  h('ul', { style: { paddingLeft: '10px', margin: 0, listStyle: 'disc' } },
-                    (col.items || []).slice(0, 3).map(function(item, i) {
-                      return h('li', { key: i, style: { fontSize: '7px', color: '#e2e8f0', marginBottom: '1px' } }, item);
-                    })
-                  )
-                );
-              })
-            ));
-            break;
-
-          case 'cta':
-            inner.push(
-              h('div', { style: { textAlign: 'center' } },
-                h('div', { style: { fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '4px' } }, title),
-                subtitle ? h('div', { style: { fontSize: '9px', color: '#94a3b8', marginBottom: '8px' } }, subtitle) : null,
-                h('div', { style: { display: 'inline-block', fontSize: '9px', fontWeight: 600, color: '#fff', background: 'linear-gradient(135deg, #22d3ee, #d946ef)', padding: '4px 12px', borderRadius: '4px' } }, slide.buttonText || 'Get in Touch')
-              )
-            );
-            break;
-
-          case 'logo-wall':
-            inner.push(h('div', { style: { fontSize: '12px', fontWeight: 600, color: '#fff', marginBottom: '6px' } }, title || 'Trusted by leading brands'));
-            if (slide.logos && slide.logos.length) {
-              inner.push(h('div', { style: { fontSize: '8px', color: '#94a3b8' } }, slide.logos.length + ' logos'));
-            } else {
-              inner.push(h('div', { style: { fontSize: '8px', color: '#64748b', fontStyle: 'italic' } }, 'Default client logos'));
-            }
-            break;
-
-          case 'image':
-            inner.push(h('div', { style: { textAlign: 'center' } },
-              h('div', { style: { fontSize: '24px', marginBottom: '4px' } }, '🖼'),
-              h('div', { style: { fontSize: '8px', color: '#94a3b8' } }, slide.caption || slide.alt || 'Image slide')
-            ));
-            break;
-
-          case 'case-study':
-            inner.push(
-              h('div', { style: { fontSize: '10px', fontWeight: 600, color: '#fff', marginBottom: '4px' } }, 'Case Study Reference'),
-              h('div', { style: { fontSize: '8px', color: '#22d3ee', fontFamily: 'monospace' } }, slide.ref || '')
-            );
-            break;
-
-          case 'testimonial':
-            if (slide.quote) inner.push(h('div', { style: { fontSize: '8px', color: '#e2e8f0', fontStyle: 'italic', borderLeft: '2px solid #ec4899', paddingLeft: '6px', marginBottom: '4px' } }, '"' + slide.quote.substring(0, 80) + '…"'));
-            inner.push(
-              h('div', { style: { fontSize: '8px', fontWeight: 500, color: '#fff' } }, slide.name || ''),
-              h('div', { style: { fontSize: '7px', color: '#64748b' } }, slide.role || '')
-            );
-            break;
-
-          default:
-            inner.push(h('div', { style: { fontSize: '9px', color: '#64748b', fontStyle: 'italic' } }, 'Unknown slide type: ' + type));
-        }
-
-        return h('div', { key: index, style: {
-          background: '#0a0f1e',
-          borderRadius: '6px',
-          border: '1px solid rgba(255,255,255,0.08)',
-          padding: '0',
-          marginBottom: '16px',
-          overflow: 'hidden',
-          aspectRatio: '16/9',
-          position: 'relative',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-        } },
-          /* heading bar */
-          heading ? h('div', { style: { display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 12px', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.03)' } },
-            h('span', { style: { fontSize: '7px', color: accent, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' } }, heading)
-          ) : null,
-          /* slide number badge */
-          h('div', { style: { position: 'absolute', top: heading ? '30px' : '6px', right: '8px', fontSize: '7px', color: '#475569', background: 'rgba(255,255,255,0.05)', padding: '2px 6px', borderRadius: '8px' } }, '#' + (index + 1)),
-          /* type label */
-          h('div', { style: { position: 'absolute', bottom: '6px', left: '10px', fontSize: '7px', color: accent, opacity: 0.7, textTransform: 'uppercase', letterSpacing: '0.5px' } }, type),
-          /* content */
-          h('div', { style: { padding: heading ? '8px 12px 20px' : '14px 12px 20px', height: heading ? 'calc(100% - 28px)' : '100%', display: 'flex', flexDirection: 'column', justifyContent: type === 'cover' || type === 'cta' ? 'center' : 'flex-start', overflow: 'hidden', boxSizing: 'border-box' } }, inner)
-        );
-      }
-
+      /* ── Deck preview: iframe to the real rendered page ── */
       var DeckPreview = createClass({
         render: function() {
           var entry = this.props.entry;
@@ -358,19 +82,29 @@ const isDev = import.meta.env.DEV;
           var slides = (data.get('slides') || { toJS: function() { return []; } }).toJS();
           var deckUrl = '/decks/' + (slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
 
-          return h('div', { style: { fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", padding: '24px', background: '#111827', minHeight: '100vh' } },
-            /* deck title + URL */
-            h('div', { style: { marginBottom: '24px' } },
-              h('h1', { style: { fontSize: '20px', fontWeight: 700, color: '#fff', margin: '0 0 4px' } }, title),
-              prospect ? h('p', { style: { fontSize: '13px', color: '#94a3b8', margin: '0 0 6px' } }, 'For: ' + prospect) : null,
-              h('a', { href: deckUrl, target: '_blank', rel: 'noopener noreferrer', style: { fontSize: '12px', color: '#22d3ee', textDecoration: 'none', fontFamily: 'monospace' } }, deckUrl),
-              h('span', { style: { fontSize: '11px', color: '#64748b', marginLeft: '12px' } }, slides.length + ' slides')
+          return h('div', { style: { fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif", background: '#111827', minHeight: '100vh', display: 'flex', flexDirection: 'column' } },
+            /* header */
+            h('div', { style: { padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)' } },
+              h('div', {},
+                h('h1', { style: { fontSize: '16px', fontWeight: 600, color: '#fff', margin: '0 0 2px' } }, title),
+                prospect ? h('span', { style: { fontSize: '12px', color: '#94a3b8' } }, 'For: ' + prospect) : null
+              ),
+              h('div', { style: { display: 'flex', alignItems: 'center', gap: '12px' } },
+                h('span', { style: { fontSize: '11px', color: '#64748b' } }, slides.length + ' slides'),
+                h('a', { href: deckUrl, target: '_blank', rel: 'noopener noreferrer', style: { fontSize: '12px', color: '#22d3ee', textDecoration: 'none', fontFamily: 'monospace' } }, deckUrl)
+              )
             ),
-            /* slides */
-            h('div', { style: { display: 'grid', gridTemplateColumns: '1fr', gap: '16px' } },
-              slides.map(function(slide, i) {
-                return renderSlidePreview(slide, i);
+            /* iframe to real deck page */
+            h('div', { style: { flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 } },
+              h('iframe', {
+                src: deckUrl + '?scroll',
+                style: { width: '100%', flex: 1, border: 'none', background: '#0a0f1e' },
+                title: 'Deck preview',
               })
+            ),
+            /* hint */
+            h('div', { style: { padding: '8px 20px 16px', textAlign: 'center' } },
+              h('p', { style: { fontSize: '11px', color: '#475569', margin: 0 } }, 'Save to update the preview. Click the URL to open the full deck.')
             )
           );
         }

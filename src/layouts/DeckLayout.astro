@@ -43,6 +43,12 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
         overflow: hidden;
       }
 
+      /* Scale all rem-based sizes proportionally to the deck width.
+         At 1920px → 16px (default). Smaller/larger viewports scale linearly. */
+      html {
+        font-size: calc(min(100vw, 100vh * 16 / 9) / 120);
+      }
+
       body {
         display: flex;
         align-items: center;
@@ -102,25 +108,58 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
         pointer-events: auto;
       }
 
+      /* ── Scroll mode (all slides stacked vertically) ──── */
+      html.scroll-mode,
+      html.scroll-mode body {
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+      }
+
+      html.scroll-mode .deck {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        box-sizing: border-box;
+        box-shadow: none;
+      }
+
+      html.scroll-mode .deck > section {
+        position: relative;
+        opacity: 1;
+        pointer-events: auto;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
       /* Watermark logo on every slide (bottom-right) */
       .slide-watermark {
         position: absolute;
-        bottom: 24px;
-        right: 28px;
+        bottom: 1.5rem;
+        right: 1.75rem;
         z-index: 10;
         opacity: 0.75;
-        height: 72px;
-        width: 72px;
+        height: 4.5rem;
+        width: 4.5rem;
         pointer-events: none;
       }
-      /* Full-width slide heading bar (injected via JS) */
+      /* Full-width slide heading bar */
       .slide-heading-wrap {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         z-index: 5;
-        padding: 28px 48px 24px;
+        padding: 1.75rem 3rem 1.5rem;
         pointer-events: none;
       }
 
@@ -130,7 +169,7 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: rgba(34, 211, 238, 0.5);
-        margin-bottom: 6px;
+        margin-bottom: 0.375rem;
       }
 
       .slide-heading {
@@ -163,6 +202,9 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
 
       /* ── Print / PDF styles ──────────────────────────────── */
       @media print {
+        html {
+          font-size: calc(13.333in / 120);
+        }
         html, body {
           width: 13.333in;
           height: auto;
@@ -281,6 +323,9 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
     </div>
 
     <script>
+      const isScrollMode = new URLSearchParams(window.location.search).has('scroll');
+      if (isScrollMode) document.documentElement.classList.add('scroll-mode');
+
       const deck = document.getElementById("deck")!;
       const slides = Array.from(deck.querySelectorAll<HTMLElement>(":scope > section"));
       const counter = document.getElementById("slide-counter")!;
@@ -306,7 +351,15 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
       }
 
       // Initialize
-      showSlide(current);
+      if (isScrollMode) {
+        // In scroll mode all slides are visible; hide nav UI
+        slides.forEach(s => s.classList.add('active'));
+        counter.style.display = 'none';
+        document.querySelector('.deck-controls')?.setAttribute('style', 'display:none');
+        document.querySelector('#progress')?.parentElement?.setAttribute('style', 'display:none');
+      } else {
+        showSlide(current);
+      }
 
       // Keyboard navigation
       document.addEventListener("keydown", (e) => {
