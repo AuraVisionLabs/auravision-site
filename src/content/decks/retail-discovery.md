@@ -15,38 +15,26 @@ slides:
     subtitle: The only solution that captures demographics without visible faces
       from existing cameras.
   - type: grid
-    title: Aura can give you fixes in minutes
-    category: How it works
-    cols: 2
+    title: How it works
+    category: Process
+    cols: 3
     cells:
       - blocks:
           - type: title
-            text: Plug & Play
+            text: 1 — Plug & Play
           - type: text
-            text: Our unique AI connects to any existing CCTV camera system in minutes.
-          - type: image
-            src: /images/uploads/adidas-dubai.jpg
-          - type: image
-            src: /images/uploads/as-watson-kruidvat.webp
+            text: Connects to any existing CCTV camera system in minutes.
+          - type: device
       - blocks:
           - type: title
-            text: Actionable Insights
+            text: 2 — Segment
           - type: text
-            text: So you can drive accurate decisions across every store, department and
-              service area.
-        options:
-          background: cyan
-          glow: cyan
-      - options:
-          background: none
-          glow: none
-        blocks:
+            text: AI segments your staff, customers, age & gender
+          - type: heatmap
+      - blocks:
           - type: title
-            text: hey
-      - options:
-          background: none
-          glow: none
-        blocks:
-          - type: title
-            text: yo
+            text: 3 — Aura Answers
+          - type: text
+            text: Get instant answers to fix store performance.
+          - type: chat
 ---

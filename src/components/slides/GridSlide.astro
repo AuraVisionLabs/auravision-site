@@ -2,7 +2,10 @@
 type ContentBlock =
   | { type: "title"; text: string }
   | { type: "text"; text: string }
-  | { type: "image"; src: string; alt?: string };
+  | { type: "image"; src: string; alt?: string }
+  | { type: "heatmap" }
+  | { type: "chat" }
+  | { type: "device" };
 
 type CellOptions = {
   background?: "cyan" | "fuchsia" | "purple" | "blue";
@@ -18,6 +21,9 @@ interface Props {
 }
 
 import SlideWrapper from './SlideWrapper.astro';
+import PathMapCompare from '../PathMapCompare.astro';
+import ChatAnimation from '../ChatAnimation.astro';
+import WireframeCube from '../WireframeCube.astro';
 
 const { title, subtitle, cols = 2, cells, category } = Astro.props;
 const rows = Math.ceil(cells.length / cols);
@@ -46,14 +52,119 @@ const bgStyles: Record<string, string> = {
       const bg = options?.background && options.background !== "none" ? `${bgStyles[options.background]} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
       const glow = options?.glow && options.glow !== "none" ? `border-[0.5rem] ${glowStyles[options.glow]}` : "";
       return (
-        <div class={`min-h-0 flex flex-col overflow-hidden ${bg} ${glow}`}>
+        <div class={`min-h-0 flex flex-col overflow-visible ${bg} ${glow}`}>
           {blocks.map((block) => {
-            if (block.type === "title") return <h3 class="font-title text-[4rem] text-white mb-4">{block.text}</h3>;
-            if (block.type === "text") return <p class="font-body text-[2.5rem] text-white leading-relaxed mb-4">{block.text}</p>;
+            if (block.type === "title") return <h3 class="font-title text-[3.5rem] text-white mb-4">{block.text}</h3>;
+            if (block.type === "text") return <p class="font-body text-[2.2rem] text-white leading-relaxed mb-6">{block.text}</p>;
             if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
+            if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
+            if (block.type === "chat") return <div class="flex-1 min-h-0"><ChatAnimation /></div>;
+            if (block.type === "device") return <div class="flex-1 min-h-0 flex items-center justify-center"><WireframeCube /></div>;
           })}
         </div>
       );
     })}
   </div>
 </SlideWrapper>
+
+<style is:global>
+  /* Cube: override fixed pixel dimensions with viewport-relative units */
+  .slide-grid .cube-container {
+    min-height: 0;
+    height: 100%;
+    margin-top: -3vw; /* Nudge up to compensate for chat bar */
+  }
+  .slide-grid .cube-scene {
+    --w: 12vw;
+    --h: 8vw;
+    --d: 12vw;
+    --half-w: 6vw;
+    --half-h: 4vw;
+    --half-d: 6vw;
+    --offset: 1vw;
+    padding: 2vw;
+    transform: scale(1);
+  }
+  /* Cube face contents: scale ports, labels, grill etc. with viewport */
+  .slide-grid .face.front {
+    gap: 0.6vw;
+  }
+  .slide-grid .eth-port {
+    width: 3vw;
+    height: 2.7vw;
+  }
+  .slide-grid .usbc-port {
+    width: 2.5vw;
+    height: 1.5vw;
+  }
+  .slide-grid .port-label {
+    font-size: 0.5vw;
+  }
+  .slide-grid .dim-label {
+    font-size: 0.9vw;
+    padding: 0 0.5vw;
+  }
+  .slide-grid .dim {
+    height: 0.8vw;
+    margin-top: -0.4vw;
+  }
+  .slide-grid .speaker-grill {
+    top: 0.8vw;
+    left: 1vw;
+    right: 1vw;
+    bottom: 0.8vw;
+  }
+  .slide-grid .grill {
+    top: 1.2vw;
+    left: 2vw;
+    right: 2vw;
+    gap: 0.35vw;
+  }
+  .slide-grid .power {
+    bottom: 1vw;
+    right: 1vw;
+    width: 1.2vw;
+    height: 1.2vw;
+  }
+
+  /* Heatmap: fill available space with breathing room */
+  .slide-grid .pathmap-wrapper {
+    height: 100%;
+    max-height: 100%;
+    padding: 4vw;
+  }
+  .slide-grid .pathmap-compare {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Chat: fill cell, remove chrome, fade only at top */
+  .slide-grid .chat-animation-wrapper {
+    height: 70%;
+    margin-top: 4vw;
+  }
+  .slide-grid .chat-animation {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding-bottom: clamp(60px, 7vw, 120px);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
+  }
+  /* Chat bar: scale with viewport instead of fixed 60px */
+  .slide-grid .chat-bar-container {
+    height: clamp(30px, 3.5vw, 60px);
+  }
+  .slide-grid .chat-prompt-input {
+    font-size: clamp(10px, 1vw, 16px);
+  }
+  .slide-grid .chat-prompt-send {
+    height: clamp(20px, 2.5vw, 36px);
+    width: clamp(20px, 2.5vw, 36px);
+  }
+  .slide-grid .chat-prompt-bar {
+    padding-bottom: clamp(8px, 1vw, 28px);
+    padding-left: clamp(8px, 1vw, 24px);
+    padding-right: clamp(8px, 1vw, 24px);
+  }
+</style>

@@ -21,6 +21,9 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("title"), text: z.string() }),
   z.object({ type: z.literal("text"), text: z.string() }),
   z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
+  z.object({ type: z.literal("heatmap") }),
+  z.object({ type: z.literal("chat") }),
+  z.object({ type: z.literal("device") }),
 ]);
 
 const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue"]);

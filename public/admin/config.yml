@@ -311,6 +311,21 @@ collections:
                           - { label: "Type", name: "type", widget: "hidden", default: "image" }
                           - { label: "Image", name: "src", widget: "image" }
                           - { label: "Alt Text", name: "alt", widget: "string", required: false }
+                      - label: "Heatmap"
+                        name: "heatmap"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "heatmap" }
+                      - label: "Chat"
+                        name: "chat"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "chat" }
+                      - label: "Device"
+                        name: "device"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "device" }
                   - label: "Cell Options"
                     name: "options"
                     widget: "object"
