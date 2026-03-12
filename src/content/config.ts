@@ -23,13 +23,22 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
 ]);
 
+const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue"]);
+
+const columnOptions = z.object({
+  background: colorOption.optional(),
+  glow: colorOption.optional(),
+});
+
 const twoColumnSlide = z.object({
   type: z.literal("two-column"),
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
   left: z.array(contentBlock),
+  leftOptions: columnOptions.optional(),
   right: z.array(contentBlock),
+  rightOptions: columnOptions.optional(),
 });
 
 const slideSchema = z.discriminatedUnion("type", [

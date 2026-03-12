@@ -304,6 +304,14 @@ collections:
                       - { label: "Type", name: "type", widget: "hidden", default: "image" }
                       - { label: "Image", name: "src", widget: "image" }
                       - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - label: "Left Column Options"
+                name: "leftOptions"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a tinted background with padding and rounded corners" }
+                  - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a coloured outline with glow effect" }
               - label: "Right Column"
                 name: "right"
                 widget: "list"
@@ -329,6 +337,14 @@ collections:
                       - { label: "Type", name: "type", widget: "hidden", default: "image" }
                       - { label: "Image", name: "src", widget: "image" }
                       - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - label: "Right Column Options"
+                name: "rightOptions"
+                widget: "object"
+                required: false
+                collapsed: true
+                fields:
+                  - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a tinted background with padding and rounded corners" }
+                  - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a coloured outline with glow effect" }
 
       - label: "Body"
         name: "body"

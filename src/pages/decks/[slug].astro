@@ -26,7 +26,7 @@ const { slides, title } = deck.data;
       case "tech":
         return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
       case "two-column":
-        return <TwoColumnSlide title={slide.title} subtitle={slide.subtitle} left={slide.left} right={slide.right} category={slide.category} />;
+        return <TwoColumnSlide title={slide.title} subtitle={slide.subtitle} left={slide.left} leftOptions={slide.leftOptions} right={slide.right} rightOptions={slide.rightOptions} category={slide.category} />;
       default:
         return null;
     }
