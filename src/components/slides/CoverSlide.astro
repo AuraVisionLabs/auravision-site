@@ -7,10 +7,12 @@ interface Props {
   background?: string;
 }
 
+import SlideWrapper from './SlideWrapper.astro';
+
 const { title, subtitle, deckType, logo, background } = Astro.props;
 ---
 
-<section
+<SlideWrapper
   class="slide-cover"
   style={background ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}
 >
@@ -40,4 +42,4 @@ const { title, subtitle, deckType, logo, background } = Astro.props;
       {subtitle || "Aura Vision Labs Ltd"} · auravision.ai
     </p>
   </div>
-</section>
+</SlideWrapper>

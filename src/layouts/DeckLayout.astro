@@ -288,52 +288,6 @@ const pageTitle = prospect ? `${title} — ${prospect}` : title;
       const total = slides.length;
       let current = 0;
 
-      // Inject watermark logo into every slide
-      slides.forEach((section) => {
-        const img = document.createElement("img");
-        img.src = "/images/aura-vision-icon.svg";
-        img.alt = "";
-        img.className = "slide-watermark";
-        section.appendChild(img);
-      });
-
-      // Inject heading bar for slides that have data-heading
-      const categoryMap: Record<string, string> = {
-        "slide-tech": "Technology",
-        "slide-process": "Process",
-        "slide-roi-table": "Product",
-        "slide-testimonials-pricing": "Testimonials",
-        "slide-timeline": "Process",
-        "slide-case-study-detail": "Case Study",
-        "slide-contact": "Contact",
-      };
-
-      slides.forEach((section) => {
-        const heading = section.dataset.heading;
-        if (heading) {
-          const wrap = document.createElement("div");
-          wrap.className = "slide-heading-wrap";
-
-          // Determine category from section class
-          const slideClass = Array.from(section.classList).find(c => c.startsWith("slide-"));
-          const category = slideClass ? categoryMap[slideClass] || "" : "";
-
-          if (category) {
-            const cat = document.createElement("div");
-            cat.className = "slide-category";
-            cat.textContent = category;
-            wrap.appendChild(cat);
-          }
-
-          const h = document.createElement("div");
-          h.className = "slide-heading";
-          h.textContent = heading;
-          wrap.appendChild(h);
-
-          section.prepend(wrap);
-        }
-      });
-
       // Read initial slide from hash
       const hashMatch = window.location.hash.match(/^#(\d+)$/);
       if (hashMatch) {

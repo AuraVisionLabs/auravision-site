@@ -6,10 +6,12 @@ interface Props {
   pricing?: Array<{ tier: string; price: string; perCamera?: string }>;
 }
 
+import SlideWrapper from './SlideWrapper.astro';
+
 const { heading, title, quotes, pricing } = Astro.props;
 ---
 
-<section class="slide-testimonials-pricing" data-heading={heading}>
+<SlideWrapper class="slide-testimonials-pricing" heading={heading} category="Testimonials">
   <div class="flex flex-col items-start justify-center h-full px-16 w-full">
     <h2 class="font-title text-8xl tracking-tight text-white leading-snug mb-12">
       {title}
@@ -47,4 +49,4 @@ const { heading, title, quotes, pricing } = Astro.props;
       )}
     </div>
   </div>
-</section>
+</SlideWrapper>

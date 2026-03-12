@@ -1,0 +1,23 @@
+---
+interface Props {
+  heading?: string;
+  category?: string;
+  class?: string;
+  style?: string;
+}
+
+const { heading, category, class: className, style } = Astro.props;
+---
+
+<section class={className} style={style}>
+  {heading && (
+    <div class="slide-heading-wrap">
+      {category && <div class="slide-category">{category}</div>}
+      <div class="slide-heading">{heading}</div>
+    </div>
+  )}
+
+  <slot />
+
+  <img src="/images/aura-vision-icon.svg" alt="" class="slide-watermark" />
+</section>

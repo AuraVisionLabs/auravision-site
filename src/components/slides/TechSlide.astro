@@ -10,10 +10,12 @@ interface Props {
   background?: string;
 }
 
+import SlideWrapper from './SlideWrapper.astro';
+
 const { heading, title, subtitle, badges = [], body, callout, video, background } = Astro.props;
 ---
 
-<section class="slide-tech" data-heading={heading} style={background && !video ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}>
+<SlideWrapper class="slide-tech" heading={heading} category="Technology" style={background && !video ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}>
   {video && (
     <video
       class="absolute inset-0 w-full h-full object-cover"
@@ -66,4 +68,4 @@ const { heading, title, subtitle, badges = [], body, callout, video, background 
       )}
     </div>
   </div>
-</section>
+</SlideWrapper>

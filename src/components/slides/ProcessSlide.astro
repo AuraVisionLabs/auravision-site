@@ -6,10 +6,12 @@ interface Props {
   steps: Array<{ number: string; title: string; description?: string }>;
 }
 
+import SlideWrapper from './SlideWrapper.astro';
+
 const { heading, title, subtitle, steps } = Astro.props;
 ---
 
-<section class="slide-process" data-heading={heading}>
+<SlideWrapper class="slide-process" heading={heading} category="Process">
   <div class="flex flex-col items-start justify-center h-full px-16 w-full">
     <h2 class="font-title text-5xl tracking-tight text-white leading-snug">
       {title}
@@ -33,4 +35,4 @@ const { heading, title, subtitle, steps } = Astro.props;
       ))}
     </div>
   </div>
-</section>
+</SlideWrapper>
