@@ -1,41 +1,38 @@
 ---
 interface Props {
   title: string;
-  subtitle?: string;
-  deckType?: string;
+  tagline: string;
   logo?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, deckType, logo } = Astro.props;
+const { title, tagline, logo } = Astro.props;
 ---
 
 <SlideWrapper
   class="slide-cover"
 >
-  <div class="relative z-10 flex flex-col items-start justify-center h-full px-16">
+  <div class="relative z-10 flex flex-col items-start justify-center h-full px-[3rem]">
     {logo ? (
       <img src={logo} alt="" class="w-full h-auto mb-10 object-contain object-left [filter:brightness(0)_invert(1)]" />
     ) : (
       <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full h-auto mb-10 object-contain object-left" />
     )}
 
-    <h1 class="font-title text-5xl tracking-tight text-white leading-tight w-full">
+    <p class="text-5xl text-white leading-tight w-full">
+      {tagline}
+    </p>
+
+    <h1 class="mt-8 text-8xl text-white font-body tracking-wide">
       {title}
     </h1>
-
-    {deckType && (
-      <p class="mt-8 text-6xl text-white font-body tracking-wide">
-        {deckType}
-      </p>
-    )}
   </div>
 
   {/* Bottom-left company attribution */}
-  <div class="absolute bottom-8 left-16 z-10">
+  <div class="absolute bottom-8 left-[3rem] z-10">
     <p class="text-sm text-white font-light">
-      {subtitle || "Aura Vision Labs Ltd"} · auravision.ai
+      Aura Vision Labs Ltd · auravision.ai
     </p>
   </div>
 </SlideWrapper>

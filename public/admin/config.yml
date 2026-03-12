@@ -254,8 +254,8 @@ collections:
             summary: "Cover: {{fields.title}}"
             fields:
               - { label: "Type", name: "type", widget: "hidden", default: "cover" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string", hint: "e.g. Retail Discovery Deck" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
               - { label: "Logo", name: "logo", widget: "image", required: false, hint: "Custom logo (defaults to Aura Vision)" }
 
           - label: "Tech"
@@ -264,6 +264,7 @@ collections:
             summary: "Tech: {{fields.title}}"
             fields:
               - { label: "Type", name: "type", widget: "hidden", default: "tech" }
+              - { label: "Category", name: "category", widget: "string", required: false, default: "Technology", hint: "Label shown above the heading (e.g. Technology)" }
               - { label: "Heading", name: "heading", widget: "string", required: false }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
@@ -276,6 +277,7 @@ collections:
             summary: "Process: {{fields.title}}"
             fields:
               - { label: "Type", name: "type", widget: "hidden", default: "process" }
+              - { label: "Category", name: "category", widget: "string", required: false, default: "Process", hint: "Label shown above the heading (e.g. How it Works)" }
               - { label: "Heading", name: "heading", widget: "string", required: false }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }

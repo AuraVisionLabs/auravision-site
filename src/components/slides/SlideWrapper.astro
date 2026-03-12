@@ -22,9 +22,9 @@ const { heading, category, class: className, style } = Astro.props;
   <div class="absolute bottom-0 left-0 right-0 h-[40%] bg-[linear-gradient(to_top,rgba(34,211,238,0.06)_0%,rgba(217,70,239,0.04)_40%,transparent_100%)] pointer-events-none z-0" />
 
   {heading && (
-    <div class="absolute top-0 left-0 right-0 z-[5] px-[3rem] pt-[1.75rem] pb-[1.5rem] pointer-events-none">
-      {category && <div class="font-mono text-[0.7rem] tracking-[0.12em] uppercase text-cyan-400/50 mb-[0.375rem]">{category}</div>}
-      <div class="font-title text-[2rem] tracking-[0.01em] text-white leading-[1.2]">{heading}</div>
+    <div class="absolute top-0 left-0 right-0 z-[5] px-[3rem] pt-[2rem] pb-[1.5rem] pointer-events-none">
+      {category && <div class="font-title text-white text-[1.5rem] mb-[0.375rem]">{category}</div>}
+      <div class="font-title text-[5rem] tracking-[0.01em] text-white leading-[1.2]">{heading}</div>
     </div>
   )}
 

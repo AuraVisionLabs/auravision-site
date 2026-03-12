@@ -3,9 +3,8 @@ title: Aura Vision — Retail Discovery Deck
 date: 2026-03-10
 slides:
   - type: cover
-    title: Take the guesswork out of managing your stores.
-    subtitle: Aura Vision Labs Ltd
-    deckType: Retail Discovery Deck
+    title: Retail Discovery Deck
+    tagline: Take the guesswork out of managing your stores.
   - type: tech
     heading: Unique AI
     title: The only solution that captures demographics without visible faces from

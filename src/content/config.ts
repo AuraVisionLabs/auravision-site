@@ -4,13 +4,13 @@ import { defineCollection, z } from "astro:content";
 const coverSlide = z.object({
   type: z.literal("cover"),
   title: z.string(),
-  subtitle: z.string().optional(),
-  deckType: z.string().optional(),
+  tagline: z.string(),
   logo: z.string().optional(),
 });
 
 const techSlide = z.object({
   type: z.literal("tech"),
+  category: z.string().optional(),
   heading: z.string().optional(),
   title: z.string(),
   subtitle: z.string().optional(),
@@ -20,6 +20,7 @@ const techSlide = z.object({
 
 const processSlide = z.object({
   type: z.literal("process"),
+  category: z.string().optional(),
   heading: z.string().optional(),
   title: z.string(),
   subtitle: z.string().optional(),
