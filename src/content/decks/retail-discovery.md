@@ -14,28 +14,39 @@ slides:
     video: /videos/aura-vision-tech-demo.mp4
     subtitle: The only solution that captures demographics without visible faces
       from existing cameras.
-  - type: two-column
+  - type: grid
     title: Aura can give you fixes in minutes
-    left:
-      - type: title
-        text: Plug & Play
-      - type: text
-        text: Our unique AI connects to any existing CCTV camera system in minutes.
-      - type: image
-        src: /images/uploads/adidas-dubai.jpg
-      - type: image
-        src: /images/uploads/as-watson-kruidvat.webp
-    right:
-      - type: title
-        text: Actionable Insights
-      - type: text
-        text: So you can drive accurate decisions across every store, department and
-          service area.
-    rightOptions:
-      background: cyan
-      glow: cyan
-    leftOptions:
-      background: none
-      glow: none
     category: How it works
+    cols: 2
+    cells:
+      - blocks:
+          - type: title
+            text: Plug & Play
+          - type: text
+            text: Our unique AI connects to any existing CCTV camera system in minutes.
+          - type: image
+            src: /images/uploads/adidas-dubai.jpg
+          - type: image
+            src: /images/uploads/as-watson-kruidvat.webp
+      - blocks:
+          - type: title
+            text: Actionable Insights
+          - type: text
+            text: So you can drive accurate decisions across every store, department and
+              service area.
+        options:
+          background: cyan
+          glow: cyan
+      - options:
+          background: none
+          glow: none
+        blocks:
+          - type: title
+            text: hey
+      - options:
+          background: none
+          glow: none
+        blocks:
+          - type: title
+            text: yo
 ---

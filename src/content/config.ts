@@ -30,21 +30,24 @@ const columnOptions = z.object({
   glow: colorOption.optional(),
 });
 
-const twoColumnSlide = z.object({
-  type: z.literal("two-column"),
+const gridSlide = z.object({
+  type: z.literal("grid"),
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  left: z.array(contentBlock),
-  leftOptions: columnOptions.optional(),
-  right: z.array(contentBlock),
-  rightOptions: columnOptions.optional(),
+  cols: z.number().min(1).max(4).default(2),
+  cells: z.array(
+    z.object({
+      blocks: z.array(contentBlock),
+      options: columnOptions.optional(),
+    })
+  ),
 });
 
 const slideSchema = z.discriminatedUnion("type", [
   coverSlide,
   techSlide,
-  twoColumnSlide,
+  gridSlide,
 ]);
 
 // ── Decks collection ──────────────────────────────────

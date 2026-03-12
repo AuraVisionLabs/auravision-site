@@ -270,81 +270,55 @@ collections:
               - { label: "Callout", name: "callout", widget: "markdown", required: false, hint: "Use raw mode to write HTML (e.g. <span style='color:#4ade80'>✓</span>)" }
               - { label: "Video", name: "video", widget: "file", required: false }
 
-          - label: "Two Column"
-            name: "two-column"
+          - label: "Grid"
+            name: "grid"
             widget: "object"
-            summary: "Two Column: {{fields.title}}"
+            summary: "Grid: {{fields.title}}"
             fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "two-column" }
-              - { label: "Category", name: "category", widget: "string", required: false, hint: "Label shown above the title (e.g. How it Works)" }
+              - { label: "Type", name: "type", widget: "hidden", default: "grid" }
+              - { label: "Category", name: "category", widget: "string", required: false, hint: "Label shown above the title" }
               - { label: "Title", name: "title", widget: "string", required: false }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-              - label: "Left Column"
-                name: "left"
+              - { label: "Columns", name: "cols", widget: "number", default: 2, min: 1, max: 4, value_type: "int", hint: "Number of columns in the grid" }
+              - label: "Cells"
+                name: "cells"
                 widget: "list"
-                label_singular: "to Left Column"
-                summary: "{{fields.type}}: {{fields.text}}"
-                types:
-                  - label: "Title"
-                    name: "title"
-                    widget: "object"
-                    fields:
-                      - { label: "Type", name: "type", widget: "hidden", default: "title" }
-                      - { label: "Text", name: "text", widget: "string" }
-                  - label: "Text"
-                    name: "text"
-                    widget: "object"
-                    fields:
-                      - { label: "Type", name: "type", widget: "hidden", default: "text" }
-                      - { label: "Text", name: "text", widget: "text" }
-                  - label: "Image"
-                    name: "image"
-                    widget: "object"
-                    fields:
-                      - { label: "Type", name: "type", widget: "hidden", default: "image" }
-                      - { label: "Image", name: "src", widget: "image" }
-                      - { label: "Alt Text", name: "alt", widget: "string", required: false }
-              - label: "Left Column Options"
-                name: "leftOptions"
-                widget: "object"
-                required: false
-                collapsed: true
+                label_singular: "Cell"
+                summary: "Cell {{index}}"
                 fields:
-                  - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a tinted background with padding and rounded corners" }
-                  - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a coloured outline with glow effect" }
-              - label: "Right Column"
-                name: "right"
-                widget: "list"
-                label_singular: "to Right Column"
-                summary: "{{fields.type}}: {{fields.text}}"
-                types:
-                  - label: "Title"
-                    name: "title"
+                  - label: "Blocks"
+                    name: "blocks"
+                    widget: "list"
+                    label_singular: "Block"
+                    summary: "{{fields.type}}: {{fields.text}}"
+                    types:
+                      - label: "Title"
+                        name: "title"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "title" }
+                          - { label: "Text", name: "text", widget: "string" }
+                      - label: "Text"
+                        name: "text"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "text" }
+                          - { label: "Text", name: "text", widget: "text" }
+                      - label: "Image"
+                        name: "image"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "image" }
+                          - { label: "Image", name: "src", widget: "image" }
+                          - { label: "Alt Text", name: "alt", widget: "string", required: false }
+                  - label: "Cell Options"
+                    name: "options"
                     widget: "object"
+                    required: false
+                    collapsed: true
                     fields:
-                      - { label: "Type", name: "type", widget: "hidden", default: "title" }
-                      - { label: "Text", name: "text", widget: "string" }
-                  - label: "Text"
-                    name: "text"
-                    widget: "object"
-                    fields:
-                      - { label: "Type", name: "type", widget: "hidden", default: "text" }
-                      - { label: "Text", name: "text", widget: "text" }
-                  - label: "Image"
-                    name: "image"
-                    widget: "object"
-                    fields:
-                      - { label: "Type", name: "type", widget: "hidden", default: "image" }
-                      - { label: "Image", name: "src", widget: "image" }
-                      - { label: "Alt Text", name: "alt", widget: "string", required: false }
-              - label: "Right Column Options"
-                name: "rightOptions"
-                widget: "object"
-                required: false
-                collapsed: true
-                fields:
-                  - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a tinted background with padding and rounded corners" }
-                  - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a coloured outline with glow effect" }
+                      - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a tinted background with padding and rounded corners" }
+                      - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a coloured outline with glow effect" }
 
       - label: "Body"
         name: "body"

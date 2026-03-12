@@ -20,6 +20,7 @@ interface Props {
 import SlideWrapper from './SlideWrapper.astro';
 
 const { title, subtitle, cols = 2, cells, category } = Astro.props;
+const rows = Math.ceil(cells.length / cols);
 
 const glowStyles: Record<string, string> = {
   cyan: "border-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.4)]",
@@ -39,7 +40,7 @@ const bgStyles: Record<string, string> = {
 <SlideWrapper class="slide-grid" title={title} subtitle={subtitle} category={category}>
   <div
     class="relative z-[1] grid h-full w-full px-[4rem] pt-[18rem] pb-[4rem] gap-[4rem]"
-    style={`grid-template-columns: repeat(${cols}, 1fr)`}
+    style={`grid-template-columns: repeat(${cols}, 1fr); grid-template-rows: repeat(${rows}, 1fr)`}
   >
     {cells.map(({ blocks, options }) => {
       const bg = options?.background && options.background !== "none" ? `${bgStyles[options.background]} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
