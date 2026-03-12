@@ -77,7 +77,6 @@ const isDev = import.meta.env.DEV;
           var entry = this.props.entry;
           var data = entry.get('data');
           var title = data.get('title') || 'Untitled Deck';
-          var prospect = data.get('prospect') || '';
           var slug = entry.get('slug') || '';
           var slides = (data.get('slides') || { toJS: function() { return []; } }).toJS();
           var deckUrl = '/decks/' + (slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''));
@@ -86,8 +85,7 @@ const isDev = import.meta.env.DEV;
             /* header */
             h('div', { style: { padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)' } },
               h('div', {},
-                h('h1', { style: { fontSize: '16px', fontWeight: 600, color: '#fff', margin: '0 0 2px' } }, title),
-                prospect ? h('span', { style: { fontSize: '12px', color: '#94a3b8' } }, 'For: ' + prospect) : null
+                h('h1', { style: { fontSize: '16px', fontWeight: 600, color: '#fff', margin: '0 0 2px' } }, title)
               ),
               h('div', { style: { display: 'flex', alignItems: 'center', gap: '12px' } },
                 h('span', { style: { fontSize: '11px', color: '#64748b' } }, slides.length + ' slides'),

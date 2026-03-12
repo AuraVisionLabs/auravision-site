@@ -3,19 +3,16 @@ interface Props {
   heading?: string;
   title: string;
   subtitle?: string;
-  badges?: string[];
-  body?: string;
   callout?: string;
   video?: string;
-  background?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { heading, title, subtitle, badges = [], body, callout, video, background } = Astro.props;
+const { heading, title, subtitle, callout, video } = Astro.props;
 ---
 
-<SlideWrapper class="slide-tech" heading={heading} category="Technology" style={background && !video ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}>
+<SlideWrapper class="slide-tech" heading={heading} category="Technology">
   {video && (
     <video
       class="absolute inset-0 w-full h-full object-cover"
@@ -36,25 +33,6 @@ const { heading, title, subtitle, badges = [], body, callout, video, background 
       {subtitle && (
         <p class="mt-4 text-4xl text-white font-body">
           {subtitle}
-        </p>
-      )}
-
-      {badges.length > 0 && (
-        <div class="mt-8 flex flex-wrap gap-3">
-          {badges.map((badge) => (
-            <span class="inline-flex items-center gap-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 px-4 py-2 text-sm text-cyan-300">
-              <svg class="h-3.5 w-3.5 text-cyan-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-              {badge}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {body && (
-        <p class="mt-8 text-base text-white/60 font-light leading-relaxed">
-          {body}
         </p>
       )}
 

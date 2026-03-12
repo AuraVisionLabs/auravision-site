@@ -4,20 +4,16 @@ interface Props {
   subtitle?: string;
   deckType?: string;
   logo?: string;
-  background?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, deckType, logo, background } = Astro.props;
+const { title, subtitle, deckType, logo } = Astro.props;
 ---
 
 <SlideWrapper
   class="slide-cover"
-  style={background ? `background-image: url('${background}'); background-size: cover; background-position: center;` : ''}
 >
-  {background && <div class="absolute inset-0 bg-slate-900/80" />}
-
   <div class="relative z-10 flex flex-col items-start justify-center h-full px-16">
     {logo ? (
       <img src={logo} alt="" class="w-full h-auto mb-10 object-contain object-left [filter:brightness(0)_invert(1)]" />

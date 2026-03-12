@@ -232,25 +232,12 @@ collections:
         widget: "string"
         hint: "Internal name for the deck"
 
-      - label: "Prospect"
-        name: "prospect"
-        widget: "string"
-        required: false
-        hint: "Company name this deck is prepared for"
-
       - label: "Date"
         name: "date"
         widget: "datetime"
         date_format: "YYYY-MM-DD"
         time_format: false
         format: "YYYY-MM-DD"
-        required: false
-
-      - label: "Theme"
-        name: "theme"
-        widget: "select"
-        options: ["dark", "light"]
-        default: "dark"
         required: false
 
       - label: "Slides"
@@ -270,125 +257,36 @@ collections:
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
               - { label: "Logo", name: "logo", widget: "image", required: false, hint: "Custom logo (defaults to Aura Vision)" }
-              - { label: "Background Image", name: "background", widget: "image", required: false }
 
-          - label: "Metrics"
-            name: "metrics"
+          - label: "Tech"
+            name: "tech"
             widget: "object"
-            summary: "Metrics: {{fields.title}}"
+            summary: "Tech: {{fields.title}}"
             fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "metrics" }
-              - { label: "Title", name: "title", widget: "string", required: false }
-              - label: "Items"
-                name: "items"
+              - { label: "Type", name: "type", widget: "hidden", default: "tech" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "Callout", name: "callout", widget: "string", required: false }
+              - { label: "Video", name: "video", widget: "file", required: false }
+
+          - label: "How it Works"
+            name: "process"
+            widget: "object"
+            summary: "Process: {{fields.title}}"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "process" }
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - label: "Steps"
+                name: "steps"
                 widget: "list"
-                summary: "{{fields.value}} — {{fields.label}}"
+                summary: "{{fields.number}}. {{fields.title}}"
                 fields:
-                  - { label: "Value", name: "value", widget: "string", hint: "e.g. 22X, 63%, 307" }
-                  - { label: "Label", name: "label", widget: "string" }
-
-          - label: "Case Study"
-            name: "case-study"
-            widget: "object"
-            summary: "Case Study: {{fields.ref}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "case-study" }
-              - { label: "Case Study Slug", name: "ref", widget: "string", hint: "Slug of the case study (e.g. virgin-media-o2-x-aura-vision-full-scale-roll-out)" }
-
-          - label: "Testimonial"
-            name: "testimonial"
-            widget: "object"
-            summary: "Testimonial: {{fields.name}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "testimonial" }
-              - { label: "Headliner", name: "headliner", widget: "string" }
-              - { label: "Quote", name: "quote", widget: "text" }
-              - { label: "Name", name: "name", widget: "string" }
-              - { label: "Role", name: "role", widget: "string" }
-              - { label: "Photo", name: "photo", widget: "image", required: false }
-              - { label: "Logo", name: "logo", widget: "image", required: false }
-              - { label: "Company", name: "company", widget: "string", required: false }
-
-          - label: "Feature"
-            name: "feature"
-            widget: "object"
-            summary: "Feature: {{fields.title}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "feature" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-              - { label: "Bullets", name: "bullets", widget: "list", required: false }
-              - { label: "Image", name: "image", widget: "image", required: false }
-              - { label: "Reversed Layout", name: "reversed", widget: "boolean", default: false, required: false }
-
-          - label: "Logo Wall"
-            name: "logo-wall"
-            widget: "object"
-            summary: "Logo Wall: {{fields.title}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "logo-wall" }
-              - { label: "Title", name: "title", widget: "string", required: false, default: "Trusted by leading brands" }
-              - label: "Logos"
-                name: "logos"
-                widget: "list"
-                required: false
-                hint: "Leave empty to use default client logos"
-                summary: "{{fields.name}}"
-                fields:
-                  - { label: "Name", name: "name", widget: "string" }
-                  - { label: "Image", name: "src", widget: "image" }
-
-          - label: "Image"
-            name: "image"
-            widget: "object"
-            summary: "Image: {{fields.caption}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "image" }
-              - { label: "Image", name: "src", widget: "image" }
-              - { label: "Alt Text", name: "alt", widget: "string", required: false }
-              - { label: "Caption", name: "caption", widget: "string", required: false }
-
-          - label: "Text"
-            name: "text"
-            widget: "object"
-            summary: "Text: {{fields.title}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "text" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-              - { label: "Body", name: "body", widget: "text", required: false }
-              - { label: "Bullets", name: "bullets", widget: "list", required: false }
-
-          - label: "Comparison"
-            name: "comparison"
-            widget: "object"
-            summary: "Comparison: {{fields.title}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "comparison" }
-              - { label: "Title", name: "title", widget: "string", required: false }
-              - label: "Left Column"
-                name: "left"
-                widget: "object"
-                fields:
-                  - { label: "Heading", name: "heading", widget: "string" }
-                  - { label: "Items", name: "items", widget: "list" }
-              - label: "Right Column"
-                name: "right"
-                widget: "object"
-                fields:
-                  - { label: "Heading", name: "heading", widget: "string" }
-                  - { label: "Items", name: "items", widget: "list" }
-
-          - label: "Call to Action"
-            name: "cta"
-            widget: "object"
-            summary: "CTA: {{fields.title}}"
-            fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "cta" }
-              - { label: "Title", name: "title", widget: "string" }
-              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-              - { label: "Button Text", name: "buttonText", widget: "string", required: false, default: "Get in Touch" }
-              - { label: "Button Link", name: "buttonHref", widget: "string", required: false, default: "/contact" }
+                  - { label: "Number", name: "number", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text", required: false }
 
       - label: "Body"
         name: "body"

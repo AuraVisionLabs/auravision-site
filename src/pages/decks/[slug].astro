@@ -5,11 +5,6 @@ import DeckLayout from "../../layouts/DeckLayout.astro";
 import CoverSlide from "../../components/slides/CoverSlide.astro";
 import TechSlide from "../../components/slides/TechSlide.astro";
 import ProcessSlide from "../../components/slides/ProcessSlide.astro";
-import ROITableSlide from "../../components/slides/ROITableSlide.astro";
-import TestimonialsPricingSlide from "../../components/slides/TestimonialsPricingSlide.astro";
-import TimelineSlide from "../../components/slides/TimelineSlide.astro";
-import CaseStudyDetailSlide from "../../components/slides/CaseStudyDetailSlide.astro";
-import ContactSlide from "../../components/slides/ContactSlide.astro";
 
 export async function getStaticPaths() {
   const decks = await getCollection("decks");
@@ -20,28 +15,18 @@ export async function getStaticPaths() {
 }
 
 const { deck } = Astro.props;
-const { slides, title, prospect } = deck.data;
+const { slides, title } = deck.data;
 ---
 
-<DeckLayout title={title} prospect={prospect}>
+<DeckLayout title={title}>
   {slides.map((slide) => {
     switch (slide.type) {
       case "cover":
-        return <CoverSlide title={slide.title} subtitle={slide.subtitle} deckType={slide.deckType} logo={slide.logo} background={slide.background} />;
+        return <CoverSlide title={slide.title} subtitle={slide.subtitle} deckType={slide.deckType} logo={slide.logo} />;
       case "tech":
-        return <TechSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} badges={slide.badges} body={slide.body} callout={slide.callout} video={slide.video} background={slide.background} />;
+        return <TechSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} />;
       case "process":
         return <ProcessSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} steps={slide.steps} />;
-      case "roi-table":
-        return <ROITableSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} rows={slide.rows} />;
-      case "testimonials-pricing":
-        return <TestimonialsPricingSlide heading={slide.heading} title={slide.title} quotes={slide.quotes} pricing={slide.pricing} />;
-      case "timeline":
-        return <TimelineSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} steps={slide.steps} milestones={slide.milestones} />;
-      case "case-study-detail":
-        return <CaseStudyDetailSlide heading={slide.heading} category={slide.category} client={slide.client} description={slide.description} roiValue={slide.roiValue} quote={slide.quote} attribution={slide.attribution} metrics={slide.metrics} logo={slide.logo} />;
-      case "contact":
-        return <ContactSlide heading={slide.heading} title={slide.title} contacts={slide.contacts} />;
       default:
         return null;
     }

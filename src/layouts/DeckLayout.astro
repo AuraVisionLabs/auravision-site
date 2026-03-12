@@ -3,12 +3,11 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
-  prospect?: string;
 }
 
-const { title, prospect } = Astro.props;
+const { title } = Astro.props;
 
-const pageTitle = prospect ? `${title} — ${prospect}` : title;
+const pageTitle = title;
 ---
 
 <!doctype html>
