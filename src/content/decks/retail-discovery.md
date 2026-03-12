@@ -13,12 +13,9 @@ slides:
       from existing cameras.
   - type: process
     title: How it works
-    steps:
-      - number: "1"
-        title: Plug & Play
-        description: Our unique AI connects to any existing CCTV camera system in minutes.
-      - number: "2"
-        title: Actionable Insights
-        description: So you can drive accurate decisions across every store, department
-          and service area.
+    columns:
+      - title: Plug & Play
+        body: Our unique AI connects to any existing CCTV camera system in minutes.
+      - title: Actionable Insights
+        body: So you can drive accurate decisions across every store, department and service area.
 ---

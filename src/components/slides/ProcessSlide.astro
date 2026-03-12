@@ -2,27 +2,22 @@
 interface Props {
   title?: string;
   subtitle?: string;
-  steps: Array<{ number: string; title: string; description?: string }>;
+  columns: Array<{ title: string; body?: string }>;
   category?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, steps, category = "Process" } = Astro.props;
+const { title, subtitle, columns, category = "Process" } = Astro.props;
 ---
 
 <SlideWrapper class="slide-process" title={title} subtitle={subtitle} category={category}>
-  <div class="relative z-[1] flex flex-col items-start justify-center h-full px-[3rem] w-full">
-    <div class="mt-12 grid grid-cols-2 gap-8 w-full">
-      {steps.map((step) => (
-        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-8">
-          <span class="inline-block font-mono text-sm text-cyan-400/70 mb-3">{step.number}</span>
-          <h3 class="font-title text-2xl text-white mb-3">{step.title}</h3>
-          {step.description && (
-            <p class="text-sm text-white/50 font-light leading-relaxed">{step.description}</p>
-          )}
-        </div>
-      ))}
-    </div>
+  <div class="relative z-[1] flex items-start justify-center h-full px-[3rem] w-full pt-[16rem] gap-[4rem]">
+    {columns.map((col) => (
+      <div class="flex-1">
+        <h3 class="font-title text-[4rem] text-white mb-4">{col.title}</h3>
+        {col.body && <p class="font-body text-[2.5rem] text-white leading-relaxed">{col.body}</p>}
+      </div>
+    ))}
   </div>
 </SlideWrapper>

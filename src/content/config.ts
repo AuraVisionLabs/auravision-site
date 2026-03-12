@@ -22,11 +22,10 @@ const processSlide = z.object({
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  steps: z.array(
+  columns: z.array(
     z.object({
-      number: z.string(),
       title: z.string(),
-      description: z.string().optional(),
+      body: z.string().optional(),
     })
   ),
 });
