@@ -27,14 +27,14 @@ slides:
           - type: device
       - blocks:
           - type: title
-            text: 2 — Segment
+            text: 2 — Analyse
           - type: text
-            text: AI segments your staff, customers, age & gender
+            text: AI segments your staff, customers, ages & genders.
           - type: heatmap
       - blocks:
           - type: title
-            text: 3 — Aura Answers
+            text: 3 — Answer
           - type: text
-            text: Get instant answers to fix store performance.
+            text: Aura instantly answers how to fix store performance.
           - type: chat
 ---

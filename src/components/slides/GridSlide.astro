@@ -142,12 +142,14 @@ const bgStyles: Record<string, string> = {
   .slide-grid .chat-animation-wrapper {
     height: 70%;
     margin-top: 4vw;
+    overflow: visible;
   }
   .slide-grid .chat-animation {
     border: none;
     background: transparent;
     border-radius: 0;
     padding-bottom: clamp(60px, 7vw, 120px);
+    overflow: hidden;
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
   }
