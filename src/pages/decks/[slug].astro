@@ -24,9 +24,9 @@ const { slides, title } = deck.data;
       case "cover":
         return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} />;
       case "tech":
-        return <TechSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
+        return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
       case "process":
-        return <ProcessSlide heading={slide.heading} title={slide.title} subtitle={slide.subtitle} steps={slide.steps} category={slide.category} />;
+        return <ProcessSlide title={slide.title} subtitle={slide.subtitle} steps={slide.steps} category={slide.category} />;
       default:
         return null;
     }

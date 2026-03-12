@@ -264,11 +264,10 @@ collections:
             summary: "Tech: {{fields.title}}"
             fields:
               - { label: "Type", name: "type", widget: "hidden", default: "tech" }
-              - { label: "Category", name: "category", widget: "string", required: false, default: "Technology", hint: "Label shown above the heading (e.g. Technology)" }
-              - { label: "Heading", name: "heading", widget: "string", required: false }
-              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string", required: false, default: "Technology", hint: "Label shown above the title (e.g. Technology)" }
+              - { label: "Title", name: "title", widget: "string", required: false }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-              - { label: "Callout", name: "callout", widget: "string", required: false }
+              - { label: "Callout", name: "callout", widget: "markdown", required: false, hint: "Use raw mode to write HTML (e.g. <span style='color:#4ade80'>✓</span>)" }
               - { label: "Video", name: "video", widget: "file", required: false }
 
           - label: "How it Works"
@@ -277,9 +276,8 @@ collections:
             summary: "Process: {{fields.title}}"
             fields:
               - { label: "Type", name: "type", widget: "hidden", default: "process" }
-              - { label: "Category", name: "category", widget: "string", required: false, default: "Process", hint: "Label shown above the heading (e.g. How it Works)" }
-              - { label: "Heading", name: "heading", widget: "string", required: false }
-              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string", required: false, default: "Process", hint: "Label shown above the title (e.g. How it Works)" }
+              - { label: "Title", name: "title", widget: "string", required: false }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
               - label: "Steps"
                 name: "steps"

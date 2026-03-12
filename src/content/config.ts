@@ -11,8 +11,7 @@ const coverSlide = z.object({
 const techSlide = z.object({
   type: z.literal("tech"),
   category: z.string().optional(),
-  heading: z.string().optional(),
-  title: z.string(),
+  title: z.string().optional(),
   subtitle: z.string().optional(),
   callout: z.string().optional(),
   video: z.string().optional(),
@@ -21,8 +20,7 @@ const techSlide = z.object({
 const processSlide = z.object({
   type: z.literal("process"),
   category: z.string().optional(),
-  heading: z.string().optional(),
-  title: z.string(),
+  title: z.string().optional(),
   subtitle: z.string().optional(),
   steps: z.array(
     z.object({

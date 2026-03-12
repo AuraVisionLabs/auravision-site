@@ -6,14 +6,13 @@ slides:
     title: Retail Discovery Deck
     tagline: Take the guesswork out of managing your stores.
   - type: tech
-    heading: Unique AI
-    title: The only solution that captures demographics without visible faces from
-      existing cameras.
-    callout: No faces / privacy
+    title: Unique AI
+    callout: "<span style='color:#4ade80'>✓</span> More accurate  <span style='color:#4ade80'>✓</span> More detailed  <span style='color:#4ade80'>✓</span> Faster setup  <span style='color:#4ade80'>✓</span> More private."
     video: /videos/aura-vision-tech-demo.mp4
+    subtitle: The only solution that captures demographics without visible faces
+      from existing cameras.
   - type: process
-    heading: How it works
-    title: Turn your stores into data platforms, in minutes
+    title: How it works
     steps:
       - number: "1"
         title: Plug & Play
