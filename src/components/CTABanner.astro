@@ -10,7 +10,7 @@ const {
   heading = "Turn your cameras into clarity",
   subheading = "Measure, optimise, and grow with Aura Vision.",
   buttonText = "Contact Us",
-  buttonHref = "/contact",
+  buttonHref = "https://calendly.com/zach-n5m/aura-vision-introduction",
 } = Astro.props;
 ---
 
@@ -29,6 +29,8 @@ const {
     )}
     <a
       href={buttonHref}
+      target="_blank"
+      rel="noopener noreferrer"
       class="mt-8 inline-block rounded-full bg-white px-8 py-3 text-sm font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
     >
       {buttonText}

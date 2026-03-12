@@ -1,13 +1,12 @@
 ---
-import ContactFormFields from "./ContactFormFields.astro";
-
 interface Props {
   headingLevel?: 'h1' | 'h2';
   title?: string;
   subtitle?: string;
+  buttonText?: string;
 }
 
-const { headingLevel = 'h2', title = 'Get in touch', subtitle = "Whether you're ready for a demo or just exploring, we'd love to hear from you." } = Astro.props;
+const { headingLevel = 'h2', title = 'Get in touch', subtitle = "Whether you're ready for a demo or just exploring, we'd love to hear from you.", buttonText = 'Book a call' } = Astro.props;
 const Heading = headingLevel;
 ---
 
@@ -17,21 +16,21 @@ const Heading = headingLevel;
   <div class="absolute inset-0 backdrop-blur-3xl"></div>
 
   <div class="relative container-site">
-    <div class="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
-      <!-- Left: Heading -->
-      <div data-fade class="flex flex-col">
-        <Heading class="heading-section">
-          {title}
-        </Heading>
-        <p class="mt-6 text-xl text-white/80 md:text-2xl">
-          {subtitle}
-        </p>
-      </div>
-
-      <!-- Right: Form -->
-      <div data-fade="100">
-        <ContactFormFields />
-      </div>
+    <div data-fade class="flex flex-col items-center text-center max-w-2xl mx-auto">
+      <Heading class="heading-section">
+        {title}
+      </Heading>
+      <p class="mt-6 text-xl text-white/80 md:text-2xl">
+        {subtitle}
+      </p>
+      <a
+        href="https://calendly.com/zach-n5m/aura-vision-introduction"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-10 inline-block rounded-full bg-white px-10 py-4 text-sm font-title font-medium text-slate-900 tracking-widest uppercase hover:bg-white/85 transition-all duration-300 hover:shadow-[0_0_40px_rgba(8,145,178,0.7)]"
+      >
+        {buttonText}
+      </a>
     </div>
   </div>
 </section>
