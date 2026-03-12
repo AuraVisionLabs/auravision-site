@@ -270,22 +270,65 @@ collections:
               - { label: "Callout", name: "callout", widget: "markdown", required: false, hint: "Use raw mode to write HTML (e.g. <span style='color:#4ade80'>✓</span>)" }
               - { label: "Video", name: "video", widget: "file", required: false }
 
-          - label: "How it Works"
-            name: "process"
+          - label: "Two Column"
+            name: "two-column"
             widget: "object"
-            summary: "Process: {{fields.title}}"
+            summary: "Two Column: {{fields.title}}"
             fields:
-              - { label: "Type", name: "type", widget: "hidden", default: "process" }
-              - { label: "Category", name: "category", widget: "string", required: false, default: "Process", hint: "Label shown above the title (e.g. How it Works)" }
+              - { label: "Type", name: "type", widget: "hidden", default: "two-column" }
+              - { label: "Category", name: "category", widget: "string", required: false, hint: "Label shown above the title (e.g. How it Works)" }
               - { label: "Title", name: "title", widget: "string", required: false }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-              - label: "Columns"
-                name: "columns"
+              - label: "Left Column"
+                name: "left"
                 widget: "list"
-                summary: "{{fields.title}}"
-                fields:
-                  - { label: "Title", name: "title", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text", required: false }
+                label_singular: "to Left Column"
+                summary: "{{fields.type}}: {{fields.text}}"
+                types:
+                  - label: "Title"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - { label: "Type", name: "type", widget: "hidden", default: "title" }
+                      - { label: "Text", name: "text", widget: "string" }
+                  - label: "Text"
+                    name: "text"
+                    widget: "object"
+                    fields:
+                      - { label: "Type", name: "type", widget: "hidden", default: "text" }
+                      - { label: "Text", name: "text", widget: "text" }
+                  - label: "Image"
+                    name: "image"
+                    widget: "object"
+                    fields:
+                      - { label: "Type", name: "type", widget: "hidden", default: "image" }
+                      - { label: "Image", name: "src", widget: "image" }
+                      - { label: "Alt Text", name: "alt", widget: "string", required: false }
+              - label: "Right Column"
+                name: "right"
+                widget: "list"
+                label_singular: "to Right Column"
+                summary: "{{fields.type}}: {{fields.text}}"
+                types:
+                  - label: "Title"
+                    name: "title"
+                    widget: "object"
+                    fields:
+                      - { label: "Type", name: "type", widget: "hidden", default: "title" }
+                      - { label: "Text", name: "text", widget: "string" }
+                  - label: "Text"
+                    name: "text"
+                    widget: "object"
+                    fields:
+                      - { label: "Type", name: "type", widget: "hidden", default: "text" }
+                      - { label: "Text", name: "text", widget: "text" }
+                  - label: "Image"
+                    name: "image"
+                    widget: "object"
+                    fields:
+                      - { label: "Type", name: "type", widget: "hidden", default: "image" }
+                      - { label: "Image", name: "src", widget: "image" }
+                      - { label: "Alt Text", name: "alt", widget: "string", required: false }
 
       - label: "Body"
         name: "body"

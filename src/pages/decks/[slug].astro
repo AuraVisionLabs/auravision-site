@@ -4,7 +4,7 @@ import DeckLayout from "../../layouts/DeckLayout.astro";
 
 import CoverSlide from "../../components/slides/CoverSlide.astro";
 import TechSlide from "../../components/slides/TechSlide.astro";
-import ProcessSlide from "../../components/slides/ProcessSlide.astro";
+import TwoColumnSlide from "../../components/slides/TwoColumnSlide.astro";
 
 export async function getStaticPaths() {
   const decks = await getCollection("decks");
@@ -25,8 +25,8 @@ const { slides, title } = deck.data;
         return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} />;
       case "tech":
         return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
-      case "process":
-        return <ProcessSlide title={slide.title} subtitle={slide.subtitle} columns={slide.columns} category={slide.category} />;
+      case "two-column":
+        return <TwoColumnSlide title={slide.title} subtitle={slide.subtitle} left={slide.left} right={slide.right} category={slide.category} />;
       default:
         return null;
     }

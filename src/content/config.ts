@@ -17,23 +17,25 @@ const techSlide = z.object({
   video: z.string().optional(),
 });
 
-const processSlide = z.object({
-  type: z.literal("process"),
+const contentBlock = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("title"), text: z.string() }),
+  z.object({ type: z.literal("text"), text: z.string() }),
+  z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
+]);
+
+const twoColumnSlide = z.object({
+  type: z.literal("two-column"),
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  columns: z.array(
-    z.object({
-      title: z.string(),
-      body: z.string().optional(),
-    })
-  ),
+  left: z.array(contentBlock),
+  right: z.array(contentBlock),
 });
 
 const slideSchema = z.discriminatedUnion("type", [
   coverSlide,
   techSlide,
-  processSlide,
+  twoColumnSlide,
 ]);
 
 // ── Decks collection ──────────────────────────────────

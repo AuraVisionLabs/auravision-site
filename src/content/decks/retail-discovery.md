@@ -7,15 +7,26 @@ slides:
     tagline: Take the guesswork out of managing your stores.
   - type: tech
     title: Unique AI
-    callout: "<span style='color:#4ade80'>✓</span> More accurate  <span style='color:#4ade80'>✓</span> More detailed  <span style='color:#4ade80'>✓</span> Faster setup  <span style='color:#4ade80'>✓</span> More private."
+    callout: <span style='color:#4ade80'>✓</span> More accurate  <span
+      style='color:#4ade80'>✓</span> More detailed  <span
+      style='color:#4ade80'>✓</span> Faster setup  <span
+      style='color:#4ade80'>✓</span> More private.
     video: /videos/aura-vision-tech-demo.mp4
     subtitle: The only solution that captures demographics without visible faces
       from existing cameras.
-  - type: process
+  - type: two-column
     title: How it works
-    columns:
-      - title: Plug & Play
-        body: Our unique AI connects to any existing CCTV camera system in minutes.
-      - title: Actionable Insights
-        body: So you can drive accurate decisions across every store, department and service area.
+    left:
+      - type: title
+        text: Plug & Play
+      - type: text
+        text: Our unique AI connects to any existing CCTV camera system in minutes.
+      - type: image
+        src: /images/uploads/adidas-dubai.jpg
+    right:
+      - type: title
+        text: Actionable Insights
+      - type: text
+        text: So you can drive accurate decisions across every store, department and
+          service area.
 ---

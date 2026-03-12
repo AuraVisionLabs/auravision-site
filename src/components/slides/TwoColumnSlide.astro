@@ -18,7 +18,7 @@ const { title, subtitle, left, right, category = "Process" } = Astro.props;
 const columns = [left, right];
 ---
 
-<SlideWrapper class="slide-process" title={title} subtitle={subtitle} category={category}>
+<SlideWrapper class="slide-two-column" title={title} subtitle={subtitle} category={category}>
   <div class="relative z-[1] flex items-start justify-center h-full px-[3rem] w-full pt-[16rem] gap-[4rem]">
     {columns.map((blocks) => (
       <div class="flex-1">
