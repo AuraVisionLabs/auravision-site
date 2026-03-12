@@ -65,48 +65,6 @@ const pageTitle = title;
         box-shadow: 0 0 80px rgba(0, 0, 0, 0.6);
       }
 
-      .deck > section {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        will-change: opacity;
-        background: #0a0f1e;
-      }
-
-      /* Subtle cyan→fuchsia gradient glow at the bottom of every slide */
-      .deck > section::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 40%;
-        background: linear-gradient(
-          to top,
-          rgba(34, 211, 238, 0.06) 0%,
-          rgba(217, 70, 239, 0.04) 40%,
-          transparent 100%
-        );
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      /* Ensure slide content sits above the gradient */
-      .deck > section > *:not(.slide-watermark):not(.slide-heading-wrap) {
-        position: relative;
-        z-index: 1;
-      }
-
-      .deck > section.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
       /* ── Scroll mode (all slides stacked vertically) ──── */
       html.scroll-mode,
       html.scroll-mode body {
@@ -138,65 +96,6 @@ const pageTitle = title;
         border-radius: 0.5rem;
         overflow: hidden;
         flex-shrink: 0;
-      }
-
-      /* Watermark logo on every slide (bottom-right) */
-      .slide-watermark {
-        position: absolute;
-        bottom: 1.5rem;
-        right: 1.75rem;
-        z-index: 10;
-        opacity: 0.75;
-        height: 4.5rem;
-        width: 4.5rem;
-        pointer-events: none;
-      }
-      /* Full-width slide heading bar */
-      .slide-heading-wrap {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 5;
-        padding: 1.75rem 3rem 1.5rem;
-        pointer-events: none;
-      }
-
-      .slide-category {
-        font-family: "Roboto Mono", monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(34, 211, 238, 0.5);
-        margin-bottom: 0.375rem;
-      }
-
-      .slide-heading {
-        font-family: "Questrial", sans-serif;
-        font-size: 2rem;
-        letter-spacing: 0.01em;
-        color: #ffffff;
-        line-height: 1.2;
-      }
-
-      /* Profile glow in slides */
-      .profile-glow::before,
-      .profile-glow::after {
-        content: "";
-        position: absolute;
-        inset: -4px;
-        border-radius: 9999px;
-        z-index: 0;
-        filter: blur(5px);
-        opacity: 0.9;
-      }
-
-      .profile-glow::before {
-        background: radial-gradient(circle at 25% 25%, #22d3ee, transparent 100%);
-      }
-
-      .profile-glow::after {
-        background: radial-gradient(circle at 75% 75%, #D946EF, transparent 100%);
       }
 
       /* ── Print / PDF styles ──────────────────────────────── */
