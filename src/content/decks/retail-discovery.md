@@ -299,16 +299,12 @@ slides:
           - blocks:
               - type: metric-list
                 items:
-                  - metric: footfall
-                    text: "<strong>24% more accurate</strong> customer counts across <strong>78 US showrooms</strong>"
                   - metric: capture
                     text: "Capture-rates ensure every marketing campaign is <strong>delivering traffic gains</strong>"
                   - metric: staffing
                     text: "Associates automatically excluded so <strong>only real customers are counted</strong>"
                   - metric: impressions
-                    text: "Which mattresses attract most customers to <strong>sit and lie down</strong>"
-                  - metric: conversion
-                    text: "Purchase funnel reports identify new opportunities to <strong>increase sales</strong>"
+                    text: "Measure which mattresses customers actually <strong>sit and lie down</strong> on"
             options:
               valign: center
   - type: table
@@ -412,14 +408,10 @@ slides:
               - type: metric-list
                 items:
                   - metric: demographics
-                    text: "<strong>Full-store demographic segmentation</strong> to tailor strategies to each store's audience"
-                  - metric: footfall
-                    text: "<strong>High-accuracy traffic counting</strong> to forecast performance and benchmark <strong>307 stores</strong>"
+                    text: "identify which displays attract which customer demographics to each store"
                   - metric: staffing
                     text: "Data-driven <strong>staffing</strong> aligned to customer demand across the full retail estate"
                   - metric: impressions
-                    text: "Pinpoint which <strong>handset displays</strong> attract and convert specific customer segments"
-                  - metric: conversion
                     text: "<strong>22X ROI</strong> from optimising display engagement and <strong>redesigning underperforming stores</strong>"
             options:
               valign: center
