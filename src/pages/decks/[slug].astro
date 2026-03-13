@@ -4,7 +4,6 @@ import DeckLayout from "../../layouts/DeckLayout.astro";
 
 import CoverSlide from "../../components/slides/CoverSlide.astro";
 import TechSlide from "../../components/slides/TechSlide.astro";
-import GridSlide from "../../components/slides/GridSlide.astro";
 import TableSlide from "../../components/slides/TableSlide.astro";
 
 export async function getStaticPaths() {
@@ -26,10 +25,8 @@ const { slides, title } = deck.data;
         return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} footer={slide.footer} />;
       case "tech":
         return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
-      case "grid":
-        return <GridSlide title={slide.title} subtitle={slide.subtitle} cols={slide.cols} cells={slide.cells} category={slide.category} />;
       case "table":
-        return <TableSlide title={slide.title} subtitle={slide.subtitle} colWidths={slide.colWidths} striped={slide.striped} rows={slide.rows} category={slide.category} />;
+        return <TableSlide title={slide.title} subtitle={slide.subtitle} colWidths={slide.colWidths} layout={slide.layout} rows={slide.rows} category={slide.category} />;
       default:
         return null;
     }

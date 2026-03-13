@@ -2,22 +2,24 @@
 import CellContent from './CellContent.astro';
 import type { ComponentProps } from 'astro/types';
 
-type ContentBlock = ComponentProps<typeof CellContent>['blocks'][number];
+type Cell = ComponentProps<typeof CellContent>;
 
 interface Props {
   title?: string;
   subtitle?: string;
   colWidths?: number[];
-  striped?: boolean;
-  rows: Array<{ cells: ContentBlock[] }>;
+  layout?: "grid" | "table-striped" | "table";
+  rows: Array<{ cells: Cell[] }>;
   category?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, colWidths, striped, rows, category } = Astro.props;
-const cols = rows[0]?.cells.length ?? 1;
-const widths = colWidths ?? Array.from({ length: cols }, () => 100 / cols);
+const { title, subtitle, colWidths = [1, 1, 1], layout = "grid", rows, category } = Astro.props;
+const gridCols = colWidths.map((w) => `${w}fr`).join(' ');
+const isTable = layout === "table-striped" || layout === "table";
+const isStriped = layout === "table-striped";
+
 const bgStylesFull: Record<string, string> = {
   cyan: "bg-cyan-400",
   fuchsia: "bg-fuchsia-500",
@@ -29,31 +31,141 @@ const bgStylesFull: Record<string, string> = {
 ---
 
 <SlideWrapper class="slide-table" title={title} subtitle={subtitle} category={category}>
-  <div class="relative z-[1] flex items-center w-full h-full px-[4rem] pt-[18rem] pb-[4rem]">
-    <table class="w-full border-separate border-spacing-0 table-fixed rounded-[2rem] overflow-hidden">
-      <colgroup>
-        {widths.map((w) => <col style={`width: ${w}%`} />)}
-      </colgroup>
-      <tbody>
+  <div class:list={["relative z-[1] flex flex-col h-full w-full px-[4rem] pt-[18rem] pb-[4rem]", isTable ? "justify-center" : ""]}>
+    {isTable ? (
+      <div class="rounded-[2rem] overflow-hidden">
         {rows.map((row, rowIdx) => {
-          const isEmptyRow = row.cells.every((b) => b.type === "text" && "text" in b && b.text.trim() === "");
-          const rowBg = striped && !isEmptyRow ? (rowIdx % 2 === 0 ? "bg-white/10" : "bg-white/5") : "";
+          const isEmptyRow = row.cells.every((cell) =>
+            cell.blocks.length === 1 && cell.blocks[0].type === "text" && cell.blocks[0].text.trim() === ""
+          );
+          const rowBg = isStriped && !isEmptyRow ? (rowIdx % 2 === 0 ? "bg-white/10" : "bg-white/5") : "";
           return (
-          <tr>
-            {row.cells.map((block) => {
-              const isEmpty = block.type === "text" && "text" in block && block.text.trim() === "";
-              const colorBg = block.type === "text" && "bg" in block && block.bg && block.bg !== "none" ? bgStylesFull[block.bg] : "";
-              const cellBg = isEmpty ? "" : (striped ? (colorBg || rowBg) : "");
-              return (
-              <td class={`align-middle px-[1.5rem] ${striped ? 'py-[1.5rem]' : 'py-[0.5rem]'} ${cellBg}`} style="vertical-align: middle;">
-                <CellContent blocks={[block]} compact stripedMode={striped} class="h-full w-full justify-center" />
-              </td>
-              );
-            })}
-          </tr>
+            <div class="grid" style={`grid-template-columns: ${gridCols}`}>
+              {row.cells.map((cell) => {
+                const firstBg = cell.blocks.find((b) => b.type === "text" && "bg" in b && b.bg && b.bg !== "none");
+                const colorBg = firstBg?.type === "text" && "bg" in firstBg && firstBg.bg ? bgStylesFull[firstBg.bg] : "";
+                const isEmpty = cell.blocks.length === 1 && cell.blocks[0].type === "text" && cell.blocks[0].text.trim() === "";
+                const cellBg = isEmpty ? "" : (colorBg || rowBg);
+                return (
+                  <div class={`px-[1.5rem] py-[1.5rem] ${cellBg} flex items-center`}>
+                    <CellContent blocks={cell.blocks} options={cell.options} compact stripedMode class="h-full w-full justify-center" />
+                  </div>
+                );
+              })}
+            </div>
           );
         })}
-      </tbody>
-    </table>
+      </div>
+    ) : (
+      <div class="grid h-full gap-[4rem]" style={`grid-template-columns: ${gridCols}; grid-template-rows: repeat(${rows.length}, 1fr)`}>
+        {rows.map((row) =>
+          row.cells.map((cell) => (
+            <CellContent {...cell} />
+          ))
+        )}
+      </div>
+    )}
   </div>
 </SlideWrapper>
+
+<style is:global>
+  /* Cube: override fixed pixel dimensions with viewport-relative units */
+  .slide-table .cube-container {
+    min-height: 0;
+    height: 100%;
+    margin-top: -3vw;
+  }
+  .slide-table .cube-scene {
+    --w: 12vw;
+    --h: 8vw;
+    --d: 12vw;
+    --half-w: 6vw;
+    --half-h: 4vw;
+    --half-d: 6vw;
+    --offset: 1vw;
+    padding: 2vw;
+    transform: scale(1);
+  }
+  .slide-table .face.front {
+    gap: 0.6vw;
+  }
+  .slide-table .eth-port {
+    width: 3vw;
+    height: 2.7vw;
+  }
+  .slide-table .usbc-port {
+    width: 2.5vw;
+    height: 1.5vw;
+  }
+  .slide-table .port-label {
+    font-size: 0.5vw;
+  }
+  .slide-table .dim-label {
+    font-size: 0.9vw;
+    padding: 0 0.5vw;
+  }
+  .slide-table .dim {
+    height: 0.8vw;
+    margin-top: -0.4vw;
+  }
+  .slide-table .speaker-grill {
+    top: 0.8vw;
+    left: 1vw;
+    right: 1vw;
+    bottom: 0.8vw;
+  }
+  .slide-table .grill {
+    top: 1.2vw;
+    left: 2vw;
+    right: 2vw;
+    gap: 0.35vw;
+  }
+  .slide-table .power {
+    bottom: 1vw;
+    right: 1vw;
+    width: 1.2vw;
+    height: 1.2vw;
+  }
+
+  /* Heatmap */
+  .slide-table .pathmap-wrapper {
+    height: 100%;
+    max-height: 100%;
+    padding: 4vw;
+  }
+  .slide-table .pathmap-compare {
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* Chat */
+  .slide-table .chat-animation-wrapper {
+    height: 70%;
+    margin-top: 4vw;
+    overflow: visible;
+  }
+  .slide-table .chat-animation {
+    border: none;
+    background: transparent;
+    border-radius: 0;
+    padding-bottom: clamp(60px, 7vw, 120px);
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
+  }
+  .slide-table .chat-bar-container {
+    height: clamp(30px, 3.5vw, 60px);
+  }
+  .slide-table .chat-prompt-input {
+    font-size: clamp(10px, 1vw, 16px);
+  }
+  .slide-table .chat-prompt-send {
+    height: clamp(20px, 2.5vw, 36px);
+    width: clamp(20px, 2.5vw, 36px);
+  }
+  .slide-table .chat-prompt-bar {
+    padding-bottom: clamp(8px, 1vw, 28px);
+    padding-left: clamp(8px, 1vw, 24px);
+    padding-right: clamp(8px, 1vw, 24px);
+  }
+</style>

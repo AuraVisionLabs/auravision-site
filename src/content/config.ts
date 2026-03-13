@@ -40,36 +40,24 @@ const columnOptions = z.object({
   glow: colorOption.optional(),
 });
 
-const gridSlide = z.object({
-  type: z.literal("grid"),
-  category: z.string().optional(),
-  title: z.string().optional(),
-  subtitle: z.string().optional(),
-  cols: z.number().min(1).max(4).default(2),
-  cells: z.array(
-    z.object({
-      blocks: z.array(contentBlock),
-      options: columnOptions.optional(),
-    })
-  ),
-});
-
 const tableSlide = z.object({
   type: z.literal("table"),
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  striped: z.boolean().default(false),
+  layout: z.enum(["grid", "table-striped", "table"]).default("grid"),
   colWidths: z.array(z.number()).optional(),
   rows: z.array(z.object({
-    cells: z.array(contentBlock),
+    cells: z.array(z.object({
+      blocks: z.array(contentBlock),
+      options: columnOptions.optional(),
+    })),
   })),
 });
 
 const slideSchema = z.discriminatedUnion("type", [
   coverSlide,
   techSlide,
-  gridSlide,
   tableSlide,
 ]);
 
