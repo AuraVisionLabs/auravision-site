@@ -5,8 +5,7 @@ slides:
   - type: cover
     title: Retail Discovery Deck
     tagline: Take the guesswork out of managing your stores.
-    footer: Aura Vision Labs Ltd · <a href='https://auravision.ai'
-      style='text-decoration:underline'>auravision.ai</a>
+    footer: Aura Vision Labs Ltd · <a href='https://auravision.ai'>auravision.ai</a>
   - type: tech
     title: Unique AI
     callout: <span style='color:#4ade80'>✓</span> More accurate  <span

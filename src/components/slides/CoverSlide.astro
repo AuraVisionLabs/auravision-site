@@ -32,6 +32,6 @@ const { title, tagline, logo, footer } = Astro.props;
 
   {/* Bottom-left company attribution */}
   <div class="absolute bottom-8 left-[3rem] z-10  px-[5rem]">
-    <p class="text-lg text-white font-light" set:html={footer ?? 'Aura Vision Labs Ltd · <a href="https://auravision.ai" class="underline">auravision.ai</a>'} />
+    <p class="text-lg text-white font-light text-[2rem]" set:html={footer ?? 'Aura Vision Labs Ltd · <a href="https://auravision.ai">auravision.ai</a>'} />
   </div>
 </SlideWrapper>
