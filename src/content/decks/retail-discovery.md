@@ -273,7 +273,7 @@ slides:
                     level: 4
   - type: table
     category: Purple — Case Study
-    title: "\"Aura Vision is our secret weapon.\""
+    title: "\"Aura Vision is our secret weapon\""
     layout: grid
     colWidths:
       - 1
@@ -375,18 +375,17 @@ slides:
           - blocks:
               - type: metric-list
                 items:
-                  - metric: impressions
-                    text: "<strong>6X ROI</strong> by benchmarking refits across multiple seasons and campaigns"
                   - metric: heatmaps
                     text: "Optimise customer flow between departments to <strong>maximise purchase opportunities</strong>"
+                  - metric: impressions
+                    text: "<strong>6X ROI</strong> by benchmarking refits across multiple seasons and campaigns"
                   - metric: conversion
                     text: "<strong>0.5% conversion uplift</strong> from data-driven layout and merchandising changes"
             options:
               valign: center
   - type: table
-    category: Path to Purchase — Case Study
-    categoryBg: fuchsia
-    title: "\"Decisions in days, not months.\""
+    category: Virgin Media O2 — Case Study
+    title: "\"Decisions in days, not months\""
     layout: grid
     colWidths:
       - 1
@@ -400,39 +399,33 @@ slides:
                   - src: /images/logos/vmo2.svg
                     alt: Virgin Media O2
               - type: text
-                text: 22X ROI
+                text: 22X ROI across 307 UK stores
                 size: h2
               - type: testimonial
-                headliner: O2 Retail linked handset displays to conversion by customer segment.
+                headliner: Facing renewal of outdated footfall counters, VMO2 saw an opportunity to go beyond traditional counting.
                 quote: — Operations Development, O2 Retail
                 size: md
-              - type: metrics
-                items:
-                  - demographics
-                  - impressions
-                  - dwell
-                  - conversion
             options:
               background: white-transparent
+              valign: center
           - blocks:
-              - type: text
-                text: Key Outcomes
-                size: h4
-              - type: text
-                text: |
-                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>Full-store demographic segmentation</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Identified how to <strong>redesign underperforming stores</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Decisions in <strong>days rather than months</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>22X ROI opportunity</strong> from store redesign</div>
-                  </div>
-                size: p-md
+              - type: metric-list
+                items:
+                  - metric: demographics
+                    text: "<strong>Full-store demographic segmentation</strong> to tailor strategies to each store's audience"
+                  - metric: footfall
+                    text: "<strong>High-accuracy traffic counting</strong> to forecast performance and benchmark <strong>307 stores</strong>"
+                  - metric: staffing
+                    text: "Data-driven <strong>staffing</strong> aligned to customer demand across the full retail estate"
+                  - metric: impressions
+                    text: "Pinpoint which <strong>handset displays</strong> attract and convert specific customer segments"
+                  - metric: conversion
+                    text: "<strong>22X ROI</strong> from optimising display engagement and <strong>redesigning underperforming stores</strong>"
             options:
-              glow: fuchsia
+              valign: center
   - type: table
-    category: Basket Recovery — Case Study
-    categoryBg: red
-    title: "\"Simplicity and ease of integration.\""
+    category: A.S. Watson — Case Study
+    title: "\"Simplicity and ease of integration\""
     layout: grid
     colWidths:
       - 1
@@ -446,32 +439,24 @@ slides:
                   - src: /images/logos/aswatson.webp
                     alt: A.S. Watson
               - type: text
-                text: 4X ROI
+                text: 4X ROI annually
                 size: h2
               - type: testimonial
                 headliner: Kruidvat introduced self-service checkouts and needed to manage queue times across both PoS types.
                 quote: — Store Innovation Lead, A.S. Watson Group
                 size: md
-              - type: metrics
-                items:
-                  - queues
-                  - dwell
-                  - conversion
             options:
               background: white-transparent
+              valign: center
           - blocks:
-              - type: text
-                text: Key Outcomes
-                size: h4
-              - type: text
-                text: |
-                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Monitors <strong>queue &amp; transaction times</strong> at each PoS</div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Prevents lost sales <strong>before they happen</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Integrates with <strong>existing cameras</strong> in every store</div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>4X ROI</strong> delivered each year</div>
-                  </div>
-                size: p-md
+              - type: metric-list
+                items:
+                  - metric: footfall
+                    text: "<strong>8% more accurate</strong> customer counts by automatically segmenting staff from customers"
+                  - metric: queues
+                    text: "Monitor <strong>queue &amp; transaction times</strong> at each PoS to prevent lost sales before they happen"
+                  - metric: conversion
+                    text: "Precise <strong>conversion metrics</strong> without additional sensors or RFID tags"
             options:
-              glow: red
+              valign: center
 ---
