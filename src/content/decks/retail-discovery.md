@@ -149,4 +149,57 @@ slides:
           - type: text
             text: 4 - 8X
             size: h4
+  - type: grid
+    category: Testimonials
+    title: What our clients say about us
+    cols: 3
+    cells:
+      - blocks:
+          - type: logos
+            fit: fixed
+            items:
+              - src: /images/logos/vmo2.svg
+                alt: Virgin Media O2
+          - type: testimonial
+            headliner: The insights we gain from Aura Vision are a game changer
+            quote: They give us a deeper understanding of our customers, which helps shape our strategy, and enables faster, smarter decision-making.
+          - type: profile
+            name: Carly Atherton
+            role: "Head of Multichannel\nOperations Development"
+            photo: /images/carly.webp
+            company: Virgin Media O2
+        options:
+          background: blue
+      - blocks:
+          - type: logos
+            fit: fixed
+            items:
+              - src: /images/logos/adidas.svg
+                alt: Adidas
+          - type: testimonial
+            headliner: This proves how impactful Aura Vision is as a tool
+            quote: It not only validates our strategies but also gives us the confidence to make data-driven decisions that ultimately grow the business.
+          - type: profile
+            name: Samantha Turner
+            role: "Business Transformation\nManager"
+            photo: /images/samantha.webp
+            company: Adidas
+        options:
+          background: blue
+      - blocks:
+          - type: logos
+            fit: fixed
+            items:
+              - src: /images/logos/aswatson.webp
+                alt: A.S. Watson
+          - type: testimonial
+            headliner: Simplicity and ease of integration
+            quote: I really like the simplicity and ease of integration with our existing camera system, which basically every store has.
+          - type: profile
+            name: Frenkel Tel
+            role: Store Innovation Lead
+            photo: /images/frenkel.webp
+            company: A.S. Watson (Kruidvat)
+        options:
+          background: blue
 ---

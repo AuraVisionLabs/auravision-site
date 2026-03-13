@@ -25,7 +25,9 @@ const bgColor = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "ora
 const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("text"), text: z.string(), size: textSize, bg: bgColor }),
   z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
-  z.object({ type: z.literal("logos"), items: z.array(z.object({ src: z.string(), alt: z.string().optional() })) }),
+  z.object({ type: z.literal("logos"), items: z.array(z.object({ src: z.string(), alt: z.string().optional() })), fit: z.enum(["fill", "fixed"]).default("fill") }),
+  z.object({ type: z.literal("testimonial"), headliner: z.string(), quote: z.string() }),
+  z.object({ type: z.literal("profile"), name: z.string(), role: z.string(), photo: z.string().optional(), logo: z.string().optional(), company: z.string().optional() }),
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat") }),
   z.object({ type: z.literal("device") }),
