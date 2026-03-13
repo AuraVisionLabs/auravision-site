@@ -11,11 +11,11 @@ slides:
 
   # ── Slide 2: The Challenge ──────────────────────────
   - type: table
-    category: The Challenge
+    category: Immediate Challenge
     title: Stores are operating blind
-    subtitle: Footfall data tells you how many people enter. It tells you nothing about what happens inside.
-    layout: table
-    colWidths: [2, 2]
+    subtitle: Footfall data tells you how many people enter. It tells you nothing about what happens in-store.
+    layout: table-striped
+    colWidths: [1.5, 2]
     rows:
       - cells:
           - blocks:
@@ -27,7 +27,6 @@ slides:
               - type: text
                 text: Staff and customer interactions go unmeasured. You cannot see who engages, where, or how often.
                 size: p-md
-                bg: white-transparent
       - cells:
           - blocks:
               - type: text
@@ -38,7 +37,6 @@ slides:
               - type: text
                 text: Which zones drive dwell time? Which windows convert passersby? Currently impossible to answer.
                 size: p-md
-                bg: white-transparent
       - cells:
           - blocks:
               - type: text
@@ -49,7 +47,6 @@ slides:
               - type: text
                 text: 20% of customers may not be approached. With no data you cannot identify where this may be happening.
                 size: p-md
-                bg: white-transparent
 
   # ── Slide 3: Ask Aura ───────────────────────────────
   - type: table
