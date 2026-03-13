@@ -1,5 +1,7 @@
 import { defineCollection, z } from "astro:content";
 
+const slideBg = z.enum(["none", "top", "bottom", "bl", "br"]).default("none");
+
 // ── Slide type schemas (discriminated union) ──────────
 const coverSlide = z.object({
   type: z.literal("cover"),
@@ -7,6 +9,7 @@ const coverSlide = z.object({
   tagline: z.string(),
   logo: z.string().optional(),
   footer: z.string().optional(),
+  background: slideBg,
 });
 
 const techSlide = z.object({
@@ -16,6 +19,7 @@ const techSlide = z.object({
   subtitle: z.string().optional(),
   callout: z.string().optional(),
   video: z.string().optional(),
+  background: slideBg,
 });
 
 const textSize = z.enum(["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm", "p-xs"]).default("p-md");
@@ -53,6 +57,7 @@ const tableSlide = z.object({
   subtitle: z.string().optional(),
   layout: z.enum(["grid", "table-striped", "table"]).default("grid"),
   colWidths: z.array(z.number()).optional(),
+  background: slideBg,
   rows: z.array(z.object({
     cells: z.array(z.object({
       blocks: z.array(contentBlock),
@@ -70,6 +75,7 @@ const endingSlide = z.object({
     phone: z.string().optional(),
   })).optional(),
   footer: z.string().optional(),
+  background: slideBg,
 });
 
 const slideSchema = z.discriminatedUnion("type", [

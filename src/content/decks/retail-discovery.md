@@ -6,6 +6,7 @@ slides:
     title: Retail Discovery Deck
     tagline: Take the guesswork out of managing your stores.
     footer: Aura Vision Labs Ltd · <a href='https://auravision.ai'>auravision.ai</a>
+    background: top
   - type: tech
     title: Unique AI
     callout: <span style='color:#4ade80'>✓</span> More accurate  <span
@@ -15,10 +16,12 @@ slides:
     video: /videos/aura-vision-tech-demo.mp4
     subtitle: The only solution that captures demographics without visible faces
       from existing cameras.
+    background: br
   - type: table
     title: How it works
     category: Process
     layout: grid
+    background: bottom
     rows:
       - cells:
           - blocks:
@@ -48,6 +51,7 @@ slides:
   - type: table
     category: Case Studies
     title: Customer ROI Stories
+    background: br
     colWidths:
       - 28
       - 40
@@ -174,6 +178,7 @@ slides:
     category: Testimonials
     title: What our clients say about us
     layout: grid
+    background: bl
     rows:
       - cells:
           - blocks:
@@ -235,6 +240,7 @@ slides:
     category: Process
     title: What we need to ensure success
     layout: grid
+    background: br
     colWidths:
       - 1
       - 1
@@ -275,6 +281,7 @@ slides:
     category: Purple — Case Study
     title: "\"Aura Vision is our secret weapon\""
     layout: grid
+    background: bl
     colWidths:
       - 1
       - 1
@@ -311,6 +318,7 @@ slides:
     category: Flannels — Case Study
     title: "\"8X ROI in 3 months with better staffing\""
     layout: grid
+    background: br
     colWidths:
       - 1
       - 1
@@ -347,6 +355,7 @@ slides:
     category: Decathlon — Case Study
     title: "\"Now we know how each refit performs\""
     layout: grid
+    background: bl
     colWidths:
       - 1
       - 1
@@ -383,6 +392,7 @@ slides:
     category: Virgin Media O2 — Case Study
     title: "\"Decisions in days, not months\""
     layout: grid
+    background: br
     colWidths:
       - 1
       - 1
@@ -419,6 +429,7 @@ slides:
     category: A.S. Watson — Case Study
     title: "\"Simplicity and ease of integration\""
     layout: grid
+    background: bl
     colWidths:
       - 1
       - 1
@@ -454,6 +465,7 @@ slides:
 
   - type: ending
     headline: "Ready to future-proof your business?<br>Get in touch:"
+    background: top
     contacts:
       - name: Zach Sutcliffe
         email: zach@auravision.ai

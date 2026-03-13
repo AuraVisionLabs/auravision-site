@@ -23,13 +23,13 @@ const { slides, title } = deck.data;
   {slides.map((slide) => {
     switch (slide.type) {
       case "cover":
-        return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} footer={slide.footer} />;
+        return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} footer={slide.footer} background={slide.background} />;
       case "tech":
-        return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
+        return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} background={slide.background} />;
       case "table":
-        return <TableSlide title={slide.title} subtitle={slide.subtitle} colWidths={slide.colWidths} layout={slide.layout} rows={slide.rows} category={slide.category} categoryBg={slide.categoryBg} />;
+        return <TableSlide title={slide.title} subtitle={slide.subtitle} colWidths={slide.colWidths} layout={slide.layout} rows={slide.rows} category={slide.category} categoryBg={slide.categoryBg} background={slide.background} />;
       case "ending":
-        return <EndingSlide headline={slide.headline} contacts={slide.contacts} footer={slide.footer} />;
+        return <EndingSlide headline={slide.headline} contacts={slide.contacts} footer={slide.footer} background={slide.background} />;
       default:
         return null;
     }

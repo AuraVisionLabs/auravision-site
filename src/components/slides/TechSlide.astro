@@ -5,14 +5,15 @@ interface Props {
   callout?: string;
   video?: string;
   category?: string;
+  background?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, callout, video, category = "Technology" } = Astro.props;
+const { title, subtitle, callout, video, category = "Technology", background } = Astro.props;
 ---
 
-<SlideWrapper class="slide-tech">
+<SlideWrapper class="slide-tech" background={background}>
   {video && (
     <video
       class="absolute inset-0 w-full h-full object-cover"

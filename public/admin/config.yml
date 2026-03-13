@@ -256,6 +256,7 @@ collections:
               - { label: "Title", name: "title", widget: "string", hint: "e.g. Retail Discovery Deck" }
               - { label: "Tagline", name: "tagline", widget: "string" }
               - { label: "Logo", name: "logo", widget: "image", required: false, hint: "Custom logo (defaults to Aura Vision)" }
+              - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "top", "bottom", "bl", "br"], hint: "Background image for the slide" }
 
           - label: "Tech"
             name: "tech"
@@ -268,6 +269,7 @@ collections:
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
               - { label: "Callout", name: "callout", widget: "markdown", required: false, hint: "Use raw mode to write HTML (e.g. <span style='color:#4ade80'>✓</span>)" }
               - { label: "Video", name: "video", widget: "file", required: false }
+              - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "top", "bottom", "bl", "br"], hint: "Background image for the slide" }
 
           - label: "Table"
             name: "table"
@@ -278,6 +280,7 @@ collections:
               - { label: "Category", name: "category", widget: "string", required: false, hint: "Label shown above the title" }
               - { label: "Category Background", name: "categoryBg", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"], hint: "Background colour for the category label" }
               - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "top", "bottom", "bl", "br"], hint: "Background image for the slide" }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
               - { label: "Layout", name: "layout", widget: "select", default: "grid", options: ["grid", "table-striped", "table"], hint: "grid = spaced cards, table-striped = compact rows with alternating backgrounds, table = compact rows no background" }
               - { label: "Column Widths", name: "colWidths", widget: "list", required: false, field: { label: "Width", name: "width", widget: "number", value_type: "int" }, hint: "Proportional column widths (e.g. 1, 1, 1 for equal or 28, 40, 23, 12 for weighted). Defaults to 3 equal columns." }

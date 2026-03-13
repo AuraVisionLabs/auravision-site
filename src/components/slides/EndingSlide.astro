@@ -9,16 +9,18 @@ interface Props {
   headline: string;
   contacts?: Contact[];
   footer?: string;
+  background?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { headline, contacts, footer } = Astro.props;
+const { headline, contacts, footer, background } = Astro.props;
 ---
 
 <SlideWrapper
   class="slide-ending"
   hideWatermark
+  background={background}
 >
   <div class="relative z-10 flex flex-col items-start justify-center h-full w-full px-[5rem]">
     <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-[70%] h-auto mb-12 object-contain object-left" />

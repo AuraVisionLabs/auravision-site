@@ -4,16 +4,18 @@ interface Props {
   tagline: string;
   logo?: string;
   footer?: string;
+  background?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, tagline, logo, footer } = Astro.props;
+const { title, tagline, logo, footer, background } = Astro.props;
 ---
 
 <SlideWrapper
   class="slide-cover"
   hideWatermark
+  background={background}
 >
   <div class="relative z-10 flex flex-col items-start justify-center h-full w-[70%] px-[5rem]">
     {logo ? (
