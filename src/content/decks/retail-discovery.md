@@ -47,15 +47,16 @@ slides:
     category: Case Studies
     title: Customer ROI Stories
     colWidths:
-      - 25
+      - 28
       - 40
       - 23
       - 12
+    striped: true
     rows:
       - cells:
           - type: text
             text: " "
-            size: p-xs
+            size: p-sm
           - type: text
             text: Opportunity
             size: h6
@@ -68,12 +69,12 @@ slides:
       - cells:
           - type: text
             text: Enhanced Footfall
-            size: p-md
+            size: h5
             bg: blue
           - type: text
             text: Discover new traffic and conversion opportunities across your stores with
               accurate customer demographics.
-            size: p-xs
+            size: p-sm
           - type: logos
             items:
               - src: /images/logos/purple.svg
@@ -90,12 +91,12 @@ slides:
       - cells:
           - type: text
             text: Precision Staff Planning
-            size: p-md
+            size: h5
             bg: purple
           - type: text
             text: Do more with your current staffing resources to optimise conversion and
               productivity.
-            size: p-xs
+            size: p-sm
           - type: logos
             items:
               - src: /images/logos/adidas.svg
@@ -112,12 +113,12 @@ slides:
       - cells:
           - type: text
             text: Path to Purchase
-            size: p-md
+            size: h5
             bg: fuchsia
           - type: text
             text: Identify key moments along the customer journey to drive conversion - from
               product displays to showrooms, fitting rooms & seating areas
-            size: p-xs
+            size: p-sm
           - type: logos
             items:
               - src: /images/logos/decathlon.svg
@@ -132,12 +133,12 @@ slides:
       - cells:
           - type: text
             text: Basket Recovery
-            size: p-md
+            size: h5
             bg: red
           - type: text
             text: Reduce basket abandonment by ensuring efficient tills, queues and service
               areas at all times through the week.
-            size: p-xs
+            size: p-sm
           - type: logos
             items:
               - src: /images/logos/centerpoint.webp

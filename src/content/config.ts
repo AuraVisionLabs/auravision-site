@@ -57,6 +57,7 @@ const tableSlide = z.object({
   title: z.string().optional(),
   subtitle: z.string().optional(),
   colWidths: z.array(z.number()).optional(),
+  striped: z.boolean().default(false),
   rows: z.array(z.object({
     cells: z.array(contentBlock),
   })),

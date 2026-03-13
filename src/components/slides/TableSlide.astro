@@ -8,33 +8,51 @@ interface Props {
   title?: string;
   subtitle?: string;
   colWidths?: number[];
+  striped?: boolean;
   rows: Array<{ cells: ContentBlock[] }>;
   category?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, colWidths, rows, category } = Astro.props;
+const { title, subtitle, colWidths, striped, rows, category } = Astro.props;
 const cols = rows[0]?.cells.length ?? 1;
 const widths = colWidths ?? Array.from({ length: cols }, () => 100 / cols);
+const bgStylesFull: Record<string, string> = {
+  cyan: "bg-cyan-400",
+  fuchsia: "bg-fuchsia-500",
+  purple: "bg-purple-500",
+  blue: "bg-blue-500",
+  red: "bg-red-500",
+  orange: "bg-orange-500",
+};
 ---
 
 <SlideWrapper class="slide-table" title={title} subtitle={subtitle} category={category}>
   <div class="relative z-[1] flex items-center w-full h-full px-[4rem] pt-[18rem] pb-[4rem]">
-    <table class="w-full border-separate border-spacing-x-[3rem] border-spacing-y-[1rem] table-fixed">
+    <table class="w-full border-collapse table-fixed">
       <colgroup>
         {widths.map((w) => <col style={`width: ${w}%`} />)}
       </colgroup>
       <tbody>
-        {rows.map((row) => (
-          <tr style="height: 0;">
-            {row.cells.map((block) => (
-              <td class="align-middle">
-                <CellContent blocks={[block]} compact class="h-full justify-center" />
+        {rows.map((row, rowIdx) => {
+          const isEmptyRow = row.cells.every((b) => b.type === "text" && "text" in b && b.text.trim() === "");
+          const rowBg = striped && !isEmptyRow ? (rowIdx % 2 === 0 ? "bg-white/5" : "bg-white/10") : "";
+          return (
+          <tr>
+            {row.cells.map((block) => {
+              const isEmpty = block.type === "text" && "text" in block && block.text.trim() === "";
+              const colorBg = block.type === "text" && "bg" in block && block.bg && block.bg !== "none" ? bgStylesFull[block.bg] : "";
+              const cellBg = isEmpty ? "" : (colorBg || rowBg);
+              return (
+              <td class={`align-middle px-[1.5rem] py-[1.5rem] ${cellBg}`} style="vertical-align: middle;">
+                <CellContent blocks={[block]} compact class="h-full w-full justify-center" />
               </td>
-            ))}
+              );
+            })}
           </tr>
-        ))}
+          );
+        })}
       </tbody>
     </table>
   </div>

@@ -77,9 +77,10 @@ const sizeClasses: Record<string, string> = {
   {blocks.map((block) => {
     if (block.type === "text") {
       const bgMap = compact ? bgStylesFull : bgStyles;
-      const pad = compact ? "px-[1rem] py-[0.75rem] rounded-[1rem] shadow-lg" : "py-[1.5rem] px-[2rem] rounded-[2rem]";
-      const textBg = block.bg && block.bg !== "none" ? `${bgMap[block.bg]} backdrop-blur-sm ${pad}` : "";
-      return <div class={`${sizeClasses[block.size ?? "p-md"]} ${textBg}`} set:html={block.text} />;
+      const pad = compact ? "" : "py-[1.5rem] px-[2rem] rounded-[2rem]";
+      const textBg = !compact && block.bg && block.bg !== "none" ? `${bgMap[block.bg]} backdrop-blur-sm ${pad}` : "";
+      const sizeClass = compact ? sizeClasses[block.size ?? "p-md"].replace(/mb-\d+/g, "mb-0") : sizeClasses[block.size ?? "p-md"];
+      return <div class={`${sizeClass} ${textBg}`} set:html={block.text} />;
     }
     if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
     if (block.type === "logos") return (
