@@ -1,0 +1,43 @@
+---
+import CellContent from './CellContent.astro';
+import type { ComponentProps } from 'astro/types';
+
+type ContentBlock = ComponentProps<typeof CellContent>['blocks'][number];
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  cols?: number;
+  cells: ContentBlock[][];
+  category?: string;
+}
+
+import SlideWrapper from './SlideWrapper.astro';
+
+const { title, subtitle, cols = 2, cells, category } = Astro.props;
+const rows: ContentBlock[][][] = [];
+for (let i = 0; i < cells.length; i += cols) {
+  rows.push(cells.slice(i, i + cols));
+}
+---
+
+<SlideWrapper class="slide-table" title={title} subtitle={subtitle} category={category}>
+  <div class="relative z-[1] flex h-full w-full px-[4rem] pt-[18rem] pb-[4rem]">
+    <table class="w-full h-full border-collapse table-fixed">
+      <colgroup>
+        {Array.from({ length: cols }).map(() => <col style={`width: ${100 / cols}%`} />)}
+      </colgroup>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            {row.map((blocks) => (
+              <td class="align-top px-[2rem] py-[2rem] border-r-[0.15rem] border-white/10 last:border-r-0 border-b-[0.15rem] border-b-white/10 last-of-type:border-b-0">
+                <CellContent blocks={blocks} class="h-full" />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</SlideWrapper>

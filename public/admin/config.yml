@@ -243,8 +243,7 @@ collections:
       - label: "Slides"
         name: "slides"
         widget: "list"
-        collapsed: true
-        minimize_collapsed: true
+        collapsed: false
         summary: "{{fields.type}} — {{fields.title}}"
         hint: "Add slides in order. Each slide has a type that determines its layout."
         types:
@@ -292,18 +291,13 @@ collections:
                     label_singular: "Block"
                     summary: "{{fields.type}}: {{fields.text}}"
                     types:
-                      - label: "Title"
-                        name: "title"
-                        widget: "object"
-                        fields:
-                          - { label: "Type", name: "type", widget: "hidden", default: "title" }
-                          - { label: "Text", name: "text", widget: "string" }
                       - label: "Text"
                         name: "text"
                         widget: "object"
                         fields:
                           - { label: "Type", name: "type", widget: "hidden", default: "text" }
-                          - { label: "Text", name: "text", widget: "text" }
+                          - { label: "Text", name: "text", widget: "markdown", hint: "Supports HTML — use raw mode for inline styles" }
+                          - { label: "Size", name: "size", widget: "select", default: "p-md", options: ["h1", "h2", "h3", "h4", "p-lg", "p-md", "p-sm"], hint: "Text size preset" }
                       - label: "Image"
                         name: "image"
                         widget: "object"
@@ -335,8 +329,54 @@ collections:
                       - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a tinted background with padding and rounded corners" }
                       - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue"], hint: "Adds a coloured outline with glow effect" }
 
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-        required: false
-        hint: "Optional notes (not displayed in the deck)"
+          - label: "Table"
+            name: "table"
+            widget: "object"
+            summary: "Table: {{fields.title}}"
+            fields:
+              - { label: "Type", name: "type", widget: "hidden", default: "table" }
+              - { label: "Category", name: "category", widget: "string", required: false, hint: "Label shown above the title" }
+              - { label: "Title", name: "title", widget: "string", required: false }
+              - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+              - { label: "Columns", name: "cols", widget: "number", default: 2, min: 1, max: 6, value_type: "int", hint: "Number of columns in the table" }
+              - label: "Cells"
+                name: "cells"
+                widget: "list"
+                label_singular: "Cell"
+                summary: "Cell {{index}}"
+                field:
+                  label: "Blocks"
+                  name: "blocks"
+                  widget: "list"
+                  label_singular: "Block"
+                  summary: "{{fields.type}}: {{fields.text}}"
+                  types:
+                    - label: "Text"
+                      name: "text"
+                      widget: "object"
+                      fields:
+                        - { label: "Type", name: "type", widget: "hidden", default: "text" }
+                        - { label: "Text", name: "text", widget: "markdown", hint: "Supports HTML — use raw mode for inline styles" }
+                        - { label: "Size", name: "size", widget: "select", default: "p-md", options: ["h1", "h2", "h3", "h4", "p-lg", "p-md", "p-sm"], hint: "Text size preset" }
+                    - label: "Image"
+                      name: "image"
+                      widget: "object"
+                      fields:
+                        - { label: "Type", name: "type", widget: "hidden", default: "image" }
+                        - { label: "Image", name: "src", widget: "image" }
+                        - { label: "Alt Text", name: "alt", widget: "string", required: false }
+                    - label: "Heatmap"
+                      name: "heatmap"
+                      widget: "object"
+                      fields:
+                        - { label: "Type", name: "type", widget: "hidden", default: "heatmap" }
+                    - label: "Chat"
+                      name: "chat"
+                      widget: "object"
+                      fields:
+                        - { label: "Type", name: "type", widget: "hidden", default: "chat" }
+                    - label: "Device"
+                      name: "device"
+                      widget: "object"
+                      fields:
+                        - { label: "Type", name: "type", widget: "hidden", default: "device" }

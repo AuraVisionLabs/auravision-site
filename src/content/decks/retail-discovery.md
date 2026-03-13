@@ -20,21 +20,34 @@ slides:
     cols: 3
     cells:
       - blocks:
-          - type: title
+          - type: text
             text: 1 — Plug & Play
+            size: h3
           - type: text
             text: Connects to any existing CCTV camera system in minutes.
+            size: p-md
           - type: device
       - blocks:
-          - type: title
+          - type: text
             text: 2 — Analyse
+            size: h3
           - type: text
             text: AI segments your staff, customers, ages & genders.
+            size: p-md
           - type: heatmap
       - blocks:
-          - type: title
+          - type: text
             text: 3 — Answer
+            size: h3
           - type: text
             text: Aura instantly answers how to fix store performance.
+            size: p-md
           - type: chat
+  - type: table
+    category: Case Studies
+    title: Customer ROI Stories
+    cells:
+      - - type: text
+          text: hey
+          size: h3
 ---

@@ -1,46 +1,21 @@
 ---
-type ContentBlock =
-  | { type: "title"; text: string }
-  | { type: "text"; text: string }
-  | { type: "image"; src: string; alt?: string }
-  | { type: "heatmap" }
-  | { type: "chat" }
-  | { type: "device" };
+import type { ComponentProps } from 'astro/types';
+import CellContent from './CellContent.astro';
 
-type CellOptions = {
-  background?: "cyan" | "fuchsia" | "purple" | "blue";
-  glow?: "cyan" | "fuchsia" | "purple" | "blue";
-};
+type Cell = ComponentProps<typeof CellContent>;
 
 interface Props {
   title?: string;
   subtitle?: string;
   cols?: number;
-  cells: Array<{ blocks: ContentBlock[]; options?: CellOptions }>;
+  cells: Cell[];
   category?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
-import PathMapCompare from '../PathMapCompare.astro';
-import ChatAnimation from '../ChatAnimation.astro';
-import WireframeCube from '../WireframeCube.astro';
 
 const { title, subtitle, cols = 2, cells, category } = Astro.props;
 const rows = Math.ceil(cells.length / cols);
-
-const glowStyles: Record<string, string> = {
-  cyan: "border-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.4)]",
-  fuchsia: "border-fuchsia-500 shadow-[0_0_24px_rgba(217,70,239,0.4)]",
-  purple: "border-purple-500 shadow-[0_0_24px_rgba(168,85,247,0.4)]",
-  blue: "border-blue-500 shadow-[0_0_24px_rgba(59,130,246,0.4)]",
-};
-
-const bgStyles: Record<string, string> = {
-  cyan: "bg-cyan-400/10",
-  fuchsia: "bg-fuchsia-500/10",
-  purple: "bg-purple-500/10",
-  blue: "bg-blue-500/10",
-};
 ---
 
 <SlideWrapper class="slide-grid" title={title} subtitle={subtitle} category={category}>
@@ -48,22 +23,9 @@ const bgStyles: Record<string, string> = {
     class="relative z-[1] grid h-full w-full px-[4rem] pt-[18rem] pb-[4rem] gap-[4rem]"
     style={`grid-template-columns: repeat(${cols}, 1fr); grid-template-rows: repeat(${rows}, 1fr)`}
   >
-    {cells.map(({ blocks, options }) => {
-      const bg = options?.background && options.background !== "none" ? `${bgStyles[options.background]} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
-      const glow = options?.glow && options.glow !== "none" ? `border-[0.5rem] ${glowStyles[options.glow]}` : "";
-      return (
-        <div class={`min-h-0 flex flex-col overflow-visible ${bg} ${glow}`}>
-          {blocks.map((block) => {
-            if (block.type === "title") return <h3 class="font-title text-[3.5rem] text-white mb-4">{block.text}</h3>;
-            if (block.type === "text") return <p class="font-body text-[2.2rem] text-white leading-relaxed mb-6">{block.text}</p>;
-            if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
-            if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
-            if (block.type === "chat") return <div class="flex-1 min-h-0"><ChatAnimation /></div>;
-            if (block.type === "device") return <div class="flex-1 min-h-0 flex items-center justify-center"><WireframeCube /></div>;
-          })}
-        </div>
-      );
-    })}
+    {cells.map((cell) => (
+      <CellContent {...cell} />
+    ))}
   </div>
 </SlideWrapper>
 

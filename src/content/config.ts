@@ -17,9 +17,10 @@ const techSlide = z.object({
   video: z.string().optional(),
 });
 
+const textSize = z.enum(["h1", "h2", "h3", "h4", "p-lg", "p-md", "p-sm"]).default("p-md");
+
 const contentBlock = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("title"), text: z.string() }),
-  z.object({ type: z.literal("text"), text: z.string() }),
+  z.object({ type: z.literal("text"), text: z.string(), size: textSize }),
   z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat") }),
@@ -47,10 +48,20 @@ const gridSlide = z.object({
   ),
 });
 
+const tableSlide = z.object({
+  type: z.literal("table"),
+  category: z.string().optional(),
+  title: z.string().optional(),
+  subtitle: z.string().optional(),
+  cols: z.number().min(1).max(6).default(2),
+  cells: z.array(z.array(contentBlock)),
+});
+
 const slideSchema = z.discriminatedUnion("type", [
   coverSlide,
   techSlide,
   gridSlide,
+  tableSlide,
 ]);
 
 // ── Decks collection ──────────────────────────────────
