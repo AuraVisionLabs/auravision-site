@@ -51,8 +51,8 @@ slides:
   # ── Slide 3: Ask Aura ───────────────────────────────
   - type: table
     category: Ask Aura
-    title: "Three questions answered in seconds"
-    subtitle: BoConcept can get answers from day one. No analyst required.
+    title: "Your questions answered in seconds"
+    subtitle: Ask Aura can give BoConcept answers from day one. No analyst required.
     layout: grid
     rows:
       - cells:

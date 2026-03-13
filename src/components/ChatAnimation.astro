@@ -263,7 +263,53 @@ const gridVisuals = [
         barContainer.style.boxShadow = on ? "0 0 25px rgba(34,211,238,1.0)" : "";
       }
 
-      runCustomLoop();
+      // Pre-populate first 3 messages instantly for print/PDF
+      const preloadCount = Math.min(3, messages.length);
+      for (let i = 0; i < preloadCount; i++) {
+        const msg = messages[i];
+        const el = addSimpleBubble(msg.role, msg.content);
+        el.parentElement!.style.opacity = "1";
+        if (msg.image) {
+          addImageBubble(msg.image);
+        }
+      }
+
+      // Start animation from message 4 onwards, then loop
+      (async () => {
+        // Animate remaining messages
+        for (let i = preloadCount; i < messages.length; i++) {
+          const msg = messages[i];
+          if (msg.role === "user") {
+            setBarGlow(true);
+            await streamInput(input, msg.content);
+            await delay(400);
+            sendBtn.classList.add("bg-cyan-500", "text-white");
+            sendBtn.classList.remove("bg-white/5", "text-white/40");
+            await delay(300);
+            sendBtn.classList.remove("bg-cyan-500", "text-white");
+            sendBtn.classList.add("bg-white/5", "text-white/40");
+            clearInput(input);
+            setBarGlow(false);
+            addSimpleBubble("user", msg.content);
+          } else {
+            await delay(800);
+            const botEl = addSimpleBubble("bot", '<span class="thinking-dots"><span></span><span></span><span></span></span>');
+            await delay(1500);
+            await streamText(botEl, msg.content);
+          }
+          if (msg.image) {
+            await delay(600);
+            addImageBubble(msg.image);
+          }
+        }
+
+        // Pause then loop
+        await delay(3000);
+        while (stream.firstChild) stream.removeChild(stream.firstChild);
+        await delay(500);
+        runCustomLoop();
+      })();
+
       return; // Skip default animation
     }
 

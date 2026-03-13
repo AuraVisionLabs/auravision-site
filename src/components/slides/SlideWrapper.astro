@@ -12,14 +12,7 @@ interface Props {
 
 const { title, subtitle, category, categoryBg, class: className, style, hideWatermark, background } = Astro.props;
 
-const backgroundImages: Record<string, string> = {
-  top: "/images/slides/backgrounds/bg-top.png",
-  bottom: "/images/slides/backgrounds/bg-bottom.png",
-  bl: "/images/slides/backgrounds/bg-br.png",
-  br: "/images/slides/backgrounds/bg-br.png",
-};
-const bgSrc = background && background !== "none" ? backgroundImages[background] : null;
-const bgFlip = background === "bl";
+// Background images removed
 
 const categoryBgColors: Record<string, string> = {
   cyan: "#22d3ee",
@@ -43,8 +36,7 @@ const catBgStyle = categoryBg && categoryBg !== "none" && categoryBgColors[categ
   ]}
   style={style}
 >
-  {/* Background image */}
-  {bgSrc && <img src={bgSrc} alt="" class:list={["absolute inset-0 w-full h-full object-cover pointer-events-none z-0  opacity-10 saturate-200 contrast-200", bgFlip && "-scale-x-100"]} />}
+  {/* Background image slot removed */}
 
   <div class="absolute top-0 left-0 right-0 z-[5] px-[4rem] pt-[4rem] pb-[1.5rem] pointer-events-none min-h-[14rem]">
     {category && <div class="font-title text-white text-[2rem] mb-[0.375rem]" style={catBgStyle}>{category}</div>}

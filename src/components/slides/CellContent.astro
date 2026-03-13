@@ -215,7 +215,7 @@ const sizeClasses: Record<string, string> = {
     if (block.type === "highlight") return (
       <div class="rounded-[2rem] px-[2.5rem] py-[1.5rem] mb-4" style="background:linear-gradient(135deg,#970FFF 0%,#BB09E7 50%,#DE02CF 100%)">
         <p class="font-title text-[4.5rem] text-white leading-tight" set:html={block.value} />
-        {block.subtitle && <p class="font-body text-[1.5rem] text-white leading-snug mt-[0.3rem]">{block.subtitle}</p>}
+        {block.subtitle && <p class="font-body text-[2rem] text-white leading-snug mt-[0.15rem]">{block.subtitle}</p>}
       </div>
     );
     if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
