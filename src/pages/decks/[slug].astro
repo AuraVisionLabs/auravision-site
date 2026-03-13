@@ -29,7 +29,7 @@ const { slides, title } = deck.data;
       case "grid":
         return <GridSlide title={slide.title} subtitle={slide.subtitle} cols={slide.cols} cells={slide.cells} category={slide.category} />;
       case "table":
-        return <TableSlide title={slide.title} subtitle={slide.subtitle} cols={slide.cols} cells={slide.cells} category={slide.category} />;
+        return <TableSlide title={slide.title} subtitle={slide.subtitle} colWidths={slide.colWidths} rows={slide.rows} category={slide.category} />;
       default:
         return null;
     }

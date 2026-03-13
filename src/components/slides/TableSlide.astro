@@ -7,32 +7,30 @@ type ContentBlock = ComponentProps<typeof CellContent>['blocks'][number];
 interface Props {
   title?: string;
   subtitle?: string;
-  cols?: number;
-  cells: ContentBlock[][];
+  colWidths?: number[];
+  rows: Array<{ cells: ContentBlock[] }>;
   category?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, subtitle, cols = 2, cells, category } = Astro.props;
-const rows: ContentBlock[][][] = [];
-for (let i = 0; i < cells.length; i += cols) {
-  rows.push(cells.slice(i, i + cols));
-}
+const { title, subtitle, colWidths, rows, category } = Astro.props;
+const cols = rows[0]?.cells.length ?? 1;
+const widths = colWidths ?? Array.from({ length: cols }, () => 100 / cols);
 ---
 
 <SlideWrapper class="slide-table" title={title} subtitle={subtitle} category={category}>
-  <div class="relative z-[1] flex h-full w-full px-[4rem] pt-[18rem] pb-[4rem]">
-    <table class="w-full h-full border-collapse table-fixed">
+  <div class="relative z-[1] flex items-center w-full h-full px-[4rem] pt-[18rem] pb-[4rem]">
+    <table class="w-full border-separate border-spacing-x-[3rem] border-spacing-y-[1rem] table-fixed">
       <colgroup>
-        {Array.from({ length: cols }).map(() => <col style={`width: ${100 / cols}%`} />)}
+        {widths.map((w) => <col style={`width: ${w}%`} />)}
       </colgroup>
       <tbody>
         {rows.map((row) => (
-          <tr>
-            {row.map((blocks) => (
-              <td class="align-middle px-[2rem] py-[2rem]">
-                <CellContent blocks={blocks} class="h-full" />
+          <tr style="height: 0;">
+            {row.cells.map((block) => (
+              <td class="align-middle">
+                <CellContent blocks={[block]} compact class="h-full justify-center" />
               </td>
             ))}
           </tr>

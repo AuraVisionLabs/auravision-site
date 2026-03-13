@@ -17,10 +17,12 @@ const techSlide = z.object({
   video: z.string().optional(),
 });
 
-const textSize = z.enum(["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm"]).default("p-md");
+const textSize = z.enum(["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm", "p-xs"]).default("p-md");
+
+const bgColor = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"]).default("none");
 
 const contentBlock = z.discriminatedUnion("type", [
-  z.object({ type: z.literal("text"), text: z.string(), size: textSize }),
+  z.object({ type: z.literal("text"), text: z.string(), size: textSize, bg: bgColor }),
   z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
   z.object({ type: z.literal("logos"), items: z.array(z.object({ src: z.string(), alt: z.string().optional() })) }),
   z.object({ type: z.literal("heatmap") }),
@@ -28,7 +30,7 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("device") }),
 ]);
 
-const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue"]);
+const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"]);
 
 const columnOptions = z.object({
   background: colorOption.optional(),
@@ -54,8 +56,10 @@ const tableSlide = z.object({
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  cols: z.number().min(1).max(6).default(2),
-  cells: z.array(z.array(contentBlock)),
+  colWidths: z.array(z.number()).optional(),
+  rows: z.array(z.object({
+    cells: z.array(contentBlock),
+  })),
 });
 
 const slideSchema = z.discriminatedUnion("type", [

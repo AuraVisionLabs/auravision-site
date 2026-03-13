@@ -1,8 +1,10 @@
 ---
-type TextSize = "h1" | "h2" | "h3" | "h4" | "p-lg" | "p-md" | "p-sm";
+type TextSize = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p-lg" | "p-md" | "p-sm" | "p-xs";
+
+type BgColor = "none" | "cyan" | "fuchsia" | "purple" | "blue" | "red" | "orange";
 
 type ContentBlock =
-  | { type: "text"; text: string; size?: TextSize }
+  | { type: "text"; text: string; size?: TextSize; bg?: BgColor }
   | { type: "image"; src: string; alt?: string }
   | { type: "logos"; items: Array<{ src: string; alt?: string }> }
   | { type: "heatmap" }
@@ -10,13 +12,14 @@ type ContentBlock =
   | { type: "device" };
 
 type CellOptions = {
-  background?: "cyan" | "fuchsia" | "purple" | "blue";
-  glow?: "cyan" | "fuchsia" | "purple" | "blue";
+  background?: "none" | BgColor;
+  glow?: "none" | BgColor;
 };
 
 interface Props {
   blocks: ContentBlock[];
   options?: CellOptions;
+  compact?: boolean;
   class?: string;
 }
 
@@ -24,13 +27,15 @@ import PathMapCompare from '../PathMapCompare.astro';
 import ChatAnimation from '../ChatAnimation.astro';
 import WireframeCube from '../WireframeCube.astro';
 
-const { blocks, options, class: className } = Astro.props;
+const { blocks, options, compact, class: className } = Astro.props;
 
 const glowStyles: Record<string, string> = {
   cyan: "border-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.4)]",
   fuchsia: "border-fuchsia-500 shadow-[0_0_24px_rgba(217,70,239,0.4)]",
   purple: "border-purple-500 shadow-[0_0_24px_rgba(168,85,247,0.4)]",
   blue: "border-blue-500 shadow-[0_0_24px_rgba(59,130,246,0.4)]",
+  red: "border-red-500 shadow-[0_0_24px_rgba(239,68,68,0.4)]",
+  orange: "border-orange-500 shadow-[0_0_24px_rgba(249,115,22,0.4)]",
 };
 
 const bgStyles: Record<string, string> = {
@@ -38,6 +43,17 @@ const bgStyles: Record<string, string> = {
   fuchsia: "bg-fuchsia-500/10",
   purple: "bg-purple-500/10",
   blue: "bg-blue-500/10",
+  red: "bg-red-500/10",
+  orange: "bg-orange-500/10",
+};
+
+const bgStylesFull: Record<string, string> = {
+  cyan: "bg-cyan-400",
+  fuchsia: "bg-fuchsia-500",
+  purple: "bg-purple-500",
+  blue: "bg-blue-500",
+  red: "bg-red-500",
+  orange: "bg-orange-500",
 };
 
 const bg = options?.background && options.background !== "none" ? `${bgStyles[options.background]} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
@@ -52,14 +68,18 @@ const sizeClasses: Record<string, string> = {
   "h6": "font-title text-[2rem] text-white mb-2",
   "p-lg": "font-body text-[2.5rem] text-white leading-relaxed mb-6",
   "p-md": "font-body text-[2rem] text-white leading-relaxed mb-6",
-  "p-sm": "font-body text-[1.2rem] text-white leading-relaxed mb-4",
+  "p-sm": "font-body text-[1.5rem] text-white leading-relaxed mb-4",
+  "p-xs": "font-body text-[1.2rem] text-white leading-relaxed mb-4",
 };
 ---
 
 <div class:list={["min-h-0 flex flex-col overflow-visible", bg, glow, className]}>
   {blocks.map((block) => {
     if (block.type === "text") {
-      return <div class={sizeClasses[block.size ?? "p-md"]} set:html={block.text} />;
+      const bgMap = compact ? bgStylesFull : bgStyles;
+      const pad = compact ? "px-[1rem] py-[0.75rem] rounded-[1rem] shadow-lg" : "py-[1.5rem] px-[2rem] rounded-[2rem]";
+      const textBg = block.bg && block.bg !== "none" ? `${bgMap[block.bg]} backdrop-blur-sm ${pad}` : "";
+      return <div class={`${sizeClasses[block.size ?? "p-md"]} ${textBg}`} set:html={block.text} />;
     }
     if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
     if (block.type === "logos") return (
