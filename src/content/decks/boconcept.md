@@ -61,48 +61,53 @@ slides:
               - type: text
                 text: "\"Are our windows driving traffic inside?\""
                 size: h4
-              - type: text
-                text: Measure capture rate changes against window display rotations and compare performance across stores.
-                size: p-sm
               - type: chat
                 conversation:
-                  - user: "Are our windows driving traffic inside?"
-                    bot: "<strong>Yes, partially.</strong> Capture rate rose 12% after the last window rotation, but 3 stores saw no change."
+                  - role: user
+                    content: "Are our windows driving traffic inside?"
                     image: /images/entrance1.webp
-                    followUpUser: "Which window display performed best?"
-                    followUpBot: "<strong>The white sofa display</strong> drove a 19% capture rate — nearly double the brown leather setup."
+                  - role: bot
+                    content: "<i>Analysing window displays...</i>"
+                  - role: bot
+                    content: "<strong>Yes, partially.</strong> Capture rate rose 12% after the last window rotation, but 3 stores saw no change."
+                  - role: user
+                    content: "Which window display performed best?"
+                  - role: bot
+                    content: "<strong>The white sofa display</strong> drove a 19% capture rate — nearly double the brown leather setup."
             options:
               background: white-transparent
           - blocks:
               - type: text
                 text: "\"Which areas of our showroom are working?\""
                 size: h4
-              - type: text
-                text: Map customer dwell time across every zone and identify where engagement converts to sales.
-                size: p-sm
               - type: chat
                 conversation:
-                  - user: "Which zones have the highest dwell time?"
-                    bot: "<strong>Sofa collections</strong> average 4.2 min dwell — 3× higher than lighting. But lighting converts at 2× the rate."
+                  - role: user
+                    content: "Which areas of our showroom are working?"
                     image: /images/activation1.webp
-                    followUpUser: "What's driving the lighting conversion?"
-                    followUpBot: "<strong>Staff engagement.</strong> Lighting zones have 2.3× more staff interactions per visitor than sofas."
+                  - role: bot
+                    content: "<strong>Sofa collections are working best</strong> with 4.2 min dwell time, 3× higher than lighting. But lighting converts at 2× the rate."
+                  - role: user
+                    content: "So should we move sofas closer to lighting?"
+                  - role: bot
+                    content: "<strong>Worth testing.</strong> Stores that placed accent lighting near sofas saw a 14% uplift in sofa conversion."
             options:
               background: white-transparent
           - blocks:
               - type: text
                 text: "\"Are staff where customers need them most?\""
                 size: h4
-              - type: text
-                text: Spot service gaps where customers linger but staff are absent — and link them to conversion drops.
-                size: p-sm
               - type: chat
                 conversation:
-                  - user: "Where are staff missing customers?"
-                    bot: "<strong>Zone 3 (dining)</strong> has a 40% service gap on weekends. Customers dwell 3 min but staff presence is under 20%."
+                  - role: user
+                    content: "Are staff where customers need them most?"
                     image: /images/entrance3.webp
-                    followUpUser: "How many extra staff do we need?"
-                    followUpBot: "<strong>2 additional staff</strong> on Saturdays 12–4pm would close the gap and match weekday service levels."
+                  - role: bot
+                    content: "<strong>Zone 3 (dining)</strong> has a 40% service gap on weekends. Customers dwell 3 min but staff presence is under 20%."
+                  - role: user
+                    content: "Which stores have the biggest gap?"
+                  - role: bot
+                    content: "<strong>Copenhagen and Hamburg.</strong> Both show under 15% staff coverage in dining on Saturdays — well below the network average."
             options:
               background: white-transparent
 

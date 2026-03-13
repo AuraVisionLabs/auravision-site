@@ -38,7 +38,7 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("metrics"), items: z.array(z.string()) }),
   z.object({ type: z.literal("metric-list"), items: z.array(z.object({ metric: z.string(), text: z.string() })) }),
   z.object({ type: z.literal("heatmap") }),
-  z.object({ type: z.literal("chat"), conversation: z.array(z.object({ user: z.string(), bot: z.string(), image: z.string().optional(), followUpUser: z.string().optional(), followUpBot: z.string().optional() })).optional() }),
+  z.object({ type: z.literal("chat"), conversation: z.array(z.object({ role: z.enum(["user", "bot"]), content: z.string(), image: z.string().optional() })).optional() }),
   z.object({ type: z.literal("device") }),
 ]);
 
