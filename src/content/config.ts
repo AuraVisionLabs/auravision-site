@@ -6,6 +6,7 @@ const coverSlide = z.object({
   title: z.string(),
   tagline: z.string(),
   logo: z.string().optional(),
+  footer: z.string().optional(),
 });
 
 const techSlide = z.object({
@@ -56,8 +57,8 @@ const tableSlide = z.object({
   category: z.string().optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
-  colWidths: z.array(z.number()).optional(),
   striped: z.boolean().default(false),
+  colWidths: z.array(z.number()).optional(),
   rows: z.array(z.object({
     cells: z.array(contentBlock),
   })),

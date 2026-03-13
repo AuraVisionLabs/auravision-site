@@ -23,7 +23,7 @@ const { slides, title } = deck.data;
   {slides.map((slide) => {
     switch (slide.type) {
       case "cover":
-        return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} />;
+        return <CoverSlide title={slide.title} tagline={slide.tagline} logo={slide.logo} footer={slide.footer} />;
       case "tech":
         return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
       case "grid":

@@ -3,11 +3,12 @@ interface Props {
   title: string;
   tagline: string;
   logo?: string;
+  footer?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, tagline, logo } = Astro.props;
+const { title, tagline, logo, footer } = Astro.props;
 ---
 
 <SlideWrapper
@@ -31,8 +32,6 @@ const { title, tagline, logo } = Astro.props;
 
   {/* Bottom-left company attribution */}
   <div class="absolute bottom-8 left-[3rem] z-10  px-[5rem]">
-    <p class="text-sm text-white font-light">
-      Aura Vision Labs Ltd · auravision.ai
-    </p>
+    <p class="text-lg text-white font-light" set:html={footer ?? 'Aura Vision Labs Ltd · <a href="https://auravision.ai" class="underline">auravision.ai</a>'} />
   </div>
 </SlideWrapper>

@@ -20,6 +20,7 @@ interface Props {
   blocks: ContentBlock[];
   options?: CellOptions;
   compact?: boolean;
+  stripedMode?: boolean;
   class?: string;
 }
 
@@ -27,7 +28,7 @@ import PathMapCompare from '../PathMapCompare.astro';
 import ChatAnimation from '../ChatAnimation.astro';
 import WireframeCube from '../WireframeCube.astro';
 
-const { blocks, options, compact, class: className } = Astro.props;
+const { blocks, options, compact, stripedMode, class: className } = Astro.props;
 
 const glowStyles: Record<string, string> = {
   cyan: "border-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.4)]",
@@ -76,9 +77,15 @@ const sizeClasses: Record<string, string> = {
 <div class:list={["min-h-0 flex flex-col overflow-visible", bg, glow, className]}>
   {blocks.map((block) => {
     if (block.type === "text") {
-      const bgMap = compact ? bgStylesFull : bgStyles;
-      const pad = compact ? "" : "py-[1.5rem] px-[2rem] rounded-[2rem]";
-      const textBg = !compact && block.bg && block.bg !== "none" ? `${bgMap[block.bg]} backdrop-blur-sm ${pad}` : "";
+      const hasBg = block.bg && block.bg !== "none";
+      let textBg = "";
+      if (hasBg) {
+        if (compact && !stripedMode) {
+          textBg = `${bgStylesFull[block.bg!]} py-[1rem] px-[1.5rem] rounded-[1rem] shadow-lg`;
+        } else if (!compact) {
+          textBg = `${bgStyles[block.bg!]} backdrop-blur-sm py-[1.5rem] px-[2rem] rounded-[2rem]`;
+        }
+      }
       const sizeClass = compact ? sizeClasses[block.size ?? "p-md"].replace(/mb-\d+/g, "mb-0") : sizeClasses[block.size ?? "p-md"];
       return <div class={`${sizeClass} ${textBg}`} set:html={block.text} />;
     }
