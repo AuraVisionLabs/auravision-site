@@ -319,4 +319,188 @@ slides:
                 size: p-md
             options:
               glow: blue
+  - type: table
+    category: Precision Staff Planning — Case Study
+    categoryBg: purple
+    title: "\"8X ROI in 3 months with better staffing.\""
+    layout: grid
+    colWidths:
+      - 1
+      - 1
+    rows:
+      - cells:
+          - blocks:
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/flannels.svg
+                    alt: Flannels
+              - type: text
+                text: 8X ROI
+                size: h2
+              - type: testimonial
+                headliner: Flannels needed better store visibility to staff smarter as the brand scales.
+                quote: — Head of Retail Insight, Frasers Group
+                size: md
+              - type: metrics
+                items:
+                  - queues
+                  - staffing
+                  - dwell
+                  - heatmaps
+                  - conversion
+            options:
+              background: white-transparent
+          - blocks:
+              - type: text
+                text: Key Outcomes
+                size: h4
+              - type: text
+                text: |
+                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>0.75% conversion uplift</strong> from demand-based rotas</div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Staff coverage optimised by <strong>floor, department &amp; checkout</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Queue monitoring to <strong>cut wait times</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>8X ROI</strong> in just <strong>3 months</strong></div>
+                  </div>
+                size: p-md
+            options:
+              glow: purple
+  - type: table
+    category: Path to Purchase — Case Study
+    categoryBg: fuchsia
+    title: "\"Now we know how each refit performs.\""
+    layout: grid
+    colWidths:
+      - 1
+      - 1
+    rows:
+      - cells:
+          - blocks:
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/decathlon.svg
+                    alt: Decathlon
+              - type: text
+                text: 6X ROI
+                size: h2
+              - type: testimonial
+                headliner: Decathlon monitors merchandising ROI across large showroom refits each season.
+                quote: — Product Manager, Decathlon France
+                size: md
+              - type: metrics
+                items:
+                  - impressions
+                  - dwell
+                  - heatmaps
+                  - conversion
+            options:
+              background: white-transparent
+          - blocks:
+              - type: text
+                text: Key Outcomes
+                size: h4
+              - type: text
+                text: |
+                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>0.5% conversion uplift</strong> from optimised layouts</div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Measures which refits <strong>perform best and why</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Tracks journeys to <strong>maximise purchase opportunities</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>6X ROI</strong> from data-driven merchandising</div>
+                  </div>
+                size: p-md
+            options:
+              glow: fuchsia
+  - type: table
+    category: Path to Purchase — Case Study
+    categoryBg: fuchsia
+    title: "\"Decisions in days, not months.\""
+    layout: grid
+    colWidths:
+      - 1
+      - 1
+    rows:
+      - cells:
+          - blocks:
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/vmo2.svg
+                    alt: Virgin Media O2
+              - type: text
+                text: 22X ROI
+                size: h2
+              - type: testimonial
+                headliner: O2 Retail linked handset displays to conversion by customer segment.
+                quote: — Operations Development, O2 Retail
+                size: md
+              - type: metrics
+                items:
+                  - demographics
+                  - impressions
+                  - dwell
+                  - conversion
+            options:
+              background: white-transparent
+          - blocks:
+              - type: text
+                text: Key Outcomes
+                size: h4
+              - type: text
+                text: |
+                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>Full-store demographic segmentation</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Identified how to <strong>redesign underperforming stores</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Decisions in <strong>days rather than months</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>22X ROI opportunity</strong> from store redesign</div>
+                  </div>
+                size: p-md
+            options:
+              glow: fuchsia
+  - type: table
+    category: Basket Recovery — Case Study
+    categoryBg: red
+    title: "\"Simplicity and ease of integration.\""
+    layout: grid
+    colWidths:
+      - 1
+      - 1
+    rows:
+      - cells:
+          - blocks:
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/aswatson.webp
+                    alt: A.S. Watson
+              - type: text
+                text: 4X ROI
+                size: h2
+              - type: testimonial
+                headliner: Kruidvat introduced self-service checkouts and needed to manage queue times across both PoS types.
+                quote: — Store Innovation Lead, A.S. Watson Group
+                size: md
+              - type: metrics
+                items:
+                  - queues
+                  - dwell
+                  - conversion
+            options:
+              background: white-transparent
+          - blocks:
+              - type: text
+                text: Key Outcomes
+                size: h4
+              - type: text
+                text: |
+                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Monitors <strong>queue &amp; transaction times</strong> at each PoS</div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Prevents lost sales <strong>before they happen</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Integrates with <strong>existing cameras</strong> in every store</div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>4X ROI</strong> delivered each year</div>
+                  </div>
+                size: p-md
+            options:
+              glow: red
 ---
