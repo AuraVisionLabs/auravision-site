@@ -293,6 +293,7 @@ slides:
               - type: testimonial
                 headliner: Associates were manually counting each customer walk-in, taking up precious time.
                 quote: — Regional Manager, Purple
+                size: md
               - type: metrics
                 items:
                   - footfall

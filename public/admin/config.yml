@@ -371,6 +371,7 @@ collections:
                               - { label: "Type", name: "type", widget: "hidden", default: "testimonial" }
                               - { label: "Headliner", name: "headliner", widget: "string", hint: "Bold italic quote headline" }
                               - { label: "Quote", name: "quote", widget: "text", hint: "Supporting quote text" }
+                              - { label: "Size", name: "size", widget: "select", required: false, default: "lg", options: ["sm", "md", "lg"], hint: "Font size preset (sm = compact, md = medium, lg = large)" }
                           - label: "Metrics"
                             name: "metrics"
                             widget: "object"

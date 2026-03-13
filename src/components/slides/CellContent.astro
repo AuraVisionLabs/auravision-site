@@ -7,7 +7,7 @@ type ContentBlock =
   | { type: "text"; text: string; size?: TextSize; bg?: BgColor }
   | { type: "image"; src: string; alt?: string; width?: "full" | "half" }
   | { type: "logos"; items: Array<{ src: string; alt?: string }>; fit?: "fill" | "fixed" }
-  | { type: "testimonial"; headliner: string; quote: string }
+  | { type: "testimonial"; headliner: string; quote: string; size?: "sm" | "md" | "lg" }
   | { type: "profile"; name: string; role: string; photo?: string; logo?: string; company?: string }
   | { type: "snapshot"; src: string; camera?: string }
   | { type: "inlinetable"; columns: Array<{ label: string; header: string; level: number }> }
@@ -127,12 +127,16 @@ const sizeClasses: Record<string, string> = {
         ))}
       </div>
       );}
-    if (block.type === "testimonial") return (
+    if (block.type === "testimonial") {
+      const tSize = block.size ?? "lg";
+      const tHeadline = tSize === "sm" ? "text-[1.6rem]" : tSize === "md" ? "text-[2.4rem]" : "text-[3rem]";
+      const tQuote = tSize === "sm" ? "text-[1.1rem]" : tSize === "md" ? "text-[1.3rem]" : "text-[1.5rem]";
+      return (
       <div class="pt-[2rem] mb-4">
-        <p class="font-body italic text-[2.4rem] text-white/90 leading-snug mb-[1rem]">&ldquo;{block.headliner}&rdquo;</p>
-        <p class="font-body text-[1.3rem] leading-relaxed text-white/70">{block.quote}</p>
+        <p class={`font-body italic ${tHeadline} text-white/90 leading-snug mb-[2rem]`}>&ldquo;{block.headliner}&rdquo;</p>
+        <p class={`font-body ${tQuote} leading-relaxed text-white/70`}>{block.quote}</p>
       </div>
-    );
+    );}
     if (block.type === "profile") return (
       <div class="mt-auto flex items-center gap-[1.5rem]">
         {block.photo ? (
