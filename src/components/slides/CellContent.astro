@@ -18,7 +18,8 @@ type ContentBlock =
   | { type: "device" };
 
 type CellOptions = {
-  background?: "none" | BgColor;
+  background?: "none" | BgColor | "white-transparent";
+  solidBg?: boolean;
   glow?: "none" | BgColor;
   valign?: "top" | "center";
 };
@@ -77,7 +78,7 @@ const bgStyles: Record<string, string> = {
   red: "bg-red-500/20",
   orange: "bg-orange-500/20",
   white: "bg-white",
-  "white-transparent": "bg-white/10",
+  "white-transparent": "bg-white/15",
 };
 
 const bgStylesFull: Record<string, string> = {
@@ -89,7 +90,9 @@ const bgStylesFull: Record<string, string> = {
   orange: "bg-orange-500",
 };
 
-const bg = options?.background && options.background !== "none" ? `${bgStyles[options.background]} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
+const solidBg = options?.solidBg ?? false;
+const bgMap = solidBg ? bgStylesFull : bgStyles;
+const bg = options?.background && options.background !== "none" ? `${(bgMap[options.background] || bgStyles[options.background])} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
 const glow = options?.glow && options.glow !== "none" ? `border-[0.5rem] ${glowStyles[options.glow]} py-[2rem] px-[3rem] rounded-[3rem]` : "";
 const isDark = options?.background === "white";
 const valign = options?.valign || "top";
@@ -116,7 +119,7 @@ const sizeClasses: Record<string, string> = {
       let textBg = "";
       if (hasBg) {
         if (compact && !stripedMode) {
-          textBg = `${bgStylesFull[block.bg!]} py-[1rem] px-[1.5rem] rounded-[1rem] shadow-lg`;
+          textBg = `${bgStylesFull[block.bg!] || bgStyles[block.bg!]} py-[1rem] px-[1.5rem] rounded-[1rem] shadow-lg`;
         } else if (!compact) {
           textBg = `${bgStyles[block.bg!]} backdrop-blur-sm py-[1.5rem] px-[2rem] rounded-[2rem]`;
         }

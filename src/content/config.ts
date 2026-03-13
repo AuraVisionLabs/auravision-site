@@ -8,6 +8,7 @@ const coverSlide = z.object({
   title: z.string(),
   tagline: z.string(),
   logo: z.string().optional(),
+  clientLogo: z.string().optional(),
   footer: z.string().optional(),
   background: slideBg,
 });
@@ -24,7 +25,7 @@ const techSlide = z.object({
 
 const textSize = z.enum(["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm", "p-xs"]).default("p-md");
 
-const bgColor = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"]).default("none");
+const bgColor = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange", "white-transparent"]).default("none");
 
 const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("text"), text: z.string(), size: textSize, bg: bgColor }),
@@ -45,6 +46,7 @@ const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", 
 
 const columnOptions = z.object({
   background: colorOption.optional(),
+  solidBg: z.boolean().optional(),
   glow: colorOption.optional(),
   valign: z.enum(["top", "center"]).optional(),
 });
@@ -56,6 +58,7 @@ const tableSlide = z.object({
   title: z.string().optional(),
   subtitle: z.string().optional(),
   layout: z.enum(["grid", "table-striped", "table"]).default("grid"),
+  autoHeight: z.boolean().optional(),
   colWidths: z.array(z.number()).optional(),
   background: slideBg,
   rows: z.array(z.object({

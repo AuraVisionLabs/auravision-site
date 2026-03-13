@@ -3,13 +3,14 @@ interface Props {
   title: string;
   tagline: string;
   logo?: string;
+  clientLogo?: string;
   footer?: string;
   background?: string;
 }
 
 import SlideWrapper from './SlideWrapper.astro';
 
-const { title, tagline, logo, footer, background } = Astro.props;
+const { title, tagline, logo, clientLogo, footer, background } = Astro.props;
 ---
 
 <SlideWrapper
@@ -17,18 +18,28 @@ const { title, tagline, logo, footer, background } = Astro.props;
   hideWatermark
   background={background}
 >
-  <div class="relative z-10 flex flex-col items-start justify-center h-full w-[70%] px-[5rem]">
-    {logo ? (
-      <img src={logo} alt="" class="w-full h-auto mb-10 object-contain object-left [filter:brightness(0)_invert(1)]" />
+  <div class="relative z-10 flex flex-col items-start justify-center h-full px-[7rem]">
+    {clientLogo ? (
+      <div class="flex items-center gap-[3rem] w-full mb-12">
+        <img src={clientLogo} alt="" class="h-auto flex-1 min-w-0 object-contain object-left [filter:brightness(0)_invert(1)]" />
+        <span class="text-white/40 text-[4rem] font-light select-none">×</span>
+        {logo ? (
+          <img src={logo} alt="" class="h-auto flex-1 min-w-0 object-contain object-left [filter:brightness(0)_invert(1)]" />
+        ) : (
+          <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="h-auto flex-1 min-w-0 object-contain object-left" />
+        )}
+      </div>
+    ) : logo ? (
+      <img src={logo} alt="" class="w-[60%] h-auto mb-10 object-contain object-left [filter:brightness(0)_invert(1)]" />
     ) : (
-      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-full h-auto mb-12 object-contain object-left" />
+      <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-[60%] h-auto mb-12 object-contain object-left" />
     )}
 
-    <p class="text-5xl text-white leading-tight w-full px-[2rem]">
+    <p class="text-5xl text-white leading-tight w-[70%]">
       {tagline}
     </p>
 
-    <h1 class="mt-10 text-8xl text-white font-body tracking-wide  px-[2rem]">
+    <h1 class="mt-10 text-8xl text-white font-body tracking-wide w-[70%]">
       {title}
     </h1>
   </div>
