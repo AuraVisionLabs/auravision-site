@@ -5,9 +5,9 @@ slides:
   # ── Slide 1: Cover ──────────────────────────────────
   - type: cover
     title: In-Store Video Analytics
-    tagline: BoConcept × Aura Vision
+    tagline: A tailored overview for Katie Nevins & the BoConcept HQ team
     clientLogo: /images/logos/boconcept.svg
-    footer: "A tailored overview for Katie Nevins & the BoConcept HQ team<br>Aura Vision Labs Ltd · <a href='https://auravision.ai'>auravision.ai</a>"
+    footer: "Aura Vision Labs Ltd · <a href='https://auravision.ai'>auravision.ai</a>"
 
   # ── Slide 2: The Challenge ──────────────────────────
   - type: table
@@ -15,6 +15,7 @@ slides:
     title: Stores are operating blind
     subtitle: Footfall data tells you how many people enter. It tells you nothing about what happens inside.
     layout: table
+    colWidths: [2, 2]
     rows:
       - cells:
           - blocks:
@@ -24,25 +25,26 @@ slides:
                 bg: blue
           - blocks:
               - type: text
+                text: Staff and customer interactions go unmeasured. You cannot see who engages, where, or how often.
+                size: p-md
+                bg: white-transparent
+      - cells:
+          - blocks:
+              - type: text
                 text: Product placement is guesswork
                 size: h4
                 bg: purple
           - blocks:
               - type: text
-                text: Franchisee inconsistency
-                size: h4
-                bg: fuchsia
-      - cells:
-          - blocks:
-              - type: text
-                text: Staff and customer interactions go unmeasured. You cannot see who engages, where, or how often.
-                size: p-md
-                bg: white-transparent
-          - blocks:
-              - type: text
                 text: Which zones drive dwell time? Which windows convert passersby? Currently impossible to answer.
                 size: p-md
                 bg: white-transparent
+      - cells:
+          - blocks:
+              - type: text
+                text: Franchisee inconsistency
+                size: h4
+                bg: fuchsia
           - blocks:
               - type: text
                 text: 20% of customers may not be approached. With no data you cannot identify where this may be happening.
