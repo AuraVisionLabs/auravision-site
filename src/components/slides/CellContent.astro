@@ -14,7 +14,7 @@ type ContentBlock =
   | { type: "metrics"; items: string[] }
   | { type: "metric-list"; items: Array<{ metric: string; text: string }> }
   | { type: "heatmap" }
-  | { type: "chat"; conversation?: Array<{ user: string; bot: string }> }
+  | { type: "chat"; conversation?: Array<{ user: string; bot: string; image?: string; followUpUser?: string; followUpBot?: string }> }
   | { type: "device" };
 
 type CellOptions = {

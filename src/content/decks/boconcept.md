@@ -68,6 +68,9 @@ slides:
                 conversation:
                   - user: "Are our windows driving traffic inside?"
                     bot: "<strong>Yes, partially.</strong> Capture rate rose 12% after the last window rotation, but 3 stores saw no change."
+                    image: /images/entrance1.webp
+                    followUpUser: "Which window display performed best?"
+                    followUpBot: "<strong>The white sofa display</strong> drove a 19% capture rate — nearly double the brown leather setup."
             options:
               background: white-transparent
           - blocks:
@@ -81,6 +84,9 @@ slides:
                 conversation:
                   - user: "Which zones have the highest dwell time?"
                     bot: "<strong>Sofa collections</strong> average 4.2 min dwell — 3× higher than lighting. But lighting converts at 2× the rate."
+                    image: /images/activation1.webp
+                    followUpUser: "What's driving the lighting conversion?"
+                    followUpBot: "<strong>Staff engagement.</strong> Lighting zones have 2.3× more staff interactions per visitor than sofas."
             options:
               background: white-transparent
           - blocks:
@@ -94,6 +100,9 @@ slides:
                 conversation:
                   - user: "Where are staff missing customers?"
                     bot: "<strong>Zone 3 (dining)</strong> has a 40% service gap on weekends. Customers dwell 3 min but staff presence is under 20%."
+                    image: /images/entrance3.webp
+                    followUpUser: "How many extra staff do we need?"
+                    followUpBot: "<strong>2 additional staff</strong> on Saturdays 12–4pm would close the gap and match weekday service levels."
             options:
               background: white-transparent
 

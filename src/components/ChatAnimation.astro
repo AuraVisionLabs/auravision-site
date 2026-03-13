@@ -174,7 +174,7 @@ const gridVisuals = [
     // --- Custom conversation mode (for slides) ---
     const convData = wrapper.closest("[data-conversation]");
     if (convData) {
-      const conv: Array<{ user: string; bot: string }> = JSON.parse(convData.getAttribute("data-conversation")!);
+      const conv: Array<{ user: string; bot: string; image?: string; followUpUser?: string; followUpBot?: string }> = JSON.parse(convData.getAttribute("data-conversation")!);
       let ci = 0;
 
       function addSimpleBubble(side: "user" | "bot", content: string): HTMLElement {
@@ -201,6 +201,22 @@ const gridVisuals = [
         return textEl;
       }
 
+      function addImageBubble(src: string): void {
+        const row = document.createElement("div");
+        row.className = "flex items-start gap-2 pr-[34px]";
+        const spacer = document.createElement("div");
+        spacer.className = "flex-shrink-0 w-8 h-8 mt-0.5";
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "rounded-2xl rounded-tl-sm overflow-hidden shadow-lg";
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "";
+        img.className = "w-[200px] h-auto rounded-lg";
+        imgWrap.appendChild(img);
+        row.append(spacer, imgWrap);
+        stream.appendChild(row);
+      }
+
       async function runCustomLoop() {
         while (true) {
           const msg = conv[ci];
@@ -224,6 +240,33 @@ const gridVisuals = [
           const botEl = addSimpleBubble("bot", '<span class="thinking-dots"><span></span><span></span><span></span></span>');
           await delay(1500);
           await streamText(botEl, msg.bot);
+
+          // Show image if provided
+          if (msg.image) {
+            await delay(600);
+            addImageBubble(msg.image);
+          }
+
+          // Follow-up if provided
+          if (msg.followUpUser && msg.followUpBot) {
+            await delay(1200);
+            setBarGlow(true);
+            await streamInput(input, msg.followUpUser);
+            await delay(400);
+            sendBtn.classList.add("bg-cyan-500", "text-white");
+            sendBtn.classList.remove("bg-white/5", "text-white/40");
+            await delay(300);
+            sendBtn.classList.remove("bg-cyan-500", "text-white");
+            sendBtn.classList.add("bg-white/5", "text-white/40");
+            clearInput(input);
+            setBarGlow(false);
+
+            addSimpleBubble("user", msg.followUpUser);
+            await delay(800);
+            const fuEl = addSimpleBubble("bot", '<span class="thinking-dots"><span></span><span></span><span></span></span>');
+            await delay(1500);
+            await streamText(fuEl, msg.followUpBot);
+          }
 
           // Pause before next
           await delay(3000);
