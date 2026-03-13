@@ -31,7 +31,7 @@ for (let i = 0; i < cells.length; i += cols) {
         {rows.map((row) => (
           <tr>
             {row.map((blocks) => (
-              <td class="align-top px-[2rem] py-[2rem] border-r-[0.15rem] border-white/10 last:border-r-0 border-b-[0.15rem] border-b-white/10 last-of-type:border-b-0">
+              <td class="align-middle px-[2rem] py-[2rem]">
                 <CellContent blocks={blocks} class="h-full" />
               </td>
             ))}

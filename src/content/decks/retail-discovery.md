@@ -46,8 +46,86 @@ slides:
   - type: table
     category: Case Studies
     title: Customer ROI Stories
+    cols: 4
     cells:
+      - []
       - - type: text
-          text: hey
-          size: h3
+          text: Opportunity
+          size: h6
+      - - type: text
+          text: Client case-studies
+          size: h6
+      - - type: text
+          text: ROI 6 months
+          size: h6
+      - - type: text
+          text: Enhanced Footfall
+          size: h6
+      - - type: text
+          text: Discover new traffic and conversion opportunities across your stores with accurate customer demographics.
+          size: p-sm
+      - - type: logos
+          items:
+            - src: /images/logos/purple.svg
+              alt: Purple
+            - src: /images/logos/onitsuka.svg
+              alt: Onitsuka Tiger
+            - src: /images/logos/browns.svg
+              alt: Browns
+            - src: /images/logos/casper.svg
+              alt: Casper
+      - - type: text
+          text: 8 - 12X
+          size: h4
+      - - type: text
+          text: Precision Staff Planning
+          size: h6
+      - - type: text
+          text: Do more with your current staffing resources to optimise conversion and productivity.
+          size: p-sm
+      - - type: logos
+          items:
+            - src: /images/logos/adidas.svg
+              alt: Adidas
+            - src: /images/logos/flannels.svg
+              alt: Flannels
+            - src: /images/logos/vmo2.svg
+              alt: VMO2
+            - src: /images/logos/krys.webp
+              alt: Krys Group
+      - - type: text
+          text: 4 - 8X
+          size: h4
+      - - type: text
+          text: Path to Purchase
+          size: h6
+      - - type: text
+          text: Identify key moments along the customer journey to drive conversion - from product displays to showrooms, fitting rooms & seating areas
+          size: p-sm
+      - - type: logos
+          items:
+            - src: /images/logos/decathlon.svg
+              alt: Decathlon
+            - src: /images/logos/gymshark.svg
+              alt: Gymshark
+            - src: /images/logos/dfs.svg
+              alt: DFS
+      - - type: text
+          text: 6 - 22X
+          size: h4
+      - - type: text
+          text: Basket Recovery
+          size: h6
+      - - type: text
+          text: Reduce basket abandonment by ensuring efficient tills, queues and service areas at all times through the week.
+          size: p-sm
+      - - type: logos
+          items:
+            - src: /images/logos/centerpoint.webp
+              alt: Centrepoint
+            - src: /images/logos/aswatson.webp
+              alt: AS Watson
+      - - type: text
+          text: 4 - 8X
+          size: h4
 ---

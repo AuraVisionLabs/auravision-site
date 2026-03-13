@@ -4,6 +4,7 @@ type TextSize = "h1" | "h2" | "h3" | "h4" | "p-lg" | "p-md" | "p-sm";
 type ContentBlock =
   | { type: "text"; text: string; size?: TextSize }
   | { type: "image"; src: string; alt?: string }
+  | { type: "logos"; items: Array<{ src: string; alt?: string }> }
   | { type: "heatmap" }
   | { type: "chat" }
   | { type: "device" };
@@ -47,9 +48,11 @@ const sizeClasses: Record<string, string> = {
   "h2": "font-title text-[4.5rem] text-white mb-5",
   "h3": "font-title text-[3.5rem] text-white mb-4",
   "h4": "font-title text-[2.8rem] text-white mb-3",
-  "p-lg": "font-body text-[2.8rem] text-white leading-relaxed mb-6",
-  "p-md": "font-body text-[2.2rem] text-white leading-relaxed mb-6",
-  "p-sm": "font-body text-[1.8rem] text-white leading-relaxed mb-4",
+  "h5": "font-title text-[2.4rem] text-white mb-2",
+  "h6": "font-title text-[2rem] text-white mb-2",
+  "p-lg": "font-body text-[2.5rem] text-white leading-relaxed mb-6",
+  "p-md": "font-body text-[2rem] text-white leading-relaxed mb-6",
+  "p-sm": "font-body text-[1.2rem] text-white leading-relaxed mb-4",
 };
 ---
 
@@ -59,6 +62,13 @@ const sizeClasses: Record<string, string> = {
       return <div class={sizeClasses[block.size ?? "p-md"]} set:html={block.text} />;
     }
     if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
+    if (block.type === "logos") return (
+      <div class="flex items-center gap-[1.5rem] mb-4">
+        {block.items.map((item) => (
+          <img src={item.src} alt={item.alt ?? ""} class={`h-auto max-h-[4rem] w-0 flex-1 object-contain ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
+        ))}
+      </div>
+    );
     if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
     if (block.type === "chat") return <div class="flex-1 min-h-0"><ChatAnimation /></div>;
     if (block.type === "device") return <div class="flex-1 min-h-0 flex items-center justify-center"><WireframeCube /></div>;

@@ -297,7 +297,7 @@ collections:
                         fields:
                           - { label: "Type", name: "type", widget: "hidden", default: "text" }
                           - { label: "Text", name: "text", widget: "markdown", hint: "Supports HTML — use raw mode for inline styles" }
-                          - { label: "Size", name: "size", widget: "select", default: "p-md", options: ["h1", "h2", "h3", "h4", "p-lg", "p-md", "p-sm"], hint: "Text size preset" }
+                          - { label: "Size", name: "size", widget: "select", default: "p-md", options: ["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm"], hint: "Text size preset" }
                       - label: "Image"
                         name: "image"
                         widget: "object"
@@ -320,6 +320,19 @@ collections:
                         widget: "object"
                         fields:
                           - { label: "Type", name: "type", widget: "hidden", default: "device" }
+                      - label: "Logos"
+                        name: "logos"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "logos" }
+                          - label: "Items"
+                            name: "items"
+                            widget: "list"
+                            label_singular: "Logo"
+                            summary: "{{fields.alt}}"
+                            fields:
+                              - { label: "Image", name: "src", widget: "image" }
+                              - { label: "Alt Text", name: "alt", widget: "string", required: false }
                   - label: "Cell Options"
                     name: "options"
                     widget: "object"
@@ -357,7 +370,7 @@ collections:
                       fields:
                         - { label: "Type", name: "type", widget: "hidden", default: "text" }
                         - { label: "Text", name: "text", widget: "markdown", hint: "Supports HTML — use raw mode for inline styles" }
-                        - { label: "Size", name: "size", widget: "select", default: "p-md", options: ["h1", "h2", "h3", "h4", "p-lg", "p-md", "p-sm"], hint: "Text size preset" }
+                        - { label: "Size", name: "size", widget: "select", default: "p-md", options: ["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm"], hint: "Text size preset" }
                     - label: "Image"
                       name: "image"
                       widget: "object"
@@ -380,3 +393,16 @@ collections:
                       widget: "object"
                       fields:
                         - { label: "Type", name: "type", widget: "hidden", default: "device" }
+                    - label: "Logos"
+                      name: "logos"
+                      widget: "object"
+                      fields:
+                        - { label: "Type", name: "type", widget: "hidden", default: "logos" }
+                        - label: "Items"
+                          name: "items"
+                          widget: "list"
+                          label_singular: "Logo"
+                          summary: "{{fields.alt}}"
+                          fields:
+                            - { label: "Image", name: "src", widget: "image" }
+                            - { label: "Alt Text", name: "alt", widget: "string", required: false }

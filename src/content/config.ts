@@ -17,11 +17,12 @@ const techSlide = z.object({
   video: z.string().optional(),
 });
 
-const textSize = z.enum(["h1", "h2", "h3", "h4", "p-lg", "p-md", "p-sm"]).default("p-md");
+const textSize = z.enum(["h1", "h2", "h3", "h4", "h5", "h6", "p-lg", "p-md", "p-sm"]).default("p-md");
 
 const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("text"), text: z.string(), size: textSize }),
   z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
+  z.object({ type: z.literal("logos"), items: z.array(z.object({ src: z.string(), alt: z.string().optional() })) }),
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat") }),
   z.object({ type: z.literal("device") }),
