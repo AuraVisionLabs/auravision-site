@@ -24,18 +24,19 @@ const bgColor = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "ora
 
 const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("text"), text: z.string(), size: textSize, bg: bgColor }),
-  z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional() }),
+  z.object({ type: z.literal("image"), src: z.string(), alt: z.string().optional(), width: z.enum(["full", "half"]).optional() }),
   z.object({ type: z.literal("logos"), items: z.array(z.object({ src: z.string(), alt: z.string().optional() })), fit: z.enum(["fill", "fixed"]).default("fill") }),
   z.object({ type: z.literal("testimonial"), headliner: z.string(), quote: z.string() }),
   z.object({ type: z.literal("profile"), name: z.string(), role: z.string(), photo: z.string().optional(), logo: z.string().optional(), company: z.string().optional() }),
   z.object({ type: z.literal("snapshot"), src: z.string(), camera: z.string().optional() }),
   z.object({ type: z.literal("inlinetable"), columns: z.array(z.object({ label: z.string(), header: z.string(), level: z.number().min(1) })) }),
+  z.object({ type: z.literal("metrics"), items: z.array(z.string()) }),
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat") }),
   z.object({ type: z.literal("device") }),
 ]);
 
-const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"]);
+const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange", "white", "white-transparent"]);
 
 const columnOptions = z.object({
   background: colorOption.optional(),
@@ -45,6 +46,7 @@ const columnOptions = z.object({
 const tableSlide = z.object({
   type: z.literal("table"),
   category: z.string().optional(),
+  categoryBg: z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"]).optional(),
   title: z.string().optional(),
   subtitle: z.string().optional(),
   layout: z.enum(["grid", "table-striped", "table"]).default("grid"),

@@ -1,16 +1,17 @@
 ---
 type TextSize = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p-lg" | "p-md" | "p-sm" | "p-xs";
 
-type BgColor = "none" | "cyan" | "fuchsia" | "purple" | "blue" | "red" | "orange";
+type BgColor = "none" | "cyan" | "fuchsia" | "purple" | "blue" | "red" | "orange" | "white";
 
 type ContentBlock =
   | { type: "text"; text: string; size?: TextSize; bg?: BgColor }
-  | { type: "image"; src: string; alt?: string }
+  | { type: "image"; src: string; alt?: string; width?: "full" | "half" }
   | { type: "logos"; items: Array<{ src: string; alt?: string }>; fit?: "fill" | "fixed" }
   | { type: "testimonial"; headliner: string; quote: string }
   | { type: "profile"; name: string; role: string; photo?: string; logo?: string; company?: string }
   | { type: "snapshot"; src: string; camera?: string }
   | { type: "inlinetable"; columns: Array<{ label: string; header: string; level: number }> }
+  | { type: "metrics"; items: string[] }
   | { type: "heatmap" }
   | { type: "chat" }
   | { type: "device" };
@@ -28,9 +29,23 @@ interface Props {
   class?: string;
 }
 
+import { Footprints, BadgePercent, UserStar, UsersRound, VenusAndMars, ArrowLeftRight, Funnel, Clock, Eye, Flame } from "@lucide/astro";
 import PathMapCompare from '../PathMapCompare.astro';
 import ChatAnimation from '../ChatAnimation.astro';
 import WireframeCube from '../WireframeCube.astro';
+
+const metricsMap: Record<string, { label: string; Icon: any }> = {
+  footfall: { label: "Footfall", Icon: Footprints },
+  staffing: { label: "Staffing", Icon: UserStar },
+  queues: { label: "Queues", Icon: UsersRound },
+  demographics: { label: "Demographics", Icon: VenusAndMars },
+  "passers-by": { label: "Passers-by", Icon: ArrowLeftRight },
+  capture: { label: "Capture", Icon: Funnel },
+  dwell: { label: "Dwell", Icon: Clock },
+  impressions: { label: "Impressions", Icon: Eye },
+  heatmaps: { label: "Heatmaps", Icon: Flame },
+  conversion: { label: "Conversion", Icon: BadgePercent },
+};
 
 const { blocks, options, compact, stripedMode, class: className } = Astro.props;
 
@@ -50,6 +65,8 @@ const bgStyles: Record<string, string> = {
   blue: "bg-blue-500/20",
   red: "bg-red-500/20",
   orange: "bg-orange-500/20",
+  white: "bg-white",
+  "white-transparent": "bg-white/10",
 };
 
 const bgStylesFull: Record<string, string> = {
@@ -62,19 +79,20 @@ const bgStylesFull: Record<string, string> = {
 };
 
 const bg = options?.background && options.background !== "none" ? `${bgStyles[options.background]} backdrop-blur-sm py-[2rem] px-[3rem] rounded-[3rem] shadow-2xl` : "";
-const glow = options?.glow && options.glow !== "none" ? `border-[0.5rem] ${glowStyles[options.glow]}` : "";
+const glow = options?.glow && options.glow !== "none" ? `border-[0.5rem] ${glowStyles[options.glow]} py-[2rem] px-[3rem] rounded-[3rem]` : "";
+const isDark = options?.background === "white";
 
 const sizeClasses: Record<string, string> = {
-  "h1": "font-title text-[6rem] text-white mb-6",
-  "h2": "font-title text-[4.5rem] text-white mb-5",
-  "h3": "font-title text-[3.5rem] text-white mb-4",
-  "h4": "font-title text-[2.8rem] text-white mb-3",
-  "h5": "font-title text-[2.4rem] text-white mb-2",
-  "h6": "font-title text-[2rem] text-white mb-2",
-  "p-lg": "font-body text-[2.5rem] text-white leading-relaxed mb-6",
-  "p-md": "font-body text-[2rem] text-white leading-relaxed mb-6",
-  "p-sm": "font-body text-[1.5rem] text-white leading-relaxed mb-4",
-  "p-xs": "font-body text-[1.2rem] text-white leading-relaxed mb-4",
+  "h1": `font-title text-[6rem] ${isDark ? 'text-slate-900' : 'text-white'} mb-6`,
+  "h2": `font-title text-[4.5rem] ${isDark ? 'text-slate-900' : 'text-white'} mb-5`,
+  "h3": `font-title text-[3.5rem] ${isDark ? 'text-slate-900' : 'text-white'} mb-4`,
+  "h4": `font-title text-[2.8rem] ${isDark ? 'text-slate-900' : 'text-white'} mb-3`,
+  "h5": `font-title text-[2.4rem] ${isDark ? 'text-slate-900' : 'text-white'} mb-2`,
+  "h6": `font-title text-[2rem] ${isDark ? 'text-slate-900' : 'text-white'} mb-2`,
+  "p-lg": `font-body text-[2.5rem] ${isDark ? 'text-slate-700' : 'text-white'} leading-relaxed mb-6`,
+  "p-md": `font-body text-[2rem] ${isDark ? 'text-slate-700' : 'text-white'} leading-relaxed mb-6`,
+  "p-sm": `font-body text-[1.5rem] ${isDark ? 'text-slate-700' : 'text-white'} leading-relaxed mb-4`,
+  "p-xs": `font-body text-[1.2rem] ${isDark ? 'text-slate-700' : 'text-white'} leading-relaxed mb-4`,
 };
 ---
 
@@ -93,7 +111,7 @@ const sizeClasses: Record<string, string> = {
       const sizeClass = compact ? sizeClasses[block.size ?? "p-md"].replace(/mb-\d+/g, "mb-0") : sizeClasses[block.size ?? "p-md"];
       return <div class={`${sizeClass} ${textBg}`} set:html={block.text} />;
     }
-    if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
+    if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class={`${block.width === "half" ? "w-1/2" : "w-full"} h-auto rounded-4xl mb-4 shadow-2xl`} />;
     if (block.type === "logos") {
       const isFill = (block.fit ?? "fill") === "fill";
       return isFill ? (
@@ -111,8 +129,8 @@ const sizeClasses: Record<string, string> = {
       );}
     if (block.type === "testimonial") return (
       <div class="pt-[2rem] mb-4">
-        <p class="font-body italic text-[3rem] text-white/90 leading-snug mb-[1rem]">&ldquo;{block.headliner}&rdquo;</p>
-        <p class="font-body text-[1.5rem] leading-relaxed text-white/70">{block.quote}</p>
+        <p class="font-body italic text-[2.4rem] text-white/90 leading-snug mb-[1rem]">&ldquo;{block.headliner}&rdquo;</p>
+        <p class="font-body text-[1.3rem] leading-relaxed text-white/70">{block.quote}</p>
       </div>
     );
     if (block.type === "profile") return (
@@ -133,6 +151,21 @@ const sizeClasses: Record<string, string> = {
         )}
       </div>
     );
+    if (block.type === "metrics") {
+      const selected = (block.items ?? []).map((key: string) => metricsMap[key]).filter(Boolean);
+      return (
+        <div class="grid mt-auto" style="grid-template-columns:repeat(auto-fill,7rem);gap:2rem;">
+          {selected.map(({ label, Icon }) => (
+            <div class="flex flex-col items-center text-center">
+              <div class="mb-[0.8rem] flex h-[7rem] w-[7rem] mx-auto items-center justify-center rounded-[1.5rem] bg-white/10 border border-white/10">
+                <Icon class="h-[3.5rem] w-[3.5rem] text-white" stroke-width={1.5} />
+              </div>
+              <p class="font-mono font-light text-[1.2rem] tracking-widest text-white/80">{label}</p>
+            </div>
+          ))}
+        </div>
+      );
+    }
     if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
     if (block.type === "chat") return <div class="flex-1 min-h-0"><ChatAnimation /></div>;
     if (block.type === "device") return <div class="flex-1 min-h-0 flex items-center justify-center"><WireframeCube /></div>;

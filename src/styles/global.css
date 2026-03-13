@@ -137,6 +137,10 @@ body {
   overflow-x: hidden;
 }
 
+strong, b {
+  font-weight: 700;
+}
+
 input,
 textarea,
 select,
@@ -352,7 +356,7 @@ select,
 
   /* Bold / strong */
   & :where(strong) {
-    @apply text-white font-semibold;
+    @apply text-white font-bold;
   }
 
   /* Links */

@@ -276,6 +276,7 @@ collections:
             fields:
               - { label: "Type", name: "type", widget: "hidden", default: "table" }
               - { label: "Category", name: "category", widget: "string", required: false, hint: "Label shown above the title" }
+              - { label: "Category Background", name: "categoryBg", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"], hint: "Background colour for the category label" }
               - { label: "Title", name: "title", widget: "string", required: false }
               - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
               - { label: "Layout", name: "layout", widget: "select", default: "grid", options: ["grid", "table-striped", "table"], hint: "grid = spaced cards, table-striped = compact rows with alternating backgrounds, table = compact rows no background" }
@@ -370,6 +371,27 @@ collections:
                               - { label: "Type", name: "type", widget: "hidden", default: "testimonial" }
                               - { label: "Headliner", name: "headliner", widget: "string", hint: "Bold italic quote headline" }
                               - { label: "Quote", name: "quote", widget: "text", hint: "Supporting quote text" }
+                          - label: "Metrics"
+                            name: "metrics"
+                            widget: "object"
+                            fields:
+                              - { label: "Type", name: "type", widget: "hidden", default: "metrics" }
+                              - label: "Items"
+                                name: "items"
+                                widget: "select"
+                                multiple: true
+                                options:
+                                  - { label: "Footfall", value: "footfall" }
+                                  - { label: "Staffing", value: "staffing" }
+                                  - { label: "Queues", value: "queues" }
+                                  - { label: "Demographics", value: "demographics" }
+                                  - { label: "Passers-by", value: "passers-by" }
+                                  - { label: "Capture", value: "capture" }
+                                  - { label: "Dwell", value: "dwell" }
+                                  - { label: "Impressions", value: "impressions" }
+                                  - { label: "Heatmaps", value: "heatmaps" }
+                                  - { label: "Conversion", value: "conversion" }
+                                hint: "Select which metric icons to display"
                           - label: "Profile"
                             name: "profile"
                             widget: "object"
@@ -386,5 +408,5 @@ collections:
                         required: false
                         collapsed: true
                         fields:
-                          - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"], hint: "Adds a tinted background with padding and rounded corners" }
+                          - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange", "white", "white-transparent"], hint: "Adds a tinted background with padding and rounded corners" }
                           - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"], hint: "Adds a coloured outline with glow effect" }

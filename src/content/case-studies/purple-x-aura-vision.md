@@ -13,7 +13,7 @@ metrics:
   - value: "5X"
     label: "ROI"
 testimonial:
-  headliner: "Only Aura Vision was able to capture these kinds of engagements correctly."
+  headliner: "Aura Vision is our secret weapon."
   quote: "A critical part of the showroom experience is for customers to be able to lie, bounce and roll on the mattresses. Only Aura Vision was able to capture these kinds of engagements correctly."
   name: ""
   role: "Chief Retail Officer, Purple"

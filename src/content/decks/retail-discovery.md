@@ -271,4 +271,51 @@ slides:
                   - label: 12 - 36 months
                     header: Strategic partnership
                     level: 4
+  - type: table
+    category: Enhanced Footfall — Case Study
+    categoryBg: blue
+    title: "\"Aura Vision is our secret weapon.\""
+    layout: grid
+    colWidths:
+      - 1
+      - 1
+    rows:
+      - cells:
+          - blocks:
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/purple.svg
+                    alt: Purple
+              - type: text
+                text: 24% more accurate
+                size: h2
+              - type: testimonial
+                headliner: Associates were manually counting each customer walk-in, taking up precious time.
+                quote: — Regional Manager, Purple
+              - type: metrics
+                items:
+                  - footfall
+                  - capture
+                  - staffing
+                  - demographics
+            options:
+              background: white-transparent
+          - blocks:
+              - type: text
+                text: Key Outcomes
+                size: h4
+              - type: text
+                text: |
+                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>24% more accurate</strong> customer counts</div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Tracks mattress engagement to <strong>optimise product displays</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Passer-by &amp; capture rates to <strong>measure marketing impact</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Conversion drivers identified to <strong>increase sales</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Rolled out across <strong>78 US showrooms</strong></div>
+                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>5X ROI</strong> in the first year</div>
+                  </div>
+                size: p-md
+            options:
+              glow: blue
 ---
