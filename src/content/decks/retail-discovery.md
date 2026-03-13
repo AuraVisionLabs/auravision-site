@@ -348,9 +348,8 @@ slides:
             options:
               valign: center
   - type: table
-    category: Path to Purchase — Case Study
-    categoryBg: fuchsia
-    title: "\"Now we know how each refit performs.\""
+    category: Decathlon — Case Study
+    title: "\"Now we know how each refit performs\""
     layout: grid
     colWidths:
       - 1
@@ -364,35 +363,26 @@ slides:
                   - src: /images/logos/decathlon.svg
                     alt: Decathlon
               - type: text
-                text: 6X ROI
+                text: 0.5% conversion uplift in just weeks
                 size: h2
               - type: testimonial
-                headliner: Decathlon monitors merchandising ROI across large showroom refits each season.
+                headliner: Decathlon needed to continuously monitor visual merchandising ROI across large showroom refits each season.
                 quote: — Product Manager, Decathlon France
                 size: md
-              - type: metrics
-                items:
-                  - impressions
-                  - dwell
-                  - heatmaps
-                  - conversion
             options:
               background: white-transparent
+              valign: center
           - blocks:
-              - type: text
-                text: Key Outcomes
-                size: h4
-              - type: text
-                text: |
-                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>0.5% conversion uplift</strong> from optimised layouts</div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Measures which refits <strong>perform best and why</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Tracks journeys to <strong>maximise purchase opportunities</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>6X ROI</strong> from data-driven merchandising</div>
-                  </div>
-                size: p-md
+              - type: metric-list
+                items:
+                  - metric: impressions
+                    text: "<strong>6X ROI</strong> by benchmarking refits across multiple seasons and campaigns"
+                  - metric: heatmaps
+                    text: "Optimise customer flow between departments to <strong>maximise purchase opportunities</strong>"
+                  - metric: conversion
+                    text: "<strong>0.5% conversion uplift</strong> from data-driven layout and merchandising changes"
             options:
-              glow: fuchsia
+              valign: center
   - type: table
     category: Path to Purchase — Case Study
     categoryBg: fuchsia
