@@ -312,9 +312,8 @@ slides:
             options:
               valign: center
   - type: table
-    category: Precision Staff Planning — Case Study
-    categoryBg: purple
-    title: "\"8X ROI in 3 months with better staffing.\""
+    category: Flannels — Case Study
+    title: "\"8X ROI in 3 months with better staffing\""
     layout: grid
     colWidths:
       - 1
@@ -328,36 +327,26 @@ slides:
                   - src: /images/logos/flannels.svg
                     alt: Flannels
               - type: text
-                text: 8X ROI
+                text: 0.75% conversion uplift across 50+ stores
                 size: h2
               - type: testimonial
-                headliner: Flannels needed better store visibility to staff smarter as the brand scales.
+                headliner: Frasers Group needed increased visibility into its stores to maintain a competitive advantage as it expands.
                 quote: — Head of Retail Insight, Frasers Group
                 size: md
-              - type: metrics
-                items:
-                  - queues
-                  - staffing
-                  - dwell
-                  - heatmaps
-                  - conversion
             options:
               background: white-transparent
+              valign: center
           - blocks:
-              - type: text
-                text: Key Outcomes
-                size: h4
-              - type: text
-                text: |
-                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>0.75% conversion uplift</strong> from demand-based rotas</div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Staff coverage optimised by <strong>floor, department &amp; checkout</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Queue monitoring to <strong>cut wait times</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>8X ROI</strong> in just <strong>3 months</strong></div>
-                  </div>
-                size: p-md
+              - type: metric-list
+                items:
+                  - metric: staffing
+                    text: "<strong>34% improvement</strong> in staff-customer allocation across multi-floor stores"
+                  - metric: queues
+                    text: "Reduced <strong>wait times</strong> during peak trading hours with queue monitoring"
+                  - metric: conversion
+                    text: "<strong>0.75% conversion uplift</strong> from demand-based rotas aligned to customer demand"
             options:
-              glow: purple
+              valign: center
   - type: table
     category: Path to Purchase — Case Study
     categoryBg: fuchsia

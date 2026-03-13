@@ -39,7 +39,7 @@ import WireframeCube from '../WireframeCube.astro';
 const metricsMap: Record<string, { label: string; Icon: any; color: string }> = {
   footfall: { label: "Footfall", Icon: Footprints, color: "blue" },
   staffing: { label: "Staffing", Icon: UserStar, color: "purple" },
-  queues: { label: "Queues", Icon: UsersRound, color: "red" },
+  queues: { label: "Queues", Icon: UsersRound, color: "orange" },
   demographics: { label: "Demographics", Icon: VenusAndMars, color: "blue" },
   "passers-by": { label: "Passers-by", Icon: ArrowLeftRight, color: "blue" },
   capture: { label: "Capture", Icon: Funnel, color: "blue" },
@@ -54,6 +54,7 @@ const metricIconColors: Record<string, { box: string; icon: string }> = {
   purple: { box: "bg-purple-500 shadow-[0_0_16px_rgba(168,85,247,0.8)]", icon: "text-white" },
   fuchsia: { box: "bg-fuchsia-500 shadow-[0_0_16px_rgba(217,70,239,0.8)]", icon: "text-white" },
   red: { box: "bg-red-500 shadow-[0_0_16px_rgba(239,68,68,0.8)]", icon: "text-white" },
+  orange: { box: "bg-orange-500 shadow-[0_0_16px_rgba(249,115,22,0.8)]", icon: "text-white" },
 };
 
 const { blocks, options, compact, stripedMode, class: className } = Astro.props;
