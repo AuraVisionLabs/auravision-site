@@ -237,6 +237,67 @@ slides:
             options:
               background: blue
   - type: table
+    category: Revenue Impact
+    title: How our retailers achieve uplift
+    layout: grid
+    background: br
+    rows:
+      - cells:
+          - blocks:
+              - type: text
+                text: Staffing
+                size: h4
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/purple.svg
+                    alt: Purple
+              - type: highlight
+                value: "£8M / yr"
+                subtitle: across 61 US locations
+              - type: text
+                text: "24% more accurate staff allocations increased <strong>sales conversion 14.3% year-on-year</strong>."
+                size: p-md
+            options:
+              background: blue
+              gap: sm
+          - blocks:
+              - type: text
+                text: Planning
+                size: h4
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/vmo2.svg
+                    alt: Virgin Media O2
+              - type: highlight
+                value: "£28M / 3yr"
+                subtitle: across 308 UK locations
+              - type: text
+                text: "Elevating <strong>conversion by 4.4%</strong> with key product displays and <strong>7.0%</strong> with faster transaction times."
+                size: p-md
+            options:
+              background: blue
+              gap: sm
+          - blocks:
+              - type: text
+                text: Design
+                size: h4
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/adidas.svg
+                    alt: Adidas
+              - type: highlight
+                value: "£1.6M / yr"
+                subtitle: across 5 UAE locations
+              - type: text
+                text: "Boosted <strong>customer engagements 33%</strong> by A/B testing key product displays and activations."
+                size: p-md
+            options:
+              background: blue
+              gap: sm
+  - type: table
     category: Process
     title: What we need to ensure success
     layout: grid

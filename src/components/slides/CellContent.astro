@@ -15,13 +15,15 @@ type ContentBlock =
   | { type: "metric-list"; items: Array<{ metric: string; text: string }> }
   | { type: "heatmap" }
   | { type: "chat"; conversation?: Array<{ role: "user" | "bot"; content: string; image?: string }> }
-  | { type: "device" };
+  | { type: "device" }
+  | { type: "highlight"; value: string; subtitle?: string };
 
 type CellOptions = {
   background?: "none" | BgColor | "white-transparent";
   solidBg?: boolean;
   glow?: "none" | BgColor;
   valign?: "top" | "center";
+  gap?: "sm" | "md" | "lg";
 };
 
 interface Props {
@@ -96,6 +98,7 @@ const bg = options?.background && options.background !== "none" ? `${(bgMap[opti
 const glow = options?.glow && options.glow !== "none" ? `border-[0.5rem] ${glowStyles[options.glow]} py-[2rem] px-[3rem] rounded-[3rem]` : "";
 const isDark = options?.background === "white";
 const valign = options?.valign || "top";
+const gapClass = options?.gap === "lg" ? "gap-[3rem]" : options?.gap === "md" ? "gap-[2rem]" : options?.gap === "sm" ? "gap-[1rem]" : "";
 
 const sizeClasses: Record<string, string> = {
   "h1": `font-title text-[6rem] ${isDark ? 'text-slate-900' : 'text-white'} leading-tight mb-6`,
@@ -112,7 +115,7 @@ const sizeClasses: Record<string, string> = {
 ---
 
 <div class:list={[valign === "center" ? "min-h-0 h-full flex flex-col justify-center overflow-visible" : "contents", valign === "center" && className]}>
-<div class:list={[valign === "center" ? "flex flex-col overflow-visible" : "min-h-0 flex flex-col overflow-visible", (bg || glow) && "h-full", bg, glow, valign !== "center" && className]}>
+<div class:list={[valign === "center" ? "flex flex-col overflow-visible" : "min-h-0 flex flex-col overflow-visible", (bg || glow) && "h-full", bg, glow, gapClass, valign !== "center" && className]}>
   {blocks.map((block) => {
     if (block.type === "text") {
       const hasBg = block.bg && block.bg !== "none";
@@ -209,6 +212,12 @@ const sizeClasses: Record<string, string> = {
         </div>
       );
     }
+    if (block.type === "highlight") return (
+      <div class="rounded-[2rem] px-[2.5rem] py-[1.5rem] mb-4" style="background:linear-gradient(135deg,#970FFF 0%,#BB09E7 50%,#DE02CF 100%)">
+        <p class="font-title text-[4.5rem] text-white leading-tight" set:html={block.value} />
+        {block.subtitle && <p class="font-body text-[1.5rem] text-white leading-snug mt-[0.3rem]">{block.subtitle}</p>}
+      </div>
+    );
     if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
     if (block.type === "chat") return <div class="flex-1 min-h-0" data-conversation={block.conversation ? JSON.stringify(block.conversation) : undefined}><ChatAnimation /></div>;
     if (block.type === "device") return <div class="flex-1 min-h-0 flex items-center justify-center"><WireframeCube /></div>;

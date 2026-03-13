@@ -40,6 +40,7 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat"), conversation: z.array(z.object({ role: z.enum(["user", "bot"]), content: z.string(), image: z.string().optional() })).optional() }),
   z.object({ type: z.literal("device") }),
+  z.object({ type: z.literal("highlight"), value: z.string(), subtitle: z.string().optional() }),
 ]);
 
 const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", "orange", "white", "white-transparent"]);
@@ -49,6 +50,7 @@ const columnOptions = z.object({
   solidBg: z.boolean().optional(),
   glow: colorOption.optional(),
   valign: z.enum(["top", "center"]).optional(),
+  gap: z.enum(["sm", "md", "lg"]).optional(),
 });
 
 const tableSlide = z.object({
