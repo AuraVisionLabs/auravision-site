@@ -5,7 +5,8 @@ slides:
   - type: cover
     title: Retail Discovery Deck
     tagline: Take the guesswork out of managing your stores.
-    footer: "Aura Vision Labs Ltd · <a href='https://auravision.ai' style='text-decoration:underline'>auravision.ai</a>"
+    footer: Aura Vision Labs Ltd · <a href='https://auravision.ai'
+      style='text-decoration:underline'>auravision.ai</a>
   - type: tech
     title: Unique AI
     callout: <span style='color:#4ade80'>✓</span> More accurate  <span
@@ -162,10 +163,13 @@ slides:
                 alt: Virgin Media O2
           - type: testimonial
             headliner: The insights we gain from Aura Vision are a game changer
-            quote: They give us a deeper understanding of our customers, which helps shape our strategy, and enables faster, smarter decision-making.
+            quote: They give us a deeper understanding of our customers, which helps shape
+              our strategy, and enables faster, smarter decision-making.
           - type: profile
             name: Carly Atherton
-            role: "Head of Multichannel\nOperations Development"
+            role: |-
+              Head of Multichannel
+              Operations Development
             photo: /images/carly.webp
             company: Virgin Media O2
         options:
@@ -178,10 +182,13 @@ slides:
                 alt: Adidas
           - type: testimonial
             headliner: This proves how impactful Aura Vision is as a tool
-            quote: It not only validates our strategies but also gives us the confidence to make data-driven decisions that ultimately grow the business.
+            quote: It not only validates our strategies but also gives us the confidence to
+              make data-driven decisions that ultimately grow the business.
           - type: profile
             name: Samantha Turner
-            role: "Business Transformation\nManager"
+            role: |-
+              Business Transformation
+              Manager
             photo: /images/samantha.webp
             company: Adidas
         options:
@@ -194,7 +201,8 @@ slides:
                 alt: A.S. Watson
           - type: testimonial
             headliner: Simplicity and ease of integration
-            quote: I really like the simplicity and ease of integration with our existing camera system, which basically every store has.
+            quote: I really like the simplicity and ease of integration with our existing
+              camera system, which basically every store has.
           - type: profile
             name: Frenkel Tel
             role: Store Innovation Lead

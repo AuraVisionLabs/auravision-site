@@ -97,13 +97,13 @@ const sizeClasses: Record<string, string> = {
       return isFill ? (
       <div class="flex items-center gap-[1.5rem] mb-4">
         {block.items.map((item) => (
-          <img src={item.src} alt={item.alt ?? ""} class={`h-auto max-h-[6rem] object-contain ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
+          <img src={item.src} alt={item.alt ?? ""} class={`h-auto max-h-[4rem] w-0 flex-1 object-contain ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
         ))}
       </div>
       ) : (
       <div class="mb-4">
         {block.items.map((item) => (
-          <img src={item.src} alt={item.alt ?? ""} class={`h-[8rem] w-auto ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
+          <img src={item.src} alt={item.alt ?? ""} class={`h-[8rem] w-auto object-contain ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
         ))}
       </div>
       );}

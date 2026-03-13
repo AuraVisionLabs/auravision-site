@@ -326,6 +326,7 @@ collections:
                         widget: "object"
                         fields:
                           - { label: "Type", name: "type", widget: "hidden", default: "logos" }
+                          - { label: "Fit", name: "fit", widget: "select", default: "fill", options: ["fill", "fixed"], required: false, hint: "fill = scale to container width, fixed = fixed height left-aligned" }
                           - label: "Items"
                             name: "items"
                             widget: "list"
@@ -334,6 +335,23 @@ collections:
                             fields:
                               - { label: "Image", name: "src", widget: "image" }
                               - { label: "Alt Text", name: "alt", widget: "string", required: false }
+                      - label: "Testimonial"
+                        name: "testimonial"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "testimonial" }
+                          - { label: "Headliner", name: "headliner", widget: "string", hint: "Bold italic quote headline" }
+                          - { label: "Quote", name: "quote", widget: "text", hint: "Supporting quote text" }
+                      - label: "Profile"
+                        name: "profile"
+                        widget: "object"
+                        fields:
+                          - { label: "Type", name: "type", widget: "hidden", default: "profile" }
+                          - { label: "Name", name: "name", widget: "string" }
+                          - { label: "Role", name: "role", widget: "string", hint: "Use \\n for line breaks" }
+                          - { label: "Photo", name: "photo", widget: "image", required: false }
+                          - { label: "Logo", name: "logo", widget: "image", required: false }
+                          - { label: "Company", name: "company", widget: "string", required: false }
                   - label: "Cell Options"
                     name: "options"
                     widget: "object"
