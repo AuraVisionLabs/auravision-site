@@ -84,6 +84,8 @@ slides:
                 conversation:
                   - role: user
                     content: "Which areas of our showroom are working?"
+                  - role: bot
+                    content: "<i>Comparing all store areas...</i>"
                     image: /images/activation1.webp
                   - role: bot
                     content: "<strong>Sofa collections are working best</strong> with 4.2 min dwell time, 3× higher than lighting. But lighting converts at 2× the rate."
@@ -101,6 +103,8 @@ slides:
                 conversation:
                   - role: user
                     content: "Are staff where customers need them most?"
+                  - role: bot
+                    content: "<i>Gathering staff-customer ratios...</i>"
                     image: /images/entrance3.webp
                   - role: bot
                     content: "<strong>Zone 3 (dining)</strong> has a 40% service gap on weekends. Customers dwell 3 min but staff presence is under 20%."
