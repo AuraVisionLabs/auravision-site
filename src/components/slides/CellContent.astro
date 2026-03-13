@@ -40,12 +40,12 @@ const glowStyles: Record<string, string> = {
 };
 
 const bgStyles: Record<string, string> = {
-  cyan: "bg-cyan-400/10",
-  fuchsia: "bg-fuchsia-500/10",
-  purple: "bg-purple-500/10",
-  blue: "bg-blue-500/10",
-  red: "bg-red-500/10",
-  orange: "bg-orange-500/10",
+  cyan: "bg-cyan-400/20",
+  fuchsia: "bg-fuchsia-500/20",
+  purple: "bg-purple-500/20",
+  blue: "bg-blue-500/20",
+  red: "bg-red-500/20",
+  orange: "bg-orange-500/20",
 };
 
 const bgStylesFull: Record<string, string> = {
@@ -91,10 +91,34 @@ const sizeClasses: Record<string, string> = {
     }
     if (block.type === "image") return <img src={block.src} alt={block.alt ?? ""} class="w-full h-auto rounded-4xl mb-4 shadow-2xl" />;
     if (block.type === "logos") return (
-      <div class="flex items-center gap-[1.5rem] mb-4">
+      <div class="flex items-center justify-start gap-[1.5rem] mb-4">
         {block.items.map((item) => (
-          <img src={item.src} alt={item.alt ?? ""} class={`h-auto max-h-[4rem] w-0 flex-1 object-contain ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
+          <img src={item.src} alt={item.alt ?? ""} class={`h-[6rem] object-contain object-left ${item.src.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
         ))}
+      </div>
+    );
+    if (block.type === "testimonial") return (
+      <div class="pt-[2rem] mb-4">
+        <p class="font-body italic text-[3rem] text-white/90 leading-snug mb-[1rem]">&ldquo;{block.headliner}&rdquo;</p>
+        <p class="font-body text-[1.5rem] leading-relaxed text-white/70">{block.quote}</p>
+      </div>
+    );
+    if (block.type === "profile") return (
+      <div class="mt-auto flex items-center gap-[1.5rem]">
+        {block.photo ? (
+          <img src={block.photo} alt={block.name} class="h-[5rem] w-[5rem] rounded-full object-cover ring-1 ring-white flex-shrink-0" />
+        ) : (
+          <div class="h-[5rem] w-[5rem] rounded-full bg-white/10 flex-shrink-0" />
+        )}
+        <div class="min-w-0 flex-1">
+          <p class="font-title font-medium text-white/90 text-[1.7rem] leading-tight mb-[0.3rem]">{block.name}</p>
+          {block.role.split("\n").map((line: string) => (
+            <p class="font-title text-[1.3rem] text-white/50 leading-tight">{line}</p>
+          ))}
+        </div>
+        {block.logo && (
+          <img src={block.logo} alt={block.company || ""} class={`h-[4rem] w-auto flex-shrink-0 opacity-60 ${block.logo.endsWith('.svg') ? '[filter:brightness(0)_invert(1)]' : '[filter:grayscale(1)_invert(1)_brightness(2)]'}`} />
+        )}
       </div>
     );
     if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
