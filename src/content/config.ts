@@ -28,6 +28,8 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("logos"), items: z.array(z.object({ src: z.string(), alt: z.string().optional() })), fit: z.enum(["fill", "fixed"]).default("fill") }),
   z.object({ type: z.literal("testimonial"), headliner: z.string(), quote: z.string() }),
   z.object({ type: z.literal("profile"), name: z.string(), role: z.string(), photo: z.string().optional(), logo: z.string().optional(), company: z.string().optional() }),
+  z.object({ type: z.literal("snapshot"), src: z.string(), camera: z.string().optional() }),
+  z.object({ type: z.literal("inlinetable"), columns: z.array(z.object({ label: z.string(), header: z.string(), level: z.number().min(1) })) }),
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat") }),
   z.object({ type: z.literal("device") }),

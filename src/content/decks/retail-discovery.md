@@ -231,4 +231,44 @@ slides:
                 company: A.S. Watson (Kruidvat)
             options:
               background: blue
+  - type: table
+    category: Process
+    title: What we need to ensure success
+    layout: grid
+    colWidths:
+      - 1
+      - 1
+    rows:
+      - cells:
+          - blocks:
+              - type: text
+                text: "1 — Camera & store counts"
+                size: h3
+              - type: text
+                text: The number of front-of-house cameras in each store determines project size
+                size: p-md
+              - type: snapshot
+                src: /images/snapshots.jpg
+                camera: /images/dome-cam.png
+          - blocks:
+              - type: text
+                text: "2 — Success criteria"
+                size: h3
+              - type: text
+                text: Your success criteria enables us to recommend an appropriate project duration
+                size: p-md
+              - type: inlinetable
+                columns:
+                  - label: 1 - 3 months
+                    header: Accuracy Audits
+                    level: 1
+                  - label: 3 - 6 months
+                    header: A/B Tests
+                    level: 2
+                  - label: 6 - 12 months
+                    header: On-boarding Organisation
+                    level: 3
+                  - label: 12 - 36 months
+                    header: Strategic partnership
+                    level: 4
 ---

@@ -328,6 +328,27 @@ collections:
                             widget: "object"
                             fields:
                               - { label: "Type", name: "type", widget: "hidden", default: "device" }
+                          - label: "Snapshot"
+                            name: "snapshot"
+                            widget: "object"
+                            fields:
+                              - { label: "Type", name: "type", widget: "hidden", default: "snapshot" }
+                              - { label: "Image", name: "src", widget: "image" }
+                              - { label: "Camera Overlay", name: "camera", widget: "image", required: false, hint: "Small image overlaid top-left" }
+                          - label: "Inline Table"
+                            name: "inlinetable"
+                            widget: "object"
+                            fields:
+                              - { label: "Type", name: "type", widget: "hidden", default: "inlinetable" }
+                              - label: "Columns"
+                                name: "columns"
+                                widget: "list"
+                                label_singular: "Column"
+                                summary: "{{fields.label}}: {{fields.header}}"
+                                fields:
+                                  - { label: "Label", name: "label", widget: "string", hint: "Bottom label (e.g. 3 months)" }
+                                  - { label: "Header", name: "header", widget: "string", hint: "Top cell text (e.g. A/B testing)" }
+                                  - { label: "Level", name: "level", widget: "number", value_type: "int", min: 1, hint: "Height of the stacked column (1 = shortest)" }
                           - label: "Logos"
                             name: "logos"
                             widget: "object"

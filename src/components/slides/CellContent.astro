@@ -9,6 +9,8 @@ type ContentBlock =
   | { type: "logos"; items: Array<{ src: string; alt?: string }>; fit?: "fill" | "fixed" }
   | { type: "testimonial"; headliner: string; quote: string }
   | { type: "profile"; name: string; role: string; photo?: string; logo?: string; company?: string }
+  | { type: "snapshot"; src: string; camera?: string }
+  | { type: "inlinetable"; columns: Array<{ label: string; header: string; level: number }> }
   | { type: "heatmap" }
   | { type: "chat" }
   | { type: "device" };
@@ -134,5 +136,48 @@ const sizeClasses: Record<string, string> = {
     if (block.type === "heatmap") return <div class="flex-1 min-h-0"><PathMapCompare /></div>;
     if (block.type === "chat") return <div class="flex-1 min-h-0"><ChatAnimation /></div>;
     if (block.type === "device") return <div class="flex-1 min-h-0 flex items-center justify-center"><WireframeCube /></div>;
+    if (block.type === "snapshot") return (
+      <div class="flex-1 min-h-0 relative">
+        {block.camera && <img src={block.camera} alt="Dome camera" class="absolute top-[2rem] left-[2rem] w-[18%] h-auto z-10 drop-shadow-2xl -scale-x-100" />}
+        <img src={block.src} alt="Snapshots" class="w-[70%] h-auto object-contain rounded-3xl ml-[12%] mt-[12%]" />
+      </div>
+    );
+    if (block.type === "inlinetable") {
+      const maxLevel = Math.max(...block.columns.map((c) => c.level));
+      const totalRows = maxLevel + 1;
+      return (
+        <table class="mt-auto w-full border-separate table-fixed" style="border-spacing: 0.4rem;">
+          {Array.from({ length: totalRows }, (_, rowIdx) => {
+            if (rowIdx === maxLevel) {
+              return (
+                <tr>
+                  {block.columns.map((col) => (
+                    <td class="text-center px-[0.5rem] py-[0.4rem]"><span class="font-body text-[1.5rem] text-white/70">{col.label}</span></td>
+                  ))}
+                </tr>
+              );
+            }
+            const rowFromTop = rowIdx;
+            const emptyAbove = (col: typeof block.columns[number]) => maxLevel - col.level;
+            return (
+              <tr class="h-[6rem]">
+                {block.columns.map((col) => {
+                  if (rowFromTop < emptyAbove(col)) {
+                    return <td />;
+                  } else if (rowFromTop === emptyAbove(col)) {
+                    return <td class="bg-purple-500 rounded-[0.8rem] text-center px-[0.8rem] py-[0.6rem]"><span class="font-title text-[1.5rem] text-white leading-tight">{col.header}</span></td>;
+                  } else {
+                    const blueIdx = rowFromTop - emptyAbove(col) - 1;
+                    const blueCount = col.level - 1;
+                    const opacity = blueCount > 0 ? 1 - (blueIdx / blueCount) * 0.7 : 1;
+                    return <td class="rounded-[0.8rem]" style={`background: rgba(59,130,246,${opacity})`} />;
+                  }
+                })}
+              </tr>
+            );
+          })}
+        </table>
+      );
+    }
   })}
 </div>
