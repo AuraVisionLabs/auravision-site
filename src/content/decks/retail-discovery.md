@@ -48,7 +48,7 @@ slides:
     category: Case Studies
     title: Customer ROI Stories
     colWidths:
-      - 28
+      - 30
       - 40
       - 23
       - 12

@@ -37,7 +37,7 @@ const bgStylesFull: Record<string, string> = {
       <tbody>
         {rows.map((row, rowIdx) => {
           const isEmptyRow = row.cells.every((b) => b.type === "text" && "text" in b && b.text.trim() === "");
-          const rowBg = striped && !isEmptyRow ? (rowIdx % 2 === 0 ? "bg-white/5" : "bg-white/10") : "";
+          const rowBg = striped && !isEmptyRow ? (rowIdx % 2 === 0 ? "bg-white/10" : "bg-white/5") : "";
           return (
           <tr>
             {row.cells.map((block) => {
@@ -45,7 +45,7 @@ const bgStylesFull: Record<string, string> = {
               const colorBg = block.type === "text" && "bg" in block && block.bg && block.bg !== "none" ? bgStylesFull[block.bg] : "";
               const cellBg = isEmpty ? "" : (striped ? (colorBg || rowBg) : "");
               return (
-              <td class={`align-middle px-[1.5rem] py-[1.5rem] ${cellBg}`} style="vertical-align: middle;">
+              <td class={`align-middle px-[1.5rem] ${striped ? 'py-[1.5rem]' : 'py-[0.5rem]'} ${cellBg}`} style="vertical-align: middle;">
                 <CellContent blocks={[block]} compact stripedMode={striped} class="h-full w-full justify-center" />
               </td>
               );
