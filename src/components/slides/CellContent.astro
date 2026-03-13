@@ -112,7 +112,7 @@ const sizeClasses: Record<string, string> = {
 ---
 
 <div class:list={[valign === "center" ? "min-h-0 h-full flex flex-col justify-center overflow-visible" : "contents", valign === "center" && className]}>
-<div class:list={[valign === "center" ? "flex flex-col overflow-visible" : "min-h-0 flex flex-col overflow-visible", bg, glow, valign !== "center" && className]}>
+<div class:list={[valign === "center" ? "flex flex-col overflow-visible" : "min-h-0 flex flex-col overflow-visible", (bg || glow) && "h-full", bg, glow, valign !== "center" && className]}>
   {blocks.map((block) => {
     if (block.type === "text") {
       const hasBg = block.bg && block.bg !== "none";

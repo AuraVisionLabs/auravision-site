@@ -63,7 +63,7 @@ slides:
                 size: h4
               - type: text
                 text: Measure capture rate changes against window display rotations and compare performance across stores.
-                size: p-md
+                size: p-sm
               - type: chat
             options:
               background: white-transparent
@@ -73,7 +73,7 @@ slides:
                 size: h4
               - type: text
                 text: Map customer dwell time across every zone and identify where engagement converts to sales.
-                size: p-md
+                size: p-sm
               - type: chat
             options:
               background: white-transparent
@@ -83,7 +83,7 @@ slides:
                 size: h4
               - type: text
                 text: Spot service gaps where customers linger but staff are absent — and link them to drops in conversion.
-                size: p-md
+                size: p-sm
               - type: chat
             options:
               background: white-transparent

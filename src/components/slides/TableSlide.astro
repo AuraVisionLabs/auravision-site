@@ -144,15 +144,17 @@ const bgStylesFull: Record<string, string> = {
 
   /* Chat */
   .slide-table .chat-animation-wrapper {
-    height: 70%;
-    margin-top: 4vw;
+    height: 100%;
+
     overflow: visible;
   }
   .slide-table .chat-animation {
     border: none;
     background: transparent;
     border-radius: 0;
-    padding-bottom: clamp(60px, 7vw, 120px);
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: clamp(60px, 3vw, 120px);
     overflow: hidden;
     mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 100%);
@@ -168,8 +170,8 @@ const bgStylesFull: Record<string, string> = {
     width: clamp(20px, 2.5vw, 36px);
   }
   .slide-table .chat-prompt-bar {
-    padding-bottom: clamp(8px, 1vw, 28px);
-    padding-left: clamp(8px, 1vw, 24px);
-    padding-right: clamp(8px, 1vw, 24px);
+    padding-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 </style>
