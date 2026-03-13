@@ -13,6 +13,7 @@ const { title, tagline, logo, footer } = Astro.props;
 
 <SlideWrapper
   class="slide-cover"
+  hideWatermark
 >
   <div class="relative z-10 flex flex-col items-start justify-center h-full w-[70%] px-[5rem]">
     {logo ? (
@@ -31,7 +32,7 @@ const { title, tagline, logo, footer } = Astro.props;
   </div>
 
   {/* Bottom-left company attribution */}
-  <div class="absolute bottom-8 left-[3rem] z-10  px-[5rem]">
+  <div class="absolute bottom-16 left-[3rem] z-10  px-[5rem]">
     <p class="text-lg text-white font-light text-[2rem]" set:html={footer ?? 'Aura Vision Labs Ltd · <a href="https://auravision.ai">auravision.ai</a>'} />
   </div>
 </SlideWrapper>

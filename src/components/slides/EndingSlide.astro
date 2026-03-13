@@ -1,0 +1,45 @@
+---
+interface Contact {
+  name: string;
+  email?: string;
+  phone?: string;
+}
+
+interface Props {
+  headline: string;
+  contacts?: Contact[];
+  footer?: string;
+}
+
+import SlideWrapper from './SlideWrapper.astro';
+
+const { headline, contacts, footer } = Astro.props;
+---
+
+<SlideWrapper
+  class="slide-ending"
+  hideWatermark
+>
+  <div class="relative z-10 flex flex-col items-start justify-center h-full w-full px-[5rem]">
+    <img src="/images/aura-vision-wordmark.svg" alt="Aura Vision" class="w-[70%] h-auto mb-12 object-contain object-left" />
+
+    <h2 class="font-title text-[5rem] text-white leading-[1.2] mb-12 px-[2rem] w-full" set:html={headline} />
+
+    {contacts && contacts.length > 0 && (
+      <div class="flex flex-col gap-6 px-[2rem] w-full">
+        {contacts.map((c) => (
+          <div class="text-white/80 text-[2rem]">
+            <span class="text-white font-semibold">{c.name}</span>
+            {c.email && <span class="ml-6">E: <a href={`mailto:${c.email}`}>{c.email}</a></span>}
+            {c.phone && <span class="ml-6">M: {c.phone}</span>}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+
+  {/* Bottom-left company attribution */}
+  <div class="absolute bottom-16 left-[2rem] z-10 px-[5rem]">
+    <p class="text-lg text-white font-light text-[2rem]" set:html={footer ?? 'Aura Vision Labs Ltd · <a href="https://auravision.ai">auravision.ai</a>'} />
+  </div>
+</SlideWrapper>

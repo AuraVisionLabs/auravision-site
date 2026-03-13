@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import DeckLayout from "../../layouts/DeckLayout.astro";
 
 import CoverSlide from "../../components/slides/CoverSlide.astro";
+import EndingSlide from "../../components/slides/EndingSlide.astro";
 import TechSlide from "../../components/slides/TechSlide.astro";
 import TableSlide from "../../components/slides/TableSlide.astro";
 
@@ -27,6 +28,8 @@ const { slides, title } = deck.data;
         return <TechSlide title={slide.title} subtitle={slide.subtitle} callout={slide.callout} video={slide.video} category={slide.category} />;
       case "table":
         return <TableSlide title={slide.title} subtitle={slide.subtitle} colWidths={slide.colWidths} layout={slide.layout} rows={slide.rows} category={slide.category} categoryBg={slide.categoryBg} />;
+      case "ending":
+        return <EndingSlide headline={slide.headline} contacts={slide.contacts} footer={slide.footer} />;
       default:
         return null;
     }

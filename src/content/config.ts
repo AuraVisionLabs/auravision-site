@@ -61,10 +61,22 @@ const tableSlide = z.object({
   })),
 });
 
+const endingSlide = z.object({
+  type: z.literal("ending"),
+  headline: z.string(),
+  contacts: z.array(z.object({
+    name: z.string(),
+    email: z.string().optional(),
+    phone: z.string().optional(),
+  })).optional(),
+  footer: z.string().optional(),
+});
+
 const slideSchema = z.discriminatedUnion("type", [
   coverSlide,
   techSlide,
   tableSlide,
+  endingSlide,
 ]);
 
 // ── Decks collection ──────────────────────────────────

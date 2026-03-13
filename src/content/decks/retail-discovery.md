@@ -459,4 +459,11 @@ slides:
                     text: "Precise <strong>conversion metrics</strong> without additional sensors or RFID tags"
             options:
               valign: center
+
+  - type: ending
+    headline: "Ready to future-proof your business?<br>Get in touch:"
+    contacts:
+      - name: Zach Sutcliffe
+        email: zach@auravision.ai
+        phone: "+44 77206 47963"
 ---

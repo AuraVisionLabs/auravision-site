@@ -6,9 +6,10 @@ interface Props {
   categoryBg?: string;
   class?: string;
   style?: string;
+  hideWatermark?: boolean;
 }
 
-const { title, subtitle, category, categoryBg, class: className, style } = Astro.props;
+const { title, subtitle, category, categoryBg, class: className, style, hideWatermark } = Astro.props;
 
 const categoryBgColors: Record<string, string> = {
   cyan: "#22d3ee",
@@ -43,7 +44,7 @@ const catBgStyle = categoryBg && categoryBg !== "none" && categoryBgColors[categ
 
   <slot />
 
-  <img src="/images/aura-vision-icon.svg" alt="" class="absolute top-[1.5rem] right-[1.75rem] z-10 opacity-75 h-[6rem] w-[6rem] pointer-events-none" />
+  {!hideWatermark && <img src="/images/aura-vision-icon.svg" alt="" class="absolute top-[3rem] right-[3rem] z-10 h-[4rem] w-[4rem] pointer-events-none" />}
 </section>
 
 <style is:global>
