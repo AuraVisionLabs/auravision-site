@@ -171,6 +171,83 @@ const gridVisuals = [
     const templates = wrapper.querySelectorAll(".chat-visual-tpl");
     let idx = 0, initIdx = 0;
 
+    // --- Custom conversation mode (for slides) ---
+    const convData = wrapper.closest("[data-conversation]");
+    if (convData) {
+      const conv: Array<{ user: string; bot: string }> = JSON.parse(convData.getAttribute("data-conversation")!);
+      let ci = 0;
+
+      function addSimpleBubble(side: "user" | "bot", content: string): HTMLElement {
+        const isUser = side === "user";
+        const row = document.createElement("div");
+        row.className = `flex items-start gap-2 ${isUser ? "justify-end" : "pr-[34px]"}`;
+        const textEl = document.createElement("div");
+        textEl.className = `max-w-[80%] text-sm leading-relaxed rounded-2xl px-4 py-2.5 shadow-lg font-medium ${
+          isUser ? "rounded-tr-sm bg-cyan-600 text-white" : "min-w-[60px] min-h-[40px] rounded-tl-sm bg-purple-600 text-white"
+        }`;
+        textEl.innerHTML = content;
+        if (isUser) {
+          const avatar = document.createElement("div");
+          avatar.className = "flex-shrink-0 w-8 h-8 rounded-full bg-cyan-600/50 flex items-center justify-center text-[10px] font-semibold text-white/70 mt-0.5";
+          avatar.textContent = "You";
+          row.append(textEl, avatar);
+        } else {
+          const avatar = document.createElement("div");
+          avatar.className = "flex-shrink-0 w-8 h-8 rounded-full bg-purple-600/50 flex items-center justify-center mt-0.5";
+          avatar.innerHTML = BOT_ICON;
+          row.append(avatar, textEl);
+        }
+        stream.appendChild(row);
+        return textEl;
+      }
+
+      async function runCustomLoop() {
+        while (true) {
+          const msg = conv[ci];
+          // Type user question in input bar
+          setBarGlow(true);
+          await streamInput(input, msg.user);
+          await delay(400);
+          sendBtn.classList.add("bg-cyan-500", "text-white");
+          sendBtn.classList.remove("bg-white/5", "text-white/40");
+          await delay(300);
+          sendBtn.classList.remove("bg-cyan-500", "text-white");
+          sendBtn.classList.add("bg-white/5", "text-white/40");
+          clearInput(input);
+          setBarGlow(false);
+
+          // Show user bubble
+          addSimpleBubble("user", msg.user);
+
+          // Bot thinking then stream answer
+          await delay(800);
+          const botEl = addSimpleBubble("bot", '<span class="thinking-dots"><span></span><span></span><span></span></span>');
+          await delay(1500);
+          await streamText(botEl, msg.bot);
+
+          // Pause before next
+          await delay(3000);
+
+          // Clear messages after full cycle
+          ci = (ci + 1) % conv.length;
+          if (ci === 0) {
+            await delay(500);
+            while (stream.firstChild) stream.removeChild(stream.firstChild);
+          }
+        }
+      }
+
+      // Hide visual templates in custom mode
+      wrapper.querySelectorAll(".chat-visual-templates").forEach(t => (t as HTMLElement).style.display = "none");
+
+      function setBarGlow(on: boolean) {
+        barContainer.style.boxShadow = on ? "0 0 25px rgba(34,211,238,1.0)" : "";
+      }
+
+      runCustomLoop();
+      return; // Skip default animation
+    }
+
     // --- Bubble factories ---
 
     function addBubble(side: "user" | "bot", content: string, opts?: { italic?: boolean; animClass?: string }): HTMLElement {

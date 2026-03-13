@@ -51,40 +51,49 @@ slides:
 
   # ── Slide 3: Ask Aura ───────────────────────────────
   - type: table
-    category: Ask Aura — New
-    title: "Ask a question. Get an answer."
-    subtitle: No analyst required.
+    category: Ask Aura
+    title: "Three questions answered in seconds"
+    subtitle: BoConcept can get answers from day one. No analyst required.
     layout: grid
     rows:
       - cells:
           - blocks:
               - type: text
-                text: "\"Are our windows working?\""
+                text: "\"Are our windows driving traffic inside?\""
                 size: h4
               - type: text
                 text: Measure capture rate changes against window display rotations and compare performance across stores.
                 size: p-sm
               - type: chat
+                conversation:
+                  - user: "Are our windows driving traffic inside?"
+                    bot: "<strong>Yes, partially.</strong> Capture rate rose 12% after the last window rotation, but 3 stores saw no change."
             options:
               background: white-transparent
           - blocks:
               - type: text
-                text: "\"Which zones are driving conversion?\""
+                text: "\"Which areas of our showroom are working?\""
                 size: h4
               - type: text
                 text: Map customer dwell time across every zone and identify where engagement converts to sales.
                 size: p-sm
               - type: chat
+                conversation:
+                  - user: "Which zones have the highest dwell time?"
+                    bot: "<strong>Sofa collections</strong> average 4.2 min dwell — 3× higher than lighting. But lighting converts at 2× the rate."
             options:
               background: white-transparent
           - blocks:
               - type: text
-                text: "\"Where are staff not engaging?\""
+                text: "\"Are staff where customers need them most?\""
                 size: h4
               - type: text
-                text: Spot service gaps where customers linger but staff are absent — and link them to drops in conversion.
+                text: Spot service gaps where customers linger but staff are absent — and link them to conversion drops.
                 size: p-sm
               - type: chat
+                conversation:
+                  - user: "Where are staff missing customers?"
+                    bot: "<strong>Zone 3 (dining)</strong> has a 40% service gap on weekends. Customers dwell 3 min but staff presence is under 20%."
             options:
               background: white-transparent
 
@@ -120,54 +129,7 @@ slides:
                 size: p-md
               - type: chat
 
-  # ── Slide 5: Use Cases ──────────────────────────────
-  - type: table
-    category: Use Cases
-    title: Three questions BoConcept can answer from day one.
-    layout: grid
-    rows:
-      - cells:
-          - blocks:
-              - type: text
-                text: 1 — Product Placement
-                size: h3
-              - type: text
-                text: Are your windows driving traffic inside?
-                size: h5
-              - type: text
-                text: Measure capture rate changes against window display rotations. Test whether the white sofa outperforms the brown. Run controlled campaigns and measure the uplift.
-                size: p-md
-              - type: text
-                text: "📊 Capture rate before and after display changes"
-                size: p-sm
-          - blocks:
-              - type: text
-                text: 2 — Zone Performance
-                size: h3
-              - type: text
-                text: Which areas of your showroom are working?
-                size: h5
-              - type: text
-                text: Map customer dwell time and movement across every zone — from your window display to your sofa and lamp collections. Identify where engagement drops and where it converts.
-                size: p-md
-              - type: text
-                text: "📊 Dwell time by zone linked to conversion rate"
-                size: p-sm
-          - blocks:
-              - type: text
-                text: 3 — Staff Engagement
-                size: h3
-              - type: text
-                text: Are staff where customers need them most?
-                size: h5
-              - type: text
-                text: Distinguish staff from customers across every zone. Identify service gaps — where customers linger but staff are absent — and link those gaps to drops in conversion.
-                size: p-md
-              - type: text
-                text: "📊 Staff-to-customer ratio mapped to conversion"
-                size: p-sm
-
-  # ── Slide 6: Clients & Social Proof ─────────────────
+  # ── Slide 5: Clients & Social Proof ─────────────────
   - type: table
     category: Clients & Social Proof
     title: Trusted by global retailers.
