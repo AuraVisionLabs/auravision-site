@@ -149,102 +149,138 @@ slides:
                 size: p-md
               - type: chat
 
-  # ── Slide 5: Clients & Social Proof ─────────────────
+  # ── Slide 5: Revenue Impact ─────────────────
   - type: table
-    category: Clients & Social Proof
-    title: Trusted by global retailers.
+    category: Revenue Impact
+    title: How our retailers achieve uplift
     layout: grid
+    background: br
     rows:
       - cells:
           - blocks:
+              - type: text
+                text: Staffing
+                size: h4
               - type: logos
                 fit: fixed
                 items:
                   - src: /images/logos/purple.svg
                     alt: Purple
+              - type: highlight
+                value: "£8M / yr"
+                subtitle: across 78 US locations
               - type: text
-                text: "60+ stores. Low-traffic furniture retailer — the closest comparable to BoConcept. 4-year partnership measuring zone performance and staff engagement."
+                text: "24% more accurate staff allocations increased <strong>sales conversion 14.3% year-on-year</strong>."
                 size: p-md
+            options:
+              background: blue
+              gap: sm
           - blocks:
+              - type: text
+                text: Planning
+                size: h4
+              - type: logos
+                fit: fixed
+                items:
+                  - src: /images/logos/vmo2.svg
+                    alt: Virgin Media O2
+              - type: highlight
+                value: "£28M / 3yr"
+                subtitle: across 308 UK locations
+              - type: text
+                text: "Elevating <strong>conversion by 4.4%</strong> with key product displays and <strong>7.0%</strong> with faster transaction times."
+                size: p-md
+            options:
+              background: blue
+              gap: sm
+          - blocks:
+              - type: text
+                text: Design
+                size: h4
               - type: logos
                 fit: fixed
                 items:
                   - src: /images/logos/adidas.svg
                     alt: Adidas
+              - type: highlight
+                value: "£1.6M / yr"
+                subtitle: across 5 UAE locations
               - type: text
-                text: Flagship and high-volume store formats across Europe. Footfall, demographic segmentation and conversion analytics.
+                text: "Boosted <strong>customer engagements 33%</strong> by A/B testing key product displays and activations."
                 size: p-md
-          - blocks:
-              - type: logos
-                fit: fixed
-                items:
-                  - src: /images/logos/gymshark.svg
-                    alt: Gymshark
-              - type: text
-                text: Staff engagement and zone performance tracking across physical retail expansion.
-                size: p-md
-          - blocks:
-              - type: logos
-                fit: fixed
-                items:
-                  - src: /images/logos/decathlon.svg
-                    alt: Decathlon
-              - type: text
-                text: 1,000+ locations. Product zone analytics and conversion tracking across high-volume retail.
-                size: p-md
+            options:
+              background: blue
+              gap: sm
 
   # ── Slide 7: Next Steps (combined) ──────────────────
   - type: table
-    category: Proposed Next Steps
-    title: A contained, low-risk proof of concept for BoConcept.
-    layout: grid
+    category: Proposal
+    title: Low-risk proof of concept for BoConcept
+    layout: table-striped
+    colWidths: [2, 1, 4]
     rows:
       - cells:
           - blocks:
               - type: text
-                text: 1 — Scoping
-                size: h3
+                text: Scoping
+                size: h4
+                bg: blue
+          - blocks:
               - type: text
                 text: "Week 1–2"
                 size: h6
-              - type: text
-                text: Camera snapshot review. Floor plan analysis. Store selection for POC. Katie shares this overview with Cor and relevant HQ stakeholders.
-                size: p-md
           - blocks:
               - type: text
-                text: 2 — Legal & DPA
-                size: h3
+                text: Camera snapshot review. Floor plan analysis. Store selection for POC. Katie shares this overview with Cor and relevant HQ stakeholders.
+                size: p-sm
+      - cells:
+          - blocks:
+              - type: text
+                text: Legal & DPA
+                size: h4
+                bg: purple
+          - blocks:
               - type: text
                 text: "Week 2–4"
                 size: h6
-              - type: text
-                text: Data Processing Agreement. Infrastructure security sign-off. MSA negotiation. BoConcept shares camera layouts from 3–5 candidate stores.
-                size: p-md
           - blocks:
               - type: text
-                text: 3 — Device Setup
-                size: h3
+                text: Data Processing Agreement. Infrastructure security sign-off. MSA negotiation. BoConcept shares camera layouts from 3–5 candidate stores.
+                size: p-sm
+      - cells:
+          - blocks:
+              - type: text
+                text: Device Setup
+                size: h4
+                bg: fuchsia
+          - blocks:
               - type: text
                 text: "Week 4–5"
                 size: h6
-              - type: text
-                text: APU devices shipped. Plug-and-play install by your IT team. Under a day per store. Key metrics defined — zone performance, capture rate, staff engagement.
-                size: p-md
           - blocks:
               - type: text
-                text: 4 — Go Live
-                size: h3
+                text: APU devices shipped. Plug-and-play install by your IT team. Under a day per store. Key metrics defined — zone performance, capture rate, staff engagement.
+                size: p-sm
+      - cells:
+          - blocks:
+              - type: text
+                text: Go Live
+                size: h4
+                bg: red
+          - blocks:
               - type: text
                 text: "Week 6"
                 size: h6
+          - blocks:
               - type: text
                 text: AI training complete. Dashboard live. Customer success onboarding begins. Review at 8 weeks to assess results and build the business case for wider rollout.
-                size: p-md
+                size: p-sm
 
   # ── Slide 8: Ending ─────────────────────────────────
   - type: ending
-    headline: "Questions?<br>Get in touch:"
+    headline: "We'd love to explore this together.<br>Let's talk:"
     contacts:
       - name: Zachary Sutcliffe
         email: zachary@auravision.ai
+        phone: "+44 77206 47963"
 ---
