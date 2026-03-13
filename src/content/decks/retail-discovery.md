@@ -272,8 +272,7 @@ slides:
                     header: Strategic partnership
                     level: 4
   - type: table
-    category: Enhanced Footfall — Case Study
-    categoryBg: blue
+    category: Purple — Case Study
     title: "\"Aura Vision is our secret weapon.\""
     layout: grid
     colWidths:
@@ -288,37 +287,30 @@ slides:
                   - src: /images/logos/purple.svg
                     alt: Purple
               - type: text
-                text: 24% more accurate
+                text: 24% more accurate than previous counter
                 size: h2
               - type: testimonial
                 headliner: Associates were manually counting each customer walk-in, taking up precious time.
                 quote: — Regional Manager, Purple
                 size: md
-              - type: metrics
-                items:
-                  - footfall
-                  - capture
-                  - staffing
-                  - demographics
             options:
               background: white-transparent
+              valign: center
           - blocks:
-              - type: text
-                text: Key Outcomes
-                size: h4
-              - type: text
-                text: |
-                  <div style="display:flex;flex-direction:column;gap:0.7em;line-height:1.4;">
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>24% more accurate</strong> customer counts</div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Tracks mattress engagement to <strong>optimise product displays</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Passer-by &amp; capture rates to <strong>measure marketing impact</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Conversion drivers identified to <strong>increase sales</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span>Rolled out across <strong>78 US showrooms</strong></div>
-                  <div><span style="color:#4ade80;font-size:1.3em;margin-right:0.5em;">✓</span><strong>5X ROI</strong> in the first year</div>
-                  </div>
-                size: p-md
+              - type: metric-list
+                items:
+                  - metric: footfall
+                    text: "<strong>24% more accurate</strong> customer counts across <strong>78 US showrooms</strong>"
+                  - metric: capture
+                    text: "Capture-rates ensure every marketing campaign is <strong>delivering traffic gains</strong>"
+                  - metric: staffing
+                    text: "Associates automatically excluded so <strong>only real customers are counted</strong>"
+                  - metric: impressions
+                    text: "Which mattresses attract most customers to <strong>sit and lie down</strong>"
+                  - metric: conversion
+                    text: "Purchase funnel reports identify new opportunities to <strong>increase sales</strong>"
             options:
-              glow: blue
+              valign: center
   - type: table
     category: Precision Staff Planning — Case Study
     categoryBg: purple

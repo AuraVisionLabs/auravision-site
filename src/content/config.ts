@@ -31,6 +31,7 @@ const contentBlock = z.discriminatedUnion("type", [
   z.object({ type: z.literal("snapshot"), src: z.string(), camera: z.string().optional() }),
   z.object({ type: z.literal("inlinetable"), columns: z.array(z.object({ label: z.string(), header: z.string(), level: z.number().min(1) })) }),
   z.object({ type: z.literal("metrics"), items: z.array(z.string()) }),
+  z.object({ type: z.literal("metric-list"), items: z.array(z.object({ metric: z.string(), text: z.string() })) }),
   z.object({ type: z.literal("heatmap") }),
   z.object({ type: z.literal("chat") }),
   z.object({ type: z.literal("device") }),
@@ -41,6 +42,7 @@ const colorOption = z.enum(["none", "cyan", "fuchsia", "purple", "blue", "red", 
 const columnOptions = z.object({
   background: colorOption.optional(),
   glow: colorOption.optional(),
+  valign: z.enum(["top", "center"]).optional(),
 });
 
 const tableSlide = z.object({

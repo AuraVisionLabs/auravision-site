@@ -411,3 +411,4 @@ collections:
                         fields:
                           - { label: "Background", name: "background", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange", "white", "white-transparent"], hint: "Adds a tinted background with padding and rounded corners" }
                           - { label: "Glow Outline", name: "glow", widget: "select", required: false, default: "none", options: ["none", "cyan", "fuchsia", "purple", "blue", "red", "orange"], hint: "Adds a coloured outline with glow effect" }
+                          - { label: "Vertical Align", name: "valign", widget: "select", required: false, default: "top", options: ["top", "center"], hint: "Vertically align cell contents — center will make background hug the content" }
