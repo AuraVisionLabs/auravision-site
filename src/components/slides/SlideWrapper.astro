@@ -40,7 +40,7 @@ const catBgStyle = categoryBg && categoryBg !== "none" && categoryBgColors[categ
 
   <div class="absolute top-0 left-0 right-0 z-[5] px-[4rem] pt-[4rem] pb-[1.5rem] pointer-events-none min-h-[14rem]">
     {category && <div class="font-title text-white text-[2rem] mb-[0.375rem]" style={catBgStyle}>{category}</div>}
-    {title && <div class="font-title text-[6rem] tracking-[0.01em] text-white leading-[1.2]">{title}</div>}
+    {title && <div class="font-title text-[6rem] tracking-[0.01em] text-white leading-[1.2] text-gradient" data-text={title}>{title}</div>}
     {subtitle && <div class="font-body text-[2.5rem] text-white/80 mt-[0.4rem]">{subtitle}</div>}
   </div>
 
